@@ -175,7 +175,7 @@ function useUpdateTodo() {
 ```jsx
 function ErrorMessage({ error }) {
   if (error.status === 401) {
-    return <Redirect to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   if (error.status === 403) {

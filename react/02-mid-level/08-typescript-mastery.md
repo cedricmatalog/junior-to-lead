@@ -232,7 +232,7 @@ function Button({ variant, isLoading, children, ...props }: ButtonProps) {
 }
 
 // Component props extraction
-type ButtonProps = React.ComponentProps<typeof Button>;
+type ExtractedButtonProps = React.ComponentProps<typeof Button>;
 type InputProps = React.ComponentProps<'input'>;
 ```
 

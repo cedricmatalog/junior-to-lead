@@ -151,9 +151,10 @@ const userAtom = atom(async () => {
   return response.json();
 });
 
-// Writable derived atom
-const temperatureAtom = atom(
-  (get) => get(celsiusAtom),
+// Writable derived atom (Fahrenheit backed by Celsius)
+const celsiusAtom = atom(0);
+const fahrenheitAtom = atom(
+  (get) => get(celsiusAtom) * 9 / 5 + 32,
   (get, set, newValue) => {
     set(celsiusAtom, (newValue - 32) * 5 / 9);
   }

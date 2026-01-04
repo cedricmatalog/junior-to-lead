@@ -33,7 +33,7 @@ Target: < 2.5 seconds
 />
 ```
 
-### FID/INP (Interaction to Next Paint)
+### INP (Interaction to Next Paint)
 
 Target: < 200ms
 
@@ -268,10 +268,10 @@ useEffect(() => {
 }, []);
 
 // Report Web Vitals
-import { onCLS, onFID, onLCP } from 'web-vitals';
+import { onCLS, onINP, onLCP } from 'web-vitals';
 
 onCLS(console.log);
-onFID(console.log);
+onINP(console.log);
 onLCP(console.log);
 ```
 

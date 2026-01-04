@@ -37,21 +37,22 @@ Test components as users interact with them.
 ```jsx
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 
 // Mock server
 const server = setupServer(
-  rest.get('/api/users', (req, res, ctx) => {
-    return res(ctx.json([
+  http.get('/api/users', () => {
+    return HttpResponse.json([
       { id: 1, name: 'Alice' },
       { id: 2, name: 'Bob' },
-    ]));
+    ]);
   }),
-  rest.post('/api/users', (req, res, ctx) => {
-    return res(ctx.json({ id: 3, ...req.body }));
+  http.post('/api/users', async ({ request }) => {
+    const body = await request.json();
+    return HttpResponse.json({ id: 3, ...body });
   })
 );
 

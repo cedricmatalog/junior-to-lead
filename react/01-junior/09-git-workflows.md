@@ -1,18 +1,32 @@
 # Git Workflows
 
-Collaborate effectively with your team using Git best practices.
+## Week Nine: Your First Real Feature
 
-## Learning Objectives
+Nine weeks in. You've built components, fixed bugs, shipped features. But there's something you've been dreading.
 
-By the end of this module, you will:
-- Use branching strategies for feature development
-- Write meaningful commit messages
-- Create quality pull requests
-- Resolve merge conflicts confidently
+"Time for your first solo feature," Sarah says. "The checkout payment integration. You'll own it start to finish—including the Git workflow."
 
-## Branching Strategy
+Until now, you've been pushing to a branch someone else set up. Now you need to manage branches, handle conflicts, and get code reviewed.
 
-### Feature Branch Workflow
+"Git isn't just version control," Marcus adds. "It's how teams work together without stepping on each other's toes."
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Branches** | Parallel universes - experiment without affecting the main timeline |
+| **Commits** | Save checkpoints - go back if things go wrong |
+| **Pull Requests** | Asking for feedback - review before publishing |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Chapter 1: Starting Clean
+
+Day one of the payment feature. Sarah walks you through the proper start.
 
 ```bash
 # Start from updated main
@@ -20,15 +34,17 @@ git checkout main
 git pull origin main
 
 # Create feature branch
-git checkout -b feature/user-authentication
+git checkout -b feature/checkout-payment-integration
 
 # Work on feature, commit regularly
 git add .
-git commit -m "feat: add login form component"
+git commit -m "feat(checkout): scaffold payment form component"
 
 # Push and create PR
-git push -u origin feature/user-authentication
+git push -u origin feature/checkout-payment-integration
 ```
+
+"Always start from a fresh main," she emphasizes. "If you branch from stale code, you're asking for conflicts."
 
 **Branch naming conventions:**
 - `feature/description` - New features
@@ -36,25 +52,22 @@ git push -u origin feature/user-authentication
 - `refactor/description` - Code refactoring
 - `docs/description` - Documentation updates
 
-### Keeping Branch Updated
+---
+
+## Chapter 2: Commit Messages That Tell a Story
+
+Marcus reviews your first few commits.
 
 ```bash
-# Option 1: Merge main into your branch
-git checkout feature/my-feature
-git merge main
-
-# Option 2: Rebase onto main (cleaner history)
-git checkout feature/my-feature
-git rebase main
-
-# If conflicts, resolve then continue
-git add .
-git rebase --continue
+# Your commits
+git commit -m "updated stuff"
+git commit -m "more changes"
+git commit -m "fixed thing"
 ```
 
-## Commit Messages
+"These tell me nothing," he says. "In six months, you won't remember what 'thing' was."
 
-Follow Conventional Commits for consistency.
+He introduces Conventional Commits:
 
 ```
 <type>(<scope>): <description>
@@ -73,34 +86,71 @@ Follow Conventional Commits for consistency.
 - `test` - Adding tests
 - `chore` - Build/tooling changes
 
-**Examples:**
+You redo your commits:
 
 ```bash
 # Good commits
-git commit -m "feat(auth): add password reset functionality"
-git commit -m "fix(cart): prevent negative quantities"
-git commit -m "refactor(api): extract fetch logic to custom hook"
-
-# Bad commits
-git commit -m "fix stuff"
-git commit -m "WIP"
-git commit -m "addressed PR comments"
+git commit -m "feat(checkout): add credit card input with validation"
+git commit -m "feat(checkout): implement Luhn algorithm for card validation"
+git commit -m "feat(checkout): add Stripe integration hook"
+git commit -m "fix(checkout): handle Amex 15-digit card numbers"
 ```
 
-**Commit often, but make each commit meaningful:**
+"Now I can read the history and understand exactly what changed."
+
+---
+
+## Chapter 3: The Conflict
+
+Day three. You're about to push, but Marcus messages: "I just merged some checkout changes. You might want to rebase."
+
+You pull main and... conflicts.
 
 ```bash
-# Before committing, review changes
-git diff
-git diff --staged
+git checkout main
+git pull origin main
+git checkout feature/checkout-payment-integration
+git rebase main
 
-# Stage specific files/hunks
-git add -p  # Interactive staging
+# CONFLICT (content): Merge conflict in src/components/CheckoutPage.jsx
 ```
 
-## Pull Requests
+You open the file and see the markers:
 
-### Creating Quality PRs
+```jsx
+<<<<<<< HEAD
+const greeting = "Hello";
+=======
+const greeting = "Hi there";
+>>>>>>> feature/new-greeting
+```
+
+"Above the `=======` is what's in main," Sarah explains. "Below is your code. Choose one, combine them, whatever makes sense."
+
+```jsx
+// You decide to combine
+const greeting = "Hello there";
+```
+
+Then continue:
+
+```bash
+git add src/components/CheckoutPage.jsx
+git rebase --continue
+
+# After rebase, push with --force-with-lease
+git push --force-with-lease origin feature/checkout-payment-integration
+```
+
+"Why `--force-with-lease` instead of `--force`?" you ask.
+
+"Safety. If someone else pushed to your branch, it won't overwrite their changes."
+
+---
+
+## Chapter 4: The Pull Request
+
+Time to request review. You open GitHub and start typing the PR description.
 
 ```markdown
 ## Description
@@ -120,60 +170,177 @@ Brief explanation of what this PR does.
 [If UI changes, include before/after]
 ```
 
-### PR Best Practices
+Sarah reviews your PR description:
 
+```markdown
+## Context
+We're integrating Stripe for payment processing (JIRA-189).
+
+## Changes
+- New PaymentForm component with card validation
+- usePaymentProcessor hook for Stripe API
+- Updated CheckoutPage to use new payment flow
+
+## Testing
+- Tested with Stripe test cards (4242...)
+- Verified error states with declined cards
+- Checked mobile responsive layout
+
+## Screenshots
+[Before/After images]
+```
+
+"Perfect. A reviewer can understand the PR without reading every line of code."
+
+**PR best practices:**
 1. **Keep PRs small** - 200-400 lines ideal
 2. **One concern per PR** - Don't mix features
 3. **Self-review first** - Catch obvious issues
 4. **Respond to feedback** - Discuss, don't defend
 5. **Update with latest main** - Before merging
 
-### Reviewing PRs
+---
+
+## Chapter 5: Code Review Feedback
+
+The reviews come in. Marcus has suggestions:
 
 ```markdown
-# Good review comments
-"Consider using useMemo here since this calculation is expensive"
-"This could throw if user is null - should we add a guard?"
+> Consider using useMemo here since this calculation is expensive
 
-# Constructive, not critical
-Instead of: "This is wrong"
-Say: "This might cause issues when X happens. What about Y?"
+> This could throw if user is null - should we add a guard?
 ```
 
-## Resolving Conflicts
+"Good review comments explain *why*," Sarah notes. "Not just 'this is wrong.'"
+
+You address the feedback:
 
 ```bash
-# When merge conflict occurs
-git status  # See conflicting files
+git add src/utils/cardValidation.js src/components/PaymentForm.jsx
+git commit -m "refactor(checkout): extract card validation to utility module"
 
-# Open file and resolve
-<<<<<<< HEAD
-const greeting = "Hello";
-=======
-const greeting = "Hi there";
->>>>>>> feature/new-greeting
+git add src/components/PaymentForm.jsx
+git commit -m "feat(checkout): add loading spinner during payment processing"
 
-# Choose one, or combine:
-const greeting = "Hello there";
+git add src/components/PaymentForm.jsx
+git commit -m "fix(checkout): add aria-live for payment error messages"
 
-# Mark resolved and continue
-git add .
-git commit -m "resolve merge conflict in greeting"
+git push origin feature/checkout-payment-integration
+```
+
+---
+
+## Chapter 6: The Merge
+
+Approved! But before merging, one last sync:
+
+```bash
+git checkout main
+git pull origin main
+git checkout feature/checkout-payment-integration
+git rebase main
+git push --force-with-lease origin feature/checkout-payment-integration
+```
+
+You click "Squash and merge" in GitHub. The commits become one clean entry:
+
+```
+feat(checkout): add payment integration (#234)
+
+This PR adds Stripe payment processing to the checkout flow:
+- Credit card input with real-time validation
+- Support for Visa, Mastercard, Amex
+- Loading states and error handling
+- Accessible error messages
+
+Closes #189
+```
+
+Clean up your local branch:
+
+```bash
+git checkout main
+git pull origin main
+git branch -d feature/checkout-payment-integration
+```
+
+---
+
+## Chapter 7: The Hotfix
+
+Friday afternoon. Production alert. The checkout is crashing.
+
+"Hotfix time," Marcus says. "Different workflow."
+
+```bash
+# Branch directly from main
+git checkout main
+git pull origin main
+git checkout -b hotfix/checkout-null-crash
+
+# Quick fix
+git add src/components/CheckoutPage.jsx
+git commit -m "fix(checkout): handle null cart items in payment flow"
+
+# Push immediately
+git push -u origin hotfix/checkout-null-crash
+```
+
+The PR gets expedited review—someone's always available for hotfixes. After merge:
+
+```bash
+git checkout main
+git pull origin main
+git tag -a v1.2.1 -m "Hotfix: checkout null crash"
+git push origin v1.2.1
+```
+
+"Hotfixes skip the normal queue," Sarah explains. "But they still need review. A bad fix can make things worse."
+
+---
+
+## Chapter 8: Staying in Sync
+
+"How do I avoid conflicts in the first place?" you ask.
+
+Marcus shares the secrets:
+
+```bash
+# Option 1: Merge main into your branch (preserves history)
+git checkout feature/my-feature
+git merge main
+
+# Option 2: Rebase onto main (cleaner history)
+git checkout feature/my-feature
+git rebase main
+```
+
+"Communicate with your team too."
+
+```markdown
+# Slack message when starting overlapping work
+"Hey team, I'm working on the checkout payment form today.
+I'll be touching CheckoutPage.jsx and adding new files in /components/checkout/.
+Let me know if anyone else needs to work in that area."
 ```
 
 **Conflict prevention:**
 - Pull main frequently
-- Communicate with team about overlapping work
+- Communicate about overlapping work
 - Keep PRs small and merge often
 
-## Common Git Commands
+---
+
+## Chapter 9: Your Git Toolkit
+
+Sarah shares the commands you'll use daily:
 
 ```bash
 # Undo last commit (keep changes)
 git reset --soft HEAD~1
 
 # Discard local changes to a file
-git checkout -- filename
+git restore filename
 
 # Stash changes temporarily
 git stash
@@ -194,11 +361,16 @@ git commit --amend -m "new message"
 
 # Cherry-pick a commit
 git cherry-pick abc123
+
+# Interactive staging (choose specific changes)
+git add -p
 ```
 
-## Git Hooks
+---
 
-Automate checks before commits.
+## Chapter 10: Automating Quality
+
+"One more thing," Marcus adds. "Git hooks."
 
 ```bash
 # .husky/pre-commit
@@ -217,6 +389,170 @@ npm run test:unit
   }
 }
 ```
+
+"Now you literally can't commit if tests fail or linting errors exist."
+
+---
+
+## Chapter 11: Secrets and Configuration
+
+Before you push, Marcus catches something in your code.
+
+"Wait—is that an API key hardcoded in there?"
+
+You look. It is. The Stripe test key, right in the component.
+
+"That can never go to GitHub," he says. "Let me show you environment variables."
+
+### The .env File
+
+```bash
+# .env.local (never commit this!)
+VITE_STRIPE_KEY=pk_test_abc123
+VITE_API_URL=http://localhost:3001
+VITE_FEATURE_FLAG_CHAT=true
+```
+
+```jsx
+// Access in your code
+const stripeKey = import.meta.env.VITE_STRIPE_KEY;
+const apiUrl = import.meta.env.VITE_API_URL;
+```
+
+### Framework Differences
+
+"Different frameworks handle this differently," Sarah explains.
+
+```bash
+# Vite projects - prefix with VITE_
+VITE_API_URL=https://api.example.com
+
+# Create React App - prefix with REACT_APP_
+REACT_APP_API_URL=https://api.example.com
+
+# Next.js - prefix with NEXT_PUBLIC_ for client-side
+NEXT_PUBLIC_API_URL=https://api.example.com
+```
+
+```jsx
+// Vite
+const url = import.meta.env.VITE_API_URL;
+
+// Create React App
+const url = process.env.REACT_APP_API_URL;
+
+// Next.js (client-side)
+const url = process.env.NEXT_PUBLIC_API_URL;
+```
+
+### The .env.example File
+
+"Create a template for other developers," Marcus adds.
+
+```bash
+# .env.example (commit this!)
+# Copy to .env.local and fill in values
+
+# Stripe API key (get from dashboard.stripe.com)
+VITE_STRIPE_KEY=
+
+# Backend API URL
+VITE_API_URL=http://localhost:3001
+
+# Feature flags
+VITE_FEATURE_FLAG_CHAT=false
+```
+
+### What Goes in .gitignore
+
+```bash
+# .gitignore
+.env
+.env.local
+.env.*.local
+
+# Keep the example
+!.env.example
+```
+
+### Environment-Specific Configs
+
+```bash
+# .env.development
+VITE_API_URL=http://localhost:3001
+VITE_DEBUG=true
+
+# .env.production
+VITE_API_URL=https://api.production.com
+VITE_DEBUG=false
+
+# .env.test
+VITE_API_URL=http://localhost:3001
+VITE_DEBUG=false
+```
+
+### Type Safety for Environment Variables
+
+```typescript
+// src/env.d.ts (Vite)
+/// <reference types="vite/client" />
+
+interface ImportMetaEnv {
+  readonly VITE_STRIPE_KEY: string;
+  readonly VITE_API_URL: string;
+  readonly VITE_FEATURE_FLAG_CHAT: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+```
+
+```typescript
+// Validate required variables at startup
+function validateEnv() {
+  const required = ['VITE_STRIPE_KEY', 'VITE_API_URL'];
+
+  for (const key of required) {
+    if (!import.meta.env[key]) {
+      throw new Error(`Missing required environment variable: ${key}`);
+    }
+  }
+}
+
+validateEnv();
+```
+
+**The rules:**
+1. Never commit secrets to Git
+2. Create `.env.example` as documentation
+3. Use framework-specific prefixes
+4. Validate required variables on startup
+5. Different values for different environments
+
+By Friday, your payment feature is live. The commit history is clean. No conflicts. No broken builds. And no secrets in the repo.
+
+"You're not just writing code anymore," Sarah says. "You're collaborating."
+
+---
+
+## Git Workflow Summary
+
+| Stage | Commands |
+|-------|----------|
+| Start feature | `git checkout main && git pull && git checkout -b feature/name` |
+| Save progress | `git add . && git commit -m "feat: description"` |
+| Stay updated | `git rebase main` |
+| Push branch | `git push -u origin feature/name` |
+| After review | `git rebase main && git push --force-with-lease` |
+| After merge | `git checkout main && git pull && git branch -d feature/name` |
+
+## Common Mistakes
+
+1. **Committing without pulling** - Always start from fresh main
+2. **Vague commit messages** - Your future self will hate you
+3. **Giant PRs** - Small PRs get reviewed faster
+4. **Ignoring conflicts** - They don't go away on their own
 
 ## Practice Exercises
 
