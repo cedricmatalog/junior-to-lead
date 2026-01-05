@@ -77,11 +77,11 @@ Here's the WCAG compliance pyramid:
 ┌──────────────────────────────────────────────────────────┐
 │            WCAG Compliance Pyramid                       │
 ├──────────────────────────────────────────────────────────┤
-│                                                          │
-│                       /\                                 │
-│                      /  \      Level AAA                 │
-│                     / En \     Enhanced                  │
-│                    / hanced\   • Highest standards       │
+│                        /\                                │
+│                       /  \                               │
+│                      /    \      Level AAA               │
+│                     / En   \     Enhanced                │
+│                    / hanced \   • Highest standards      │
 │                   /          \  • Sign language          │
 │                  /    AAA     \ • Extended audio desc.   │
 │                 /──────────────\                         │
@@ -104,11 +104,11 @@ Here's the WCAG compliance pyramid:
 │/       • Proper heading structure               \        │
 │──────────────────────────────────────────────────        │
 │                                                          │
-│  Most organizations require: Level AA                   │
-│  Government contracts often mandate: WCAG 2.1 AA        │
+│  Most organizations require: Level AA                    │
+│  Government contracts often mandate: WCAG 2.1 AA         │
 │                                                          │
-│  Each level includes all lower levels                   │
-│  (AA includes all A requirements)                       │
+│  Each level includes all lower levels                    │
+│  (AA includes all A requirements)                        │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -297,53 +297,53 @@ Here's how keyboard navigation should flow through your app:
 │         Keyboard Navigation Flow                         │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  User presses Tab key:                                  │
+│  User presses Tab key:                                   │
 │       │                                                  │
 │       ↓                                                  │
-│  ┌─────────────────────────┐                            │
-│  │ Skip to main content    │ ← Skip link (Tab 1)        │
-│  └─────────────────────────┘                            │
-│       │ (User presses Enter to skip, or Tab to nav)    │
+│  ┌─────────────────────────┐                             │
+│  │ Skip to main content    │ ← Skip link (Tab 1)         │
+│  └─────────────────────────┘                             │
+│       │ (User presses Enter to skip, or Tab to nav)      │
 │       ↓                                                  │
-│  ┌──────────────────────────────────────────┐           │
-│  │  Navigation                              │           │
-│  │  ├─ Logo (link)         Tab 2            │           │
-│  │  ├─ Home (link)         Tab 3            │           │
-│  │  ├─ Products (link)     Tab 4            │           │
-│  │  ├─ About (link)        Tab 5            │           │
-│  │  └─ Search (input)      Tab 6            │           │
-│  └──────────────────────────────────────────┘           │
+│  ┌──────────────────────────────────────────┐            │
+│  │  Navigation                              │            │
+│  │  ├─ Logo (link)         Tab 2            │            │
+│  │  ├─ Home (link)         Tab 3            │            │
+│  │  ├─ Products (link)     Tab 4            │            │
+│  │  ├─ About (link)        Tab 5            │            │
+│  │  └─ Search (input)      Tab 6            │            │
+│  └──────────────────────────────────────────┘            │
 │       │                                                  │
 │       ↓                                                  │
-│  ┌──────────────────────────────────────────┐           │
-│  │  Main Content (id="main-content")        │           │
-│  │  ├─ Heading (not focusable)              │           │
-│  │  ├─ "Add to Cart" button    Tab 7        │           │
-│  │  ├─ Quantity select         Tab 8        │           │
-│  │  ├─ "Buy Now" button        Tab 9        │           │
-│  │  └─ Product link            Tab 10       │           │
-│  └──────────────────────────────────────────┘           │
+│  ┌──────────────────────────────────────────┐            │
+│  │  Main Content (id="main-content")        │            │
+│  │  ├─ Heading (not focusable)              │            │
+│  │  ├─ "Add to Cart" button    Tab 7        │            │
+│  │  ├─ Quantity select         Tab 8        │            │
+│  │  ├─ "Buy Now" button        Tab 9        │            │
+│  │  └─ Product link            Tab 10       │            │
+│  └──────────────────────────────────────────┘            │
 │       │                                                  │
 │       ↓                                                  │
-│  ┌──────────────────────────────────────────┐           │
-│  │  Footer                                  │           │
-│  │  ├─ Privacy link          Tab 11         │           │
-│  │  └─ Contact link          Tab 12         │           │
-│  └──────────────────────────────────────────┘           │
+│  ┌──────────────────────────────────────────┐            │
+│  │  Footer                                  │            │
+│  │  ├─ Privacy link          Tab 11         │            │
+│  │  └─ Contact link          Tab 12         │            │
+│  └──────────────────────────────────────────┘            │
 │       │                                                  │
 │       ↓                                                  │
-│  Back to top (loops to skip link)                      │
+│  Back to top (loops to skip link)                        │
 │                                                          │
-│  Key interactions:                                      │
-│  • Tab      → Next focusable element                   │
-│  • Shift+Tab → Previous focusable element              │
-│  • Enter    → Activate links/buttons                   │
-│  • Space    → Activate buttons, toggle checkboxes     │
-│  • Escape   → Close modals/menus                       │
-│  • Arrows   → Navigate within components (tabs, menu) │
+│  Key interactions:                                       │
+│  • Tab      → Next focusable element                     │
+│  • Shift+Tab → Previous focusable element                │
+│  • Enter    → Activate links/buttons                     │
+│  • Space    → Activate buttons, toggle checkboxes        │
+│  • Escape   → Close modals/menus                         │
+│  • Arrows   → Navigate within components (tabs, menu)    │
 │                                                          │
-│  Focus must be visible at all times!                   │
-│  Order must follow visual/logical flow                 │
+│  Focus must be visible at all times!                     │
+│  Order must follow visual/logical flow                   │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```

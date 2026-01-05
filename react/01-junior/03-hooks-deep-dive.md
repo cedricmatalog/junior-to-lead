@@ -204,7 +204,7 @@ Here's the useEffect lifecycle visualized:
 │       │                  │                               │
 │  Component re-renders ───┤                               │
 │       ↓                  │                               │
-│  Cleanup runs ←──────────┘  (if dependencies changed)   │
+│  Cleanup runs ←──────────┘  (if dependencies changed)    │
 │  (prev effect cleanup)                                   │
 │       ↓                                                  │
 │  New effect runs                                         │
@@ -212,15 +212,15 @@ Here's the useEffect lifecycle visualized:
 │       │                                                  │
 │  Component unmounts                                      │
 │       ↓                                                  │
-│  Final cleanup runs  ← (always runs on unmount)         │
+│  Final cleanup runs  ← (always runs on unmount)          │
 │                                                          │
 │  Example:                                                │
 │  useEffect(() => {                                       │
-│    socket.connect();     ← Effect                       │
+│    socket.connect();     ← Effect                        │
 │    return () => {                                        │
-│      socket.disconnect(); ← Cleanup                     │
+│      socket.disconnect(); ← Cleanup                      │
 │    };                                                    │
-│  }, [userId]);           ← Dependencies                 │
+│  }, [userId]);           ← Dependencies                  │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```"
@@ -345,13 +345,13 @@ Here's a decision tree for dependency arrays:
 │         Dependency Array Decision Tree                   │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  Does your effect use props or state?                   │
+│  Does your effect use props or state?                    │
 │           │                                              │
 │     ┌─────┴─────┐                                        │
 │     │           │                                        │
 │    NO          YES                                       │
 │     │           │                                        │
-│     │           ├─ Does it use ALL props/state?         │
+│     │           ├─ Does it use ALL props/state?          │
 │     │           │      │                                 │
 │     │           │  ┌───┴───┐                             │
 │     │           │  │       │                             │
@@ -363,22 +363,22 @@ Here's a decision tree for dependency arrays:
 │    []  ← Empty  │  │     [specific] ← List them          │
 │  )              │  │   )                                 │
 │                 │  │                                     │
-│  Run once       │  │   Re-run when those change         │
+│  Run once       │  │   Re-run when those change          │
 │  on mount       │  │                                     │
 │                 │  ↓                                     │
 │                 │  useEffect(                            │
 │                 │    () => {},                           │
-│                 │    [all, props, state] ← All of them  │
+│                 │    [all, props, state] ← All of them   │ 
 │                 │  )                                     │
 │                 │                                        │
-│                 │  Re-run when any change               │
+│                 │  Re-run when any change                │
 │                 │                                        │
 │  Common mistake:                                         │
 │  useEffect(() => {                                       │
-│    fetchUser(userId); ← Uses userId                     │
-│  }, []); ← Missing dependency! Bug!                     │
+│    fetchUser(userId); ← Uses userId                      │
+│  }, []); ← Missing dependency! Bug!                      │
 │                                                          │
-│  ESLint will warn you - listen to it!                   │
+│  ESLint will warn you - listen to it!                    │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -495,44 +495,44 @@ Here's what happens with race conditions:
 │           Race Condition Timeline                        │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  Without cancellation flag (BUG):                       │
+│  Without cancellation flag (BUG):                        │
 │                                                          │
-│  Time   User Action        Fetch Request    State       │
-│  ────   ───────────        ────────────────  ──────     │
-│   0s    View user A    →   Fetch A starts              │
-│   1s    View user B    →   Fetch B starts   (A pending) │
+│  Time   User Action        Fetch Request    State        │
+│  ────   ───────────        ────────────────  ──────      │
+│   0s    View user A    →   Fetch A starts                │
+│   1s    View user B    →   Fetch B starts   (A pending)  │ 
 │   2s                   ←   B returns        Set B ✓     │
 │   3s                   ←   A returns        Set A ✗     │
 │                                                          │
-│  Result: Shows user A (wrong!)                          │
-│  User clicked B but sees A's data                       │
+│  Result: Shows user A (wrong!)                           │
+│  User clicked B but sees A's data                        │
 │                                                          │
-│  ─────────────────────────────────────────────────────  │
+│  ─────────────────────────────────────────────────────   │
 │                                                          │
-│  With cancellation flag (FIX):                          │
+│  With cancellation flag (FIX):                           │
 │                                                          │
-│  Time   User Action        Fetch Request    State       │
-│  ────   ───────────        ────────────────  ──────     │
-│   0s    View user A    →   Fetch A starts              │
-│         Set cancelled=false                             │
-│   1s    View user B    →   Cleanup: cancelled=true     │
-│                        →   Fetch B starts              │
-│         Set cancelled=false                             │
+│  Time   User Action        Fetch Request    State        │
+│  ────   ───────────        ────────────────  ──────      │
+│   0s    View user A    →   Fetch A starts                │
+│         Set cancelled=false                              │
+│   1s    View user B    →   Cleanup: cancelled=true       │
+│                        →   Fetch B starts                │
+│         Set cancelled=false                              │
 │   2s                   ←   B returns        Set B ✓     │
 │   3s                   ←   A returns        Ignored! ✓  │
-│                            (cancelled=true)             │
+│                            (cancelled=true)              │
 │                                                          │
-│  Result: Shows user B (correct!)                        │
-│  Stale response ignored                                 │
+│  Result: Shows user B (correct!)                         │
+│  Stale response ignored                                  │
 │                                                          │
-│  Code pattern:                                          │
-│  useEffect(() => {                                      │
-│    let cancelled = false;                               │
-│    fetchData().then(data => {                           │
-│      if (!cancelled) setState(data);                   │
-│    });                                                  │
-│    return () => { cancelled = true; };                 │
-│  }, [id]);                                              │
+│  Code pattern:                                           │
+│  useEffect(() => {                                       │
+│    let cancelled = false;                                │
+│    fetchData().then(data => {                            │
+│      if (!cancelled) setState(data);                     │
+│    });                                                   │
+│    return () => { cancelled = true; };                   │
+│  }, [id]);                                               │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```

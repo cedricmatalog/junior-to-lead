@@ -89,13 +89,13 @@ Here's the test pyramid to guide your strategy:
 │   /     • Jest, Vitest                    \              │
 │  /─────────────────────────────────────────\             │
 │                                                          │
-│  Write MORE tests at the bottom (fast, cheap)           │
-│  Write FEWER tests at the top (slow, expensive)         │
+│  Write MORE tests at the bottom (fast, cheap)            │
+│  Write FEWER tests at the top (slow, expensive)          │
 │                                                          │
-│  For React apps, focus on:                              │
-│  • Integration tests (70%) - Component + user behavior  │
-│  • Unit tests (20%) - Complex logic, utilities         │
-│  • E2E tests (10%) - Critical user journeys            │
+│  For React apps, focus on:                               │
+│  • Integration tests (70%) - Component + user behavior   │
+│  • Unit tests (20%) - Complex logic, utilities           │
+│  • E2E tests (10%) - Critical user journeys              │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -194,48 +194,48 @@ Here's the query priority flowchart - which query method to use:
 │         Testing Library Query Priority                   │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  Start here: What are you testing?                      │
+│  Start here: What are you testing?                       │
 │       │                                                  │
 │       ↓                                                  │
-│  Can users interact with it?                            │
+│  Can users interact with it?                             │
 │       │                                                  │
 │   ┌───┴───┐                                              │
 │   │       │                                              │
-│  YES     NO (text, images)                              │
+│  YES     NO (text, images)                               │
 │   │       │                                              │
-│   ↓       └──→ screen.getByText('Welcome')              │
-│  Is it a form element?                                  │
+│   ↓       └──→ screen.getByText('Welcome')               │
+│  Is it a form element?                                   │
 │   │                                                      │
-│  YES ──→ screen.getByLabelText('Email')                 │
-│   │      screen.getByPlaceholderText('Enter email')     │
+│  YES ──→ screen.getByLabelText('Email')                  │
+│   │      screen.getByPlaceholderText('Enter email')      │
 │   │                                                      │
 │  NO                                                      │
 │   ↓                                                      │
-│  Use role (BEST):                                       │
-│  screen.getByRole('button', { name: 'Submit' })         │
-│  screen.getByRole('heading', { name: 'Title' })         │
-│  screen.getByRole('textbox', { name: 'Search' })        │
+│  Use role (BEST):                                        │
+│  screen.getByRole('button', { name: 'Submit' })          │
+│  screen.getByRole('heading', { name: 'Title' })          │
+│  screen.getByRole('textbox', { name: 'Search' })         │
 │                                                          │
-│  Last resort:                                           │
-│  screen.getByTestId('custom-element')                   │
+│  Last resort:                                            │
+│  screen.getByTestId('custom-element')                    │
 │                                                          │
-│  ─────────────────────────────────────────────────────  │
+│  ─────────────────────────────────────────────────────   │
 │                                                          │
-│  Query Variants:                                        │
+│  Query Variants:                                         │
 │                                                          │
-│  getBy*    → Element must exist (throws if not)         │
-│              Use for: Elements that should be there     │
+│  getBy*    → Element must exist (throws if not)          │
+│              Use for: Elements that should be there      │
 │                                                          │
-│  queryBy*  → Element may not exist (returns null)       │
-│              Use for: Checking absence                  │
-│              expect(queryByRole('alert')).not.toBe...   │
+│  queryBy*  → Element may not exist (returns null)        │
+│              Use for: Checking absence                   │
+│              expect(queryByRole('alert')).not.toBe...    │
 │                                                          │
-│  findBy*   → Wait for element (async, returns promise)  │
-│              Use for: Elements appearing after async    │
-│              await findByText('Loaded!')                │
+│  findBy*   → Wait for element (async, returns promise)   │
+│              Use for: Elements appearing after async     │
+│              await findByText('Loaded!')                 │
 │                                                          │
-│  getAllBy*, queryAllBy*, findAllBy*                     │
-│              Return arrays for multiple elements        │
+│  getAllBy*, queryAllBy*, findAllBy*                      │
+│              Return arrays for multiple elements         │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```

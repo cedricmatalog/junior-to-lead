@@ -91,40 +91,40 @@ Here's what the React DevTools component tree looks like:
 │         React DevTools Component Tree                    │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  Components Tab:                                        │
+│  Components Tab:                                         │
 │                                                          │
 │  ▼ App                                                   │
 │    ├─ props: {}                                          │
 │    ├─ hooks:                                             │
-│    │   └─ State: { user: {...} }                        │
+│    │   └─ State: { user: {...} }                         │
 │    │                                                     │
 │    ├─▼ ChatWindow                                        │
-│    │   ├─ props: { conversationId: "abc123" }           │
+│    │   ├─ props: { conversationId: "abc123" }            │
 │    │   ├─ hooks:                                         │
-│    │   │   ├─ State: { messages: [...] }                │
+│    │   │   ├─ State: { messages: [...] }                 │
 │    │   │   ├─ Effect                                     │
-│    │   │   └─ Ref: { current: null }                    │
+│    │   │   └─ Ref: { current: null }                     │
 │    │   │                                                 │
 │    │   ├─▼ MessageList                                   │
-│    │   │   ├─ props: { messages: [...] }                │
+│    │   │   ├─ props: { messages: [...] }                 │
 │    │   │   └─▼ MessageItem (×3)                          │
-│    │   │       ├─ props: { message: {...} }             │
+│    │   │       ├─ props: { message: {...} }              │
 │    │   │       └─ key: "msg-1"                           │
 │    │   │                                                 │
 │    │   └─► MessageInput                                  │
 │    │       ├─ props: { onSend: ƒ }                       │
 │    │       └─ hooks:                                     │
-│    │           └─ State: { text: "typing..." }          │
+│    │           └─ State: { text: "typing..." }           │
 │    │                                                     │
 │    └─► Sidebar                                           │
 │        └─ props: { user: {...} }                         │
 │                                                          │
-│  Features:                                              │
-│  • Click any component to see props/state              │
-│  • Edit values live to test scenarios                  │
-│  • Search by component name                            │
-│  • Highlight updates (see what re-renders)             │
-│  • View component source code location                 │
+│  Features:                                               │
+│  • Click any component to see props/state                │
+│  • Edit values live to test scenarios                    │
+│  • Search by component name                              │
+│  • Highlight updates (see what re-renders)               │
+│  • View component source code location                   │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -499,13 +499,13 @@ Before you leave, Marcus pulls together everything you've learned about errors i
 │                     React Error Handling                        │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────┐ │
-│  │  Render Errors  │    │  Event Errors   │    │ Async Errors│ │
-│  │                 │    │                 │    │             │ │
-│  │ Error Boundary  │    │   try/catch     │    │  try/catch  │ │
-│  │                 │    │                 │    │  .catch()   │ │
-│  │                 │    │                 │    │  cancelled  │ │
-│  └─────────────────┘    └─────────────────┘    └─────────────┘ │
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────┐  │
+│  │  Render Errors  │    │  Event Errors   │    │ Async Errors│  │
+│  │                 │    │                 │    │             │  │
+│  │ Error Boundary  │    │   try/catch     │    │  try/catch  │  │
+│  │                 │    │                 │    │  .catch()   │  │
+│  │                 │    │                 │    │  cancelled  │  │
+│  └─────────────────┘    └─────────────────┘    └─────────────┘  │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```

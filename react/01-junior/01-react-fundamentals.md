@@ -111,26 +111,26 @@ Here's how that transformation works:
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  JSX (What you write):                                      │
-│  ┌──────────────────────────────────────────────────┐      │
-│  │ <div className="product">                        │      │
-│  │   <h1>Wireless Headphones</h1>                   │      │
-│  │ </div>                                           │      │
-│  └──────────────────────────────────────────────────┘      │
+│  ┌──────────────────────────────────────────────────┐       │
+│  │ <div className="product">                        │       │
+│  │   <h1>Wireless Headphones</h1>                   │       │
+│  │ </div>                                           │       │
+│  └──────────────────────────────────────────────────┘       │
 │                          │                                  │
 │                          ↓ Babel transforms                 │
 │                          │                                  │
 │  JavaScript (What runs):                                    │
-│  ┌──────────────────────────────────────────────────┐      │
-│  │ React.createElement(                             │      │
-│  │   'div',                    ← Element type       │      │
-│  │   { className: 'product' }, ← Props object       │      │
-│  │   React.createElement(      ← Children          │      │
-│  │     'h1',                                        │      │
-│  │     null,                                        │      │
-│  │     'Wireless Headphones'                        │      │
-│  │   )                                              │      │
-│  │ )                                                │      │
-│  └──────────────────────────────────────────────────┘      │
+│  ┌──────────────────────────────────────────────────┐       │
+│  │ React.createElement(                             │       │
+│  │   'div',                    ← Element type       │       │
+│  │   { className: 'product' }, ← Props object       │       │
+│  │   React.createElement(      ← Children           │       │
+│  │     'h1',                                        │       │
+│  │     null,                                        │       │
+│  │     'Wireless Headphones'                        │       │
+│  │   )                                              │       │
+│  │ )                                                │       │
+│  └──────────────────────────────────────────────────┘       │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -604,15 +604,15 @@ The component hierarchy you just built looks like this:
 │        ProductCard ProductCard ProductCard              │
 │        (id: 1)     (id: 2)     (id: 3)                  │
 │           │            │            │                   │
-│           ├─ name      ├─ name      ├─ name            │
-│           ├─ price     ├─ price     ├─ price           │
-│           ├─ image     ├─ image     ├─ image           │
-│           ├─ rating    ├─ rating    ├─ rating          │
-│           └─ inStock   └─ inStock   └─ inStock         │
+│           ├─ name      ├─ name      ├─ name             │
+│           ├─ price     ├─ price     ├─ price            │
+│           ├─ image     ├─ image     ├─ image            │
+│           ├─ rating    ├─ rating    ├─ rating           │
+│           └─ inStock   └─ inStock   └─ inStock          │
 │                                                         │
-│  Data flows DOWN (props) →                             │
-│  Components are REUSABLE →                             │
-│  Each ProductCard gets different data but same logic   │
+│  Data flows DOWN (props) →                              │
+│  Components are REUSABLE →                              │
+│  Each ProductCard gets different data but same logic    │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
 ```

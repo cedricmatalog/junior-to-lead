@@ -158,37 +158,37 @@ Here's how state lifting works:
 │              State Lifting Pattern                       │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  BEFORE (siblings have separate state):                 │
+│  BEFORE (siblings have separate state):                  │
 │                                                          │
-│         TemperatureInputs                               │
+│         TemperatureInputs                                │
 │              │                                           │
 │       ┌──────┴──────┐                                    │
 │       │             │                                    │
-│  CelsiusInput   FahrenheitInput                         │
-│    state: 0°C     state: 32°F                           │
+│  CelsiusInput   FahrenheitInput                          │
+│    state: 0°C     state: 32°F                            │
 │                                                          │
-│  Problem: Change one, other doesn't update!             │
-│  They don't communicate                                 │
+│  Problem: Change one, other doesn't update!              │
+│  They don't communicate                                  │
 │                                                          │
-│  ─────────────────────────────────────────────────────  │
+│  ─────────────────────────────────────────────────────   │
 │                                                          │
-│  AFTER (state lifted to parent):                        │
+│  AFTER (state lifted to parent):                         │
 │                                                          │
-│         TemperatureInputs                               │
-│         state: celsius = 0                              │
+│         TemperatureInputs                                │
+│         state: celsius = 0                               │
 │              │                                           │
 │         ┌────┴─────┐                                     │
 │         ↓          ↓                                     │
-│    CelsiusInput   FahrenheitInput                       │
-│    props:         props:                                │
-│    • value: 0     • value: 32                           │
-│    • onChange     • onChange                            │
+│    CelsiusInput   FahrenheitInput                        │
+│    props:         props:                                 │
+│    • value: 0     • value: 32                            │
+│    • onChange     • onChange                             │
 │                                                          │
-│  Parent calculates: fahrenheit = (celsius * 9/5) + 32  │
-│  Both inputs stay in sync!                              │
+│  Parent calculates: fahrenheit = (celsius * 9/5) + 32    │
+│  Both inputs stay in sync!                               │
 │                                                          │
-│  Data flows DOWN (via props)                            │
-│  Events flow UP (via callbacks)                         │
+│  Data flows DOWN (via props)                             │
+│  Events flow UP (via callbacks)                          │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -239,7 +239,7 @@ Here's how Context works as a provider tree:
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
 │  <App>                                                   │
-│    └─ <ThemeProvider value={{ theme, toggle }}>         │
+│    └─ <ThemeProvider value={{ theme, toggle }}>          │
 │         │                                                │
 │         ├─ <Header>                                      │
 │         │    └─ <ThemeToggle>                            │
@@ -256,21 +256,21 @@ Here's how Context works as a provider tree:
 │                      Gets: { theme, toggle }             │
 │                                                          │
 │  Key points:                                             │
-│  • Provider wraps tree at top level                     │
-│  • Any descendant can useContext                        │
-│  • No prop drilling through intermediate components     │
-│  • Components not using context don't re-render         │
-│  • Multiple contexts can be nested                      │
+│  • Provider wraps tree at top level                      │
+│  • Any descendant can useContext                         │
+│  • No prop drilling through intermediate components      │
+│  • Components not using context don't re-render          │
+│  • Multiple contexts can be nested                       │
 │                                                          │
-│  Without Context (prop drilling):                       │
-│  App → Header → ThemeToggle                             │
+│  Without Context (prop drilling):                        │
+│  App → Header → ThemeToggle                              │
 │   │     ↑                                                │
-│   └─────┘ (pass theme through every level)              │
+│   └─────┘ (pass theme through every level)               │
 │                                                          │
-│  With Context (direct access):                          │
-│  App → Header → ThemeToggle                             │
+│  With Context (direct access):                           │
+│  App → Header → ThemeToggle                              │
 │   │              ↑                                       │
-│   └──────────────┘ (skip intermediate levels)           │
+│   └──────────────┘ (skip intermediate levels)            │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -360,51 +360,51 @@ Here's how useReducer works as a state machine:
 │          useReducer State Machine                        │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  Component dispatches action:                           │
-│  dispatch({ type: 'ADD_ITEM', item: {...} })            │
+│  Component dispatches action:                            │
+│  dispatch({ type: 'ADD_ITEM', item: {...} })             │
 │       │                                                  │
 │       ↓                                                  │
-│  ┌─────────────────────────────────────┐                │
-│  │       Reducer Function              │                │
-│  │  (current state, action) => new state│               │
-│  └─────────────────────────────────────┘                │
+│  ┌─────────────────────────────────────┐                 │
+│  │       Reducer Function              │                 │
+│  │  (current state, action) => new state│                │
+│  └─────────────────────────────────────┘                 │
 │       │                                                  │
-│       ├─ switch (action.type)                           │
+│       ├─ switch (action.type)                            │
 │       │                                                  │
 │       ├──→ 'ADD_ITEM'                                    │
-│       │      • Check if item exists                     │
-│       │      • Update quantity or add new               │
-│       │      • Recalculate subtotal                     │
-│       │      • Return new state                         │
+│       │      • Check if item exists                      │
+│       │      • Update quantity or add new                │
+│       │      • Recalculate subtotal                      │
+│       │      • Return new state                          │
 │       │                                                  │
 │       ├──→ 'REMOVE_ITEM'                                 │
-│       │      • Filter out item                          │
-│       │      • Recalculate subtotal                     │
-│       │      • Return new state                         │
+│       │      • Filter out item                           │
+│       │      • Recalculate subtotal                      │
+│       │      • Return new state                          │
 │       │                                                  │
 │       ├──→ 'SET_RESTAURANT'                              │
-│       │      • Clear existing items                     │
-│       │      • Set new restaurant                       │
-│       │      • Return new state                         │
+│       │      • Clear existing items                      │
+│       │      • Set new restaurant                        │
+│       │      • Return new state                          │
 │       │                                                  │
 │       └──→ default                                       │
-│              • Return unchanged state                   │
+│              • Return unchanged state                    │
 │       │                                                  │
 │       ↓                                                  │
-│  React updates component with new state                 │
+│  React updates component with new state                  │
 │       │                                                  │
 │       ↓                                                  │
-│  Component re-renders                                   │
+│  Component re-renders                                    │
 │                                                          │
-│  Benefits of useReducer:                                │
-│  • Complex state logic in one place                    │
-│  • Predictable state transitions                       │
-│  • Easy to test (pure function)                        │
-│  • Action history for debugging                        │
+│  Benefits of useReducer:                                 │
+│  • Complex state logic in one place                      │
+│  • Predictable state transitions                         │
+│  • Easy to test (pure function)                          │
+│  • Action history for debugging                          │ 
 │                                                          │
-│  vs useState:                                           │
-│  • useState: Simple state (toggle, counter)            │
-│  • useReducer: Complex state (cart, form, wizard)     │
+│  vs useState:                                            │
+│  • useState: Simple state (toggle, counter)              │
+│  • useReducer: Complex state (cart, form, wizard)        │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```

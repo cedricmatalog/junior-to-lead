@@ -224,48 +224,48 @@ Here's the validation flow:
 │           Form Validation Flow                           │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  User types in form                                     │
+│  User types in form                                      │
 │       │                                                  │
 │       ↓                                                  │
-│  React Hook Form captures value                         │
+│  React Hook Form captures value                          │
 │       │                                                  │
 │       ↓                                                  │
-│  On blur or submit...                                   │
+│  On blur or submit...                                    │
 │       │                                                  │
 │       ↓                                                  │
-│  ┌──────────────────────────────┐                       │
-│  │    Zod Schema Validation     │                       │
-│  │  z.object({ ... })           │                       │
-│  └──────────────────────────────┘                       │
+│  ┌──────────────────────────────┐                        │
+│  │    Zod Schema Validation     │                        │
+│  │  z.object({ ... })           │                        │
+│  └──────────────────────────────┘                        │
 │       │                                                  │
-│       ├─ Valid? ──────────┐                             │
-│       │                   │                             │
-│      YES                 NO                             │
-│       │                   │                             │
-│       ↓                   ↓                             │
-│  ┌─────────┐        ┌──────────┐                        │
-│  │ Submit  │        │  Errors  │                        │
-│  │  data   │        │ Object:  │                        │
-│  └─────────┘        │ {        │                        │
-│       │             │  email:  │                        │
-│       ↓             │   "..."  │                        │
-│  API call           │ }        │                        │
-│       │             └──────────┘                        │
-│       │                   │                             │
-│       │                   ↓                             │
-│       │            Display errors inline                │
-│       │                   │                             │
-│       │                   ↓                             │
-│       │            Focus first error field              │
-│       │                   │                             │
-│       ↓                   │                             │
-│  Success/Error      User fixes and retries              │
-│  feedback                 │                             │
-│       │                   │                             │
-│       └───────────────────┘                             │
+│       ├─ Valid? ──────────┐                              │
+│       │                   │                              │
+│      YES                 NO                              │
+│       │                   │                              │
+│       ↓                   ↓                              │
+│  ┌─────────┐        ┌──────────┐                         │
+│  │ Submit  │        │  Errors  │                         │
+│  │  data   │        │ Object:  │                         │
+│  └─────────┘        │ {        │                         │
+│       │             │  email:  │                         │
+│       ↓             │   "..."  │                         │
+│  API call           │ }        │                         │
+│       │             └──────────┘                         │
+│       │                   │                              │
+│       │                   ↓                              │
+│       │            Display errors inline                 │
+│       │                   │                              │
+│       │                   ↓                              │
+│       │            Focus first error field               │
+│       │                   │                              │
+│       ↓                   │                              │
+│  Success/Error      User fixes and retries               │
+│  feedback                 │                              │
+│       │                   │                              │
+│       └───────────────────┘                              │
 │                                                          │
-│  Key: Validation happens BEFORE submission             │
-│  Errors shown immediately with clear messages          │
+│  Key: Validation happens BEFORE submission               │
+│  Errors shown immediately with clear messages            │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -355,42 +355,42 @@ A 20-field form is overwhelming. You break it into steps:
 │          Multi-Step Wizard Flow                          │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
-│  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌──────┐ │
-│  │ Step 1  │ →  │ Step 2  │ →  │ Step 3  │ →  │ Step │ │
-│  │Personal │    │Experience│   │Additional│   │  4   │ │
-│  │  Info   │    │         │    │          │    │Review│ │
-│  └─────────┘    └─────────┘    └─────────┘    └──────┘ │
+│  ┌─────────┐    ┌─────────┐    ┌──────────┐    ┌──────┐  │
+│  │ Step 1  │ →  │ Step 2  │ →  │ Step 3   │ →  │ Step │  │
+│  │Personal │    │Experience│   │Additional│    │  4   │  │
+│  │  Info   │    │         │    │          │    │Review│  │
+│  └─────────┘    └─────────┘    └──────────┘    └──────┘  │
 │      │              │               │              │     │
 │      ↓              ↓               ↓              ↓     │
-│  Validate      Validate       Validate        Validate  │
-│  fields        fields         fields          all +     │
-│  for step      for step       for step        submit    │
+│  Validate      Validate       Validate        Validate   │
+│  fields        fields         fields          all +      │
+│  for step      for step       for step        submit     │
 │      │              │               │              │     │
-│      ├─ Valid? ─────┤───── Valid? ──┤──── Valid? ──┤    │
+│      ├─ Valid? ─────┤───── Valid? ──┤──── Valid? ──┤     │
 │      │              │               │              │     │
 │     YES             YES            YES            YES    │
 │      ↓              ↓               ↓              ↓     │
-│  Continue       Continue        Continue        Submit  │
-│  to Step 2      to Step 3       to Step 4       data    │
+│  Continue       Continue        Continue        Submit   │
+│  to Step 2      to Step 3       to Step 4       data     │
 │      │              │               │              │     │
 │     NO              NO             NO             NO     │
 │      ↓              ↓               ↓              ↓     │
-│  Show errors   Show errors    Show errors    Show      │
-│  Stay on       Stay on        Stay on        errors    │
-│  Step 1        Step 2         Step 3         Don't     │
-│                                               submit    │
+│  Show errors   Show errors    Show errors    Show        │
+│  Stay on       Stay on        Stay on        errors      │
+│  Step 1        Step 2         Step 3         Don't       │
+│                                               submit     │
 │                                                          │
-│  Progress saved in state:                               │
-│  { step1Data, step2Data, step3Data, step4Data }        │
+│  Progress saved in state:                                │
+│  { step1Data, step2Data, step3Data, step4Data }          │
 │                                                          │
-│  Back button:                                           │
-│  • Saves current step data                             │
-│  • Moves to previous step                              │
-│  • Loads previous step data                            │
+│  Back button:                                            │
+│  • Saves current step data                               │
+│  • Moves to previous step                                │
+│  • Loads previous step data                              │
 │                                                          │
-│  Auto-save to localStorage (optional):                 │
-│  • Saves after each step completion                    │
-│  • Restores on page reload                             │
+│  Auto-save to localStorage (optional):                   │
+│  • Saves after each step completion                      │
+│  • Restores on page reload                               │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
