@@ -31,6 +31,33 @@ Keep these in mind. They'll click as we build.
 
 ---
 
+## Prerequisites
+
+Module 09 (Git Workflows) - Understanding collaboration practices and code review to ship accessible features.
+
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Use semantic HTML elements (nav, main, button) instead of divs for better screen reader support
+- [ ] Apply ARIA attributes (roles, labels, live regions) when HTML isn't sufficient
+- [ ] Ensure all interactive elements are keyboard accessible with proper focus management
+- [ ] Implement focus trapping in modals and restore focus on close
+- [ ] Create accessible forms with proper labels, error messages, and validation feedback
+- [ ] Test with automated tools (axe, Lighthouse) and manual screen reader testing
+
+---
+
+## Time Estimate
+
+- **Reading**: 65-80 minutes
+- **Exercises**: 4-5 hours
+- **Mastery**: Build accessibility into every feature over 6-8 weeks to make it habitual
+
+---
+
 ## Chapter 1: Understanding the Audit
 
 The consultant, Maya, joins a video call to walk through the failures.
@@ -43,6 +70,48 @@ The consultant, Maya, joins a video call to walk through the failures.
 - **Level AAA** - Enhanced accessibility (nice to have)
 
 "GovServe requires Level AA. That's the standard for government and enterprise."
+
+Here's the WCAG compliance pyramid:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│            WCAG Compliance Pyramid                       │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│                       /\                                 │
+│                      /  \      Level AAA                 │
+│                     / En \     Enhanced                  │
+│                    / hanced\   • Highest standards       │
+│                   /          \  • Sign language          │
+│                  /    AAA     \ • Extended audio desc.   │
+│                 /──────────────\                         │
+│                /                \                        │
+│               /    Level AA      \                       │
+│              /                    \                      │
+│             /   Standard Complianc \                     │
+│            /  • Required by most    \                    │
+│           /    regulations           \                   │
+│          /  • 4.5:1 contrast          \                  │
+│         /   • Keyboard accessible      \                 │
+│        /    • ARIA labels               \                │
+│       /──────────────────────────────────\               │
+│      /                                    \              │
+│     /           Level A                    \             │
+│    /         Minimum                        \            │
+│   /  • Basic accessibility                   \           │
+│  /   • Alt text for images                    \          │
+│ /    • Keyboard navigation                     \         │
+│/       • Proper heading structure               \        │
+│──────────────────────────────────────────────────        │
+│                                                          │
+│  Most organizations require: Level AA                   │
+│  Government contracts often mandate: WCAG 2.1 AA        │
+│                                                          │
+│  Each level includes all lower levels                   │
+│  (AA includes all A requirements)                       │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
 
 She shares her screen, showing the audit categories:
 
@@ -220,6 +289,64 @@ She shares her screen, showing the audit categories:
 ```
 
 **The rule: Never use positive tabIndex. It creates maintenance nightmares.**
+
+Here's how keyboard navigation should flow through your app:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│         Keyboard Navigation Flow                         │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  User presses Tab key:                                  │
+│       │                                                  │
+│       ↓                                                  │
+│  ┌─────────────────────────┐                            │
+│  │ Skip to main content    │ ← Skip link (Tab 1)        │
+│  └─────────────────────────┘                            │
+│       │ (User presses Enter to skip, or Tab to nav)    │
+│       ↓                                                  │
+│  ┌──────────────────────────────────────────┐           │
+│  │  Navigation                              │           │
+│  │  ├─ Logo (link)         Tab 2            │           │
+│  │  ├─ Home (link)         Tab 3            │           │
+│  │  ├─ Products (link)     Tab 4            │           │
+│  │  ├─ About (link)        Tab 5            │           │
+│  │  └─ Search (input)      Tab 6            │           │
+│  └──────────────────────────────────────────┘           │
+│       │                                                  │
+│       ↓                                                  │
+│  ┌──────────────────────────────────────────┐           │
+│  │  Main Content (id="main-content")        │           │
+│  │  ├─ Heading (not focusable)              │           │
+│  │  ├─ "Add to Cart" button    Tab 7        │           │
+│  │  ├─ Quantity select         Tab 8        │           │
+│  │  ├─ "Buy Now" button        Tab 9        │           │
+│  │  └─ Product link            Tab 10       │           │
+│  └──────────────────────────────────────────┘           │
+│       │                                                  │
+│       ↓                                                  │
+│  ┌──────────────────────────────────────────┐           │
+│  │  Footer                                  │           │
+│  │  ├─ Privacy link          Tab 11         │           │
+│  │  └─ Contact link          Tab 12         │           │
+│  └──────────────────────────────────────────┘           │
+│       │                                                  │
+│       ↓                                                  │
+│  Back to top (loops to skip link)                      │
+│                                                          │
+│  Key interactions:                                      │
+│  • Tab      → Next focusable element                   │
+│  • Shift+Tab → Previous focusable element              │
+│  • Enter    → Activate links/buttons                   │
+│  • Space    → Activate buttons, toggle checkboxes     │
+│  • Escape   → Close modals/menus                       │
+│  • Arrows   → Navigate within components (tabs, menu) │
+│                                                          │
+│  Focus must be visible at all times!                   │
+│  Order must follow visual/logical flow                 │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
 
 ### Skip Links
 
@@ -658,9 +785,606 @@ The GovServe deal closes the following week.
 2. Navigate a complex form using only keyboard
 3. Use VoiceOver or NVDA to browse a website you built
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Run axe Audit and Fix Failures</summary>
+
+**Install axe DevTools:**
+1. Install axe DevTools extension in Chrome or Firefox
+2. Open your app in the browser
+3. Open DevTools (F12)
+4. Click on the "axe DevTools" tab
+5. Click "Scan ALL of my page"
+
+**Common failures and fixes:**
+
+**Failure 1: Images missing alt text**
+```jsx
+// BEFORE (Fails)
+<img src="/logo.png" />
+
+// AFTER (Passes)
+<img src="/logo.png" alt="Company Name Logo" />
+
+// Decorative images
+<img src="/decoration.svg" alt="" role="presentation" />
+```
+
+**Failure 2: Form inputs without labels**
+```jsx
+// BEFORE (Fails)
+<input type="email" placeholder="Email" />
+
+// AFTER (Passes) - Option 1: Visible label
+<label htmlFor="email">Email Address</label>
+<input type="email" id="email" />
+
+// Option 2: aria-label
+<input type="email" aria-label="Email Address" />
+
+// Option 3: Visually hidden label
+<label htmlFor="email" className="sr-only">Email Address</label>
+<input type="email" id="email" placeholder="you@example.com" />
+
+// CSS for sr-only:
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+```
+
+**Failure 3: Low color contrast**
+```jsx
+// BEFORE (Fails) - 2.5:1 contrast ratio
+<p style={{ color: '#999', background: '#fff' }}>Low contrast text</p>
+
+// AFTER (Passes) - 7:1 contrast ratio
+<p style={{ color: '#595959', background: '#fff' }}>High contrast text</p>
+
+// Use tools like webaim.org/resources/contrastchecker/
+```
+
+**Failure 4: Buttons without accessible names**
+```jsx
+// BEFORE (Fails)
+<button><TrashIcon /></button>
+
+// AFTER (Passes)
+<button aria-label="Delete item">
+  <TrashIcon aria-hidden="true" />
+</button>
+
+// Or with visible text
+<button>
+  <TrashIcon aria-hidden="true" />
+  <span>Delete</span>
+</button>
+```
+
+**Failure 5: Heading levels skipped**
+```jsx
+// BEFORE (Fails)
+<h1>Page Title</h1>
+<h3>Section Title</h3>  {/* Skipped h2! */}
+
+// AFTER (Passes)
+<h1>Page Title</h1>
+<h2>Section Title</h2>
+<h3>Subsection Title</h3>
+```
+
+**Failure 6: Links with non-descriptive text**
+```jsx
+// BEFORE (Fails)
+<a href="/products/123">Click here</a>
+<a href="/download">Read more</a>
+
+// AFTER (Passes)
+<a href="/products/123">View Wireless Headphones details</a>
+<a href="/download">Download product specification PDF</a>
+```
+
+**Comprehensive test file:**
+```jsx
+// AccessibilityTest.jsx
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
+
+describe('Accessibility', () => {
+  it('should not have any automatically detectable accessibility violations', async () => {
+    const { container } = render(<MyComponent />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});
+```
+
+**Key points:**
+- Run axe audits regularly during development
+- Fix violations as you code, not at the end
+- Test with keyboard navigation and screen readers too
+- Automated tools catch ~30-50% of accessibility issues
+- Manual testing is still necessary
+
+</details>
+
+<details>
+<summary>Exercise 2: Keyboard Navigation in Complex Form</summary>
+
+**Testing checklist for keyboard navigation:**
+
+```jsx
+function ComplexRegistrationForm() {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    interests: [],
+    agreeToTerms: false,
+  });
+
+  return (
+    <form>
+      {step === 1 && (
+        <fieldset>
+          <legend>Account Information</legend>
+
+          {/* Email input - Tab stop 1 */}
+          <label htmlFor="email">Email Address</label>
+          <input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            required
+          />
+
+          {/* Password input - Tab stop 2 */}
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            required
+            aria-describedby="password-hint"
+          />
+          <p id="password-hint">Must be at least 8 characters</p>
+
+          {/* Next button - Tab stop 3 */}
+          <button type="button" onClick={() => setStep(2)}>
+            Next
+          </button>
+        </fieldset>
+      )}
+
+      {step === 2 && (
+        <fieldset>
+          <legend>Interests (Select all that apply)</legend>
+
+          {/* Checkbox group - Tab stops 4-7 */}
+          <label>
+            <input
+              type="checkbox"
+              value="tech"
+              checked={formData.interests.includes('tech')}
+              onChange={(e) => {
+                const interests = e.target.checked
+                  ? [...formData.interests, 'tech']
+                  : formData.interests.filter(i => i !== 'tech');
+                setFormData({ ...formData, interests });
+              }}
+            />
+            Technology
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              value="sports"
+              checked={formData.interests.includes('sports')}
+              onChange={(e) => {
+                const interests = e.target.checked
+                  ? [...formData.interests, 'sports']
+                  : formData.interests.filter(i => i !== 'sports');
+                setFormData({ ...formData, interests });
+              }}
+            />
+            Sports
+          </label>
+
+          {/* Navigation buttons - Tab stops 8-9 */}
+          <button type="button" onClick={() => setStep(1)}>
+            Back
+          </button>
+          <button type="button" onClick={() => setStep(3)}>
+            Next
+          </button>
+        </fieldset>
+      )}
+
+      {step === 3 && (
+        <fieldset>
+          <legend>Review and Submit</legend>
+
+          <div>
+            <strong>Email:</strong> {formData.email}
+          </div>
+          <div>
+            <strong>Interests:</strong> {formData.interests.join(', ')}
+          </div>
+
+          {/* Checkbox - Tab stop 10 */}
+          <label>
+            <input
+              type="checkbox"
+              checked={formData.agreeToTerms}
+              onChange={(e) => setFormData({ ...formData, agreeToTerms: e.target.checked })}
+              required
+            />
+            I agree to the terms and conditions
+          </label>
+
+          {/* Navigation buttons - Tab stops 11-12 */}
+          <button type="button" onClick={() => setStep(2)}>
+            Back
+          </button>
+          <button
+            type="submit"
+            disabled={!formData.agreeToTerms}
+          >
+            Submit
+          </button>
+        </fieldset>
+      )}
+    </form>
+  );
+}
+```
+
+**Keyboard navigation test procedure:**
+
+1. **Tab key navigation:**
+   - Press Tab to move forward through interactive elements
+   - Press Shift+Tab to move backward
+   - Verify logical tab order (top to bottom, left to right)
+   - Ensure focus indicator is always visible
+
+2. **Checkbox/Radio interaction:**
+   - Use Space to toggle checkboxes
+   - Use Arrow keys to select radio buttons in a group
+   - Verify selection state is announced
+
+3. **Button activation:**
+   - Press Enter or Space to activate buttons
+   - Verify disabled buttons can't be activated
+
+4. **Form submission:**
+   - Press Enter in text field to submit
+   - Verify validation errors appear and are focusable
+
+5. **Modal/Dialog interaction:**
+   - Focus should trap inside modal
+   - Escape key should close modal
+   - Focus returns to trigger element on close
+
+**Testing script:**
+```javascript
+// Manual testing checklist
+const keyboardTestChecklist = [
+  '✓ Can tab to all interactive elements',
+  '✓ Tab order is logical (follows visual flow)',
+  '✓ Focus indicator is visible on all elements',
+  '✓ Can activate buttons with Enter and Space',
+  '✓ Can toggle checkboxes with Space',
+  '✓ Can navigate radio groups with arrows',
+  '✓ Can submit form by pressing Enter',
+  '✓ Skip links work (jump to main content)',
+  '✓ Modal traps focus and closes on Escape',
+  '✓ No keyboard traps (can always navigate away)',
+];
+```
+
+**Common keyboard issues and fixes:**
+
+```jsx
+// Issue: Non-interactive element made clickable
+// BEFORE (Fails keyboard nav)
+<div onClick={handleClick}>Click me</div>
+
+// AFTER (Works with keyboard)
+<button onClick={handleClick}>Click me</button>
+
+// Issue: Custom components not keyboard accessible
+// BEFORE
+<div className="dropdown" onClick={() => setOpen(!open)}>
+
+// AFTER
+<button
+  aria-expanded={open}
+  aria-controls="dropdown-menu"
+  onClick={() => setOpen(!open)}
+>
+  Menu
+</button>
+<ul id="dropdown-menu" role="menu">
+  <li role="menuitem">
+    <button onClick={handleAction}>Action</button>
+  </li>
+</ul>
+```
+
+**Key points:**
+- Never use positive tabIndex values
+- Only interactive elements should be focusable
+- Focus indicator must always be visible
+- Logical tab order follows visual order
+- Test with real keyboard, not just Tab key
+- Document expected keyboard interactions
+
+</details>
+
+<details>
+<summary>Exercise 3: Screen Reader Testing</summary>
+
+**macOS VoiceOver Testing:**
+
+```jsx
+// Sample component to test
+function ProductCard({ product }) {
+  const { name, price, rating, image, inStock } = product;
+
+  return (
+    <article aria-label={`${name} product card`}>
+      {/* Screen reader hears: "Product image, Wireless Headphones" */}
+      <img src={image} alt={name} />
+
+      <h3>{name}</h3>
+
+      {/* Screen reader hears: "4.5 out of 5 stars" */}
+      <div aria-label={`${rating} out of 5 stars`}>
+        {'★'.repeat(Math.floor(rating))}{'☆'.repeat(5 - Math.floor(rating))}
+      </div>
+
+      <p>
+        <span className="sr-only">Price:</span>
+        ${price.toFixed(2)}
+      </p>
+
+      {/* Screen reader announces stock status */}
+      <p aria-live="polite">
+        {inStock ? 'In stock' : 'Out of stock'}
+      </p>
+
+      {/* Screen reader hears: "Add Wireless Headphones to cart, button" */}
+      <button aria-label={`Add ${name} to cart`}>
+        <CartIcon aria-hidden="true" />
+        Add to Cart
+      </button>
+    </article>
+  );
+}
+```
+
+**VoiceOver testing procedure (macOS):**
+
+1. **Enable VoiceOver:**
+   - Press Cmd + F5
+   - Or: System Preferences → Accessibility → VoiceOver
+
+2. **Basic navigation:**
+   - VO + Right Arrow: Next item
+   - VO + Left Arrow: Previous item
+   - VO + Space: Activate element
+   - VO = Control + Option
+
+3. **Rotor navigation:**
+   - VO + U: Open rotor
+   - Left/Right arrows: Switch categories (headings, links, form controls)
+   - Up/Down arrows: Navigate within category
+
+4. **Test checklist:**
+```javascript
+const screenReaderChecklist = [
+  '✓ All images have appropriate alt text',
+  '✓ Form inputs have labels announced',
+  '✓ Headings create logical document outline',
+  '✓ Buttons have clear, descriptive names',
+  '✓ Links describe destination clearly',
+  '✓ Error messages are announced',
+  '✓ Dynamic content changes are announced',
+  '✓ Tables have proper headers',
+  '✓ No random text is skipped',
+  '✓ Language is natural and makes sense',
+];
+```
+
+**Windows NVDA Testing:**
+
+1. **Install NVDA:**
+   - Download from nvaccess.org (free)
+   - Install and run
+
+2. **Basic navigation:**
+   - Down Arrow: Next line
+   - Up Arrow: Previous line
+   - Tab: Next focusable element
+   - H: Next heading
+   - B: Next button
+   - F: Next form field
+
+**Improved component with better screen reader support:**
+
+```jsx
+function AccessibleProductCard({ product }) {
+  const { name, price, rating, ratingCount, image, inStock, description } = product;
+
+  return (
+    <article>
+      {/* Provide context for the image */}
+      <img
+        src={image}
+        alt={`${name} product image showing ${description}`}
+      />
+
+      <h3 id={`product-${product.id}-name`}>{name}</h3>
+
+      {/* Announce rating clearly */}
+      <div
+        role="img"
+        aria-label={`Rated ${rating} out of 5 stars based on ${ratingCount} reviews`}
+      >
+        <span aria-hidden="true">
+          {'★'.repeat(Math.floor(rating))}{'☆'.repeat(5 - Math.floor(rating))}
+        </span>
+      </div>
+
+      <p>
+        {/* Price announced clearly */}
+        <span className="sr-only">Price: </span>
+        <span aria-label={`${price} dollars`}>
+          ${price.toFixed(2)}
+        </span>
+      </p>
+
+      {/* Stock status with appropriate live region */}
+      <p aria-live="polite" aria-atomic="true">
+        <span className={inStock ? 'in-stock' : 'out-of-stock'}>
+          {inStock ? (
+            <>
+              <span className="sr-only">This item is </span>
+              In stock
+            </>
+          ) : (
+            <>
+              <span className="sr-only">This item is </span>
+              Out of stock
+            </>
+          )}
+        </span>
+      </p>
+
+      {/* Clear button action with context */}
+      <button
+        aria-label={`Add ${name} to shopping cart`}
+        aria-describedby={`product-${product.id}-name`}
+        disabled={!inStock}
+      >
+        <CartIcon aria-hidden="true" />
+        <span>Add to Cart</span>
+      </button>
+
+      {/* Additional info for screen readers */}
+      <div className="sr-only">
+        {description}. {inStock ? 'Available for immediate purchase.' : 'Currently unavailable.'}
+      </div>
+    </article>
+  );
+}
+```
+
+**Common screen reader issues and fixes:**
+
+```jsx
+// Issue: Icon-only buttons
+// BEFORE (Screen reader hears: "button")
+<button><TrashIcon /></button>
+
+// AFTER (Screen reader hears: "Delete item, button")
+<button aria-label="Delete item">
+  <TrashIcon aria-hidden="true" />
+</button>
+
+// Issue: Loading states not announced
+// BEFORE
+{loading && <Spinner />}
+
+// AFTER
+{loading && (
+  <div role="status" aria-live="polite">
+    <Spinner aria-hidden="true" />
+    <span className="sr-only">Loading content, please wait</span>
+  </div>
+)}
+
+// Issue: Form errors not announced
+// BEFORE
+{errors.email && <span className="error">{errors.email}</span>}
+
+// AFTER
+{errors.email && (
+  <span
+    id="email-error"
+    role="alert"
+    className="error"
+  >
+    {errors.email}
+  </span>
+)}
+<input
+  type="email"
+  aria-invalid={!!errors.email}
+  aria-describedby={errors.email ? 'email-error' : undefined}
+/>
+```
+
+**Key points:**
+- Test with real screen readers, not just code review
+- VoiceOver (macOS) and NVDA (Windows) are free
+- Listen to entire flow, not just individual elements
+- Ensure context is provided for all content
+- Dynamic updates should use aria-live
+- Hide decorative content with aria-hidden
+- Test forms, modals, and complex interactions thoroughly
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Semantic HTML**: Use proper elements (button, nav, main, section) for structure screen readers understand
+- **ARIA Attributes**: Add roles, labels, and states when HTML alone isn't descriptive enough
+- **Keyboard Navigation**: Make all interactive elements reachable and operable with Tab, Enter, Space, Escape
+- **Focus Management**: Trap focus in modals, restore focus on close, provide visible focus indicators
+- **Accessible Forms**: Label all inputs, announce errors with aria-live, indicate required and invalid states
+- **Testing**: Automate with jest-axe and Lighthouse, verify manually with screen readers (VoiceOver, NVDA)
+
+**Key takeaway**: Accessibility isn't a checklist - it's designing for how all users experience your app, including those using assistive technology.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Audit your checkout flow with axe and fix keyboard navigation issues
+- Ensure all form errors are announced to screen readers with aria-live
+- Add skip links so keyboard users can bypass repetitive navigation
+- Test your modal implementation with VoiceOver to verify focus trapping
+- Achieve WCAG 2.1 AA compliance for a client contract or procurement requirement
+
+---
+
 ## Further Reading
 
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [MDN Accessibility Guide](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - [Deque University](https://dequeuniversity.com/)
+
+---
+
+**Navigation**: [← Previous Module](./09-git-workflows.md)

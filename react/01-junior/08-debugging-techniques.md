@@ -24,6 +24,33 @@ Keep these in mind. They'll click as we build.
 
 ---
 
+## Prerequisites
+
+Module 07 (Testing Fundamentals) - Understanding component behavior and state to debug effectively.
+
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Use React DevTools to inspect component props, state, and hooks in real-time
+- [ ] Debug with advanced console methods beyond console.log (table, time, trace)
+- [ ] Set conditional breakpoints and use debugger statement to pause execution
+- [ ] Identify and fix race conditions in async code with cancellation patterns
+- [ ] Implement error boundaries to catch and handle render errors gracefully
+- [ ] Apply systematic debugging methodology to isolate and resolve issues
+
+---
+
+## Time Estimate
+
+- **Reading**: 55-70 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Debug issues consistently over 4-6 weeks to internalize the process
+
+---
+
 ## Chapter 1: Your New Best Friend — React DevTools
 
 "First things first," Sarah says, pulling up Chrome. "Install React DevTools."
@@ -55,6 +82,51 @@ MyContext.displayName = 'MyContext';
 const MemoizedComponent = memo(function MemoizedComponent(props) {
   return <div>{props.value}</div>;
 });
+```
+
+Here's what the React DevTools component tree looks like:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│         React DevTools Component Tree                    │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Components Tab:                                        │
+│                                                          │
+│  ▼ App                                                   │
+│    ├─ props: {}                                          │
+│    ├─ hooks:                                             │
+│    │   └─ State: { user: {...} }                        │
+│    │                                                     │
+│    ├─▼ ChatWindow                                        │
+│    │   ├─ props: { conversationId: "abc123" }           │
+│    │   ├─ hooks:                                         │
+│    │   │   ├─ State: { messages: [...] }                │
+│    │   │   ├─ Effect                                     │
+│    │   │   └─ Ref: { current: null }                    │
+│    │   │                                                 │
+│    │   ├─▼ MessageList                                   │
+│    │   │   ├─ props: { messages: [...] }                │
+│    │   │   └─▼ MessageItem (×3)                          │
+│    │   │       ├─ props: { message: {...} }             │
+│    │   │       └─ key: "msg-1"                           │
+│    │   │                                                 │
+│    │   └─► MessageInput                                  │
+│    │       ├─ props: { onSend: ƒ }                       │
+│    │       └─ hooks:                                     │
+│    │           └─ State: { text: "typing..." }          │
+│    │                                                     │
+│    └─► Sidebar                                           │
+│        └─ props: { user: {...} }                         │
+│                                                          │
+│  Features:                                              │
+│  • Click any component to see props/state              │
+│  • Edit values live to test scenarios                  │
+│  • Search by component name                            │
+│  • Highlight updates (see what re-renders)             │
+│  • View component source code location                 │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -282,7 +354,7 @@ class ErrorBoundary extends React.Component {
 - Server-side rendering
 - Errors in the error boundary itself
 
-> **React 19 Note**: React 19 introduces functional error boundaries using the new `use` hook and `ErrorBoundary` component from `react-error-boundary`. The class-based approach above still works, but modern codebases increasingly use the library approach for cleaner syntax.
+> **Note**: React still requires class components for error boundaries. If you want a function-component-friendly API, use a library like `react-error-boundary`, which wraps a class boundary for you.
 
 ---
 
@@ -601,7 +673,502 @@ function UserAvatar({ userId }) {
 2. Debug a stale closure issue in a timer component
 3. Add error boundaries to handle API failures gracefully
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Finding Unnecessary Re-renders</summary>
+
+**Problem Code:**
+
+```jsx
+// Parent component recreating objects on every render
+function Dashboard() {
+  const [count, setCount] = useState(0);
+
+  // BUG: New object on every render!
+  const user = {
+    name: 'John Doe',
+    email: 'john@example.com'
+  };
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>
+        Clicked {count} times
+      </button>
+      <UserProfile user={user} />
+    </div>
+  );
+}
+
+const UserProfile = memo(function UserProfile({ user }) {
+  console.log('UserProfile rendered');
+  return <div>{user.name} ({user.email})</div>;
+});
+```
+
+**Debugging Steps:**
+
+1. Open React DevTools
+2. Go to Components tab
+3. Click the settings icon (gear)
+4. Enable "Highlight updates when components render"
+5. Click the button in the Dashboard
+6. Notice UserProfile flashes (re-renders) even though user data hasn't changed
+7. Select UserProfile in the tree
+8. Look at props in the right panel
+9. Notice `user` object reference changes every render
+
+**Fixed Code:**
+
+```jsx
+function Dashboard() {
+  const [count, setCount] = useState(0);
+
+  // FIX: Memoize the object
+  const user = useMemo(() => ({
+    name: 'John Doe',
+    email: 'john@example.com'
+  }), []); // Empty deps = never changes
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>
+        Clicked {count} times
+      </button>
+      <UserProfile user={user} />
+    </div>
+  );
+}
+
+const UserProfile = memo(function UserProfile({ user }) {
+  console.log('UserProfile rendered');
+  return <div>{user.name} ({user.email})</div>;
+});
+```
+
+**Alternative Fix - Move Outside Component:**
+
+```jsx
+// Even better: if data is static, move it outside
+const USER_DATA = {
+  name: 'John Doe',
+  email: 'john@example.com'
+};
+
+function Dashboard() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>
+        Clicked {count} times
+      </button>
+      <UserProfile user={USER_DATA} />
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Objects/arrays created in render are new instances each time
+- React DevTools highlight feature makes re-renders visible
+- useMemo prevents creating new object references
+- Static data should live outside components when possible
+- Use Profiler tab to see which components render and why
+
+</details>
+
+<details>
+<summary>Exercise 2: Debugging Stale Closure in Timer</summary>
+
+**Problem Code:**
+
+```jsx
+function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    // BUG: Stale closure! count never updates inside interval
+    const timer = setInterval(() => {
+      console.log('Count:', count); // Always logs 0
+      setCount(count + 1); // Always sets to 1
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isRunning]); // Missing count dependency!
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+**Debugging Steps:**
+
+1. Add console.log inside interval callback
+2. Notice it always logs the same value
+3. Check ESLint warnings - should show missing dependency
+4. Add count to dependency array - but this recreates interval every second!
+5. Solution: use functional update form
+
+**Fixed Code - Solution 1 (Functional Updates):**
+
+```jsx
+function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    // FIX: Use functional update to avoid stale closure
+    const timer = setInterval(() => {
+      setCount(prevCount => {
+        console.log('Previous count:', prevCount); // Shows correct value
+        return prevCount + 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isRunning]); // Only isRunning needed now
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+**Fixed Code - Solution 2 (useRef):**
+
+```jsx
+function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const countRef = useRef(count);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    countRef.current = count;
+  }, [count]);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const timer = setInterval(() => {
+      const current = countRef.current;
+      console.log('Count:', current); // Always current value
+      setCount(current + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isRunning]);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Closures capture variables from their creation time
+- Functional updates `setState(prev => prev + 1)` always get latest value
+- useRef can store mutable values that don't trigger re-renders
+- ESLint exhaustive-deps rule catches these issues
+- console.log in callbacks helps identify stale values
+
+</details>
+
+<details>
+<summary>Exercise 3: Error Boundaries for API Failures</summary>
+
+```jsx
+// ErrorBoundary.jsx
+import React from 'react';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // Log to error reporting service
+    console.error('Error caught by boundary:', error, errorInfo);
+
+    // Could send to Sentry, LogRocket, etc.
+    // logErrorToService(error, errorInfo);
+
+    this.setState({ errorInfo });
+  }
+
+  resetError = () => {
+    this.setState({ hasError: false, error: null, errorInfo: null });
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{
+          padding: '2rem',
+          textAlign: 'center',
+          backgroundColor: '#fee',
+          border: '1px solid #fcc',
+          borderRadius: '4px',
+        }}>
+          <h2>Something went wrong</h2>
+          <p style={{ color: '#c00' }}>{this.state.error?.message}</p>
+
+          {process.env.NODE_ENV === 'development' && this.state.errorInfo && (
+            <details style={{ textAlign: 'left', marginTop: '1rem' }}>
+              <summary>Error Details (dev only)</summary>
+              <pre style={{ fontSize: '0.875rem', overflow: 'auto' }}>
+                {this.state.errorInfo.componentStack}
+              </pre>
+            </details>
+          )}
+
+          <button
+            onClick={this.resetError}
+            style={{
+              marginTop: '1rem',
+              padding: '0.5rem 1rem',
+              backgroundColor: '#0066cc',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+          >
+            Try Again
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+// UserData.jsx - Component that fetches data
+function UserData({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchUser() {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/users/${userId}`);
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch user: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!cancelled) {
+          setUser(data);
+          setError(null);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchUser();
+    return () => { cancelled = true; };
+  }, [userId]);
+
+  // Throw error to be caught by error boundary
+  if (error) {
+    throw new Error(error);
+  }
+
+  if (loading) return <p>Loading...</p>;
+  if (!user) return null;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+
+// App.jsx - Wrapping components with error boundaries
+function App() {
+  return (
+    <div>
+      <h1>User Dashboard</h1>
+
+      {/* Separate error boundary per section */}
+      <ErrorBoundary>
+        <section>
+          <h2>User Profile</h2>
+          <UserData userId="123" />
+        </section>
+      </ErrorBoundary>
+
+      <ErrorBoundary>
+        <section>
+          <h2>User Settings</h2>
+          <UserSettings userId="123" />
+        </section>
+      </ErrorBoundary>
+
+      {/* Rest of app still works if one section fails */}
+      <section>
+        <h2>Navigation</h2>
+        <nav>Always visible even if sections above fail</nav>
+      </section>
+    </div>
+  );
+}
+
+// Alternative: Async error handling without error boundary
+function UserDataAlternative({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchUser() {
+      try {
+        setLoading(true);
+        setError(null); // Clear previous errors
+
+        const response = await fetch(`/api/users/${userId}`);
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch user: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!cancelled) {
+          setUser(data);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchUser();
+    return () => { cancelled = true; };
+  }, [userId]);
+
+  if (loading) return <p>Loading...</p>;
+
+  // Show error inline instead of throwing
+  if (error) {
+    return (
+      <div role="alert" style={{ color: 'red', padding: '1rem', border: '1px solid red' }}>
+        <strong>Error:</strong> {error}
+        <button onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  if (!user) return null;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Error boundaries catch render errors in child components
+- They don't catch event handler or async errors (use try/catch)
+- Wrap each major section separately to isolate failures
+- Reset functionality allows recovery without full page reload
+- Show stack trace in development, hide in production
+- Alternative: handle errors in state without throwing
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **React DevTools**: Inspect component trees, props, state, and hooks; highlight re-renders visually
+- **Console Methods**: table, time, trace, assert provide richer debugging info than console.log
+- **Breakpoints**: Pause execution at specific lines or conditions to inspect state
+- **Race Conditions**: Cancel stale async operations with cleanup flags to prevent bugs
+- **Error Boundaries**: Catch render errors without crashing the entire app
+- **Systematic Debugging**: Reproduce, isolate, hypothesize, test - a methodical approach
+
+**Key takeaway**: Debugging is a skill built on method, not luck - use tools systematically and fix the cause, not just the symptom.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Track down why a component re-renders too often using React DevTools Profiler
+- Fix race conditions in data fetching when users navigate quickly
+- Add error boundaries to isolate failures in third-party widgets
+- Debug stale closures in event handlers with breakpoints and console logs
+- Identify memory leaks from uncleaned subscriptions and timers
+
+---
+
 ## Further Reading
 
 - [React DevTools Tutorial](https://react.dev/learn/react-developer-tools)
 - [Chrome DevTools Documentation](https://developer.chrome.com/docs/devtools/)
+
+---
+
+**Navigation**: [← Previous Module](./07-testing-fundamentals.md) | [Next Module →](./09-git-workflows.md)

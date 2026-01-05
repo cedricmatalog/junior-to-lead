@@ -26,6 +26,33 @@ Keep these in mind. They'll click as we build.
 
 ---
 
+## Prerequisites
+
+Module 04 (State Management Basics) - Understanding state management, useReducer, and Context patterns.
+
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Build controlled form inputs with React Hook Form for minimal boilerplate
+- [ ] Implement schema-based validation using Zod with type safety
+- [ ] Display validation errors inline with proper accessibility attributes
+- [ ] Create multi-step forms with step-by-step validation
+- [ ] Handle file uploads with validation and preview functionality
+- [ ] Implement auto-save to localStorage to prevent data loss
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-75 minutes
+- **Exercises**: 4-5 hours
+- **Mastery**: Practice form patterns over 3-4 weeks across different projects
+
+---
+
 ## Chapter 1: The Controlled Input
 
 "First, understand how React handles form inputs," Sarah starts.
@@ -159,12 +186,17 @@ const schema = z.object({
   path: ['confirmPassword'],
 });
 
+// TypeScript users: infer types from schema
 type FormData = z.infer<typeof schema>;
 
 function RegisterForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema)
   });
+
+  function onSubmit(data: FormData) {
+    console.log(data);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -184,6 +216,59 @@ function RegisterForm() {
 ```
 
 "The schema is your contract. If it passes Zod, you know exactly what shape the data has."
+
+Here's the validation flow:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│           Form Validation Flow                           │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  User types in form                                     │
+│       │                                                  │
+│       ↓                                                  │
+│  React Hook Form captures value                         │
+│       │                                                  │
+│       ↓                                                  │
+│  On blur or submit...                                   │
+│       │                                                  │
+│       ↓                                                  │
+│  ┌──────────────────────────────┐                       │
+│  │    Zod Schema Validation     │                       │
+│  │  z.object({ ... })           │                       │
+│  └──────────────────────────────┘                       │
+│       │                                                  │
+│       ├─ Valid? ──────────┐                             │
+│       │                   │                             │
+│      YES                 NO                             │
+│       │                   │                             │
+│       ↓                   ↓                             │
+│  ┌─────────┐        ┌──────────┐                        │
+│  │ Submit  │        │  Errors  │                        │
+│  │  data   │        │ Object:  │                        │
+│  └─────────┘        │ {        │                        │
+│       │             │  email:  │                        │
+│       ↓             │   "..."  │                        │
+│  API call           │ }        │                        │
+│       │             └──────────┘                        │
+│       │                   │                             │
+│       │                   ↓                             │
+│       │            Display errors inline                │
+│       │                   │                             │
+│       │                   ↓                             │
+│       │            Focus first error field              │
+│       │                   │                             │
+│       ↓                   │                             │
+│  Success/Error      User fixes and retries              │
+│  feedback                 │                             │
+│       │                   │                             │
+│       └───────────────────┘                             │
+│                                                          │
+│  Key: Validation happens BEFORE submission             │
+│  Errors shown immediately with clear messages          │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -265,6 +350,51 @@ const applicationSchema = z.object({
 
 A 20-field form is overwhelming. You break it into steps:
 
+```
+┌──────────────────────────────────────────────────────────┐
+│          Multi-Step Wizard Flow                          │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌──────┐ │
+│  │ Step 1  │ →  │ Step 2  │ →  │ Step 3  │ →  │ Step │ │
+│  │Personal │    │Experience│   │Additional│   │  4   │ │
+│  │  Info   │    │         │    │          │    │Review│ │
+│  └─────────┘    └─────────┘    └─────────┘    └──────┘ │
+│      │              │               │              │     │
+│      ↓              ↓               ↓              ↓     │
+│  Validate      Validate       Validate        Validate  │
+│  fields        fields         fields          all +     │
+│  for step      for step       for step        submit    │
+│      │              │               │              │     │
+│      ├─ Valid? ─────┤───── Valid? ──┤──── Valid? ──┤    │
+│      │              │               │              │     │
+│     YES             YES            YES            YES    │
+│      ↓              ↓               ↓              ↓     │
+│  Continue       Continue        Continue        Submit  │
+│  to Step 2      to Step 3       to Step 4       data    │
+│      │              │               │              │     │
+│     NO              NO             NO             NO     │
+│      ↓              ↓               ↓              ↓     │
+│  Show errors   Show errors    Show errors    Show      │
+│  Stay on       Stay on        Stay on        errors    │
+│  Step 1        Step 2         Step 3         Don't     │
+│                                               submit    │
+│                                                          │
+│  Progress saved in state:                               │
+│  { step1Data, step2Data, step3Data, step4Data }        │
+│                                                          │
+│  Back button:                                           │
+│  • Saves current step data                             │
+│  • Moves to previous step                              │
+│  • Loads previous step data                            │
+│                                                          │
+│  Auto-save to localStorage (optional):                 │
+│  • Saves after each step completion                    │
+│  • Restores on page reload                             │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
 ```jsx
 function JobApplicationForm({ jobId, onSubmit }) {
   const [step, setStep] = useState(1);
@@ -284,6 +414,7 @@ function JobApplicationForm({ jobId, onSubmit }) {
     }
   });
 
+  // useFieldArray manages dynamic form arrays (add, remove, reorder items)
   const { fields, append, remove } = useFieldArray({ control, name: 'experiences' });
   const availability = watch('startAvailability');
 
@@ -769,6 +900,490 @@ const userSchema = z.object({
 1. Build a multi-step registration form with validation
 2. Create a dynamic form that adds/removes fields
 3. Implement async validation (e.g., check if username exists)
+
+### Solutions
+
+<details>
+<summary>Exercise 1: Multi-Step Registration Form</summary>
+
+```jsx
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+// Step schemas
+const step1Schema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+  confirmPassword: z.string(),
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ['confirmPassword'],
+});
+
+const step2Schema = z.object({
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  dateOfBirth: z.string().min(1, 'Date of birth is required'),
+});
+
+const step3Schema = z.object({
+  address: z.string().min(1, 'Address is required'),
+  city: z.string().min(1, 'City is required'),
+  zipCode: z.string().regex(/^\d{5}$/, 'Must be 5 digits'),
+  terms: z.boolean().refine(val => val === true, 'You must accept the terms'),
+});
+
+function MultiStepRegistration() {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({});
+
+  const schemas = {
+    1: step1Schema,
+    2: step2Schema,
+    3: step3Schema,
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+  } = useForm({
+    resolver: zodResolver(schemas[step]),
+    defaultValues: formData,
+  });
+
+  const onNext = async (data) => {
+    const isValid = await trigger();
+    if (isValid) {
+      setFormData(prev => ({ ...prev, ...data }));
+      setStep(s => s + 1);
+    }
+  };
+
+  const onBack = (data) => {
+    setFormData(prev => ({ ...prev, ...data }));
+    setStep(s => s - 1);
+  };
+
+  const onSubmit = async (data) => {
+    const finalData = { ...formData, ...data };
+    console.log('Submitting:', finalData);
+    // Submit to API
+  };
+
+  return (
+    <div className="registration-form">
+      <div className="progress-bar">
+        <div className="progress" style={{ width: `${(step / 3) * 100}%` }} />
+      </div>
+
+      <h2>Step {step} of 3</h2>
+
+      {step === 1 && (
+        <form onSubmit={handleSubmit(onNext)}>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input id="email" type="email" {...register('email')} />
+            {errors.email && <span className="error">{errors.email.message}</span>}
+          </div>
+
+          <div>
+            <label htmlFor="password">Password</label>
+            <input id="password" type="password" {...register('password')} />
+            {errors.password && <span className="error">{errors.password.message}</span>}
+          </div>
+
+          <div>
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password" {...register('confirmPassword')} />
+            {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
+          </div>
+
+          <button type="submit">Next</button>
+        </form>
+      )}
+
+      {step === 2 && (
+        <form onSubmit={handleSubmit(onNext)}>
+          <div>
+            <label htmlFor="firstName">First Name</label>
+            <input id="firstName" {...register('firstName')} />
+            {errors.firstName && <span className="error">{errors.firstName.message}</span>}
+          </div>
+
+          <div>
+            <label htmlFor="lastName">Last Name</label>
+            <input id="lastName" {...register('lastName')} />
+            {errors.lastName && <span className="error">{errors.lastName.message}</span>}
+          </div>
+
+          <div>
+            <label htmlFor="dateOfBirth">Date of Birth</label>
+            <input id="dateOfBirth" type="date" {...register('dateOfBirth')} />
+            {errors.dateOfBirth && <span className="error">{errors.dateOfBirth.message}</span>}
+          </div>
+
+          <button type="button" onClick={handleSubmit(onBack)}>Back</button>
+          <button type="submit">Next</button>
+        </form>
+      )}
+
+      {step === 3 && (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label htmlFor="address">Address</label>
+            <input id="address" {...register('address')} />
+            {errors.address && <span className="error">{errors.address.message}</span>}
+          </div>
+
+          <div>
+            <label htmlFor="city">City</label>
+            <input id="city" {...register('city')} />
+            {errors.city && <span className="error">{errors.city.message}</span>}
+          </div>
+
+          <div>
+            <label htmlFor="zipCode">ZIP Code</label>
+            <input id="zipCode" {...register('zipCode')} />
+            {errors.zipCode && <span className="error">{errors.zipCode.message}</span>}
+          </div>
+
+          <div>
+            <label>
+              <input type="checkbox" {...register('terms')} />
+              I agree to the terms and conditions
+            </label>
+            {errors.terms && <span className="error">{errors.terms.message}</span>}
+          </div>
+
+          <button type="button" onClick={handleSubmit(onBack)}>Back</button>
+          <button type="submit">Submit</button>
+        </form>
+      )}
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Separate schemas for each step allow progressive validation
+- Form data accumulates across steps in state
+- trigger() validates current step before proceeding
+- Progress bar provides visual feedback
+- Back button preserves entered data
+
+</details>
+
+<details>
+<summary>Exercise 2: Dynamic Form with Add/Remove Fields</summary>
+
+```jsx
+import { useForm, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  teamName: z.string().min(1, 'Team name is required'),
+  members: z.array(
+    z.object({
+      name: z.string().min(1, 'Name is required'),
+      email: z.string().email('Invalid email'),
+      role: z.enum(['developer', 'designer', 'manager'], {
+        errorMap: () => ({ message: 'Please select a role' }),
+      }),
+    })
+  ).min(1, 'At least one team member is required'),
+});
+
+function TeamForm() {
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      teamName: '',
+      members: [{ name: '', email: '', role: 'developer' }],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'members',
+  });
+
+  const onSubmit = (data) => {
+    console.log('Team data:', data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label htmlFor="teamName">Team Name</label>
+        <input id="teamName" {...register('teamName')} />
+        {errors.teamName && <span className="error">{errors.teamName.message}</span>}
+      </div>
+
+      <h3>Team Members</h3>
+      {errors.members?.root && (
+        <span className="error">{errors.members.root.message}</span>
+      )}
+
+      {fields.map((field, index) => (
+        <div key={field.id} className="member-card">
+          <h4>Member {index + 1}</h4>
+
+          <div>
+            <label htmlFor={`members.${index}.name`}>Name</label>
+            <input
+              id={`members.${index}.name`}
+              {...register(`members.${index}.name`)}
+            />
+            {errors.members?.[index]?.name && (
+              <span className="error">{errors.members[index].name.message}</span>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor={`members.${index}.email`}>Email</label>
+            <input
+              id={`members.${index}.email`}
+              type="email"
+              {...register(`members.${index}.email`)}
+            />
+            {errors.members?.[index]?.email && (
+              <span className="error">{errors.members[index].email.message}</span>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor={`members.${index}.role`}>Role</label>
+            <select
+              id={`members.${index}.role`}
+              {...register(`members.${index}.role`)}
+            >
+              <option value="">Select role...</option>
+              <option value="developer">Developer</option>
+              <option value="designer">Designer</option>
+              <option value="manager">Manager</option>
+            </select>
+            {errors.members?.[index]?.role && (
+              <span className="error">{errors.members[index].role.message}</span>
+            )}
+          </div>
+
+          {fields.length > 1 && (
+            <button type="button" onClick={() => remove(index)}>
+              Remove Member
+            </button>
+          )}
+        </div>
+      ))}
+
+      <button
+        type="button"
+        onClick={() => append({ name: '', email: '', role: 'developer' })}
+      >
+        + Add Team Member
+      </button>
+
+      <button type="submit">Create Team</button>
+    </form>
+  );
+}
+```
+
+**Key points:**
+- useFieldArray manages dynamic arrays of form fields
+- Each field gets unique ID for proper React reconciliation
+- Remove button disabled when only one member remains
+- Validation applies to each array item individually
+- Array-level validation ensures at least one member exists
+
+</details>
+
+<details>
+<summary>Exercise 3: Async Validation (Username Availability)</summary>
+
+```jsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { useState } from 'react';
+
+// Simulate API call
+const checkUsernameAvailability = async (username) => {
+  await new Promise(resolve => setTimeout(resolve, 500));
+  const taken = ['admin', 'user', 'test'];
+  return !taken.includes(username.toLowerCase());
+};
+
+const schema = z.object({
+  username: z
+    .string()
+    .min(3, 'Username must be at least 3 characters')
+    .regex(/^[a-zA-Z0-9_]+$/, 'Only letters, numbers, and underscores allowed'),
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+});
+
+function RegistrationForm() {
+  const [usernameChecking, setUsernameChecking] = useState(false);
+  const [usernameAvailable, setUsernameAvailable] = useState(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError,
+    clearErrors,
+    watch,
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  const username = watch('username');
+
+  // Debounced async username check
+  const checkUsername = async (value) => {
+    if (!value || value.length < 3) {
+      setUsernameAvailable(null);
+      return;
+    }
+
+    setUsernameChecking(true);
+    clearErrors('username');
+
+    try {
+      const isAvailable = await checkUsernameAvailability(value);
+
+      if (isAvailable) {
+        setUsernameAvailable(true);
+      } else {
+        setUsernameAvailable(false);
+        setError('username', {
+          type: 'manual',
+          message: 'Username is already taken',
+        });
+      }
+    } catch (error) {
+      setError('username', {
+        type: 'manual',
+        message: 'Failed to check username availability',
+      });
+    } finally {
+      setUsernameChecking(false);
+    }
+  };
+
+  // Debounce helper
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func(...args), delay);
+    };
+  };
+
+  const debouncedCheck = debounce(checkUsername, 500);
+
+  const onSubmit = async (data) => {
+    // Final check before submission
+    if (!usernameAvailable) {
+      setError('username', {
+        type: 'manual',
+        message: 'Please choose an available username',
+      });
+      return;
+    }
+
+    console.log('Submitting:', data);
+    // Submit to API
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label htmlFor="username">Username</label>
+        <div className="input-with-status">
+          <input
+            id="username"
+            {...register('username')}
+            onChange={(e) => {
+              register('username').onChange(e);
+              debouncedCheck(e.target.value);
+            }}
+          />
+          {usernameChecking && <span className="checking">Checking...</span>}
+          {usernameAvailable === true && !usernameChecking && (
+            <span className="available">✓ Available</span>
+          )}
+        </div>
+        {errors.username && <span className="error">{errors.username.message}</span>}
+      </div>
+
+      <div>
+        <label htmlFor="email">Email</label>
+        <input id="email" type="email" {...register('email')} />
+        {errors.email && <span className="error">{errors.email.message}</span>}
+      </div>
+
+      <div>
+        <label htmlFor="password">Password</label>
+        <input id="password" type="password" {...register('password')} />
+        {errors.password && <span className="error">{errors.password.message}</span>}
+      </div>
+
+      <button type="submit" disabled={isSubmitting || usernameChecking}>
+        {isSubmitting ? 'Registering...' : 'Register'}
+      </button>
+    </form>
+  );
+}
+```
+
+**Key points:**
+- Debouncing prevents excessive API calls while typing
+- Visual feedback shows checking/available/taken states
+- setError allows manual validation errors from async checks
+- Final validation on submit ensures username is still available
+- Disable submit while checking to prevent race conditions
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **React Hook Form**: Simplifies form state management with register, handleSubmit, and formState
+- **Zod Validation**: Type-safe schema validation with clear error messages and type inference
+- **Error Display**: Inline error messages with aria-invalid and role="alert" for accessibility
+- **Multi-Step Forms**: Validating each step independently before allowing progression
+- **File Uploads**: Handling binary data with validation, previews, and proper error states
+- **Form Persistence**: Auto-saving to localStorage with debouncing to prevent data loss
+
+**Key takeaway**: React Hook Form + Zod creates a powerful, type-safe form solution with minimal boilerplate and excellent developer experience.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Build a job application form with resume upload and multi-step progression
+- Create a user registration flow with real-time password strength validation
+- Implement a settings page with auto-save functionality
+- Design a checkout form with address validation and payment processing
+- Build a survey form with conditional questions based on previous answers
+
+---
 
 ## Further Reading
 

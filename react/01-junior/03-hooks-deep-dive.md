@@ -26,6 +26,33 @@ Keep these in mind. They'll click as we build.
 
 ---
 
+## Prerequisites
+
+Module 02 (Component Patterns) - Familiarity with props, component composition, and how data flows in React.
+
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Use useState with functional updates to handle state based on previous values
+- [ ] Implement useEffect for side effects with proper cleanup and dependency arrays
+- [ ] Manage mutable values and DOM references using useRef without triggering re-renders
+- [ ] Share global state across components using useContext
+- [ ] Build custom hooks to extract and reuse stateful logic
+- [ ] Apply performance optimizations with useMemo and useCallback when needed
+
+---
+
+## Time Estimate
+
+- **Reading**: 50-70 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice hooks patterns over 3-4 weeks as you build real features
+
+---
+
 ## Chapter 1: State That Sticks Around
 
 You start with a simple notification counter. Every time a notification arrives, the badge should update.
@@ -156,6 +183,48 @@ useEffect(() => {
 
 "Think of the dependency array as an answer to 'when should this run again?' If `userId` changes, fetch the new user. Otherwise, leave it alone."
 
+Here's the useEffect lifecycle visualized:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│              useEffect Lifecycle                         │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Component renders                                       │
+│       ↓                                                  │
+│  React commits to DOM                                    │
+│       ↓                                                  │
+│  Browser paints screen                                   │
+│       ↓                                                  │
+│  useEffect runs  ────────┐                               │
+│       ↓                  │                               │
+│  Side effect executes    │                               │
+│  (fetch, subscribe, etc) │                               │
+│       │                  │                               │
+│       │                  │                               │
+│  Component re-renders ───┤                               │
+│       ↓                  │                               │
+│  Cleanup runs ←──────────┘  (if dependencies changed)   │
+│  (prev effect cleanup)                                   │
+│       ↓                                                  │
+│  New effect runs                                         │
+│       │                                                  │
+│       │                                                  │
+│  Component unmounts                                      │
+│       ↓                                                  │
+│  Final cleanup runs  ← (always runs on unmount)         │
+│                                                          │
+│  Example:                                                │
+│  useEffect(() => {                                       │
+│    socket.connect();     ← Effect                       │
+│    return () => {                                        │
+│      socket.disconnect(); ← Cleanup                     │
+│    };                                                    │
+│  }, [userId]);           ← Dependencies                 │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```"
+
 ---
 
 ## Chapter 3: The Ref Escape Hatch
@@ -269,6 +338,51 @@ function useUser(userId) {
 }
 ```
 
+Here's a decision tree for dependency arrays:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│         Dependency Array Decision Tree                   │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Does your effect use props or state?                   │
+│           │                                              │
+│     ┌─────┴─────┐                                        │
+│     │           │                                        │
+│    NO          YES                                       │
+│     │           │                                        │
+│     │           ├─ Does it use ALL props/state?         │
+│     │           │      │                                 │
+│     │           │  ┌───┴───┐                             │
+│     │           │  │       │                             │
+│     │           │ YES     NO                             │
+│     │           │  │       │                             │
+│     ↓           │  │       ↓                             │
+│  useEffect(     │  │   useEffect(                        │
+│    () => {},    │  │     () => {},                       │
+│    []  ← Empty  │  │     [specific] ← List them          │
+│  )              │  │   )                                 │
+│                 │  │                                     │
+│  Run once       │  │   Re-run when those change         │
+│  on mount       │  │                                     │
+│                 │  ↓                                     │
+│                 │  useEffect(                            │
+│                 │    () => {},                           │
+│                 │    [all, props, state] ← All of them  │
+│                 │  )                                     │
+│                 │                                        │
+│                 │  Re-run when any change               │
+│                 │                                        │
+│  Common mistake:                                         │
+│  useEffect(() => {                                       │
+│    fetchUser(userId); ← Uses userId                     │
+│  }, []); ← Missing dependency! Bug!                     │
+│                                                          │
+│  ESLint will warn you - listen to it!                   │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
 ---
 
 ## Chapter 6: Your First Custom Hook
@@ -374,6 +488,55 @@ Look at how many hooks work together:
 
 "Clean, readable, testable," Sarah says. "Each hook handles one thing. The component just orchestrates."
 
+Here's what happens with race conditions:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│           Race Condition Timeline                        │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Without cancellation flag (BUG):                       │
+│                                                          │
+│  Time   User Action        Fetch Request    State       │
+│  ────   ───────────        ────────────────  ──────     │
+│   0s    View user A    →   Fetch A starts              │
+│   1s    View user B    →   Fetch B starts   (A pending) │
+│   2s                   ←   B returns        Set B ✓     │
+│   3s                   ←   A returns        Set A ✗     │
+│                                                          │
+│  Result: Shows user A (wrong!)                          │
+│  User clicked B but sees A's data                       │
+│                                                          │
+│  ─────────────────────────────────────────────────────  │
+│                                                          │
+│  With cancellation flag (FIX):                          │
+│                                                          │
+│  Time   User Action        Fetch Request    State       │
+│  ────   ───────────        ────────────────  ──────     │
+│   0s    View user A    →   Fetch A starts              │
+│         Set cancelled=false                             │
+│   1s    View user B    →   Cleanup: cancelled=true     │
+│                        →   Fetch B starts              │
+│         Set cancelled=false                             │
+│   2s                   ←   B returns        Set B ✓     │
+│   3s                   ←   A returns        Ignored! ✓  │
+│                            (cancelled=true)             │
+│                                                          │
+│  Result: Shows user B (correct!)                        │
+│  Stale response ignored                                 │
+│                                                          │
+│  Code pattern:                                          │
+│  useEffect(() => {                                      │
+│    let cancelled = false;                               │
+│    fetchData().then(data => {                           │
+│      if (!cancelled) setState(data);                   │
+│    });                                                  │
+│    return () => { cancelled = true; };                 │
+│  }, [id]);                                              │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
 ---
 
 ## Chapter 8: The Traps to Avoid
@@ -426,6 +589,8 @@ function GoodComponent({ url }) {
 ### React.memo — Memoize Components
 
 ```jsx
+import { memo } from 'react';
+
 // Without memo: re-renders every time parent renders
 function ExpensiveList({ items }) {
   console.log('Rendering list...'); // Logs on every parent render
@@ -523,11 +688,525 @@ const greeting = `Hello, ${name}!`;
 2. **Stale closures** - Use functional updates or refs
 3. **Infinite loops** - Object/array dependencies recreated each render
 
+---
+
+## Debug This Code
+
+Before moving to the exercises, test your debugging skills. Each snippet has bugs - can you spot and fix them?
+
+<details>
+<summary>Challenge 1: Infinite Loop with useEffect</summary>
+
+```jsx
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/users/${userId}`)
+      .then(res => res.json())
+      .then(data => setUser(data));
+  }, [userId, user]);
+
+  if (!user) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+Check the dependency array. What happens when `user` changes?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: `user` in the dependency array causes an infinite loop. When user state updates, the effect runs again, fetches data, updates user, triggers effect again, etc.
+
+**Fixed code:**
+
+```jsx
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/users/${userId}`)
+      .then(res => res.json())
+      .then(data => setUser(data));
+  }, [userId]); // Remove 'user' from dependencies
+
+  if (!user) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+**Why it matters**: Including state that the effect updates in the dependency array creates infinite re-render loops. Only include external values the effect depends on.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 2: Stale Closure in Timer</summary>
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setCount(count + 1); // Bug: stale count value
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+The interval captures the `count` value. What happens when count should update?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: Stale closure - the interval callback captures the initial `count` value (0) and never sees updates.
+
+**Fixed code (using functional update):**
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setCount(prevCount => prevCount + 1); // Use functional update
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+**Alternative fix (using useRef):**
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const countRef = useRef(count);
+
+  useEffect(() => {
+    countRef.current = count;
+  }, [count]);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setCount(countRef.current + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+```
+
+**Why it matters**: Closures in effects capture values at creation time. Use functional updates or refs to access current values in async callbacks.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 3: Missing Cleanup in useEffect</summary>
+
+```jsx
+function SearchResults({ query }) {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+
+    fetch(`/api/search?q=${query}`)
+      .then(res => res.json())
+      .then(data => {
+        setResults(data);
+        setLoading(false);
+      });
+  }, [query]);
+
+  if (loading) return <div>Searching...</div>;
+
+  return (
+    <ul>
+      {results.map(item => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+What happens if the user types quickly and `query` changes before the fetch completes?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: No cleanup means stale requests can complete after newer ones, showing outdated results. Also causes "Can't perform a React state update on an unmounted component" warnings.
+
+**Fixed code:**
+
+```jsx
+function SearchResults({ query }) {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    setLoading(true);
+
+    fetch(`/api/search?q=${query}`)
+      .then(res => res.json())
+      .then(data => {
+        if (!cancelled) {
+          setResults(data);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [query]);
+
+  if (loading) return <div>Searching...</div>;
+
+  return (
+    <ul>
+      {results.map(item => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+**Even better with AbortController:**
+
+```jsx
+function SearchResults({ query }) {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    setLoading(true);
+
+    fetch(`/api/search?q=${query}`, { signal: abortController.signal })
+      .then(res => res.json())
+      .then(data => {
+        setResults(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        if (error.name !== 'AbortError') {
+          console.error('Search failed:', error);
+        }
+      });
+
+    return () => {
+      abortController.abort();
+    };
+  }, [query]);
+
+  if (loading) return <div>Searching...</div>;
+
+  return (
+    <ul>
+      {results.map(item => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+**Why it matters**: Async operations that complete after component unmount or dependency change cause memory leaks and race conditions. Always cleanup effects.
+
+</details>
+
+</details>
+
+---
+
 ## Practice Exercises
 
 1. Build a `useWindowSize` hook that returns current viewport dimensions
 2. Create a `useFetch` hook with loading, error, and data states
 3. Build a `usePrevious` hook that returns the previous value
+
+### Solutions
+
+<details>
+<summary>Exercise 1: useWindowSize Hook</summary>
+
+```jsx
+function useWindowSize() {
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []); // Empty deps - only set up listener once
+
+  return size;
+}
+
+// Usage
+function ResponsiveComponent() {
+  const { width, height } = useWindowSize();
+
+  return (
+    <div>
+      <p>Window size: {width} x {height}</p>
+      {width < 768 ? <MobileView /> : <DesktopView />}
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Initialize state with current window dimensions to avoid flash of incorrect values
+- Use cleanup function to remove event listener and prevent memory leaks
+- Empty dependency array ensures listener is added once, not on every render
+- Consider debouncing resize events in production for better performance
+
+</details>
+
+<details>
+<summary>Exercise 2: useFetch Hook</summary>
+
+```jsx
+function useFetch(url, options = {}) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchData() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const json = await response.json();
+
+        if (!cancelled) {
+          setData(json);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchData();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [url]); // Re-fetch when URL changes
+
+  return { data, loading, error };
+}
+
+// Usage
+function UserProfile({ userId }) {
+  const { data: user, loading, error } = useFetch(`/api/users/${userId}`);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!user) return null;
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Cancelled flag prevents setting state after component unmounts (race condition)
+- Error handling for both network errors and HTTP errors
+- Loading state tracks fetch progress for better UX
+- URL in dependency array triggers re-fetch when it changes
+- For production, consider using TanStack Query instead for caching and revalidation
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **useState**: Manages component state with functional updates to avoid stale closures
+- **useEffect**: Handles side effects (data fetching, subscriptions, DOM manipulation) with cleanup functions and dependencies
+- **useRef**: Stores mutable values and DOM references without triggering re-renders
+- **useContext**: Accesses shared state from Context providers without prop drilling
+- **Custom Hooks**: Extracts reusable stateful logic following the "use" naming convention
+- **Performance Hooks**: useMemo and useCallback prevent unnecessary recalculations and re-renders
+
+**Key takeaway**: Hooks let you add state and side effects to function components while keeping logic reusable and testable through custom hooks.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Build a notification system with WebSocket connections managed via useEffect cleanup
+- Create a useFetch custom hook to handle loading, error, and data states across multiple components
+- Implement a theme switcher using useContext to avoid passing theme props through every component
+- Optimize expensive filtering or sorting operations with useMemo
+- Build a useLocalStorage hook that syncs state with browser storage
+
+---
+
+<details>
+<summary>Exercise 3: usePrevious Hook</summary>
+
+```jsx
+function usePrevious(value) {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current = value;
+  });
+
+  return ref.current;
+}
+
+// Usage
+function Counter() {
+  const [count, setCount] = useState(0);
+  const prevCount = usePrevious(count);
+
+  return (
+    <div>
+      <p>Current: {count}</p>
+      <p>Previous: {prevCount}</p>
+      <p>
+        {count > prevCount
+          ? 'Increased'
+          : count < prevCount
+          ? 'Decreased'
+          : 'No change'}
+      </p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- useRef stores values without triggering re-renders
+- The effect runs after render, so ref.current holds the previous value during render
+- No dependency array means effect runs after every render
+- Useful for comparing previous and current values in animations or transitions
+- First render returns undefined since there's no previous value yet
+
+</details>
 
 ## Further Reading
 

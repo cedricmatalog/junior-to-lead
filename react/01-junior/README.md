@@ -24,6 +24,7 @@ You've completed this level when you can:
 | 7 | [Testing Fundamentals](07-testing-fundamentals.md) | Jest basics, React Testing Library, unit tests, test structure |
 | 8 | [Debugging Techniques](08-debugging-techniques.md) | React DevTools, console methods, breakpoints, error boundaries |
 | 9 | [Git Workflows](09-git-workflows.md) | Branching strategies, PR etiquette, meaningful commits, conflict resolution |
+| 10 | [Accessibility Fundamentals](10-accessibility-fundamentals.md) | WCAG, semantic HTML, ARIA, keyboard/focus |
 
 ## Recommended Path
 
@@ -32,7 +33,8 @@ You've completed this level when you can:
 3. **State Management** and **Forms** cover most real-world UI challenges
 4. **Styling** ensures you can make things look professional
 5. **Testing** and **Debugging** make you self-sufficient
-6. **Git Workflows** prepares you for team collaboration
+6. **Accessibility** ensures your UI works for everyone
+7. **Git Workflows** prepares you for team collaboration
 
 ## Time Investment
 

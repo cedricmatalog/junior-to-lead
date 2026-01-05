@@ -30,6 +30,33 @@ Keep these in mind. They'll click as we build.
 
 ---
 
+## Prerequisites
+
+Module 03 (Hooks Deep Dive) - Understanding useState, useEffect, useContext, and custom hooks.
+
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Determine where state should live (local, lifted, or global)
+- [ ] Lift state up to common ancestors when siblings need shared data
+- [ ] Use Context API to share global state without prop drilling
+- [ ] Implement useReducer for complex state logic with multiple update patterns
+- [ ] Build custom hooks that combine Context and useReducer for domain-specific state
+- [ ] Decide when to use built-in React state vs external state management libraries
+
+---
+
+## Time Estimate
+
+- **Reading**: 55-70 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice state management decisions over 4-5 weeks building features
+
+---
+
 ## Chapter 1: State Has Addresses
 
 "Think of state like mail," Marcus explains. "It has to live somewhere. The question is: which mailbox?"
@@ -124,6 +151,48 @@ function TemperatureInputs() {
 
 **The rule**: When siblings need the same state, lift it to their nearest common ancestor.
 
+Here's how state lifting works:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│              State Lifting Pattern                       │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  BEFORE (siblings have separate state):                 │
+│                                                          │
+│         TemperatureInputs                               │
+│              │                                           │
+│       ┌──────┴──────┐                                    │
+│       │             │                                    │
+│  CelsiusInput   FahrenheitInput                         │
+│    state: 0°C     state: 32°F                           │
+│                                                          │
+│  Problem: Change one, other doesn't update!             │
+│  They don't communicate                                 │
+│                                                          │
+│  ─────────────────────────────────────────────────────  │
+│                                                          │
+│  AFTER (state lifted to parent):                        │
+│                                                          │
+│         TemperatureInputs                               │
+│         state: celsius = 0                              │
+│              │                                           │
+│         ┌────┴─────┐                                     │
+│         ↓          ↓                                     │
+│    CelsiusInput   FahrenheitInput                       │
+│    props:         props:                                │
+│    • value: 0     • value: 32                           │
+│    • onChange     • onChange                            │
+│                                                          │
+│  Parent calculates: fahrenheit = (celsius * 9/5) + 32  │
+│  Both inputs stay in sync!                              │
+│                                                          │
+│  Data flows DOWN (via props)                            │
+│  Events flow UP (via callbacks)                         │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
 ---
 
 ## Chapter 3: Context for the Cart
@@ -161,6 +230,50 @@ function ThemeToggle() {
 ```
 
 "No props. No drilling. The component just reaches up and grabs what it needs."
+
+Here's how Context works as a provider tree:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│           Context Provider Tree                          │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  <App>                                                   │
+│    └─ <ThemeProvider value={{ theme, toggle }}>         │
+│         │                                                │
+│         ├─ <Header>                                      │
+│         │    └─ <ThemeToggle>                            │
+│         │         └─ useContext(ThemeContext) ✓         │
+│         │            Gets: { theme, toggle }             │
+│         │                                                │
+│         ├─ <Sidebar>                                     │
+│         │    └─ <Navigation>                             │
+│         │         └─ (doesn't use theme)                 │
+│         │                                                │
+│         └─ <MainContent>                                 │
+│              └─ <ArticleCard>                            │
+│                   └─ useContext(ThemeContext) ✓         │
+│                      Gets: { theme, toggle }             │
+│                                                          │
+│  Key points:                                             │
+│  • Provider wraps tree at top level                     │
+│  • Any descendant can useContext                        │
+│  • No prop drilling through intermediate components     │
+│  • Components not using context don't re-render         │
+│  • Multiple contexts can be nested                      │
+│                                                          │
+│  Without Context (prop drilling):                       │
+│  App → Header → ThemeToggle                             │
+│   │     ↑                                                │
+│   └─────┘ (pass theme through every level)              │
+│                                                          │
+│  With Context (direct access):                          │
+│  App → Header → ThemeToggle                             │
+│   │              ↑                                       │
+│   └──────────────┘ (skip intermediate levels)           │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -240,6 +353,62 @@ function orderReducer(state, action) {
 
 "The reducer is the brain," Marcus explains. "It knows all the rules: can't mix restaurants, quantities stack, clearing resets everything."
 
+Here's how useReducer works as a state machine:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│          useReducer State Machine                        │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Component dispatches action:                           │
+│  dispatch({ type: 'ADD_ITEM', item: {...} })            │
+│       │                                                  │
+│       ↓                                                  │
+│  ┌─────────────────────────────────────┐                │
+│  │       Reducer Function              │                │
+│  │  (current state, action) => new state│               │
+│  └─────────────────────────────────────┘                │
+│       │                                                  │
+│       ├─ switch (action.type)                           │
+│       │                                                  │
+│       ├──→ 'ADD_ITEM'                                    │
+│       │      • Check if item exists                     │
+│       │      • Update quantity or add new               │
+│       │      • Recalculate subtotal                     │
+│       │      • Return new state                         │
+│       │                                                  │
+│       ├──→ 'REMOVE_ITEM'                                 │
+│       │      • Filter out item                          │
+│       │      • Recalculate subtotal                     │
+│       │      • Return new state                         │
+│       │                                                  │
+│       ├──→ 'SET_RESTAURANT'                              │
+│       │      • Clear existing items                     │
+│       │      • Set new restaurant                       │
+│       │      • Return new state                         │
+│       │                                                  │
+│       └──→ default                                       │
+│              • Return unchanged state                   │
+│       │                                                  │
+│       ↓                                                  │
+│  React updates component with new state                 │
+│       │                                                  │
+│       ↓                                                  │
+│  Component re-renders                                   │
+│                                                          │
+│  Benefits of useReducer:                                │
+│  • Complex state logic in one place                    │
+│  • Predictable state transitions                       │
+│  • Easy to test (pure function)                        │
+│  • Action history for debugging                        │
+│                                                          │
+│  vs useState:                                           │
+│  • useState: Simple state (toggle, counter)            │
+│  • useReducer: Complex state (cart, form, wizard)     │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
 ---
 
 ## Chapter 5: A Custom Hook for Cleaner Code
@@ -287,6 +456,10 @@ function MenuItem({ item, restaurantId }) {
       return;
     }
 
+    if (!order.restaurantId) {
+      dispatch({ type: 'SET_RESTAURANT', restaurantId });
+    }
+
     dispatch({
       type: 'ADD_ITEM',
       item: {
@@ -297,10 +470,6 @@ function MenuItem({ item, restaurantId }) {
         customizations,
       },
     });
-
-    if (!order.restaurantId) {
-      dispatch({ type: 'SET_RESTAURANT', restaurantId });
-    }
 
     // Reset local state
     setIsCustomizing(false);
@@ -358,7 +527,10 @@ function OrderSummary() {
     <div className="order-summary">
       <h2>Your Order</h2>
       {order.items.map((item, index) => (
-        <div key={index} className="order-item">
+        <div
+          key={`${item.menuItemId}-${JSON.stringify(item.customizations)}`}
+          className="order-item"
+        >
           <span>{item.quantity}x {item.name}</span>
           <span>${(item.price * item.quantity).toFixed(2)}</span>
           <button onClick={() => dispatch({ type: 'REMOVE_ITEM', index })}>
@@ -436,6 +608,501 @@ function Counter() {
 1. Build a shopping cart with Context (add, remove, update quantity)
 2. Create a form with multiple inputs sharing validation state
 3. Implement a notification system with Context and reducer
+
+### Solutions
+
+<details>
+<summary>Exercise 1: Shopping Cart with Context</summary>
+
+```jsx
+import { createContext, useContext, useReducer, useMemo } from 'react';
+
+// Context
+const CartContext = createContext(null);
+
+// Reducer
+function cartReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_ITEM':
+      const existingIndex = state.items.findIndex(
+        item => item.id === action.item.id
+      );
+
+      if (existingIndex >= 0) {
+        const updatedItems = [...state.items];
+        updatedItems[existingIndex].quantity += action.item.quantity || 1;
+        return { ...state, items: updatedItems };
+      }
+
+      return {
+        ...state,
+        items: [...state.items, { ...action.item, quantity: action.item.quantity || 1 }]
+      };
+
+    case 'REMOVE_ITEM':
+      return {
+        ...state,
+        items: state.items.filter(item => item.id !== action.id)
+      };
+
+    case 'UPDATE_QUANTITY':
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === action.id
+            ? { ...item, quantity: action.quantity }
+            : item
+        )
+      };
+
+    case 'CLEAR_CART':
+      return { items: [] };
+
+    default:
+      return state;
+  }
+}
+
+// Provider
+function CartProvider({ children }) {
+  const [state, dispatch] = useReducer(cartReducer, { items: [] });
+
+  const total = useMemo(() => {
+    return state.items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+  }, [state.items]);
+
+  const itemCount = useMemo(() => {
+    return state.items.reduce((sum, item) => sum + item.quantity, 0);
+  }, [state.items]);
+
+  const value = useMemo(
+    () => ({ cart: state, dispatch, total, itemCount }),
+    [state, total, itemCount]
+  );
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+}
+
+// Custom hook
+function useCart() {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within CartProvider');
+  }
+  return context;
+}
+
+// Usage components
+function ProductCard({ product }) {
+  const { dispatch } = useCart();
+
+  const addToCart = () => {
+    dispatch({ type: 'ADD_ITEM', item: product });
+  };
+
+  return (
+    <div className="product-card">
+      <h3>{product.name}</h3>
+      <p>${product.price.toFixed(2)}</p>
+      <button onClick={addToCart}>Add to Cart</button>
+    </div>
+  );
+}
+
+function CartSummary() {
+  const { cart, dispatch, total, itemCount } = useCart();
+
+  if (itemCount === 0) {
+    return <p>Your cart is empty</p>;
+  }
+
+  return (
+    <div className="cart-summary">
+      <h2>Cart ({itemCount} items)</h2>
+      {cart.items.map(item => (
+        <div key={item.id}>
+          <span>{item.name}</span>
+          <input
+            type="number"
+            value={item.quantity}
+            min="1"
+            onChange={(e) =>
+              dispatch({
+                type: 'UPDATE_QUANTITY',
+                id: item.id,
+                quantity: parseInt(e.target.value) || 1
+              })
+            }
+          />
+          <span>${(item.price * item.quantity).toFixed(2)}</span>
+          <button onClick={() => dispatch({ type: 'REMOVE_ITEM', id: item.id })}>
+            Remove
+          </button>
+        </div>
+      ))}
+      <div className="total">
+        <strong>Total: ${total.toFixed(2)}</strong>
+      </div>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Reducer handles all cart logic in one place for consistency
+- useMemo prevents recalculating totals on every render
+- Custom hook provides clean API and error checking
+- Memoizing the context value prevents unnecessary re-renders
+- Quantity updates merge items instead of duplicating
+
+</details>
+
+<details>
+<summary>Exercise 2: Form with Shared Validation State</summary>
+
+```jsx
+import { useState } from 'react';
+
+function useFormValidation(initialValues, validationRules) {
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  const validate = (fieldName, value) => {
+    const rules = validationRules[fieldName];
+    if (!rules) return '';
+
+    for (const rule of rules) {
+      const error = rule(value, values);
+      if (error) return error;
+    }
+    return '';
+  };
+
+  const handleChange = (name, value) => {
+    setValues(prev => ({ ...prev, [name]: value }));
+
+    if (touched[name]) {
+      const error = validate(name, value);
+      setErrors(prev => ({ ...prev, [name]: error }));
+    }
+  };
+
+  const handleBlur = (name) => {
+    setTouched(prev => ({ ...prev, [name]: true }));
+    const error = validate(name, values[name]);
+    setErrors(prev => ({ ...prev, [name]: error }));
+  };
+
+  const validateAll = () => {
+    const newErrors = {};
+    let isValid = true;
+
+    Object.keys(validationRules).forEach(fieldName => {
+      const error = validate(fieldName, values[fieldName]);
+      if (error) {
+        newErrors[fieldName] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+    setTouched(
+      Object.keys(validationRules).reduce(
+        (acc, key) => ({ ...acc, [key]: true }),
+        {}
+      )
+    );
+
+    return isValid;
+  };
+
+  return {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    validateAll
+  };
+}
+
+// Validation rules
+const required = (value) => (!value ? 'This field is required' : '');
+const email = (value) =>
+  !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? 'Invalid email address' : '';
+const minLength = (min) => (value) =>
+  value.length < min ? `Must be at least ${min} characters` : '';
+const matchField = (fieldName) => (value, allValues) =>
+  value !== allValues[fieldName] ? `Must match ${fieldName}` : '';
+
+// Usage
+function SignupForm() {
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    validateAll
+  } = useFormValidation(
+    {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      username: ''
+    },
+    {
+      email: [required, email],
+      password: [required, minLength(8)],
+      confirmPassword: [required, matchField('password')],
+      username: [required, minLength(3)]
+    }
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateAll()) {
+      console.log('Form is valid!', values);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username</label>
+        <input
+          value={values.username}
+          onChange={(e) => handleChange('username', e.target.value)}
+          onBlur={() => handleBlur('username')}
+        />
+        {touched.username && errors.username && (
+          <span className="error">{errors.username}</span>
+        )}
+      </div>
+
+      <div>
+        <label>Email</label>
+        <input
+          type="email"
+          value={values.email}
+          onChange={(e) => handleChange('email', e.target.value)}
+          onBlur={() => handleBlur('email')}
+        />
+        {touched.email && errors.email && (
+          <span className="error">{errors.email}</span>
+        )}
+      </div>
+
+      <div>
+        <label>Password</label>
+        <input
+          type="password"
+          value={values.password}
+          onChange={(e) => handleChange('password', e.target.value)}
+          onBlur={() => handleBlur('password')}
+        />
+        {touched.password && errors.password && (
+          <span className="error">{errors.password}</span>
+        )}
+      </div>
+
+      <div>
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          value={values.confirmPassword}
+          onChange={(e) => handleChange('confirmPassword', e.target.value)}
+          onBlur={() => handleBlur('confirmPassword')}
+        />
+        {touched.confirmPassword && errors.confirmPassword && (
+          <span className="error">{errors.confirmPassword}</span>
+        )}
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+  );
+}
+```
+
+**Key points:**
+- Custom hook centralizes validation logic across multiple fields
+- Touched state prevents showing errors before user interacts with field
+- Validation rules are composable and reusable functions
+- Cross-field validation (like password matching) has access to all values
+- Only validates on blur to avoid annoying users while typing
+
+</details>
+
+<details>
+<summary>Exercise 3: Notification System with Context and Reducer</summary>
+
+```jsx
+import { createContext, useContext, useReducer, useMemo, useCallback } from 'react';
+
+const NotificationContext = createContext(null);
+
+// Reducer
+function notificationReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_NOTIFICATION':
+      return [...state, { ...action.notification, id: Date.now() }];
+
+    case 'REMOVE_NOTIFICATION':
+      return state.filter(notification => notification.id !== action.id);
+
+    case 'CLEAR_ALL':
+      return [];
+
+    default:
+      return state;
+  }
+}
+
+// Provider
+function NotificationProvider({ children }) {
+  const [notifications, dispatch] = useReducer(notificationReducer, []);
+
+  const addNotification = useCallback((message, type = 'info', duration = 3000) => {
+    const notification = { message, type };
+    dispatch({ type: 'ADD_NOTIFICATION', notification });
+
+    if (duration > 0) {
+      setTimeout(() => {
+        dispatch({ type: 'REMOVE_NOTIFICATION', id: notification.id });
+      }, duration);
+    }
+  }, []);
+
+  const removeNotification = useCallback((id) => {
+    dispatch({ type: 'REMOVE_NOTIFICATION', id });
+  }, []);
+
+  const clearAll = useCallback(() => {
+    dispatch({ type: 'CLEAR_ALL' });
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      notifications,
+      addNotification,
+      removeNotification,
+      clearAll
+    }),
+    [notifications, addNotification, removeNotification, clearAll]
+  );
+
+  return (
+    <NotificationContext.Provider value={value}>
+      {children}
+    </NotificationContext.Provider>
+  );
+}
+
+// Custom hook
+function useNotifications() {
+  const context = useContext(NotificationContext);
+  if (!context) {
+    throw new Error('useNotifications must be used within NotificationProvider');
+  }
+  return context;
+}
+
+// Notification display component
+function NotificationList() {
+  const { notifications, removeNotification } = useNotifications();
+
+  if (notifications.length === 0) return null;
+
+  return (
+    <div className="notification-container">
+      {notifications.map(notification => (
+        <div
+          key={notification.id}
+          className={`notification notification-${notification.type}`}
+          role="alert"
+        >
+          <span>{notification.message}</span>
+          <button onClick={() => removeNotification(notification.id)}>
+            ×
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Usage
+function App() {
+  return (
+    <NotificationProvider>
+      <NotificationList />
+      <MyApp />
+    </NotificationProvider>
+  );
+}
+
+function MyApp() {
+  const { addNotification } = useNotifications();
+
+  const handleSuccess = () => {
+    addNotification('Changes saved successfully!', 'success');
+  };
+
+  const handleError = () => {
+    addNotification('Something went wrong', 'error', 5000);
+  };
+
+  return (
+    <div>
+      <button onClick={handleSuccess}>Save</button>
+      <button onClick={handleError}>Trigger Error</button>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Auto-dismiss notifications after duration using setTimeout
+- useCallback prevents recreating functions on every render
+- Type parameter allows different notification styles (success, error, warning)
+- Unique IDs generated with Date.now() for simple key management
+- ARIA role="alert" announces notifications to screen readers
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **State Location**: Local state stays in one component, shared state lifts to common ancestor, global state uses Context
+- **Lifting State Up**: Moving state to parent components when siblings need to share data
+- **Context API**: Provides global state without passing props through every level
+- **useReducer**: Manages complex state with multiple update types using reducer pattern
+- **Custom State Hooks**: Combines Context, useReducer, and custom logic for reusable domain-specific state
+- **When to Use Libraries**: useState + Context works for most apps; consider Redux/Zustand for complex needs
+
+**Key takeaway**: Keep state as local as possible, lift when needed, and use Context for truly global concerns like auth or themes.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Build a shopping cart that persists across pages using Context and useReducer
+- Create an authentication provider that shares user state across the entire app
+- Implement a multi-step form where each step shares validation state with the parent
+- Design a notification system where any component can trigger toasts
+- Refactor prop drilling by moving shared state into Context providers
+
+---
 
 ## Further Reading
 

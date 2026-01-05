@@ -24,6 +24,33 @@ Keep these in mind. They'll click as we build.
 
 ---
 
+## Prerequisites
+
+Module 08 (Debugging Techniques) - Understanding how to investigate and fix issues before committing code.
+
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Create and manage feature branches following naming conventions
+- [ ] Write meaningful commit messages using Conventional Commits format
+- [ ] Resolve merge conflicts confidently using rebase or merge strategies
+- [ ] Create pull requests with clear descriptions and proper testing documentation
+- [ ] Use environment variables to keep secrets out of version control
+- [ ] Apply proper Git workflows for features, hotfixes, and collaboration
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-75 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice Git workflows daily over 4-6 weeks until it becomes second nature
+
+---
+
 ## Chapter 1: Starting Clean
 
 Day one of the payment feature. Sarah walks you through the proper start.
@@ -373,21 +400,17 @@ git add -p
 "One more thing," Marcus adds. "Git hooks."
 
 ```bash
+# One-time setup
+npx husky init
+
 # .husky/pre-commit
 npm run lint
 npm run test:unit
 ```
 
-```json
-// package.json
-{
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  }
-}
+```bash
+# .husky/commit-msg
+npx --no -- commitlint --edit "$1"
 ```
 
 "Now you literally can't commit if tests fail or linting errors exist."
@@ -560,7 +583,352 @@ By Friday, your payment feature is live. The commit history is clean. No conflic
 2. Write 5 commits following Conventional Commits
 3. Create a merge conflict and resolve it
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Feature Branch Workflow</summary>
+
+**Step-by-step workflow:**
+
+```bash
+# 1. Start from fresh main
+git checkout main
+git pull origin main
+
+# 2. Create feature branch
+git checkout -b feature/add-user-authentication
+
+# 3. Make changes and commit regularly
+# (Create LoginForm.jsx)
+git add src/components/LoginForm.jsx
+git commit -m "feat(auth): add login form component with email and password fields"
+
+# (Add validation)
+git add src/components/LoginForm.jsx
+git commit -m "feat(auth): add form validation for login fields"
+
+# (Add API integration)
+git add src/services/authService.js src/components/LoginForm.jsx
+git commit -m "feat(auth): integrate login form with authentication API"
+
+# (Add tests)
+git add src/components/LoginForm.test.jsx
+git commit -m "test(auth): add tests for login form validation and submission"
+
+# 4. Push branch to remote
+git push -u origin feature/add-user-authentication
+
+# 5. Create pull request on GitHub
+# (Use GitHub UI to create PR)
+
+# 6. Address review feedback
+git add src/components/LoginForm.jsx
+git commit -m "refactor(auth): extract validation logic to separate utility"
+
+git push origin feature/add-user-authentication
+
+# 7. Before merging, sync with latest main
+git checkout main
+git pull origin main
+git checkout feature/add-user-authentication
+git rebase main
+
+# Resolve any conflicts if they appear
+# Then force push (since rebase rewrites history)
+git push --force-with-lease origin feature/add-user-authentication
+
+# 8. Merge via GitHub PR (squash and merge)
+
+# 9. Clean up locally
+git checkout main
+git pull origin main
+git branch -d feature/add-user-authentication
+```
+
+**Key points:**
+- Always start from updated main branch
+- Make small, focused commits
+- Push early and often
+- Sync with main before merging to catch conflicts early
+- Use --force-with-lease (not --force) for safety
+- Clean up merged branches
+
+</details>
+
+<details>
+<summary>Exercise 2: Conventional Commit Messages</summary>
+
+```bash
+# Example 1: New feature
+git commit -m "feat(cart): add ability to apply discount codes at checkout"
+
+# Example 2: Bug fix
+git commit -m "fix(cart): correct total calculation when removing items with quantity > 1"
+
+# Example 3: Documentation
+git commit -m "docs(readme): add setup instructions for local development"
+
+# Example 4: Refactoring
+git commit -m "refactor(api): extract fetch logic into reusable service layer"
+
+# Example 5: Test addition
+git commit -m "test(cart): add integration tests for checkout flow"
+
+# Example 6: Feature with breaking change
+git commit -m "feat(auth)!: migrate to OAuth 2.0
+
+BREAKING CHANGE: Password-based authentication is no longer supported.
+Users must authenticate using OAuth providers (Google, GitHub, etc.)"
+
+# Example 7: Multiple related changes
+git commit -m "feat(profile): add user profile editing
+
+- Add ProfileForm component with validation
+- Implement avatar upload with preview
+- Add API endpoint for profile updates
+- Include accessibility labels for screen readers"
+
+# Example 8: Bug fix with issue reference
+git commit -m "fix(navigation): prevent menu from closing on mobile when clicking submenu
+
+Fixes #234"
+```
+
+**Format breakdown:**
+```
+<type>(<scope>): <subject>
+
+[optional body]
+
+[optional footer]
+```
+
+**Common types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation only
+- `style`: Code formatting (not CSS)
+- `refactor`: Code restructuring
+- `test`: Adding/updating tests
+- `chore`: Build tools, dependencies
+
+**Key points:**
+- Use imperative mood ("add" not "added")
+- Keep subject line under 72 characters
+- Reference issues in footer
+- Explain "why" in body, "what" is in the code
+- Use BREAKING CHANGE footer for breaking changes
+
+</details>
+
+<details>
+<summary>Exercise 3: Creating and Resolving Merge Conflicts</summary>
+
+**Setup scenario:**
+
+```bash
+# 1. Create a test repository
+mkdir git-conflict-practice
+cd git-conflict-practice
+git init
+echo "# My Project" > README.md
+git add README.md
+git commit -m "Initial commit"
+
+# 2. Create main branch content
+cat > src/config.js << EOF
+export const config = {
+  apiUrl: 'https://api.example.com',
+  timeout: 5000,
+  retries: 3
+};
+EOF
+
+git add src/config.js
+git commit -m "Add initial configuration"
+
+# 3. Create branch A
+git checkout -b feature/update-timeout
+# Modify config.js
+cat > src/config.js << EOF
+export const config = {
+  apiUrl: 'https://api.example.com',
+  timeout: 10000,  // Changed from 5000
+  retries: 3
+};
+EOF
+git add src/config.js
+git commit -m "Increase API timeout to 10 seconds"
+
+# 4. Go back to main and create branch B
+git checkout main
+git checkout -b feature/add-debug-mode
+# Modify config.js (same lines!)
+cat > src/config.js << EOF
+export const config = {
+  apiUrl: 'https://api.example.com',
+  timeout: 5000,
+  retries: 3,
+  debug: true  // Added new line
+};
+EOF
+git add src/config.js
+git commit -m "Add debug mode configuration"
+
+# 5. Merge branch A into main
+git checkout main
+git merge feature/update-timeout
+# This works fine
+
+# 6. Try to merge branch B - CONFLICT!
+git merge feature/add-debug-mode
+# Auto-merging src/config.js
+# CONFLICT (content): Merge conflict in src/config.js
+# Automatic merge failed; fix conflicts and then commit the result.
+```
+
+**Resolving the conflict:**
+
+```bash
+# View the conflict
+cat src/config.js
+# Shows:
+# export const config = {
+#   apiUrl: 'https://api.example.com',
+# <<<<<<< HEAD
+#   timeout: 10000,
+#   retries: 3
+# =======
+#   timeout: 5000,
+#   retries: 3,
+#   debug: true
+# >>>>>>> feature/add-debug-mode
+# };
+
+# Open in editor and resolve manually
+# Combined version:
+export const config = {
+  apiUrl: 'https://api.example.com',
+  timeout: 10000,  // Keep the updated timeout
+  retries: 3,
+  debug: true      // Keep the new debug option
+};
+
+# Stage the resolved file
+git add src/config.js
+
+# Check status
+git status
+# On branch main
+# All conflicts fixed but you are still merging.
+
+# Complete the merge
+git commit
+# Git opens editor with merge message, save and close
+
+# Push to remote
+git push origin main
+```
+
+**Alternative: Rebase approach (cleaner history):**
+
+```bash
+# Starting from the conflict scenario above
+git checkout feature/add-debug-mode
+git rebase main
+
+# CONFLICT appears
+# Same process to resolve in src/config.js
+
+# After resolving:
+git add src/config.js
+git rebase --continue
+
+# If more conflicts appear, repeat the process
+# When done:
+git checkout main
+git merge feature/add-debug-mode
+# This will be a fast-forward merge, no conflict
+```
+
+**Handling complex conflicts:**
+
+```bash
+# Use a merge tool
+git mergetool
+
+# Or check both versions side by side
+git diff HEAD
+git diff feature/add-debug-mode
+
+# See the common ancestor version
+git show :1:src/config.js  # Common ancestor
+git show :2:src/config.js  # Current branch (HEAD)
+git show :3:src/config.js  # Incoming branch
+
+# If you want to take one side entirely
+git checkout --theirs src/config.js  # Take their version
+# or
+git checkout --ours src/config.js    # Keep our version
+git add src/config.js
+git commit
+```
+
+**Abort if needed:**
+
+```bash
+# If you want to start over
+git merge --abort
+# or during rebase
+git rebase --abort
+```
+
+**Key points:**
+- Conflicts happen when same lines are modified in different branches
+- Markers: <<<<<<< HEAD, =======, >>>>>>> branch-name
+- Resolve by editing the file to the desired final state
+- Remove conflict markers before committing
+- Test the code after resolving to ensure it works
+- Use --ours or --theirs to accept one side entirely
+- git mergetool provides visual diff tools
+- Communicate with teammates when resolving conflicts in shared code
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Feature Branches**: Create isolated branches from main with descriptive names (feature/, fix/, refactor/)
+- **Commit Messages**: Use Conventional Commits (feat, fix, docs, refactor) for clear history
+- **Conflict Resolution**: Resolve merge conflicts by understanding both versions and combining changes
+- **Pull Requests**: Document changes with context, testing steps, and screenshots for reviewers
+- **Environment Variables**: Store secrets in .env files using framework-specific prefixes (VITE_, REACT_APP_, etc.)
+- **Hotfix Workflow**: Fast-track critical fixes with expedited review and deployment
+
+**Key takeaway**: Git workflows enable team collaboration without stepping on each other's toes - commit often, communicate clearly, and keep secrets safe.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Create a feature branch for a new dashboard widget and submit a clean PR
+- Resolve conflicts when two developers modify the same component
+- Write commit messages that teammates can understand six months later
+- Set up environment variables for API keys and feature flags
+- Handle a production hotfix without disrupting ongoing feature work
+
+---
+
 ## Further Reading
 
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [Git Branching - Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
+
+---
+
+**Navigation**: [← Previous Module](./08-debugging-techniques.md) | [Next Module →](./10-accessibility-fundamentals.md)

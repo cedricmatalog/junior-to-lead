@@ -26,6 +26,33 @@ Keep these in mind. They'll click as we build.
 
 ---
 
+## Prerequisites
+
+None - this is the starting point.
+
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Write JSX syntax confidently and understand how it transforms to JavaScript
+- [ ] Build reusable React components using function syntax
+- [ ] Pass data between components using props and understand the unidirectional data flow
+- [ ] Implement conditional rendering patterns (ternary operators, && operator, early returns)
+- [ ] Render dynamic lists of data using .map() with proper key management
+- [ ] Debug common JSX errors and component issues
+
+---
+
+## Time Estimate
+
+- **Reading**: 45-60 minutes
+- **Exercises**: 2-3 hours
+- **Mastery**: Practice these concepts over 1-2 weeks with real projects
+
+---
+
 ## What You'll Learn
 
 By the end of this module, you'll be able to:
@@ -74,6 +101,38 @@ const product = React.createElement(
   { className: 'product' },
   React.createElement('h1', null, 'Wireless Headphones')
 );
+```
+
+Here's how that transformation works:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    JSX Transformation                       │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  JSX (What you write):                                      │
+│  ┌──────────────────────────────────────────────────┐      │
+│  │ <div className="product">                        │      │
+│  │   <h1>Wireless Headphones</h1>                   │      │
+│  │ </div>                                           │      │
+│  └──────────────────────────────────────────────────┘      │
+│                          │                                  │
+│                          ↓ Babel transforms                 │
+│                          │                                  │
+│  JavaScript (What runs):                                    │
+│  ┌──────────────────────────────────────────────────┐      │
+│  │ React.createElement(                             │      │
+│  │   'div',                    ← Element type       │      │
+│  │   { className: 'product' }, ← Props object       │      │
+│  │   React.createElement(      ← Children          │      │
+│  │     'h1',                                        │      │
+│  │     null,                                        │      │
+│  │     'Wireless Headphones'                        │      │
+│  │   )                                              │      │
+│  │ )                                                │      │
+│  └──────────────────────────────────────────────────┘      │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 You wince. "That's... verbose."
@@ -505,7 +564,12 @@ function ProductGrid({ products, category }) {
 
 // StorePage.jsx
 function StorePage() {
-  const products = useProducts(); // We'll learn hooks soon
+  // Hardcoded data for now - we'll learn how to fetch from APIs later
+  const products = [
+    { id: 1, name: 'Wireless Headphones', price: 79.99, image: '/headphones.jpg', inStock: true, rating: 4.5 },
+    { id: 2, name: 'Bluetooth Speaker', price: 49.99, image: '/speaker.jpg', inStock: true, rating: 4.2 },
+    { id: 3, name: 'USB-C Cable', price: 12.99, image: '/cable.jpg', inStock: false, rating: 4.8 },
+  ];
 
   return (
     <main>
@@ -519,6 +583,39 @@ function StorePage() {
 Sarah walks by on her way out. She glances at your screen.
 
 "Ship it."
+
+The component hierarchy you just built looks like this:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│              Component Hierarchy                        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│                    StorePage                            │
+│                        │                                │
+│                        ├─ products data                 │
+│                        │                                │
+│                        ↓                                │
+│                  ProductGrid                            │
+│                  (filters products)                     │
+│                        │                                │
+│              ┌─────────┼─────────┐                      │
+│              ↓         ↓         ↓                      │
+│        ProductCard ProductCard ProductCard              │
+│        (id: 1)     (id: 2)     (id: 3)                  │
+│           │            │            │                   │
+│           ├─ name      ├─ name      ├─ name            │
+│           ├─ price     ├─ price     ├─ price           │
+│           ├─ image     ├─ image     ├─ image           │
+│           ├─ rating    ├─ rating    ├─ rating          │
+│           └─ inStock   └─ inStock   └─ inStock         │
+│                                                         │
+│  Data flows DOWN (props) →                             │
+│  Components are REUSABLE →                             │
+│  Each ProductCard gets different data but same logic   │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -543,6 +640,415 @@ You've got the fundamentals. Now practice:
 1. **Extend the ProductCard** - Add a "Wishlist" button that only appears when the user hovers
 2. **Build a CategoryFilter** - A row of buttons that filters products by category
 3. **Create a Navbar** - Shows "Login" for guests, "Welcome, {name}" for logged-in users
+
+### Solutions
+
+<details>
+<summary>Exercise 1: Wishlist Button with Hover</summary>
+
+```jsx
+function ProductCard({ product }) {
+  const { name, price, image, inStock } = product;
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <article
+      className="product-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <img src={image} alt={name} />
+      <h2>{name}</h2>
+      <p className="price">${price}</p>
+
+      {inStock ? (
+        <button>Add to Cart</button>
+      ) : (
+        <button disabled>Out of Stock</button>
+      )}
+
+      {/* Wishlist button only shows on hover */}
+      {isHovered && (
+        <button className="wishlist-btn">
+          ♥ Add to Wishlist
+        </button>
+      )}
+    </article>
+  );
+}
+```
+
+**Key points:**
+- Use `onMouseEnter` and `onMouseLeave` to track hover state
+- Store hover state with `useState` (we'll learn this in Module 3)
+- Use conditional rendering (`&&`) to show/hide the button
+- Consider accessibility: keyboard users won't see the button! Better approach: always show, but style differently on hover
+
+</details>
+
+<details>
+<summary>Exercise 2: Category Filter</summary>
+
+```jsx
+function CategoryFilter({ categories, selectedCategory, onCategoryChange }) {
+  return (
+    <div className="category-filter">
+      <button
+        className={selectedCategory === 'all' ? 'active' : ''}
+        onClick={() => onCategoryChange('all')}
+      >
+        All
+      </button>
+      {categories.map(category => (
+        <button
+          key={category}
+          className={selectedCategory === category ? 'active' : ''}
+          onClick={() => onCategoryChange(category)}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// Usage in parent component
+function StorePage() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const categories = ['Electronics', 'Clothing', 'Books'];
+
+  const products = [/* ... */];
+  const filteredProducts = selectedCategory === 'all'
+    ? products
+    : products.filter(p => p.category === selectedCategory);
+
+  return (
+    <main>
+      <h1>Our Products</h1>
+      <CategoryFilter
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
+      <ProductGrid products={filteredProducts} />
+    </main>
+  );
+}
+```
+
+**Key points:**
+- Parent component owns the selected category state
+- Pass `onCategoryChange` callback to update state
+- Use `className` conditionally to highlight active category
+- Filter products based on selected category
+
+</details>
+
+<details>
+<summary>Exercise 3: Navbar with Conditional Rendering</summary>
+
+```jsx
+function Navbar({ user }) {
+  return (
+    <nav className="navbar">
+      <h1 className="logo">My Store</h1>
+
+      <ul className="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+
+      <div className="nav-actions">
+        {user ? (
+          <>
+            <span>Welcome, {user.name}</span>
+            <button onClick={user.onLogout}>Logout</button>
+          </>
+        ) : (
+          <button>Login</button>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+// Usage
+<Navbar user={null} /> {/* Guest: shows Login */}
+<Navbar user={{ name: 'Alice', onLogout: handleLogout }} /> {/* Logged in */}
+```
+
+**Key points:**
+- Use ternary operator for either/or rendering
+- Fragment (`<>`) groups multiple elements without extra DOM node
+- Props can be objects with multiple properties
+- Parent component manages authentication state
+
+</details>
+
+---
+
+## Debug This Code
+
+Before moving to wrap-up, test your debugging skills. Each snippet has bugs - can you spot and fix them?
+
+<details>
+<summary>Challenge 1: Broken Product List</summary>
+
+```jsx
+function ProductList() {
+  const products = [
+    { name: 'Laptop', price: 999 },
+    { name: 'Mouse', price: 29 },
+    { name: 'Keyboard', price: 79 }
+  ];
+
+  return (
+    <div>
+      <h2>Products</h2>
+      {products.map(product => (
+        <div>
+          <h3>{product.name}</h3>
+          <p>${product.price}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+Think about what React needs to efficiently update lists. Check the console for warnings.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: Missing `key` prop on list items. React needs keys to track which items changed.
+
+**Fixed code:**
+
+```jsx
+function ProductList() {
+  const products = [
+    { name: 'Laptop', price: 999 },
+    { name: 'Mouse', price: 29 },
+    { name: 'Keyboard', price: 79 }
+  ];
+
+  return (
+    <div>
+      <h2>Products</h2>
+      {products.map(product => (
+        <div key={product.name}>
+          <h3>{product.name}</h3>
+          <p>${product.price}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+**Why it matters**: Without keys, React can't optimize updates and may re-render items incorrectly when the list changes.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 2: Conditional Rendering Gone Wrong</summary>
+
+```jsx
+function UserGreeting({ user }) {
+  return (
+    <div>
+      <h1>Welcome, {user.name}!</h1>
+      {user.isPremium === true && (
+        <span class="badge">Premium Member</span>
+      )}
+      {user.notifications > 0 && (
+        <p>You have {user.notifications} new notifications</p>
+      )}
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 2 bugs)
+
+<details>
+<summary>Hint 1</summary>
+
+Look at the HTML attributes. Are they using React syntax?
+
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+What happens when `user.notifications` is 0? What will render?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug 1**: Using `class` instead of `className` - JSX uses JavaScript property names.
+
+**Bug 2**: When `user.notifications` is 0, React will render `0` on the page (because `0 && anything` returns `0`).
+
+**Fixed code:**
+
+```jsx
+function UserGreeting({ user }) {
+  return (
+    <div>
+      <h1>Welcome, {user.name}!</h1>
+      {user.isPremium === true && (
+        <span className="badge">Premium Member</span>
+      )}
+      {user.notifications > 0 && (
+        <p>You have {user.notifications} new notifications</p>
+      )}
+    </div>
+  );
+}
+```
+
+**Alternative fix for notifications** (more defensive):
+
+```jsx
+{user.notifications > 0 ? (
+  <p>You have {user.notifications} new notifications</p>
+) : null}
+```
+
+**Why it matters**: `class` will silently fail or cause warnings. The `0` rendering issue creates unwanted visual bugs.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 3: Props and Destructuring Confusion</summary>
+
+```jsx
+function ProductCard(name, price, inStock) {
+  return (
+    <div className="card">
+      <h3>{name}</h3>
+      <p>${price}</p>
+      {inStock ? (
+        <button>Add to Cart</button>
+      ) : (
+        <p style="color: red;">Out of Stock</p>
+      )}
+    </div>
+  );
+}
+
+// Usage
+<ProductCard name="Laptop" price={999} inStock={true} />
+```
+
+**How many bugs can you find?** (Answer: 2 bugs)
+
+<details>
+<summary>Hint 1</summary>
+
+How does React pass data to components? Check the function signature.
+
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+Look at the inline styles. Is that the correct JSX syntax?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug 1**: Props are passed as an object, not individual parameters. Should destructure from `props` or accept `props` object.
+
+**Bug 2**: Inline `style` attribute should be an object, not a string.
+
+**Fixed code:**
+
+```jsx
+function ProductCard({ name, price, inStock }) {
+  return (
+    <div className="card">
+      <h3>{name}</h3>
+      <p>${price}</p>
+      {inStock ? (
+        <button>Add to Cart</button>
+      ) : (
+        <p style={{ color: 'red' }}>Out of Stock</p>
+      )}
+    </div>
+  );
+}
+
+// Usage
+<ProductCard name="Laptop" price={999} inStock={true} />
+```
+
+**Alternative without destructuring:**
+
+```jsx
+function ProductCard(props) {
+  return (
+    <div className="card">
+      <h3>{props.name}</h3>
+      <p>${props.price}</p>
+      {props.inStock ? (
+        <button>Add to Cart</button>
+      ) : (
+        <p style={{ color: 'red' }}>Out of Stock</p>
+      )}
+    </div>
+  );
+}
+```
+
+**Why it matters**: Incorrect prop handling means the component receives `undefined` values. Incorrect style syntax causes rendering errors.
+
+</details>
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **JSX Syntax**: HTML-like syntax that transforms to JavaScript, with key differences like className and self-closing tags
+- **Components**: Reusable building blocks that accept props and return JSX
+- **Props**: Read-only data flow from parent to child components
+- **Conditional Rendering**: Using ternary operators, && operator, and early returns to show/hide UI elements
+- **List Rendering**: Using .map() to transform arrays into components with unique keys
+
+**Key takeaway**: React components are just JavaScript functions that return JSX, making UI predictable and reusable.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Build a product catalog with cards showing name, image, price, and stock status
+- Create a user dashboard that displays different content based on authentication state
+- Implement a notification list that dynamically renders items from an API response
+- Build reusable UI components like buttons, cards, and badges that work across multiple pages
 
 ---
 
