@@ -872,7 +872,7 @@ function UserGreeting({ user }) {
       {user.isPremium === true && (
         <span class="badge">Premium Member</span>
       )}
-      {user.notifications > 0 && (
+      {user.notifications && (
         <p>You have {user.notifications} new notifications</p>
       )}
     </div>

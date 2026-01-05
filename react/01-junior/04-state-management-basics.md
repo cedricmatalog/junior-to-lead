@@ -259,7 +259,8 @@ Here's how Context works as a provider tree:
 │  • Provider wraps tree at top level                      │
 │  • Any descendant can useContext                         │
 │  • No prop drilling through intermediate components      │
-│  • Components not using context don't re-render          │
+│  • Components not using context don't re-render due to    │
+│    context changes (but can re-render when parents do)   │
 │  • Multiple contexts can be nested                       │
 │                                                          │
 │  Without Context (prop drilling):                        │
@@ -950,7 +951,7 @@ const NotificationContext = createContext(null);
 function notificationReducer(state, action) {
   switch (action.type) {
     case 'ADD_NOTIFICATION':
-      return [...state, { ...action.notification, id: Date.now() }];
+      return [...state, action.notification];
 
     case 'REMOVE_NOTIFICATION':
       return state.filter(notification => notification.id !== action.id);
@@ -968,7 +969,11 @@ function NotificationProvider({ children }) {
   const [notifications, dispatch] = useReducer(notificationReducer, []);
 
   const addNotification = useCallback((message, type = 'info', duration = 3000) => {
-    const notification = { message, type };
+    const notification = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      message,
+      type
+    };
     dispatch({ type: 'ADD_NOTIFICATION', notification });
 
     if (duration > 0) {

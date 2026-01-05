@@ -328,7 +328,7 @@ const applicationSchema = z.object({
   // Additional
   linkedinUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
   portfolioUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-  salary: z.number().min(0, 'Salary must be positive'),
+  salary: z.coerce.number().min(0, 'Salary must be positive'),
   startAvailability: z.enum(['immediately', '2weeks', '1month', 'other']),
   customAvailability: z.string().optional(),
   referralSource: z.string().min(1, 'Please tell us how you heard about us'),
@@ -907,7 +907,7 @@ const userSchema = z.object({
 <summary>Exercise 1: Multi-Step Registration Form</summary>
 
 ```jsx
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -1242,15 +1242,12 @@ function RegistrationForm() {
     formState: { errors, isSubmitting },
     setError,
     clearErrors,
-    watch,
   } = useForm({
     resolver: zodResolver(schema),
   });
 
-  const username = watch('username');
-
   // Debounced async username check
-  const checkUsername = async (value) => {
+  const checkUsername = useCallback(async (value) => {
     if (!value || value.length < 3) {
       setUsernameAvailable(null);
       return;
@@ -1279,18 +1276,27 @@ function RegistrationForm() {
     } finally {
       setUsernameChecking(false);
     }
-  };
+  }, [clearErrors, setError]);
 
   // Debounce helper
   const debounce = (func, delay) => {
     let timeoutId;
-    return (...args) => {
+    const debounced = (...args) => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func(...args), delay);
     };
+    debounced.cancel = () => clearTimeout(timeoutId);
+    return debounced;
   };
 
-  const debouncedCheck = debounce(checkUsername, 500);
+  const debouncedCheck = useMemo(
+    () => debounce(checkUsername, 500),
+    [checkUsername]
+  );
+
+  useEffect(() => {
+    return () => debouncedCheck.cancel();
+  }, [debouncedCheck]);
 
   const onSubmit = async (data) => {
     // Final check before submission
@@ -1306,6 +1312,8 @@ function RegistrationForm() {
     // Submit to API
   };
 
+  const usernameField = register('username');
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -1313,9 +1321,9 @@ function RegistrationForm() {
         <div className="input-with-status">
           <input
             id="username"
-            {...register('username')}
+            {...usernameField}
             onChange={(e) => {
-              register('username').onChange(e);
+              usernameField.onChange(e);
               debouncedCheck(e.target.value);
             }}
           />

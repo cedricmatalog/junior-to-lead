@@ -399,26 +399,44 @@ function Modal({ isOpen, onClose, title, children }) {
   const previousFocus = useRef(null);
 
   useEffect(() => {
-    if (isOpen) {
-      // Save current focus
-      previousFocus.current = document.activeElement;
-      // Focus the modal
-      modalRef.current?.focus();
-    } else {
-      // Restore focus when closing
-      previousFocus.current?.focus();
-    }
-  }, [isOpen]);
+    if (!isOpen) return;
 
-  // Close on Escape
-  useEffect(() => {
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+    const modal = modalRef.current;
+    const focusable = modal ? Array.from(modal.querySelectorAll(focusableSelector)) : [];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    // Save current focus and move it into the modal
+    previousFocus.current = document.activeElement;
+    (first || modal)?.focus();
+
     function handleKeyDown(e) {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      // Trap focus inside the modal
+      if (e.key === 'Tab' && focusable.length > 0) {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     }
+
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      // Restore focus when closing
+      previousFocus.current?.focus();
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;

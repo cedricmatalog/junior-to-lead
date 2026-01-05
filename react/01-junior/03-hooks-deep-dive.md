@@ -223,7 +223,7 @@ Here's the useEffect lifecycle visualized:
 │  }, [userId]);           ← Dependencies                  │
 │                                                          │
 └──────────────────────────────────────────────────────────┘
-```"
+```
 
 ---
 
@@ -615,16 +615,20 @@ const ExpensiveList = memo(function ExpensiveList({ items }) {
 ### useMemo — Memoize Expensive Calculations
 
 ```jsx
+// BAD: Filters on every render, even if products/filter unchanged
 function ProductList({ products, filter }) {
-  // BAD: Filters on every render, even if products/filter unchanged
   const filteredProducts = products.filter(p => p.category === filter);
+  return <List items={filteredProducts} />;
+}
+```
 
-  // GOOD: Only recalculates when dependencies change
+```jsx
+// GOOD: Only recalculates when dependencies change
+function ProductList({ products, filter }) {
   const filteredProducts = useMemo(
     () => products.filter(p => p.category === filter),
     [products, filter]
   );
-
   return <List items={filteredProducts} />;
 }
 ```
@@ -640,6 +644,15 @@ function SearchPage() {
   const handleSearch = (term) => {
     fetch(`/api/search?q=${term}`).then(r => r.json()).then(setResults);
   };
+
+  return <SearchBox onSearch={handleSearch} />;
+}
+```
+
+```jsx
+function SearchPage() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
 
   // GOOD: Same function reference unless dependencies change
   const handleSearch = useCallback((term) => {

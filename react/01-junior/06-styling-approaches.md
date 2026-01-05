@@ -211,7 +211,7 @@ const Button = styled.button`
 <Button>Secondary</Button>
 ```
 
-"The `$` prefix is a convention for props that shouldn't hit the DOM," Marcus explains. "This prevents React warnings about invalid DOM attributes. It's required in styled-components v6+."
+"The `$` prefix is a convention for props that shouldn't hit the DOM," Marcus explains. "This prevents React warnings about invalid DOM attributes and is the recommended way to pass transient props in styled-components."
 
 "And you can theme the whole app:"
 
