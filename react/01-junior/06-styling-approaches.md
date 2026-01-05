@@ -546,6 +546,257 @@ Sarah nods. "The consistency comes from the tokens, not from the technology."
 3. **Styles scattered everywhere** - Keep them organized
 4. **Overusing !important** - Fix specificity issues properly
 
+---
+
+## Debug This Code
+
+Before moving to the exercises, test your debugging skills. Each snippet has bugs - can you spot and fix them?
+
+<details>
+<summary>Challenge 1: CSS Modules Import</summary>
+
+```jsx
+// Button.jsx
+import styles from './Button.module.css';
+
+function Button({ variant, children }) {
+  return (
+    <button className={styles.button styles.variant}>
+      {children}
+    </button>
+  );
+}
+```
+
+```css
+/* Button.module.css */
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: blue;
+  color: white;
+}
+
+.secondary {
+  background: gray;
+  color: white;
+}
+```
+
+**How many bugs can you find?** (Answer: 2 bugs)
+
+<details>
+<summary>Hint</summary>
+
+Look at how className is constructed. Is the syntax correct? Does `variant` actually map to a CSS class?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug 1**: Missing template literal or string concatenation - `className={styles.button styles.variant}` is invalid syntax.
+
+**Bug 2**: `styles.variant` tries to access a CSS class named `.variant`, but we need to dynamically access `.primary` or `.secondary` based on the prop value.
+
+**Fixed code:**
+
+```jsx
+// Button.jsx
+import styles from './Button.module.css';
+
+function Button({ variant = 'primary', children }) {
+  return (
+    <button className={`${styles.button} ${styles[variant]}`}>
+      {children}
+    </button>
+  );
+}
+
+// Usage
+<Button variant="primary">Click me</Button>
+<Button variant="secondary">Cancel</Button>
+```
+
+**Alternative with clsx library:**
+
+```jsx
+import styles from './Button.module.css';
+import clsx from 'clsx';
+
+function Button({ variant = 'primary', children }) {
+  return (
+    <button className={clsx(styles.button, styles[variant])}>
+      {children}
+    </button>
+  );
+}
+```
+
+**Why it matters**: CSS Modules exports an object where keys are class names. You need proper string concatenation or bracket notation to dynamically access classes.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 2: Tailwind Conditional Classes</summary>
+
+```jsx
+function Alert({ type, message }) {
+  const bgColor = type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+
+  return (
+    <div className={bgColor text-white p-4 rounded}>
+      {message}
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+Look at the className value. Is it a valid JavaScript expression?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: Missing template literal or quotes - `className={bgColor text-white p-4 rounded}` is invalid syntax. Multiple classes need to be in a string.
+
+**Fixed code:**
+
+```jsx
+function Alert({ type, message }) {
+  const bgColor = type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+
+  return (
+    <div className={`${bgColor} text-white p-4 rounded`}>
+      {message}
+    </div>
+  );
+}
+```
+
+**Alternative with clsx:**
+
+```jsx
+import clsx from 'clsx';
+
+function Alert({ type, message }) {
+  return (
+    <div className={clsx(
+      'text-white p-4 rounded',
+      type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+    )}>
+      {message}
+    </div>
+  );
+}
+```
+
+**Why it matters**: className expects a string. When combining dynamic and static classes, you need proper string interpolation.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 3: Styled Components Theme Access</summary>
+
+```jsx
+import styled from 'styled-components';
+
+const theme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca'
+  }
+};
+
+const Button = styled.button`
+  background: ${theme.colors.primary};
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+`;
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button>Click me</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+Styled components access theme via props. Is the theme being accessed correctly?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: Theme is accessed directly instead of through props - styled components receive theme via `props.theme`, not as a closure variable.
+
+**Fixed code:**
+
+```jsx
+import styled, { ThemeProvider } from 'styled-components';
+
+const theme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca'
+  }
+};
+
+const Button = styled.button`
+  background: ${props => props.theme.colors.primary};
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+
+  &:hover {
+    background: ${props => props.theme.colors.secondary};
+  }
+`;
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button>Click me</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+**Why it matters**: Styled components inject theme values via props, allowing components to reactively update when the theme changes. Direct variable access breaks this reactivity.
+
+</details>
+
+</details>
+
+---
+
 ## Practice Exercises
 
 1. Build a button component with 3 variants using CSS Modules

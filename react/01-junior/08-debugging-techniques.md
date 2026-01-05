@@ -667,6 +667,321 @@ function UserAvatar({ userId }) {
 3. **Ignoring ESLint warnings** - They catch real bugs
 4. **Not using DevTools** - Stop guessing, start inspecting
 
+---
+
+## Debug This Code
+
+Before moving to the exercises, test your debugging skills. Each snippet has bugs - can you spot and fix them?
+
+<details>
+<summary>Challenge 1: Stale Closure in useEffect</summary>
+
+```jsx
+function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+The timer starts, but does the count actually increment? What value of `count` does the interval closure capture?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: Stale closure - the interval captures the initial `count` value (0) and always sets it to 1. The dependency array is missing `count`, but adding it would restart the interval every second.
+
+**Fixed code (Option 1 - Functional update):**
+
+```jsx
+function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setCount(prevCount => prevCount + 1); // ✅ Use functional update
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]); // ✅ No need to include count
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+    </div>
+  );
+}
+```
+
+**Fixed code (Option 2 - useRef):**
+
+```jsx
+function Timer() {
+  const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const countRef = useRef(count);
+
+  useEffect(() => {
+    countRef.current = count;
+  }, [count]);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setCount(countRef.current + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setIsRunning(!isRunning)}>
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+    </div>
+  );
+}
+```
+
+**Why it matters**: Closures in effects capture values at the time they're created. Functional updates (`prevState => newState`) always get the latest value.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 2: Missing Dependency Warning</summary>
+
+```jsx
+function SearchResults({ query }) {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchResults = async () => {
+    setLoading(true);
+    const response = await fetch(`/api/search?q=${query}`);
+    const data = await response.json();
+    setResults(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchResults();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <div>
+      {loading ? <p>Loading...</p> : <ul>{results.map(r => <li key={r.id}>{r.name}</li>)}</ul>}
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 2 bugs)
+
+<details>
+<summary>Hint</summary>
+
+What happens when the `query` prop changes? Also, is the ESLint warning being suppressed for a good reason?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug 1**: Missing `query` and `fetchResults` in dependency array - the effect won't re-run when the query changes.
+
+**Bug 2**: Suppressing ESLint warning with a comment instead of fixing the actual issue.
+
+**Fixed code:**
+
+```jsx
+function SearchResults({ query }) {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchResults = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/search?q=${query}`);
+        const data = await response.json();
+
+        if (!cancelled) {
+          setResults(data);
+          setLoading(false);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchResults();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [query]); // ✅ Include query dependency
+
+  return (
+    <div>
+      {loading ? <p>Loading...</p> : <ul>{results.map(r => <li key={r.id}>{r.name}</li>)}</ul>}
+    </div>
+  );
+}
+```
+
+**Why it matters**: Missing dependencies cause stale values and effects that don't re-run when they should. Always fix ESLint warnings rather than suppressing them.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 3: Object Dependency Causing Infinite Loop</summary>
+
+```jsx
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  const config = {
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+  };
+
+  useEffect(() => {
+    fetch(`/api/users/${userId}`, config)
+      .then(res => res.json())
+      .then(setUser);
+  }, [userId, config]);
+
+  return user ? <div>{user.name}</div> : <p>Loading...</p>;
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+What happens on every render? Does the `config` object have a stable reference?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: The `config` object is recreated on every render with a new reference, causing the effect to run infinitely because the dependency changes every time.
+
+**Fixed code (Option 1 - useMemo):**
+
+```jsx
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  const config = useMemo(() => ({
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+  }), []); // ✅ Stable reference
+
+  useEffect(() => {
+    fetch(`/api/users/${userId}`, config)
+      .then(res => res.json())
+      .then(setUser);
+  }, [userId, config]);
+
+  return user ? <div>{user.name}</div> : <p>Loading...</p>;
+}
+```
+
+**Fixed code (Option 2 - Move inside effect):**
+
+```jsx
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+    };
+
+    fetch(`/api/users/${userId}`, config)
+      .then(res => res.json())
+      .then(setUser);
+  }, [userId]); // ✅ No config dependency needed
+
+  return user ? <div>{user.name}</div> : <p>Loading...</p>;
+}
+```
+
+**Fixed code (Option 3 - Static constant):**
+
+```jsx
+const FETCH_CONFIG = {
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'include',
+};
+
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/users/${userId}`, FETCH_CONFIG)
+      .then(res => res.json())
+      .then(setUser);
+  }, [userId]);
+
+  return user ? <div>{user.name}</div> : <p>Loading...</p>;
+}
+```
+
+**Why it matters**: Objects and arrays are compared by reference in JavaScript. Creating new objects in the component body causes infinite loops when used as dependencies.
+
+</details>
+
+</details>
+
+---
+
 ## Practice Exercises
 
 1. Use React DevTools to find why a component re-renders unnecessarily

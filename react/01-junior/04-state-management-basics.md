@@ -604,6 +604,330 @@ function Counter() {
 2. **Too much global state** - Keep state as local as possible
 3. **Premature Context** - A few levels of props is fine
 
+---
+
+## Debug This Code
+
+Before moving to the exercises, test your debugging skills. Each snippet has bugs - can you spot and fix them?
+
+<details>
+<summary>Challenge 1: Lifting State Gone Wrong</summary>
+
+```jsx
+function TemperatureConverter() {
+  return (
+    <>
+      <CelsiusInput />
+      <FahrenheitInput />
+    </>
+  );
+}
+
+function CelsiusInput() {
+  const [celsius, setCelsius] = useState(0);
+
+  return (
+    <div>
+      <label>Celsius:</label>
+      <input
+        type="number"
+        value={celsius}
+        onChange={(e) => setCelsius(Number(e.target.value))}
+      />
+    </div>
+  );
+}
+
+function FahrenheitInput() {
+  const [fahrenheit, setFahrenheit] = useState(32);
+
+  return (
+    <div>
+      <label>Fahrenheit:</label>
+      <input
+        type="number"
+        value={fahrenheit}
+        onChange={(e) => setFahrenheit(Number(e.target.value))}
+      />
+    </div>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 architectural issue)
+
+<details>
+<summary>Hint</summary>
+
+The components render, but do they stay in sync when you change one temperature?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: State is not lifted - each input has independent state, so they don't stay synchronized. Changing Celsius doesn't update Fahrenheit and vice versa.
+
+**Fixed code:**
+
+```jsx
+function TemperatureConverter() {
+  const [celsius, setCelsius] = useState(0);
+  const fahrenheit = (celsius * 9/5) + 32;
+
+  return (
+    <>
+      <CelsiusInput value={celsius} onChange={setCelsius} />
+      <FahrenheitInput
+        value={fahrenheit}
+        onChange={(f) => setCelsius((f - 32) * 5/9)}
+      />
+    </>
+  );
+}
+
+function CelsiusInput({ value, onChange }) {
+  return (
+    <div>
+      <label>Celsius:</label>
+      <input
+        type="number"
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
+    </div>
+  );
+}
+
+function FahrenheitInput({ value, onChange }) {
+  return (
+    <div>
+      <label>Fahrenheit:</label>
+      <input
+        type="number"
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
+    </div>
+  );
+}
+```
+
+**Why it matters**: Sibling components that need synchronized state must share a single source of truth from their parent.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 2: Context Provider Missing</summary>
+
+```jsx
+const ThemeContext = createContext();
+
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    <div>
+      <Header />
+      <MainContent />
+    </div>
+  );
+}
+
+function Header() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    <header>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        Toggle Theme (Current: {theme})
+      </button>
+    </header>
+  );
+}
+
+function MainContent() {
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <main className={`theme-${theme}`}>
+      <p>Content goes here</p>
+    </main>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+Look at what wraps the component tree. Is the Context value being provided?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: `ThemeContext.Provider` is never used - the state exists in App but isn't provided to descendants via Context.
+
+**Fixed code:**
+
+```jsx
+const ThemeContext = createContext();
+
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <div>
+        <Header />
+        <MainContent />
+      </div>
+    </ThemeContext.Provider>
+  );
+}
+
+function Header() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    <header>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        Toggle Theme (Current: {theme})
+      </button>
+    </header>
+  );
+}
+
+function MainContent() {
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <main className={`theme-${theme}`}>
+      <p>Content goes here</p>
+    </main>
+  );
+}
+```
+
+**Why it matters**: Without a Provider, `useContext` returns `undefined`, causing runtime errors when trying to destructure properties.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 3: Reducer Mutation Bug</summary>
+
+```jsx
+function cartReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_ITEM':
+      // Add item to cart
+      state.items.push(action.item);
+      return state;
+
+    case 'UPDATE_QUANTITY':
+      // Update item quantity
+      const item = state.items.find(i => i.id === action.id);
+      if (item) {
+        item.quantity = action.quantity;
+      }
+      return state;
+
+    case 'REMOVE_ITEM':
+      // Remove item
+      state.items = state.items.filter(i => i.id !== action.id);
+      return state;
+
+    default:
+      return state;
+  }
+}
+
+function CartProvider({ children }) {
+  const [cart, dispatch] = useReducer(cartReducer, { items: [] });
+
+  return (
+    <CartContext.Provider value={{ cart, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 3 bugs - same pattern)
+
+<details>
+<summary>Hint</summary>
+
+Reducers must be pure functions. Are we modifying the existing state object?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: All three cases directly mutate the state object instead of returning a new state. Reducers must never mutate - they should return new objects.
+
+**Fixed code:**
+
+```jsx
+function cartReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_ITEM':
+      // Create new state with new items array
+      return {
+        ...state,
+        items: [...state.items, action.item]
+      };
+
+    case 'UPDATE_QUANTITY':
+      // Create new state with mapped items array
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === action.id
+            ? { ...item, quantity: action.quantity }
+            : item
+        )
+      };
+
+    case 'REMOVE_ITEM':
+      // Create new state with filtered items array
+      return {
+        ...state,
+        items: state.items.filter(item => item.id !== action.id)
+      };
+
+    default:
+      return state;
+  }
+}
+
+function CartProvider({ children }) {
+  const [cart, dispatch] = useReducer(cartReducer, { items: [] });
+
+  return (
+    <CartContext.Provider value={{ cart, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
+}
+```
+
+**Why it matters**: Mutating state breaks React's change detection - React compares references, so if you return the same object reference, it won't trigger re-renders even though the contents changed.
+
+</details>
+
+</details>
+
+---
+
 ## Practice Exercises
 
 1. Build a shopping cart with Context (add, remove, update quantity)

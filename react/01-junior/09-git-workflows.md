@@ -577,6 +577,265 @@ By Friday, your payment feature is live. The commit history is clean. No conflic
 3. **Giant PRs** - Small PRs get reviewed faster
 4. **Ignoring conflicts** - They don't go away on their own
 
+---
+
+## Debug This Code
+
+Before moving to the exercises, test your debugging skills. Each Git scenario has issues - can you spot and fix them?
+
+<details>
+<summary>Challenge 1: Broken Git History</summary>
+
+```bash
+# Developer's workflow
+git checkout main
+git checkout -b feature/new-button
+
+# Make changes to Button.jsx
+git add .
+git commit -m "changes"
+
+# Make more changes
+git add .
+git commit -m "more changes"
+
+# Make final changes
+git add .
+git commit -m "fixed it"
+
+git push origin feature/new-button
+```
+
+**How many issues can you find?** (Answer: 3 issues)
+
+<details>
+<summary>Hint</summary>
+
+Think about commit messages, pulling latest changes, and how this history will look to reviewers.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Issue 1**: Didn't pull latest main before creating branch - might be working on outdated code.
+
+**Issue 2**: Vague commit messages ("changes", "more changes", "fixed it") don't follow Conventional Commits and provide no context.
+
+**Issue 3**: Multiple tiny commits for what should be one logical change - makes history noisy.
+
+**Fixed workflow:**
+
+```bash
+# 1. Start from fresh main
+git checkout main
+git pull origin main
+
+# 2. Create feature branch
+git checkout -b feature/add-primary-button
+
+# 3. Make all your changes, then commit with meaningful message
+git add .
+git commit -m "feat: add primary button component with hover states
+
+- Created Button component with primary variant
+- Added hover and active states
+- Included accessibility attributes (aria-label, role)
+- Updated Storybook documentation"
+
+# 4. If you made multiple WIP commits, squash them before pushing
+git rebase -i HEAD~3  # Squash last 3 commits into one
+
+# 5. Push to remote
+git push -u origin feature/add-primary-button
+```
+
+**Why it matters**: Clean commit history makes code review easier, helps with debugging (git blame), and creates a professional project history.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 2: Merge Conflict Panic</summary>
+
+```bash
+# You're working on feature/update-navbar
+git checkout feature/update-navbar
+
+# Meanwhile, someone merged changes to Header.jsx on main
+# You try to merge main into your branch
+git merge main
+
+# Git says: CONFLICT in src/components/Header.jsx
+# You see this in the file:
+<<<<<<< HEAD
+<nav className="navbar">
+  <Logo />
+  <UserMenu />
+</nav>
+=======
+<nav className="header">
+  <Logo />
+  <SearchBar />
+  <UserMenu />
+</nav>
+>>>>>>> main
+
+# Panicked developer does:
+git merge --abort
+# Then tries to push anyway
+git push origin feature/update-navbar --force
+```
+
+**How many issues can you find?** (Answer: 2 issues)
+
+<details>
+<summary>Hint</summary>
+
+Aborting the merge doesn't solve the problem. What's the correct way to handle conflicts? Also, what's wrong with the force push?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Issue 1**: Aborting the merge instead of resolving the conflict - the problem still exists and will block PR merging.
+
+**Issue 2**: Force pushing without resolving conflicts can overwrite others' work and doesn't fix the underlying issue.
+
+**Fixed workflow:**
+
+```bash
+# 1. Try to merge (or preferably rebase) main
+git checkout feature/update-navbar
+git rebase main
+
+# 2. When conflict appears, don't panic! Open the file
+# CONFLICT in src/components/Header.jsx
+
+# 3. Manually resolve by choosing what to keep
+# Remove conflict markers and combine both changes:
+<nav className="header">
+  <Logo />
+  <SearchBar />
+  <UserMenu />
+</nav>
+
+# 4. Stage the resolved file
+git add src/components/Header.jsx
+
+# 5. Continue the rebase
+git rebase --continue
+
+# 6. Push with force-with-lease (safer than --force)
+git push origin feature/update-navbar --force-with-lease
+```
+
+**Alternative - abort and ask for help:**
+
+```bash
+# If you're truly stuck, abort and ask
+git rebase --abort
+# Then communicate with your team:
+# "Hey, I have a conflict in Header.jsx between my navbar changes
+# and the recent header refactor. Can someone help me resolve it?"
+```
+
+**Why it matters**: Conflicts are normal in team development. Learning to resolve them properly is essential. Force-with-lease is safer than force because it checks if remote has changes you don't have.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 3: Commit Message Chaos</summary>
+
+Look at these commit messages from a PR:
+
+```bash
+git log --oneline
+a1b2c3d fixed bug
+b2c3d4e updates
+c3d4e5f wip
+d4e5f6g more fixes
+e5f6g7h final version
+f6g7h8i actually final
+g7h8i9j ok this is really final now
+```
+
+**How many issues can you find?** (Answer: Multiple issues)
+
+<details>
+<summary>Hint</summary>
+
+Do these messages follow any convention? Can you tell what changed? Would these be helpful in 6 months?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Issues**:
+- No type prefix (feat, fix, chore, etc.)
+- No descriptive message about what changed
+- Multiple "final" commits suggest poor planning
+- "wip" commits should be squashed before PR
+- No context for why changes were made
+
+**Fixed commit history (after interactive rebase):**
+
+```bash
+# Squash all those commits into logical units:
+git rebase -i HEAD~7  # Interactive rebase last 7 commits
+
+# Result should be clear, meaningful commits:
+git log --oneline
+a1b2c3d feat: add user authentication with JWT tokens
+b2c3d4e fix: resolve memory leak in useEffect cleanup
+c3d4e5f docs: update API documentation for auth endpoints
+```
+
+**Good commit message template:**
+
+```bash
+<type>: <short summary>
+
+<optional body explaining why this change was needed>
+
+<optional footer with breaking changes or issue references>
+```
+
+**Examples:**
+
+```bash
+# Good commit messages:
+git commit -m "feat: add dark mode toggle to user preferences
+
+Implements dark mode using CSS variables and localStorage
+persistence. Updates all components to respect theme context."
+
+git commit -m "fix: prevent form submission on Enter key in search input
+
+Addresses issue where hitting Enter in search bar would submit
+the entire form instead of triggering search.
+
+Closes #123"
+
+git commit -m "refactor: extract validation logic into custom hook
+
+Moves form validation from component into useFormValidation hook
+for better reusability across login and signup forms."
+```
+
+**Why it matters**: Six months from now when tracking down a bug, meaningful commit messages in `git log` or `git blame` are invaluable. They explain not just what changed, but why.
+
+</details>
+
+</details>
+
+---
+
 ## Practice Exercises
 
 1. Practice the feature branch workflow on a sample repo

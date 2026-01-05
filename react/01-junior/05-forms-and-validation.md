@@ -895,6 +895,291 @@ const userSchema = z.object({
 3. **Clearing form on error** - Preserve user input
 4. **Generic error messages** - Be specific about what's wrong
 
+---
+
+## Debug This Code
+
+Before moving to the exercises, test your debugging skills. Each snippet has bugs - can you spot and fix them?
+
+<details>
+<summary>Challenge 1: Uncontrolled vs Controlled Input</summary>
+
+```jsx
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ email, password });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        value={password}
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
+    </form>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 2 bugs)
+
+<details>
+<summary>Hint</summary>
+
+Check which inputs are controlled vs uncontrolled. Are all inputs properly connected to state?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug 1**: Email input is uncontrolled - it has `onChange` but no `value` prop, so React doesn't control its value.
+
+**Bug 2**: Password input is read-only - it has `value` but no `onChange`, so users can't type in it.
+
+**Fixed code:**
+
+```jsx
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ email, password });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
+    </form>
+  );
+}
+```
+
+**Why it matters**: Controlled inputs need both `value` and `onChange`. Without `value`, React can't control the input. Without `onChange`, users can't modify it.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 2: React Hook Form Registration</summary>
+
+```jsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  username: z.string().min(3, 'Username must be at least 3 characters'),
+  email: z.string().email('Invalid email'),
+});
+
+function SignupForm() {
+  const { handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input type="text" placeholder="Username" />
+      {errors.username && <span>{errors.username.message}</span>}
+
+      <input type="email" placeholder="Email" />
+      {errors.email && <span>{errors.email.message}</span>}
+
+      <button type="submit">Sign Up</button>
+    </form>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+React Hook Form needs to know which inputs to manage. How does it track them?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: Inputs are not registered with React Hook Form - missing `{...register('fieldName')}` spread on each input.
+
+**Fixed code:**
+
+```jsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  username: z.string().min(3, 'Username must be at least 3 characters'),
+  email: z.string().email('Invalid email'),
+});
+
+function SignupForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input
+        type="text"
+        placeholder="Username"
+        {...register('username')}
+      />
+      {errors.username && <span>{errors.username.message}</span>}
+
+      <input
+        type="email"
+        placeholder="Email"
+        {...register('email')}
+      />
+      {errors.email && <span>{errors.email.message}</span>}
+
+      <button type="submit">Sign Up</button>
+    </form>
+  );
+}
+```
+
+**Why it matters**: React Hook Form's `register` function connects inputs to the form state. Without it, RHF doesn't know these inputs exist and won't validate or collect their values.
+
+</details>
+
+</details>
+
+<details>
+<summary>Challenge 3: Zod Schema Validation Logic</summary>
+
+```jsx
+import { z } from 'zod';
+
+const passwordSchema = z.object({
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain an uppercase letter')
+    .regex(/[0-9]/, 'Password must contain a number'),
+  confirmPassword: z.string(),
+}).refine(data => data.password === data.confirmPassword, {
+  message: 'Passwords must match',
+  path: 'confirmPassword',
+});
+
+function PasswordForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(passwordSchema),
+  });
+
+  return (
+    <form onSubmit={handleSubmit(console.log)}>
+      <input type="password" {...register('password')} />
+      {errors.password && <span>{errors.password.message}</span>}
+
+      <input type="password" {...register('confirmPassword')} />
+      {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+**How many bugs can you find?** (Answer: 1 bug)
+
+<details>
+<summary>Hint</summary>
+
+Look at the refine error path. Is it pointing to the right field?
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Bug**: The `path` in the refine should be an array, not a string.
+
+**Fixed code:**
+
+```jsx
+import { z } from 'zod';
+
+const passwordSchema = z.object({
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain an uppercase letter')
+    .regex(/[0-9]/, 'Password must contain a number'),
+  confirmPassword: z.string(),
+}).refine(data => data.password === data.confirmPassword, {
+  message: 'Passwords must match',
+  path: ['confirmPassword'],  // ✅ Array, not string
+});
+
+function PasswordForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(passwordSchema),
+  });
+
+  return (
+    <form onSubmit={handleSubmit(console.log)}>
+      <input type="password" {...register('password')} />
+      {errors.password && <span>{errors.password.message}</span>}
+
+      <input type="password" {...register('confirmPassword')} />
+      {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+**Why it matters**: Zod's `path` in refinements should be an array indicating which field the error belongs to. A string might work in some cases but isn't the correct type and can cause issues.
+
+</details>
+
+</details>
+
+---
+
 ## Practice Exercises
 
 1. Build a multi-step registration form with validation
