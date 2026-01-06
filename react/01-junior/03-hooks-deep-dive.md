@@ -1,5 +1,8 @@
 # Hooks Deep Dive
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Three: The Notification System
 
 The streaming dashboard is live. Users are browsing, watching, building their lists. But something's missing.
@@ -433,7 +436,7 @@ function useNotifications(userId) {
 
 ---
 
-## Chapter 7: Putting It All Together
+## Chapter 7: Putting It All Together and Pitfalls
 
 By Friday, the notification bell is live:
 
@@ -539,7 +542,7 @@ Here's what happens with race conditions:
 
 ---
 
-## Chapter 8: The Traps to Avoid
+### Dependency Pitfalls
 
 Before you leave for the weekend, Marcus shares a war story.
 
@@ -574,15 +577,9 @@ function GoodComponent({ url }) {
 }
 ```
 
-**Other common mistakes:**
-
-1. **Missing dependencies** - Use ESLint's `react-hooks/exhaustive-deps` rule
-2. **Stale closures** - Use functional updates or refs
-3. **Forgetting cleanup** - WebSockets, timers, event listeners need cleanup
-
 ---
 
-## Chapter 9: The Performance Toolkit
+### The Performance Toolkit
 
 "Now that you understand hooks," Sarah says, "let's talk about when *not* to recompute things."
 
@@ -700,6 +697,7 @@ const greeting = `Hello, ${name}!`;
 1. **Missing dependencies in useEffect** - Use ESLint rules to catch these
 2. **Stale closures** - Use functional updates or refs
 3. **Infinite loops** - Object/array dependencies recreated each render
+4. **Forgetting cleanup** - WebSockets, timers, and event listeners need cleanup
 
 ---
 

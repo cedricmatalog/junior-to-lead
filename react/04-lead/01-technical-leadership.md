@@ -1,16 +1,55 @@
 # Technical Leadership
 
-Lead through expertise, vision, and influence.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 32: The Technical Vision Reset
+
+The team is shipping, but direction is fuzzy. Sarah asks you to define a technical vision that aligns with product goals and reduces risk. Marcus reminds you that leadership is not about writing every line -- it is about setting direction, making trade-offs, and creating clarity. This week focuses on the systems and decisions that guide a team at scale.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Technical vision** | A compass - keeps the team pointed the same way |
+| **Decision making** | A filter - weigh trade-offs, not opinions |
+| **Roadmaps** | A route plan - sequence steps toward a destination |
+| **Tech radar** | A weather report - know what is safe to adopt |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 31 (Framework Comparison) - Comfort evaluating trade-offs and documenting decisions.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Set technical vision and direction
-- Make buy vs build decisions
-- Assess and manage technical risk
-- Balance innovation with delivery
+By the end of this module, you'll be able to:
 
-## The Lead Developer Role
+- [ ] Set a clear technical vision tied to business goals
+- [ ] Build roadmaps that balance delivery and risk
+- [ ] Make buy vs build decisions with explicit criteria
+- [ ] Assess and communicate technical risk
+- [ ] Document decisions so teams can move faster later
+- [ ] Balance innovation with reliable delivery
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice technical leadership habits over 8-12 weeks
+
+---
+
+## Chapter 1: The Lead Developer Role
 
 ### What It Is
 
@@ -26,7 +65,7 @@ By the end of this module, you will:
 - Managing people (that's EM)
 - Being the smartest person
 
-## Setting Technical Vision
+## Chapter 2: Setting Technical Vision
 
 ### Vision Document Structure
 
@@ -66,12 +105,12 @@ By the end of this module, you will:
 - **Product**: Feature velocity, reliability improvements
 - **Design**: Design system, consistency
 
-## Technical Roadmaps
+## Chapter 3: Technical Roadmaps
 
 ### Roadmap Structure
 
 ```markdown
-## Q1 2024 Roadmap
+### Q1 2024 Roadmap
 
 ### Theme: Foundation
 
@@ -109,12 +148,12 @@ By the end of this module, you will:
 └──────────────────────────────────────────────┘
 ```
 
-## Buy vs Build Decisions
+## Chapter 4: Buy vs Build Decisions
 
 ### Decision Framework
 
 ```markdown
-## Evaluation: Auth Solution
+### Evaluation: Auth Solution
 
 ### Options
 1. **Build**: Custom auth system
@@ -144,7 +183,7 @@ Auth0 for now:
 - Feature limitations
 ```
 
-## Risk Assessment
+## Chapter 5: Risk Assessment
 
 ### Risk Categories
 
@@ -165,7 +204,7 @@ Auth0 for now:
 | API breaking changes | Medium | Medium | 4 | Version pinning, abstraction layer | Backend |
 ```
 
-## Making Decisions
+## Chapter 6: Making Decisions
 
 ### Decision Types
 
@@ -175,7 +214,7 @@ Auth0 for now:
 ### Decision Log
 
 ```markdown
-## Decision: State Management Library
+### Decision: State Management Library
 
 **Date**: 2024-01-15
 **Status**: Decided
@@ -203,7 +242,7 @@ Zustand
 - Create migration guide from current Context usage
 ```
 
-## Balancing Innovation and Delivery
+## Chapter 7: Balancing Innovation and Delivery
 
 ### The 70-20-10 Rule
 
@@ -237,13 +276,124 @@ Zustand
 - Enzyme
 ```
 
+---
+
+## Common Mistakes
+
+1. **Vision without metrics** - If success is not measurable, alignment fades quickly.
+2. **Roadmaps without risk buffers** - Delivery timelines collapse when surprises hit.
+3. **Undocumented decisions** - Teams re-argue the same choices every quarter.
+4. **Innovation without guardrails** - Experiments consume time without clear exit criteria.
+
 ## Practice Exercises
 
 1. Create a technical vision document for a migration
 2. Build a decision matrix for a build vs buy scenario
 3. Develop a tech radar for your team
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Vision Document</summary>
+
+```markdown
+# Frontend Vision 2025
+
+## Current State
+- Monolith build times > 20 minutes
+- Mobile LCP at 4.0s (P75)
+
+## Target State
+- Modular architecture with owned features
+- LCP < 2.5s and CLS < 0.1
+
+## Strategic Priorities
+1. Next.js migration (Q1-Q2)
+2. Design system adoption (Q2)
+3. Performance budgets (Q3)
+
+## Success Metrics
+- Build time < 10 minutes
+- 20% increase in release frequency
+```
+
+**Key points:**
+- Vision ties to measurable metrics.
+- Priorities are staged, not simultaneous.
+- Targets align with product outcomes.
+
+</details>
+
+<details>
+<summary>Exercise 2: Decision Matrix</summary>
+
+```markdown
+| Criteria | Build | Buy | Notes |
+|----------|------:|----:|------|
+| Time to ship | 2 | 5 | Vendor is ready |
+| Customization | 5 | 2 | Edge cases need support |
+| Total cost | 3 | 4 | License vs dev time |
+| Risk | 3 | 4 | Vendor has SOC2 |
+
+Decision: Buy (score 15 vs 13)
+```
+
+**Key points:**
+- Use weighted criteria if needed.
+- Capture notes so the decision is auditable.
+- Document why the winning option won.
+
+</details>
+
+<details>
+<summary>Exercise 3: Tech Radar</summary>
+
+```markdown
+Adopt: Next.js App Router, TanStack Query
+Trial: Playwright, Module Federation
+Assess: Bun, Effect-TS
+Hold: Create React App, Enzyme
+```
+
+**Key points:**
+- Radar categories signal adoption intent.
+- Keep the list short to avoid noise.
+- Review and update quarterly.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Vision**: Direction that aligns with business goals
+- **Roadmaps**: Sequenced delivery with risk awareness
+- **Decisions**: Trade-offs captured in writing
+- **Risk**: Explicit assessment before committing
+- **Innovation**: Experiments with guardrails
+
+**Key takeaway**: Technical leadership is clarity at scale.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Draft a technical vision for the next quarter
+- Build a buy vs build matrix for a vendor tool
+- Define success metrics for a migration
+- Publish a tech radar update
+- Lead a roadmap review with stakeholders
+
+---
 ## Further Reading
 
 - [Staff Engineer](https://staffeng.com/book)
 - [The Staff Engineer's Path](https://www.oreilly.com/library/view/the-staff-engineers/9781098118723/)
+
+---
+
+**Navigation**: [Next Module ->](./02-architecture-ownership.md)

@@ -1,5 +1,8 @@
 # Accessibility Fundamentals
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Ten: The Audit
 
 Everything is going well. The features are polished, the tests are passing, the team is hitting deadlines. Then Monday morning, Sarah calls an emergency meeting.
@@ -726,7 +729,7 @@ describe('LoginForm', () => {
 
 ---
 
-## Chapter 9: The Fixes Come Together
+### The Fixes Come Together
 
 By the end of the second week, you've addressed all 47 failures:
 

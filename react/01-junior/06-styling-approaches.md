@@ -1,5 +1,8 @@
 # Styling Approaches
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Six: The Design System
 
 The job application portal is complete. But when you open it in the browser, something feels off.
@@ -404,7 +407,7 @@ function PropertyCard({ property }) {
 
 ---
 
-## Chapter 7: The Reusable Button with CSS Modules
+### The Reusable Button with CSS Modules
 
 For the button component that appears everywhere, you use CSS Modules:
 
@@ -459,7 +462,7 @@ function Button({ variant = 'primary', size = 'md', children, className, ...prop
 
 ---
 
-## Chapter 8: The Fancy Confirmation with styled-components
+### The Fancy Confirmation with styled-components
 
 For the booking confirmation—something special that needs animations—styled-components fits perfectly:
 
@@ -514,7 +517,7 @@ const BookingDetails = styled.div`
 
 ---
 
-## Chapter 9: The Pattern Emerges
+## Chapter 7: The Pattern Emerges
 
 By Friday, the travel platform is styled and polished. You step back and see the pattern:
 

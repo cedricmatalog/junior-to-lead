@@ -1,33 +1,82 @@
 # Technical Strategy
 
-Align technology decisions with business goals.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 37: The Long Horizon
+
+Two teams pitch new tools in the same week, and leadership wants a 12-month plan. Sarah asks you to shape a technical strategy that supports business goals without chasing every new idea. Marcus reminds you that strategy is a set of choices, not a list of technologies. This week focuses on evaluation frameworks, tech radars, roadmaps, and experiments that turn curiosity into accountable decisions.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Strategy** | A north star - focus the team on what matters most |
+| **Evaluation** | A scorecard - compare options with shared criteria |
+| **Tech radar** | A weather map - know what is safe and what is risky |
+| **Roadmap** | A flight plan - sequence steps toward a destination |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 36 (Stakeholder Communication) - Comfort presenting trade-offs to different audiences.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Evaluate technologies strategically
-- Create long-term technical plans
-- Balance innovation with stability
-- Conduct effective proof of concepts
+By the end of this module, you'll be able to:
 
-## Strategic Technology Evaluation
+- [ ] Evaluate new technologies with explicit criteria
+- [ ] Maintain a tech radar that signals adoption intent
+- [ ] Tie technical initiatives to business outcomes
+- [ ] Design experiments and POCs with success criteria
+- [ ] Build a 12-18 month technical roadmap
+- [ ] Communicate strategy decisions with clarity
 
-### Evaluation Framework
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice strategic planning over 8-12 weeks
+
+---
+
+## Chapter 1: Start With the Problem
+
+Sarah asks you to write the strategy in terms of business goals, not tooling preferences. Marcus suggests a short problem statement before any solution talk.
+
+```markdown
+## Problem Statement Template
+
+**Problem**: What is slowing us down or creating risk?
+**Impact**: Who is affected and how?
+**Constraints**: Time, budget, compliance, or staffing limits
+**Success**: What does a good outcome look like?
+```
+
+## Chapter 2: Evaluate Options with a Scorecard
+
+Use a weighted scorecard to make the trade-offs explicit. This helps avoid debates that turn into opinions.
 
 ```markdown
 ## Technology Evaluation: [Technology Name]
 
 ### 1. Problem Statement
 What problem are we trying to solve?
-Is this a real problem or a perceived problem?
 
 ### 2. Current State
-How do we solve this today?
-What's the cost of the status quo?
+How do we solve this today? What is the cost of the status quo?
 
 ### 3. Proposed Solution
-What is this technology?
-How would it solve our problem?
+What is this technology and how does it solve the problem?
 
 ### 4. Evaluation Criteria
 
@@ -48,250 +97,257 @@ How would it solve our problem?
 
 ### 6. Recommendation
 Adopt / Trial / Assess / Hold
-
-### 7. Next Steps
-What would adoption look like?
 ```
 
-### Technology Radar
+## Chapter 3: Maintain a Tech Radar
+
+Sarah wants a single place that signals what the team should adopt, trial, or avoid. Review it quarterly.
 
 ```markdown
-## Our Technology Radar
+## Team Technology Radar
 
 ### Adopt
-*Use confidently in production*
 - React 18
 - TypeScript
 - Next.js App Router
 - TanStack Query
-- Tailwind CSS
 
 ### Trial
-*Use in non-critical production*
-- Server Components
-- Turborepo
-- Vitest
 - Playwright
+- Turborepo
+- Module Federation
 
 ### Assess
-*Explore in spikes/POCs*
 - React Server Actions
 - Bun
 - Effect-TS
 
 ### Hold
-*Don't start new projects with*
 - Create React App
-- Redux (for new projects)
-- Jest (preferring Vitest)
 - Enzyme
+- Unmaintained UI libraries
 ```
 
-## Long-term Planning
+## Chapter 4: Build Roadmaps Tied to Goals
 
-### Technical Roadmap
+Marcus suggests you connect each initiative to a business outcome. The roadmap should show sequence and dependencies, not just a wish list.
 
 ```markdown
 ## Frontend Technical Roadmap 2024-2025
 
 ### H1 2024: Foundation
-
-**Q1: Migration**
-- Complete Next.js migration
-- Establish new patterns
-- Team training
-
-**Q2: Quality**
-- Design system v2
-- Test coverage to 80%
-- Performance monitoring
+- Migrate core pages to Next.js
+- Establish shared design system
+- Instrument Core Web Vitals
 
 ### H2 2024: Scale
-
-**Q3: Performance**
-- Edge deployment
-- Image optimization
-- Core Web Vitals green
-
-**Q4: Platform**
-- Component library extraction
-- Micro-frontend evaluation
-- Mobile web improvements
+- Improve build pipeline
+- Add edge caching for product pages
+- Expand integration tests
 
 ### 2025: Growth
-
-**Q1-Q2: Expansion**
 - Multi-region support
-- A/B testing infrastructure
-- Analytics improvements
-
-**Q3-Q4: Innovation**
-- AI-assisted features
-- Next-gen tooling evaluation
-- Performance excellence
+- Personalization platform
+- AI-assisted content workflows
 ```
 
-### Connecting to Business Goals
-
 ```markdown
-## Technical Strategy Alignment
+## Goal Alignment Example
 
-### Business Goal: Increase conversion by 10%
+**Business goal: Increase conversion by 10%**
+- Performance improvements
+- A/B testing platform
+- Personalization capabilities
 
-**Technical Initiatives:**
-1. Performance improvements (faster = higher conversion)
-2. A/B testing infrastructure (data-driven optimization)
-3. Personalization capabilities (relevant experiences)
-
-### Business Goal: Enter mobile market
-
-**Technical Initiatives:**
-1. Responsive web improvements
-2. PWA capabilities
-3. React Native evaluation
-
-### Business Goal: Reduce operational costs
-
-**Technical Initiatives:**
-1. Cloud cost optimization
-2. Build time reduction
-3. Incident reduction through reliability
+**Business goal: Reduce operational costs**
+- Build time reduction
+- Incident reduction via monitoring
+- Dependency upgrades to reduce support load
 ```
 
-## Innovation Management
+## Chapter 5: Run Experiments and POCs
 
-### Innovation Budget
-
-```markdown
-## Innovation Time Allocation
-
-### Regular Sprints
-- 5% innovation time
-- Use for small experiments
-- Individual learning
-
-### Quarterly Innovation Sprint
-- 1 week per quarter
-- Team-chosen projects
-- Demo at end
-
-### Annual Hackathon
-- 2 days
-- Cross-team collaboration
-- Top ideas funded for development
-```
-
-### Managing Experiments
+Sarah expects every experiment to have a hypothesis and exit criteria. POCs are tools for learning, not pre-approved decisions.
 
 ```markdown
-## Innovation Experiment Template
-
-### Experiment: Server-Driven UI
+## Experiment Template
 
 **Hypothesis**
-We can reduce app store update cycles by moving UI logic to server.
+If we adopt X, we can reduce Y by Z.
 
 **Success Criteria**
-- Can render 3 existing screens from server config
-- Performance within 10% of native
-- Team can iterate without deploys
+- Measurable outcome
+- Performance constraints
+- Team adoption signal
 
 **Timeline**
-2 weeks spike
-
-**Resources**
-1 senior engineer
+Two-week spike
 
 **Risks**
-- Performance impact
-- Debugging complexity
-- Learning curve
+List top 3 risks and mitigation
 
 **Go/No-Go Decision**
-Demo to team week 2, decide if to pursue further.
+What evidence will trigger a decision?
 ```
-
-## Proof of Concepts
-
-### POC Structure
 
 ```markdown
 ## POC: Real-time Collaboration
 
 ### Objective
-Validate that we can add real-time collaboration to our editor.
+Validate real-time collaboration for the editor.
 
 ### Scope
-- Two users editing same document
-- See each other's cursors
+- Two users editing the same document
+- Presence indicators
 - Basic conflict resolution
 
 ### Out of Scope
-- Production-ready performance
-- Full feature parity
 - Mobile support
-
-### Technologies to Evaluate
-1. Yjs + WebSocket
-2. Liveblocks
-3. Supabase Realtime
+- Full feature parity
 
 ### Timeline
-- Week 1: Yjs prototype
-- Week 2: Liveblocks prototype
+- Week 1: Prototype A
+- Week 2: Prototype B
 - Week 3: Comparison and recommendation
 
 ### Success Criteria
 - < 100ms sync latency
 - Handles 10 concurrent users
-- Reasonable complexity
-
-### Deliverables
-- Working prototypes
-- Technical comparison doc
-- Recommendation with rationale
+- Reasonable implementation complexity
 ```
 
-### POC Evaluation
+## Chapter 6: Decide and Communicate
+
+Marcus recommends a short decision memo that records the why, not just the what. This prevents reruns of the same debates.
 
 ```markdown
-## POC Results: Real-time Collaboration
+## Decision Memo
 
-### Summary
-Liveblocks recommended. Best balance of capability and simplicity.
-
-### Detailed Comparison
-
-| Criterion | Yjs | Liveblocks | Supabase |
-|-----------|-----|------------|----------|
-| Latency | 50ms | 80ms | 120ms |
-| Complexity | High | Low | Medium |
-| Cost (monthly) | $0 | $99 | $25 |
-| Cursor support | DIY | Built-in | DIY |
-| Conflict resolution | Built-in | Built-in | Manual |
-
-### Recommendation
-Liveblocks
-
-### Rationale
-- 70% less code than Yjs
-- Built-in presence and cursors
-- Reasonable cost for our scale
-- Excellent documentation
-
-### Next Steps
-1. Security review
-2. Contract negotiation
-3. Pilot with one document type
+**Decision**: Adopt Next.js App Router for new pages
+**Rationale**: Improves performance and aligns with future needs
+**Risks**: Migration complexity, short-term velocity dip
+**Mitigations**: Phased rollout, training, pilot project
+**Next Steps**: Start pilot on marketing pages
 ```
+
+---
+
+## Common Mistakes
+
+1. **Chasing shiny tech** - Strategy becomes a list of tools, not outcomes.
+2. **No success criteria** - Experiments never end and decisions stall.
+3. **Ignoring team capability** - Adoption fails when skills do not match ambition.
+4. **No exit plan** - POCs become production without proving value.
 
 ## Practice Exercises
 
 1. Create a technology radar for your team
-2. Write a POC plan for a technology you're curious about
-3. Connect technical initiatives to business goals
+2. Write a POC plan for a technology you are curious about
+3. Draft a one-page technical strategy aligned to business goals
+
+### Solutions
+
+<details>
+<summary>Exercise 1: Tech Radar</summary>
+
+```markdown
+Adopt: React 18, TypeScript, Next.js App Router
+Trial: Playwright, Turborepo
+Assess: React Server Actions
+Hold: Create React App, Enzyme
+```
+
+**Key points:**
+- Keep the list short and intentional.
+- Review on a regular cadence.
+- Use it to set adoption expectations.
+
+</details>
+
+<details>
+<summary>Exercise 2: POC Plan</summary>
+
+```markdown
+## POC: Edge Image Optimization
+
+Objective: Reduce image load time on product pages.
+Scope: Product list and product detail images.
+Timeline: Two-week spike.
+Success Criteria: 30% smaller payload, no visual regressions.
+Decision: Adopt if criteria met and ops cost acceptable.
+```
+
+**Key points:**
+- Define success before you start.
+- Keep POCs time-boxed.
+- Decide based on evidence, not excitement.
+
+</details>
+
+<details>
+<summary>Exercise 3: Strategy One-Pager</summary>
+
+```markdown
+## Frontend Strategy: Next 12 Months
+
+Goals:
+- Improve conversion by 10%
+- Reduce incidents by 30%
+
+Initiatives:
+- Performance program (Core Web Vitals)
+- Design system adoption
+- Observability improvements
+
+Risks:
+- Migration complexity
+- Team bandwidth
+
+Ask:
+Approve roadmap and staffing for Q1-Q2
+```
+
+**Key points:**
+- Tie initiatives to measurable outcomes.
+- Highlight risks early.
+- End with a clear ask.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Problem framing**: Start with outcomes and constraints
+- **Evaluation**: Use scorecards to make trade-offs explicit
+- **Tech radar**: Signal adoption intent and risk level
+- **Roadmaps**: Sequence initiatives tied to business goals
+- **Experiments**: Run time-boxed POCs with success criteria
+
+**Key takeaway**: Strategy is choosing what to do and what not to do.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Evaluate a new framework proposal
+- Publish a quarterly tech radar update
+- Align a migration plan to revenue goals
+- Pitch a POC with clear success criteria
+- Document a strategic decision for future teams
+
+---
 
 ## Further Reading
 
 - [Technology Radar](https://www.thoughtworks.com/radar)
 - [Good Strategy Bad Strategy](https://www.amazon.com/Good-Strategy-Bad-Difference-Matters/dp/0307886239)
+- [Accelerate](https://www.oreilly.com/library/view/accelerate/9781457191435/)
+
+---
+
+**Navigation**: [<- Previous Module](./05-stakeholder-communication.md) | [Next Module ->](./07-incident-management.md)

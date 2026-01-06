@@ -1,16 +1,57 @@
 # Observability and Monitoring
 
-Know what's happening in production before users tell you.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 27: The Visibility Gap
+
+Errors are slipping into production and nobody notices until support tickets arrive. Sarah wants visibility before users complain. Marcus points out that without clear telemetry, performance and reliability regress silently. This week is about building observability for the frontend: errors, performance, logs, analytics, and alerts that surface the right signals at the right time.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Error tracking** | A smoke detector - catch failures early |
+| **Performance monitoring** | A speedometer - track runtime health |
+| **Logging** | A black box - context when things go wrong |
+| **Alerting** | A pager - only wake someone when it matters |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 26 (Design Systems) - Familiarity with shared tooling and component conventions.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Implement error tracking and reporting
-- Set up performance monitoring
-- Configure logging and analytics
-- Create actionable alerts
+By the end of this module, you'll be able to:
 
-## Error Tracking with Sentry
+- [ ] Implement error tracking with actionable metadata
+- [ ] Monitor performance and web vitals in production
+- [ ] Build a logging strategy for frontend events
+- [ ] Instrument analytics responsibly
+- [ ] Create alerting rules that reduce noise
+- [ ] Define dashboard metrics for operational health
+
+---
+
+## Time Estimate
+
+- **Reading**: 70-90 minutes
+- **Exercises**: 3-5 hours
+- **Mastery**: Practice observability systems over 6-8 weeks
+
+---
+
+## Chapter 1: Error Tracking with Sentry
+
+You need error visibility with enough context to fix issues quickly.
 
 ### Setup
 
@@ -74,12 +115,14 @@ function handlePaymentError(error: Error, context: PaymentContext) {
 }
 ```
 
-## Performance Monitoring
+## Chapter 2: Performance Monitoring
+
+Track runtime performance before it shows up in user complaints.
 
 ### Web Vitals
 
 ```tsx
-import { onCLS, onFID, onLCP, onFCP, onTTFB } from 'web-vitals';
+import { onCLS, onINP, onLCP, onFCP, onTTFB } from 'web-vitals';
 
 function sendToAnalytics(metric: Metric) {
   const body = JSON.stringify({
@@ -101,7 +144,7 @@ function sendToAnalytics(metric: Metric) {
 
 // Report all vitals
 onCLS(sendToAnalytics);
-onFID(sendToAnalytics);
+onINP(sendToAnalytics);
 onLCP(sendToAnalytics);
 onFCP(sendToAnalytics);
 onTTFB(sendToAnalytics);
@@ -137,7 +180,9 @@ function Dashboard() {
 }
 ```
 
-## Logging Strategy
+## Chapter 3: Logging Strategy
+
+Logs should answer "what happened" without drowning you in noise.
 
 ### Structured Logging
 
@@ -216,7 +261,9 @@ logger.info('User signed in', { userId: user.id, method: 'google' });
 logger.error('Payment failed', { error: err.message, orderId });
 ```
 
-## Analytics
+## Chapter 4: Analytics
+
+Product analytics should be precise and respectful of user privacy.
 
 ### Event Tracking
 
@@ -284,7 +331,9 @@ function AnalyticsProvider({ children }: { children: React.ReactNode }) {
 }
 ```
 
-## Alerting
+## Chapter 5: Alerting
+
+Alerts should be actionable, not constant.
 
 ### Alert Configuration
 
@@ -335,7 +384,9 @@ export async function GET() {
 }
 ```
 
-## Dashboard Metrics
+## Chapter 6: Dashboard Metrics
+
+Dashboards tell you if the system is healthy at a glance.
 
 Key metrics to track:
 
@@ -347,13 +398,127 @@ Key metrics to track:
 | Apdex Score | > 0.9 | < 0.7 |
 | Session Duration | Baseline | -50% |
 
+---
+
+## Common Mistakes
+
+1. **Logging without context** - Errors without user or route info are hard to debug.
+2. **Alert fatigue** - Too many alerts get ignored.
+3. **Sampling too low** - You miss rare but critical issues.
+4. **No ownership** - Metrics without owners do not improve.
+
 ## Practice Exercises
 
 1. Set up Sentry with custom error boundaries
 2. Implement Web Vitals tracking dashboard
 3. Create alerting rules for critical metrics
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Error Boundaries + Sentry</summary>
+
+```tsx
+function AppShell() {
+  return (
+    <Sentry.ErrorBoundary
+      fallback={<ErrorFallback />}
+      beforeCapture={(scope) => {
+        scope.setTag('area', 'app-shell');
+        scope.setContext('release', { version: window.__BUILD_ID__ });
+      }}
+    >
+      <App />
+    </Sentry.ErrorBoundary>
+  );
+}
+```
+
+**Key points:**
+- Boundaries keep crashes isolated.
+- Sentry captures stack traces with useful tags.
+- Fallback UI keeps users moving.
+
+</details>
+
+<details>
+<summary>Exercise 2: Web Vitals Dashboard</summary>
+
+```tsx
+import { onCLS, onINP, onLCP } from 'web-vitals';
+
+function report(metric) {
+  const payload = {
+    ...metric,
+    path: window.location.pathname,
+    buildId: window.__BUILD_ID__
+  };
+
+  navigator.sendBeacon('/api/metrics', JSON.stringify(payload));
+}
+
+onCLS(report);
+onINP(report);
+onLCP(report);
+```
+
+**Key points:**
+- Send vitals to a backend for aggregation.
+- Plot metrics per route and device.
+- Track regressions by release.
+
+</details>
+
+<details>
+<summary>Exercise 3: Alert Rules</summary>
+
+```js
+const alerts = [
+  { metric: 'errorRate', threshold: 0.01, window: '5m', severity: 'critical' },
+  { metric: 'LCP', threshold: 4000, window: '15m', severity: 'warning' }
+];
+```
+
+**Key points:**
+- Alerts should be tied to user impact.
+- Use longer windows for noisy metrics.
+- Route critical alerts to on-call channels only.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Error tracking**: Capturing crashes with context
+- **Performance monitoring**: Measuring runtime health
+- **Logging**: Structured data for debugging
+- **Analytics**: Product signals with intent
+- **Alerting**: Actionable thresholds
+
+**Key takeaway**: Observability is the difference between guessing and knowing.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Add error boundaries around critical routes
+- Track Core Web Vitals by page
+- Define alert thresholds for error spikes
+- Create a dashboard for frontend health
+- Route logs with user context for faster triage
+
+---
+
 ## Further Reading
 
 - [Sentry React Documentation](https://docs.sentry.io/platforms/javascript/guides/react/)
 - [Web Vitals](https://web.dev/vitals/)
+
+---
+
+**Navigation**: [<- Previous Module](./06-design-systems.md) | [Next Module ->](./08-code-review-mastery.md)

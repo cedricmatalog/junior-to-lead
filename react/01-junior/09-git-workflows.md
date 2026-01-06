@@ -1,5 +1,8 @@
 # Git Workflows
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Nine: Your First Real Feature
 
 Nine weeks in. You've built components, fixed bugs, shipped features. But there's something you've been dreading.
@@ -358,7 +361,7 @@ Let me know if anyone else needs to work in that area."
 
 ---
 
-## Chapter 9: Your Git Toolkit
+### Your Git Toolkit
 
 Sarah shares the commands you'll use daily:
 
@@ -395,7 +398,7 @@ git add -p
 
 ---
 
-## Chapter 10: Automating Quality
+### Automating Quality
 
 "One more thing," Marcus adds. "Git hooks."
 
@@ -417,7 +420,7 @@ npx --no -- commitlint --edit "$1"
 
 ---
 
-## Chapter 11: Secrets and Configuration
+### Secrets and Configuration
 
 Before you push, Marcus catches something in your code.
 
@@ -1126,9 +1129,9 @@ git show :2:src/config.js  # Current branch (HEAD)
 git show :3:src/config.js  # Incoming branch
 
 # If you want to take one side entirely
-git checkout --theirs src/config.js  # Take their version
+git restore --theirs src/config.js  # Take their version
 # or
-git checkout --ours src/config.js    # Keep our version
+git restore --ours src/config.js    # Keep our version
 git add src/config.js
 git commit
 ```

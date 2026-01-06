@@ -1,16 +1,57 @@
 # Mentoring Juniors
 
-Help others grow while multiplying your own impact.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 29: The Growth Plan
+
+Two new juniors joined the team, and Sarah asks you to mentor one of them. Marcus reminds you that mentoring is not just answering questions -- it is about building confidence and habits. This week focuses on how to mentor effectively: set goals, teach with intention, give feedback, and balance mentoring with your own delivery.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Mentoring** | A coaching plan - guide progress over time |
+| **Teaching** | A scaffold - support that fades as skills grow |
+| **Feedback** | A mirror - show gaps without judgment |
+| **Pairing** | A tandem bike - move together at the right pace |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 28 (Code Review Mastery) - Familiarity with feedback and team collaboration.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Structure effective mentoring relationships
-- Adapt teaching to different learning styles
-- Provide feedback that accelerates growth
-- Balance mentoring with your own work
+By the end of this module, you'll be able to:
 
-## Mentoring Mindset
+- [ ] Structure effective mentoring relationships
+- [ ] Adapt teaching to different learning styles
+- [ ] Create growth plans with clear milestones
+- [ ] Provide feedback that accelerates growth
+- [ ] Pair program without taking over
+- [ ] Balance mentoring with delivery work
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice mentoring over 6-8 weeks
+
+---
+
+## Chapter 1: Mentoring Mindset
+
+Mentoring works best when you focus on growth, not gatekeeping.
 
 ### Your Role
 
@@ -27,7 +68,9 @@ After training complete:    2x (two productive people)
 Training them to train:     nx (exponential growth)
 ```
 
-## Structuring Mentorship
+## Chapter 2: Structuring Mentorship
+
+A structured plan prevents mentorship from becoming ad-hoc support.
 
 ### Initial Assessment
 
@@ -77,7 +120,9 @@ Training them to train:     nx (exponential growth)
 - Monthly: 1-hour deep dive (growth reflection)
 ```
 
-## Teaching Techniques
+## Chapter 3: Teaching Techniques
+
+Different juniors need different teaching modes.
 
 ### The "Why" Before "How"
 
@@ -95,7 +140,7 @@ Training them to train:     nx (exponential growth)
 ### Scaffolded Challenges
 
 ```markdown
-## Challenge: Build a Search Component
+### Challenge: Build a Search Component
 
 ### Level 1 (Guided)
 I'll show you how to build the input and display results.
@@ -118,7 +163,9 @@ Add keyboard navigation for results.
 ### Pair Programming
 
 ```markdown
-## Pairing Modes
+## Chapter 4: Pairing Modes
+
+Pairing can teach quickly when you use it intentionally.
 
 **Driver-Navigator**
 - Junior drives: Types code, thinks out loud
@@ -135,7 +182,9 @@ Add keyboard navigation for results.
 - Good for: TDD, keeping both engaged
 ```
 
-## Giving Feedback
+## Chapter 5: Giving Feedback
+
+Good feedback is specific and tied to impact.
 
 ### The SBI Model
 
@@ -178,7 +227,9 @@ implementation details before we understood the requirements
    three months ago you wouldn't have spotted that!"
 ```
 
-## Unblocking Without Solving
+## Chapter 6: Unblocking Without Solving
+
+Solve the problem of learning, not the problem itself.
 
 ### Ask Before Telling
 
@@ -204,7 +255,9 @@ implementation details before we understood the requirements
 - Deadline pressure
 - Obscure issue (dependency bug, etc.)
 
-## Balancing Mentoring with Work
+## Chapter 7: Balancing Mentoring with Work
+
+Mentoring is part of the job, but delivery still matters.
 
 ### Time Boxing
 
@@ -226,13 +279,123 @@ Common mistakes → Create a lint rule
 Frequent patterns → Build a snippet library
 ```
 
+---
+
+## Common Mistakes
+
+1. **Solving everything** - Juniors learn less when you take the wheel.
+2. **No goals** - Mentorship without milestones drifts.
+3. **Inconsistent feedback** - Mixed signals slow growth.
+4. **Overcommitting** - Mentoring still needs boundaries.
+
 ## Practice Exercises
 
 1. Create a 90-day growth plan for a hypothetical mentee
 2. Practice the SBI feedback model on past situations
 3. Design a "scaffolded challenge" for a concept you know well
 
+### Solutions
+
+<details>
+<summary>Exercise 1: 90-Day Growth Plan</summary>
+
+```markdown
+## 90-Day Plan: Frontend Mentee
+
+### Days 1-30
+- Learn codebase structure
+- Ship 2 small UI fixes
+- Pair twice per week
+- Weekly 1:1 with feedback notes
+
+### Days 31-60
+- Own a feature end-to-end
+- Write 3 unit/integration tests
+- Lead a small demo
+
+### Days 61-90
+- Refactor a component safely
+- Review a teammate PR
+- Present a lesson learned
+- Update growth plan based on strengths
+```
+
+**Key points:**
+- Goals are staged and measurable.
+- Work scales from small to independent.
+- Feedback checkpoints are built in.
+
+</details>
+
+<details>
+<summary>Exercise 2: SBI Feedback</summary>
+
+```markdown
+Situation: Yesterday's API bug fix
+Behavior: You pushed without testing the error path
+Impact: The staging environment broke for the team
+Next step: Add an error-path test and run it before pushing
+```
+
+**Key points:**
+- Describe facts, not opinions.
+- Tie behavior to impact.
+- Offer a next step.
+
+</details>
+
+<details>
+<summary>Exercise 3: Scaffolded Challenge</summary>
+
+```markdown
+### Challenge: Build a Filtered List
+Step 1: Render a static list
+Step 2: Add a text input
+Step 3: Filter based on input
+Step 4: Add empty state messaging
+Step 5: Add a small test for the filter behavior
+```
+
+**Key points:**
+- Break tasks into progressive steps.
+- Add constraints that teach fundamentals.
+- Celebrate completion at each step.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Mentoring mindset**: Growth-focused guidance
+- **Structure**: Plans and milestones that scale
+- **Teaching**: Tailored techniques for different learners
+- **Feedback**: Clear, actionable coaching
+- **Balance**: Mentoring while delivering work
+
+**Key takeaway**: Mentoring multiplies impact when it is intentional and structured.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Create a plan for a new teammate
+- Run a structured pairing session
+- Give SBI-style feedback on a PR
+- Turn repeated questions into documentation
+- Set mentoring hours on your calendar
+
+---
+
 ## Further Reading
 
 - [The Manager's Path](https://www.oreilly.com/library/view/the-managers-path/9781491973882/)
 - [Radical Candor](https://www.radicalcandor.com/)
+
+---
+
+**Navigation**: [<- Previous Module](./08-code-review-mastery.md) | [Next Module ->](./10-nextjs-advanced.md)

@@ -10,12 +10,12 @@ This curriculum covers both **technical React skills** and **leadership competen
 
 | Level | Focus | Modules | Target |
 |-------|-------|---------|--------|
-| [01 - Junior](01-junior/) | Foundation | 9 | Solid fundamentals, ship features independently |
+| [01 - Junior](01-junior/) | Foundation | 10 | Solid fundamentals, ship features independently |
 | [02 - Mid-Level](02-mid-level/) | Proficiency | 10 | Own complex features, production-grade code |
 | [03 - Senior](03-senior/) | Expertise | 11 | Architectural decisions, mentor others |
 | [04 - Lead](04-lead/) | Leadership | 12 | Technical direction, grow teams |
 
-**Total: 42 modules across 4 levels**
+**Total: 43 modules across 4 levels**
 
 ## How to Use This Curriculum
 

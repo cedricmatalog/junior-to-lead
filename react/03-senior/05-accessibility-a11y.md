@@ -1,16 +1,57 @@
 # Accessibility (a11y)
 
-Build applications that everyone can use.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 25: The Accessibility Review
+
+An audit flagged multiple accessibility issues, and a key client requires WCAG compliance. Sarah asks you to lead the remediation plan. Marcus reminds you that accessibility is not a checklist -- it is a set of habits that shape every component. This week is about building inclusive UI: semantic HTML, ARIA usage, keyboard support, and realistic testing strategies.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **WCAG** | Building codes - minimum standards for safety |
+| **Semantics** | Road signs - meaning that guides users |
+| **ARIA** | Labels - fill the gaps when semantics fall short |
+| **Keyboard support** | The remote control - full access without a mouse |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 24 (Security Practices) - Familiarity with safe UI defaults.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Apply WCAG guidelines to React applications
-- Use ARIA attributes correctly
-- Implement keyboard navigation
-- Test with screen readers
+By the end of this module, you'll be able to:
 
-## WCAG Principles
+- [ ] Apply WCAG principles to React components
+- [ ] Use semantic HTML before relying on ARIA
+- [ ] Implement keyboard navigation patterns
+- [ ] Validate color contrast and focus visibility
+- [ ] Build accessible forms and error messaging
+- [ ] Test with screen readers and a11y tooling
+
+---
+
+## Time Estimate
+
+- **Reading**: 70-90 minutes
+- **Exercises**: 3-5 hours
+- **Mastery**: Practice accessibility over 6-8 weeks
+
+---
+
+## Chapter 1: WCAG Principles
+
+You need a shared standard before you fix anything.
 
 **POUR**: Perceivable, Operable, Understandable, Robust
 
@@ -30,7 +71,9 @@ By the end of this module, you will:
 - No timing
 - No interruptions
 
-## Semantic HTML
+## Chapter 2: Semantic HTML
+
+Start with correct elements before adding any ARIA.
 
 ```tsx
 // Bad: div soup
@@ -58,7 +101,9 @@ By the end of this module, you will:
 </main>
 ```
 
-## ARIA Attributes
+## Chapter 3: ARIA Attributes
+
+ARIA should enhance, not replace, semantics.
 
 ### When to Use ARIA
 
@@ -117,7 +162,9 @@ By the end of this module, you will:
 </div>
 ```
 
-## Keyboard Navigation
+## Chapter 4: Keyboard Navigation
+
+Every action should be reachable without a mouse.
 
 ### Focus Management
 
@@ -187,7 +234,9 @@ function SkipLink() {
 }
 ```
 
-## Forms
+## Chapter 5: Forms
+
+Forms are where accessibility failures hurt the most.
 
 ```tsx
 function AccessibleForm() {
@@ -223,7 +272,9 @@ function AccessibleForm() {
 }
 ```
 
-## Color and Contrast
+## Chapter 6: Color and Contrast
+
+Contrast and focus are essential for readability and navigation.
 
 ```tsx
 // Don't rely on color alone
@@ -240,7 +291,9 @@ function AccessibleForm() {
 // Large text (18pt+): 3:1 minimum
 ```
 
-## Images
+## Chapter 7: Images
+
+Alt text is the difference between silence and meaning.
 
 ```tsx
 // Informative image
@@ -258,7 +311,9 @@ function AccessibleForm() {
 </figure>
 ```
 
-## Testing
+## Chapter 8: Testing
+
+Automated tools are a start, but real checks require real tools.
 
 ### Automated Testing
 
@@ -284,13 +339,194 @@ it('has no accessibility violations', async () => {
 - [ ] Check focus indicators
 - [ ] Verify form error announcements
 
+---
+
+## Common Mistakes
+
+1. **Using divs for buttons** - Buttons and links have built-in semantics.
+2. **Relying on color alone** - Provide text or icon cues too.
+3. **Missing focus styles** - Keyboard users lose track without visible focus.
+4. **Adding ARIA everywhere** - Use native semantics first.
+
 ## Practice Exercises
 
 1. Add keyboard navigation to a custom dropdown
 2. Make a data table accessible
 3. Implement a focus trap for a modal
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Keyboard Dropdown</summary>
+
+```tsx
+function Dropdown({ options, onSelect }) {
+  const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState(0);
+  const listId = 'dropdown-listbox';
+
+  const handleKeyDown = (event) => {
+    if (!open && event.key === 'Enter') setOpen(true);
+    if (!open) return;
+
+    if (event.key === 'ArrowDown') setIndex((i) => Math.min(i + 1, options.length - 1));
+    if (event.key === 'ArrowUp') setIndex((i) => Math.max(i - 1, 0));
+    if (event.key === 'Enter') onSelect(options[index]);
+    if (event.key === 'Escape') setOpen(false);
+  };
+
+  return (
+    <div onKeyDown={handleKeyDown}>
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={listId}
+        onClick={() => setOpen((value) => !value)}
+      >
+        {options[index]}
+      </button>
+      {open && (
+        <ul id={listId} role="listbox" aria-activedescendant={`option-${index}`}>
+          {options.map((option, i) => (
+            <li
+              id={`option-${i}`}
+              key={option}
+              role="option"
+              aria-selected={i === index}
+              onMouseDown={() => onSelect(options[i])}
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Arrow keys move focus.
+- Escape closes the menu.
+- ARIA roles describe the widget.
+
+</details>
+
+<details>
+<summary>Exercise 2: Accessible Table</summary>
+
+```tsx
+<table>
+  <caption>Quarterly revenue by region</caption>
+  <thead>
+    <tr>
+      <th scope="col">Region</th>
+      <th scope="col">Q1</th>
+      <th scope="col">Q2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">North America</th>
+      <td>$2.1M</td>
+      <td>$2.4M</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+**Key points:**
+- Use `caption` for context.
+- `scope` associates headers correctly.
+- Keep tables for tabular data only.
+
+</details>
+
+<details>
+<summary>Exercise 3: Modal Focus Trap</summary>
+
+```tsx
+function Modal({ onClose, children }) {
+  const ref = useRef(null);
+  const triggerRef = useRef(document.activeElement);
+
+  useEffect(() => {
+    const focusable = ref.current.querySelectorAll('button, a, input, [tabindex]');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') onClose();
+      if (event.key !== 'Tab') return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    first?.focus();
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      triggerRef.current?.focus?.();
+    };
+  }, []);
+
+  return (
+    <div role="dialog" aria-modal="true">
+      <div ref={ref}>
+        {children}
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- Focus stays inside the modal.
+- First focusable element gets focus on open.
+- Escape closes the modal and restores focus.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **WCAG principles**: The foundation for inclusive UI
+- **Semantics**: Native elements that carry meaning
+- **ARIA**: Enhancements for custom components
+- **Keyboard support**: Full navigation without a mouse
+- **Testing**: Automated checks plus manual verification
+
+**Key takeaway**: Accessibility is part of quality, not an afterthought.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Fix focus traps in dialogs and menus
+- Add aria labels to custom widgets
+- Improve color contrast in design tokens
+- Add automated accessibility checks in CI
+- Run a manual screen reader review of a critical flow
+
+---
+
 ## Further Reading
 
 - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 - [A11y Project](https://www.a11yproject.com/)
+
+---
+
+**Navigation**: [<- Previous Module](./04-security-practices.md) | [Next Module ->](./06-design-systems.md)

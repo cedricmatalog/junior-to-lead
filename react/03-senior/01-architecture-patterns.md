@@ -1,16 +1,57 @@
 # Architecture Patterns
 
-Design scalable frontend architectures that grow with your team and product.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 21: The Architecture Review
+
+The product is growing fast and the codebase is starting to drift. Sarah asks you to lead an architecture review before the next feature push. Marcus pulls up a diagram with three competing structures and says, "We need a map that scales with the team." This week is about organizing code so features are easy to find, dependencies stay predictable, and decisions are documented instead of tribal knowledge.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Feature slices** | Neighborhoods - group related work together |
+| **Module boundaries** | Fences - control what can pass through |
+| **Monorepos** | A campus - shared infrastructure, separate buildings |
+| **Dependency injection** | Power outlets - swap implementations safely |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 20 (Next.js Fundamentals) - Comfort with project structure and production concerns.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Apply feature-sliced design principles
-- Define clear module boundaries
-- Structure monorepos effectively
-- Make architectural decisions with trade-offs in mind
+By the end of this module, you'll be able to:
 
-## Feature-Sliced Design
+- [ ] Apply feature-sliced design to organize a growing codebase
+- [ ] Define module boundaries with clear public APIs
+- [ ] Structure monorepos with shared libraries and tooling
+- [ ] Use dependency injection to decouple implementations
+- [ ] Document architectural decisions with explicit trade-offs
+- [ ] Evaluate architecture options based on team constraints
+
+---
+
+## Time Estimate
+
+- **Reading**: 70-90 minutes
+- **Exercises**: 3-5 hours
+- **Mastery**: Practice architecture decisions over 6-8 weeks
+
+---
+
+## Chapter 1: Feature-Sliced Design
+
+You need a structure that scales without burying features across folders.
 
 Organize code by features, not technical layers.
 
@@ -72,7 +113,9 @@ entities/
 │   └── index.ts
 ```
 
-## Module Boundaries
+## Chapter 2: Module Boundaries
+
+Clear boundaries prevent accidental coupling between features.
 
 ### Public API Pattern
 
@@ -112,7 +155,9 @@ interface ProductCardProps {
 />
 ```
 
-## Monorepo Structure
+## Chapter 3: Monorepo Structure
+
+Some teams need shared packages without losing ownership.
 
 ```
 packages/
@@ -170,7 +215,9 @@ packages/
 }
 ```
 
-## Dependency Injection
+## Chapter 4: Dependency Injection
+
+When dependencies change, you should not need to rewrite every consumer.
 
 Decouple components from implementations.
 
@@ -222,12 +269,14 @@ function CheckoutButton() {
 }
 ```
 
-## Trade-off Analysis
+## Chapter 5: Trade-off Analysis
+
+Architecture choices need a paper trail so the team can revisit them later.
 
 When making architectural decisions, document trade-offs:
 
 ```markdown
-## Decision: State Management Approach
+### Decision: State Management Approach
 
 ### Context
 Need to manage complex checkout flow state.
@@ -254,13 +303,157 @@ Redux Toolkit - team familiarity, DevTools for debugging.
 - Keep slices focused to manage complexity
 ```
 
+---
+
+## Common Mistakes
+
+1. **Organizing by file type only** - Features get scattered and hard to reason about.
+2. **Leaky module boundaries** - Internal details become public API by accident.
+3. **Monorepo without ownership** - Shared code becomes nobody's responsibility.
+4. **Undocumented decisions** - Teams repeat the same debates every quarter.
+
 ## Practice Exercises
 
 1. Refactor a flat project structure to feature-sliced design
 2. Set up a monorepo with shared UI library
 3. Write an ADR for a technical decision
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Feature-Sliced Refactor</summary>
+
+```text
+src/
+├── app/
+├── pages/
+├── widgets/
+├── features/
+│   ├── checkout/
+│   │   ├── ui/
+│   │   ├── model/
+│   │   ├── api/
+│   │   ├── lib/
+│   │   └── index.ts
+│   └── search/
+│       ├── ui/
+│       ├── model/
+│       └── index.ts
+├── entities/
+│   └── user/
+│       ├── ui/
+│       ├── model/
+│       ├── api/
+│       └── index.ts
+└── shared/
+    ├── ui/
+    ├── lib/
+    ├── config/
+    └── api/
+```
+
+**Key points:**
+- Group by feature, not by layer.
+- Expose only `index.ts` as the public API.
+- Keep shared utilities and config in `shared/`.
+- Features depend on entities, not the reverse.
+
+</details>
+
+<details>
+<summary>Exercise 2: Monorepo Layout</summary>
+
+```text
+apps/
+├── web/
+└── admin/
+packages/
+├── ui/
+├── design-tokens/
+├── api-client/
+├── eslint-config/
+├── tsconfig/
+└── utils/
+turbo.json
+pnpm-workspace.yaml
+```
+
+**Key points:**
+- Apps consume packages through stable interfaces.
+- Shared packages keep tooling and styling consistent.
+- Tooling packages prevent config drift.
+- Ownership is explicit per package.
+
+</details>
+
+<details>
+<summary>Exercise 3: ADR Template</summary>
+
+```markdown
+# Decision: Client State Management
+
+## Context
+We need shared state for checkout and user session across multiple apps.
+
+## Decision Drivers
+- Debugging support
+- Team familiarity
+- Performance impact
+- Migration cost
+
+## Options Considered
+1. Context + useReducer
+2. Redux Toolkit
+3. XState
+
+## Decision
+Redux Toolkit for DevTools support and team familiarity.
+
+## Consequences
+- Training required for new hires
+- Keep slices small to avoid complexity
+```
+
+**Key points:**
+- Document options and trade-offs.
+- Capture consequences for future teams.
+- Keep it short and actionable.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Feature slicing**: Organizing by user-facing capability
+- **Boundaries**: Public APIs that prevent coupling
+- **Monorepos**: Shared tooling with clear ownership
+- **Dependency injection**: Swappable implementations
+- **Trade-offs**: Decisions that stay visible over time
+
+**Key takeaway**: Architecture is a map for people, not just code.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Propose a new folder structure for a growing app
+- Define public APIs for feature modules
+- Split shared UI into a package
+- Document a tooling decision with an ADR
+- Review dependency boundaries during a refactor
+
+---
+
 ## Further Reading
 
 - [Feature-Sliced Design](https://feature-sliced.design/)
 - [Turborepo Handbook](https://turbo.build/repo/docs)
+
+---
+
+**Navigation**: [Next Module ->](./02-system-design.md)

@@ -1,5 +1,8 @@
 # React Fundamentals
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Your First Day on the Job
 
 It's Monday morning. You've just joined a startup as a frontend developer, and your tech lead Sarah drops by your desk.
@@ -9,8 +12,6 @@ It's Monday morning. You've just joined a startup as a frontend developer, and y
 You nod, open your editor, and stare at the blank file.
 
 Where do you even start?
-
----
 
 ## Mental Models
 
@@ -50,19 +51,6 @@ By the end of this module, you'll be able to:
 - **Reading**: 45-60 minutes
 - **Exercises**: 2-3 hours
 - **Mastery**: Practice these concepts over 1-2 weeks with real projects
-
----
-
-## What You'll Learn
-
-By the end of this module, you'll be able to:
-- Write JSX without thinking twice about the syntax
-- Build components that you (and your team) can reuse anywhere
-- Pass data between components using props
-- Show different UI based on conditions
-- Render lists of items (like products) dynamically
-
-Let's build that product catalog.
 
 ---
 
@@ -137,7 +125,7 @@ Here's how that transformation works:
 
 You wince. "That's... verbose."
 
-"Exactly why we have JSX. It's syntactic sugar that makes React bearable to write."
+"That's why JSX exists. It's syntactic sugar that makes React bearable to write."
 
 ### The Translation Guide
 
@@ -619,178 +607,20 @@ The component hierarchy you just built looks like this:
 
 ---
 
-## The Traps to Avoid
+## Common Mistakes
 
-Before you go, Marcus shares the mistakes he made when he started:
+Before you head out, Marcus shares the mistakes he made when he started:
 
-| Mistake | What Happens | The Fix |
-|---------|--------------|---------|
-| Using `class` instead of `className` | Doesn't work, confusing error | Always use `className` in JSX |
-| Mutating props | Unpredictable bugs, React won't re-render | Create new variables instead |
-| Using array index as key | Bugs when items reorder or delete | Use unique, stable IDs |
-| Forgetting curly braces | Variable name shows literally | `{variable}` not `variable` |
-| Multiple root elements | Syntax error | Wrap in `<>...</>` Fragment |
-
----
-
-## Your Turn
-
-You've got the fundamentals. Now practice:
-
-1. **Extend the ProductCard** - Add a "Wishlist" button that only appears when the user hovers
-2. **Build a CategoryFilter** - A row of buttons that filters products by category
-3. **Create a Navbar** - Shows "Login" for guests, "Welcome, {name}" for logged-in users
-
-### Solutions
-
-<details>
-<summary>Exercise 1: Wishlist Button with Hover</summary>
-
-```jsx
-function ProductCard({ product }) {
-  const { name, price, image, inStock } = product;
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <article
-      className="product-card"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <img src={image} alt={name} />
-      <h2>{name}</h2>
-      <p className="price">${price}</p>
-
-      {inStock ? (
-        <button>Add to Cart</button>
-      ) : (
-        <button disabled>Out of Stock</button>
-      )}
-
-      {/* Wishlist button only shows on hover */}
-      {isHovered && (
-        <button className="wishlist-btn">
-          ♥ Add to Wishlist
-        </button>
-      )}
-    </article>
-  );
-}
-```
-
-**Key points:**
-- Use `onMouseEnter` and `onMouseLeave` to track hover state
-- Store hover state with `useState` (we'll learn this in Module 3)
-- Use conditional rendering (`&&`) to show/hide the button
-- Consider accessibility: keyboard users won't see the button! Better approach: always show, but style differently on hover
-
-</details>
-
-<details>
-<summary>Exercise 2: Category Filter</summary>
-
-```jsx
-function CategoryFilter({ categories, selectedCategory, onCategoryChange }) {
-  return (
-    <div className="category-filter">
-      <button
-        className={selectedCategory === 'all' ? 'active' : ''}
-        onClick={() => onCategoryChange('all')}
-      >
-        All
-      </button>
-      {categories.map(category => (
-        <button
-          key={category}
-          className={selectedCategory === category ? 'active' : ''}
-          onClick={() => onCategoryChange(category)}
-        >
-          {category}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-// Usage in parent component
-function StorePage() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const categories = ['Electronics', 'Clothing', 'Books'];
-
-  const products = [/* ... */];
-  const filteredProducts = selectedCategory === 'all'
-    ? products
-    : products.filter(p => p.category === selectedCategory);
-
-  return (
-    <main>
-      <h1>Our Products</h1>
-      <CategoryFilter
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-      />
-      <ProductGrid products={filteredProducts} />
-    </main>
-  );
-}
-```
-
-**Key points:**
-- Parent component owns the selected category state
-- Pass `onCategoryChange` callback to update state
-- Use `className` conditionally to highlight active category
-- Filter products based on selected category
-
-</details>
-
-<details>
-<summary>Exercise 3: Navbar with Conditional Rendering</summary>
-
-```jsx
-function Navbar({ user }) {
-  return (
-    <nav className="navbar">
-      <h1 className="logo">My Store</h1>
-
-      <ul className="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-
-      <div className="nav-actions">
-        {user ? (
-          <>
-            <span>Welcome, {user.name}</span>
-            <button onClick={user.onLogout}>Logout</button>
-          </>
-        ) : (
-          <button>Login</button>
-        )}
-      </div>
-    </nav>
-  );
-}
-
-// Usage
-<Navbar user={null} /> {/* Guest: shows Login */}
-<Navbar user={{ name: 'Alice', onLogout: handleLogout }} /> {/* Logged in */}
-```
-
-**Key points:**
-- Use ternary operator for either/or rendering
-- Fragment (`<>`) groups multiple elements without extra DOM node
-- Props can be objects with multiple properties
-- Parent component manages authentication state
-
-</details>
+1. **Mixing HTML with JSX syntax** - Use `className`, `htmlFor`, and `{}` for expressions; JSX expects JS-friendly attribute names.
+2. **Mutating props** - Props are read-only; derive new values in local variables instead.
+3. **Unstable list keys** - Avoid indexes or `Math.random()`; use a unique, stable ID.
+4. **Returning multiple root elements** - Wrap siblings in a single parent or a Fragment.
 
 ---
 
 ## Debug This Code
 
-Before moving to wrap-up, test your debugging skills. Each snippet has bugs - can you spot and fix them?
+Before moving to the exercises, test your debugging skills. Each snippet has bugs - can you spot and fix them?
 
 <details>
 <summary>Challenge 1: Broken Product List</summary>
@@ -1025,6 +855,157 @@ function ProductCard(props) {
 
 </details>
 
+## Practice Exercises
+
+Practice these skills with quick exercises:
+
+1. Extend the ProductCard by adding a "Wishlist" button that only appears on hover.
+2. Build a CategoryFilter that renders a row of buttons and filters products by category.
+3. Create a Navbar that shows "Login" for guests and "Welcome, {name}" for signed-in users.
+
+### Solutions
+
+<details>
+<summary>Exercise 1: Wishlist Button with Hover</summary>
+
+```jsx
+function ProductCard({ product }) {
+  const { name, price, image, inStock } = product;
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <article
+      className="product-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <img src={image} alt={name} />
+      <h2>{name}</h2>
+      <p className="price">${price}</p>
+
+      {inStock ? (
+        <button>Add to Cart</button>
+      ) : (
+        <button disabled>Out of Stock</button>
+      )}
+
+      {/* Wishlist button only shows on hover */}
+      {isHovered && (
+        <button className="wishlist-btn">Add to Wishlist</button>
+      )}
+    </article>
+  );
+}
+```
+
+**Key points:**
+- Use `onMouseEnter` and `onMouseLeave` to track hover state
+- Store hover state with `useState` (we'll learn this in Module 3)
+- Use conditional rendering (`&&`) to show/hide the button
+- Consider accessibility: keyboard users won't see the button. Better approach: always show it and style differently on hover
+
+</details>
+
+<details>
+<summary>Exercise 2: Category Filter</summary>
+
+```jsx
+function CategoryFilter({ categories, selectedCategory, onCategoryChange }) {
+  return (
+    <div className="category-filter">
+      <button
+        className={selectedCategory === 'all' ? 'active' : ''}
+        onClick={() => onCategoryChange('all')}
+      >
+        All
+      </button>
+      {categories.map(category => (
+        <button
+          key={category}
+          className={selectedCategory === category ? 'active' : ''}
+          onClick={() => onCategoryChange(category)}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// Usage in parent component
+function StorePage() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const categories = ['Electronics', 'Clothing', 'Books'];
+
+  const products = [/* ... */];
+  const filteredProducts = selectedCategory === 'all'
+    ? products
+    : products.filter(p => p.category === selectedCategory);
+
+  return (
+    <main>
+      <h1>Our Products</h1>
+      <CategoryFilter
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
+      <ProductGrid products={filteredProducts} />
+    </main>
+  );
+}
+```
+
+**Key points:**
+- Parent component owns the selected category state
+- Pass `onCategoryChange` callback to update state
+- Use `className` conditionally to highlight active category
+- Filter products based on selected category
+
+</details>
+
+<details>
+<summary>Exercise 3: Navbar with Conditional Rendering</summary>
+
+```jsx
+function Navbar({ user }) {
+  return (
+    <nav className="navbar">
+      <h1 className="logo">My Store</h1>
+
+      <ul className="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+
+      <div className="nav-actions">
+        {user ? (
+          <>
+            <span>Welcome, {user.name}</span>
+            <button onClick={user.onLogout}>Logout</button>
+          </>
+        ) : (
+          <button>Login</button>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+// Usage
+<Navbar user={null} /> {/* Guest: shows Login */}
+<Navbar user={{ name: 'Alice', onLogout: handleLogout }} /> {/* Logged in */}
+```
+
+**Key points:**
+- Use ternary operator for either/or rendering
+- Fragment (`<>`) groups multiple elements without extra DOM node
+- Props can be objects with multiple properties
+- Parent component manages authentication state
+
+</details>
+
 ---
 
 ## What You Learned
@@ -1049,14 +1030,6 @@ This week at work, you might use these concepts to:
 - Create a user dashboard that displays different content based on authentication state
 - Implement a notification list that dynamically renders items from an API response
 - Build reusable UI components like buttons, cards, and badges that work across multiple pages
-
----
-
-## The Journey Continues
-
-Tomorrow, you'll learn about **component patterns** - how to build flexible, reusable components that work together like a well-oiled machine.
-
-But for now? You just survived your first day.
 
 ---
 

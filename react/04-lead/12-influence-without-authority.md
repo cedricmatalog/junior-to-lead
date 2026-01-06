@@ -1,324 +1,273 @@
 # Influence Without Authority
 
-Lead through expertise, relationships, and persuasion.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 43: The Soft Power Test
+
+A cross-team decision is stuck, and you do not have formal authority to resolve it. Sarah asks you to move it forward through influence, not escalation. Marcus reminds you that credibility and relationships are your strongest tools. This week focuses on building trust, persuading with data and stories, building consensus, and leading by example.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Influence** | A lever - small inputs can move big decisions |
+| **Credibility** | A reputation ledger - deposits and withdrawals over time |
+| **Persuasion** | A story arc - connect problem, journey, and outcome |
+| **Consensus** | A coalition - align enough people to move forward |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 42 (Conflict Resolution) - Comfort navigating disagreements and decision frameworks.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Build credibility and trust
-- Persuade through data and storytelling
-- Build consensus across teams
-- Lead by example effectively
+By the end of this module, you'll be able to:
 
-## The Lead Developer's Influence
+- [ ] Build credibility through competence and reliability
+- [ ] Persuade with data and clear storytelling
+- [ ] Build consensus across teams without authority
+- [ ] Navigate resistance with empathy and structure
+- [ ] Lead by example to shape culture
+- [ ] Turn influence into sustained trust
 
-### You Lead Without Authority
+---
 
-As a lead developer, you typically don't have:
-- Hire/fire power
-- Direct reports
-- Budget control
-- Final say on priorities
+## Time Estimate
 
-But you can still:
-- Shape technical direction
-- Influence decisions
-- Change culture
-- Inspire others
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice influence skills over 8-12 weeks
 
-### Sources of Influence
+---
+
+## Chapter 1: Understand Sources of Influence
+
+Sarah points out that you do not need a title to lead. Influence comes from how people experience working with you.
 
 ```markdown
-## Where Influence Comes From
+## Sources of Influence
 
-### Expertise
-- Deep technical knowledge
-- Track record of success
-- Known for solving hard problems
-- Others seek your opinion
-
-### Relationships
-- Trust built over time
-- Network across teams
-- Mentorship connections
-- Reciprocity bank
-
-### Communication
-- Clear articulation of ideas
-- Persuasive presentations
-- Active listening
-- Empathy and understanding
-
-### Character
-- Consistency and reliability
-- Integrity in actions
-- Fairness and objectivity
-- Genuine care for others
+- Expertise: You solve hard problems
+- Relationships: You show up and help
+- Communication: You explain and listen
+- Character: You are consistent and fair
 ```
 
-## Building Credibility
+## Chapter 2: Build Credibility
 
-### Credibility Equation
+Marcus uses the credibility equation to show what you can control.
 
 ```
 Credibility = (Competence + Reliability + Intimacy) / Self-Interest
 ```
 
-**Competence**: Do you know what you're talking about?
-**Reliability**: Do you do what you say?
-**Intimacy**: Do people feel safe with you?
-**Self-Interest**: Are you in it for you or the team?
-
-### Building Competence
-
 ```markdown
-## Demonstrating Expertise
+## Build Credibility
 
-### Be Right (More Often)
+Competence:
 - Research before speaking
-- Admit when you don't know
-- Follow up with answers
-- Document your thinking
+- Admit what you do not know
+- Share learning openly
 
-### Share Knowledge
-- Write internal blog posts
-- Present at team meetings
-- Mentor others
-- Answer questions thoroughly
+Reliability:
+- Do what you say you will do
+- Communicate early if plans change
 
-### Stay Current
-- Keep learning
-- Experiment with new tech
-- Bring outside ideas in
-- Balance practical and cutting-edge
+Intimacy:
+- Create safety in conversations
+- Protect confidential details
 ```
 
-### Building Reliability
+## Chapter 3: Persuade with Data and Story
 
-```markdown
-## Being Dependable
-
-### Follow Through
-- Do what you commit to
-- If you can't, communicate early
-- Under-promise, over-deliver
-- Track your commitments
-
-### Be Consistent
-- Same message to different people
-- Predictable reactions
-- Steady in crisis
-- Fair to everyone
-
-### Show Up
-- Be present in meetings
-- Respond in reasonable time
-- Available when needed
-- Reliable in routine tasks
-```
-
-## Persuasion Techniques
-
-### The Art of Persuasion
+Sarah wants every argument to connect evidence to impact, then land with a story that people remember.
 
 ```markdown
 ## Persuasion Framework
 
-### 1. Understand Their Position
-Before trying to convince, truly understand.
-- What do they believe?
-- Why do they believe it?
-- What are their concerns?
-- What would change their mind?
-
-### 2. Find Common Ground
-Start from agreement, not disagreement.
-"We both want this project to succeed..."
-
-### 3. Present Evidence
-- Data over opinions
-- Examples from experience
-- External case studies
-- Logical reasoning
-
-### 4. Address Concerns
-Don't ignore objections, address them.
-"I know you're worried about X. Here's how we handle that..."
-
-### 5. Make It Easy
-- Reduce perceived risk
-- Offer to take on work
-- Propose small first steps
-- Provide escape hatches
+1. Understand their position and concerns
+2. Find common ground
+3. Present evidence
+4. Address objections directly
+5. Offer a safe first step
 ```
 
-### Data-Driven Persuasion
-
 ```markdown
-## Using Data Effectively
+## Data-Driven Example
 
-### Gathering Data
-- Measure current state
-- Find industry benchmarks
-- Run experiments
-- Document outcomes
-
-### Presenting Data
-- Lead with the insight, not the data
-- Visualize for impact
-- Compare to something familiar
-- Acknowledge limitations
-
-### Example
 Instead of:
 "Bundle size is 2.3MB"
 
 Say:
-"Our bundle is 2.3MB - 3x larger than similar sites.
-This adds 4 seconds to load time on average connections,
-which studies show causes 40% of users to leave.
-Reducing by half could recover $X in conversions."
+"Our bundle is 2.3MB, about 3x larger than similar sites.
+This adds 4 seconds on average connections, which reduces
+conversion. Cutting it in half could recover $X per month."
 ```
 
-### Storytelling
+## Chapter 4: Build Consensus
+
+Marcus recommends pre-wiring: talk to stakeholders before the big meeting.
 
 ```markdown
-## Persuasion Through Story
+## Consensus Process
 
-### Story Structure
-1. **Context**: Set the scene
-2. **Challenge**: What's the problem?
-3. **Journey**: What did we try?
-4. **Resolution**: What worked?
-5. **Lesson**: What should we learn?
-
-### Example
-"Last year, we faced constant production issues.
-Every week something broke. Team morale was low.
-
-We decided to invest in testing. It was hard -
-slowed us down initially. People pushed back.
-
-But after three months, incidents dropped 80%.
-The team is happier. We ship faster because we're
-confident.
-
-This same investment in monitoring would have
-similar impact on our current debugging time."
-```
-
-## Building Consensus
-
-### Consensus Process
-
-```markdown
-## Getting to Agreement
-
-### Pre-Meeting
+Pre-meeting:
 - Identify stakeholders
-- Have 1:1 conversations first
-- Understand positions
-- Find potential allies
+- Run 1:1 conversations
+- Understand concerns
 
-### During Discussion
+During the meeting:
 - Let everyone speak
-- Acknowledge all perspectives
-- Find common ground
-- Identify true blockers vs preferences
+- Summarize points of agreement
+- Ask for remaining objections
 
-### Reaching Decision
-- Summarize the options
-- State the recommendation
-- Ask for objections
-- Confirm commitment
-
-### Post-Decision
+After:
 - Document the decision
-- Communicate to affected parties
+- Assign owners
 - Follow up on commitments
-- Revisit if circumstances change
 ```
 
-### Navigating Resistance
+## Chapter 5: Navigate Resistance
+
+Sarah suggests naming the resistance type so you can respond without defensiveness.
 
 ```markdown
 ## Types of Resistance
 
-### The Skeptic
-"That won't work here."
-→ Show relevant examples, offer to prove it
+Skeptic: "That will not work here"
+- Response: Show relevant examples and propose a small test
 
-### The Traditionalist
-"We've always done it this way."
-→ Acknowledge what works, show evolution not revolution
+Traditionalist: "We have always done it this way"
+- Response: Preserve what works, change what does not
 
-### The Blocker
-"I don't have bandwidth for this."
-→ Reduce their burden, do more of the work
-
-### The Politics Player
-"This threatens my team's ownership."
-→ Find ways to share credit, align incentives
+Blocker: "I do not have bandwidth"
+- Response: Reduce their burden or take on work
 ```
 
-## Leading by Example
+## Chapter 6: Lead by Example
 
-### Walking the Talk
+Marcus reminds you that culture changes when people see the behavior, not when they hear a speech.
 
 ```markdown
-## Actions That Influence
+## Lead by Example
 
-### Code Quality
-- Your PRs are exemplary
-- You write tests
-- You document
-- You review thoughtfully
-
-### Collaboration
-- You help others succeed
-- You share credit
-- You admit mistakes
-- You seek feedback
-
-### Culture
-- You stay calm in crisis
-- You're positive and constructive
-- You make time for people
-- You celebrate others' wins
+- Write high-quality PRs and tests
+- Document decisions as you make them
+- Share credit publicly
+- Stay calm during incidents
 ```
 
-### Being the Change
+---
 
-```markdown
-## You Want More Testing?
+## Common Mistakes
 
-Don't: Mandate testing in a meeting
-Do:
-- Write excellent tests on your PRs
-- Help others write tests
-- Celebrate when tests catch bugs
-- Make testing easy (templates, examples)
-- Share testing knowledge
-
-## You Want Better Documentation?
-
-Don't: Complain about bad docs
-Do:
-- Write great docs yourself
-- Template good patterns
-- Thank people who document
-- Make doc writing easy
-- Link to docs in conversations
-```
+1. **Relying on title** - Influence fails when authority is missing.
+2. **Pushing without listening** - People resist when they feel unheard.
+3. **Over-arguing** - Too much logic without empathy stalls progress.
+4. **Ignoring incentives** - Decisions follow incentives, not just reasons.
 
 ## Practice Exercises
 
 1. Map your influence network and identify gaps
 2. Prepare a persuasive case for a change you want
-3. Practice the consensus-building process on a real decision
+3. Design a consensus plan for a cross-team decision
+
+### Solutions
+
+<details>
+<summary>Exercise 1: Influence Map</summary>
+
+```markdown
+Influence Map
+- Product: strong relationship, needs business framing
+- Design: light relationship, set up monthly sync
+- Backend: neutral, align on API timelines
+```
+
+**Key points:**
+- Identify gaps early.
+- Build relationships before you need them.
+- Match message to audience.
+
+</details>
+
+<details>
+<summary>Exercise 2: Persuasive Case</summary>
+
+```markdown
+Change: Adopt Playwright
+Evidence: 40% faster tests, fewer flaky runs
+Story: Two releases blocked by flaky tests, causing delays
+Ask: Approve a 2-week pilot on checkout suite
+```
+
+**Key points:**
+- Connect evidence to impact.
+- Offer a safe first step.
+- End with a clear ask.
+
+</details>
+
+<details>
+<summary>Exercise 3: Consensus Plan</summary>
+
+```markdown
+1. Pre-wire with each stakeholder
+2. Draft decision options and trade-offs
+3. Run a structured meeting
+4. Document the decision and owner
+```
+
+**Key points:**
+- Do the alignment work before the group meeting.
+- Make trade-offs explicit.
+- Track follow-through.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Credibility**: Build trust through competence and reliability
+- **Persuasion**: Combine data with clear storytelling
+- **Consensus**: Pre-wire and align stakeholders early
+- **Resistance**: Address concerns with empathy and options
+- **Leading by example**: Model the behavior you want to see
+
+**Key takeaway**: Influence is earned through consistent, credible action.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Gain support for a tooling change
+- Align two teams on a shared API decision
+- Build a coalition for a roadmap shift
+- Use data to justify a performance project
+- Lead by example during a stressful release
+
+---
 
 ## Further Reading
 
 - [Influence Without Authority](https://www.amazon.com/Influence-Without-Authority-3rd-Cohen/dp/1119347718)
 - [How to Win Friends and Influence People](https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034)
 - [Turn the Ship Around](https://www.amazon.com/Turn-Ship-Around-Turning-Followers/dp/1591846404)
+
+---
+
+**Navigation**: [<- Previous Module](./11-conflict-resolution.md)

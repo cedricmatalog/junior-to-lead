@@ -1,301 +1,279 @@
 # Effective 1:1s
 
-Build trust and accelerate growth through meaningful conversations.
+> **Last reviewed**: 2026-01-06
 
-## Learning Objectives
 
-By the end of this module, you will:
-- Structure productive 1:1 meetings
-- Have difficult career conversations
-- Give feedback that drives change
-- Build trust and psychological safety
+## Week 41: The Growth Engine
 
-## The Purpose of 1:1s
+Two engineers feel stuck, and morale is dipping. Sarah asks you to use 1:1s to unblock growth and build trust. Marcus reminds you that the best 1:1s are not status meetings; they are coaching conversations. This week focuses on structure, questions, feedback, and the habits that make 1:1s a reliable growth tool.
 
-### What 1:1s Are For
+## Mental Models
 
-```markdown
-## 1:1 Priorities (in order)
+Before we dive in, here's how to think about the core concepts:
 
-1. **Build relationship and trust**
-   Their concerns, not yours
+| Concept | Think of it as... |
+|---------|-------------------|
+| **1:1s** | Coaching sessions - focus on the person, not the project |
+| **Feedback** | A mirror - show behavior and impact clearly |
+| **Trust** | A bank account - consistency builds balance |
+| **Growth plans** | A map - show the next steps and milestones |
 
-2. **Support their growth**
-   Career development, learning
-
-3. **Remove blockers**
-   What's slowing them down?
-
-4. **Align on priorities**
-   Make sure we're on same page
-
-5. **Share context**
-   What they need to know
-```
-
-### What 1:1s Are NOT For
-
-- Status updates (use async)
-- Project deep dives (separate meeting)
-- Your venting session
-- Surprise performance feedback
-
-## Meeting Structure
-
-### Weekly 1:1 Template
-
-```markdown
-## 1:1 with [Name] - [Date]
-
-### Their Items (15 min)
-What's on their mind?
-
-### Growth & Development (10 min)
-Progress on goals, learning opportunities
-
-### Feedback (5 min)
-What went well, what could improve
-
-### My Items (if time)
-Context, alignment, asks
+Keep these in mind. They'll click as we build.
 
 ---
 
-### Notes
-[Capture key points]
+## Prerequisites
 
-### Action Items
-- [ ] [Owner]: Action
-```
+Module 40 (Cross-Team Collaboration) - Comfort with stakeholder alignment and communication.
 
-### Monthly Deep Dive
+---
+
+## Learning Objectives
+
+By the end of this module, you'll be able to:
+
+- [ ] Structure productive weekly and monthly 1:1s
+- [ ] Ask questions that uncover blockers and goals
+- [ ] Hold career and promotion conversations clearly
+- [ ] Deliver actionable feedback using a framework
+- [ ] Build and repair trust through consistency
+- [ ] Create growth plans tied to real work
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice 1:1 leadership over 8-12 weeks
+
+---
+
+## Chapter 1: Define the Purpose
+
+Sarah wants you to prioritize the human side of the work. Marcus reminds you that a good 1:1 solves for trust first, then growth.
 
 ```markdown
-## Monthly Check-in Template
+## 1:1 Priorities
 
-### Happiness & Engagement
-- How are you feeling about work? (1-10)
-- What would make it a 10?
-- What's energizing you?
-- What's draining you?
-
-### Growth
-- Progress on quarterly goals?
-- What have you learned this month?
-- What do you want to learn next?
-- Are you getting enough challenge?
-
-### Team & Relationships
-- How's collaboration going?
-- Any team dynamics to discuss?
-- Feedback you want me to relay?
-
-### Career
-- Still excited about your path?
-- Any changes in direction?
-- How can I help your career?
+1. Build relationship and trust
+2. Support growth and development
+3. Remove blockers
+4. Align on priorities
+5. Share context
 ```
 
-## Asking Good Questions
+## Chapter 2: Structure the Meeting
 
-### Open-Ended Questions
+A consistent structure helps people feel safe and prepared.
+
+```markdown
+## Weekly 1:1 Template
+
+1. Their items (15 min)
+2. Growth and development (10 min)
+3. Feedback (5 min)
+4. Your items if time
+
+Notes:
+- Capture key points
+- Track action items
+```
+
+```markdown
+## Monthly Deep Dive
+
+Happiness and engagement:
+- How are you feeling about work (1-10)?
+- What would make it a 10?
+
+Growth:
+- What did you learn this month?
+- What do you want to learn next?
+
+Career:
+- Are you still excited about your path?
+- How can I help your progression?
+```
+
+## Chapter 3: Ask Better Questions
+
+Marcus suggests open-ended questions that invite reflection instead of yes or no.
 
 ```markdown
 ## Questions That Work
 
-### To Understand State
-- "How are you feeling about X?"
-- "What's on your mind?"
-- "What's the hardest part of your job right now?"
-
-### To Dig Deeper
-- "Tell me more about that."
-- "What makes you say that?"
-- "How did that make you feel?"
-
-### To Encourage Reflection
-- "What would you do differently?"
-- "What did you learn from that?"
-- "What would success look like?"
-
-### To Understand Needs
-- "What do you need from me?"
-- "How can I help?"
-- "What's blocking you?"
+- What is the hardest part of your job right now?
+- What do you need from me this week?
+- What would success look like for you this quarter?
+- What feedback do you have for me?
 ```
-
-### Questions to Avoid
 
 ```markdown
-## Questions That Don't Work
+## Questions to Avoid
 
-❌ "Everything going okay?" (Yes/no, surface level)
-✅ "What's challenging you right now?"
-
-❌ "Is that project on track?" (Status, not 1:1 material)
-✅ "How are you feeling about the project?"
-
-❌ "Don't you think X is the right approach?" (Leading)
-✅ "What are you considering for approach?"
+- "Everything going okay?"
+- "Is the project on track?"
+- "Don't you think X is the right approach?"
 ```
 
-## Career Conversations
+## Chapter 4: Career and Promotion Conversations
 
-### Career Discussion Framework
+Sarah asks you to be direct about expectations and evidence.
 
 ```markdown
 ## Career Conversation Guide
 
-### Understand Aspirations
-- "Where do you see yourself in 2 years?"
-- "What kind of work energizes you most?"
-- "What skills do you want to develop?"
+Understand aspirations:
+- Where do you want to be in 2 years?
+- What kind of work energizes you?
 
-### Assess Current State
-- "Where do you feel you're strongest?"
-- "What gaps do you see in your skills?"
-- "What experiences are you missing?"
+Assess current state:
+- Where are you strongest?
+- What gaps do you see?
 
-### Create a Plan
-- "What's one thing you could work on this quarter?"
-- "What projects would help you grow in that area?"
-- "How can I support your development?"
-
-### Check Progress
-- "How's progress on X goal?"
-- "What's working? What isn't?"
-- "Should we adjust the plan?"
+Create a plan:
+- One goal for this quarter
+- Projects that build the skill
 ```
-
-### Promotion Conversations
 
 ```markdown
-## Talking About Promotions
+## Promotion Conversation
 
-### When They Ask
-"I want to be promoted to Senior. What do I need to do?"
-
-**Good Response:**
-"Let's break this down. The Senior role expects X, Y, Z.
-I see you doing X well. For Y, here's what I'd want to see.
-Let's create a plan to get you there."
-
-### When They're Not Ready
-"I think you're not ready yet for this reason.
-Here's what I'd need to see: [specific examples]
-Let's check in monthly on progress."
-
-### When They're Ready
-"I agree you're ready. Here's what needs to happen:
-[process details]. I'll advocate for you in calibration.
-The timeline is typically X."
+"The Senior role expects X, Y, Z.
+I see you doing X well. For Y, I need to see A and B.
+Let's build a plan together and check progress monthly."
 ```
 
-## Giving Feedback
+## Chapter 5: Deliver Feedback That Lands
 
-### SBI Model in Practice
+Marcus recommends the SBI model for clarity.
 
 ```markdown
-## Feedback Example
+## SBI Example
 
-**Situation**: "In yesterday's design review..."
-
-**Behavior**: "...you interrupted the designer multiple times
-before they finished presenting their rationale."
-
-**Impact**: "This made it harder for us to understand their
-thinking, and I noticed they became less willing to share."
-
-**Request**: "In future reviews, could you hold questions
-until the end of their presentation?"
+Situation: "In yesterday's design review..."
+Behavior: "...you interrupted the designer multiple times..."
+Impact: "...it made it harder to understand their rationale."
+Request: "In future reviews, hold questions to the end."
 ```
 
-### Difficult Feedback
+## Chapter 6: Build and Repair Trust
+
+Consistency beats intensity. Show up, follow through, and be clear about commitments.
 
 ```markdown
-## Delivering Hard Feedback
+## Trust Builders
 
-### Preparation
-- Have specific examples
-- Focus on behavior, not character
-- Know what you want to change
-- Consider their perspective
-
-### The Conversation
-1. State the behavior clearly
-2. Explain the impact
-3. Listen to their perspective
-4. Agree on next steps
-5. Express confidence
-
-### Example
-"I've noticed in the last few PRs, comments from reviewers
-are being dismissed without consideration. [examples]
-
-This is affecting team trust and code quality.
-
-I'd like to understand your perspective. What's going on?"
-
-[Listen]
-
-"Going forward, I need to see more engagement with review
-feedback. Can we agree on that? I'm confident you can do this."
+- Do what you say you will do
+- Admit mistakes quickly
+- Protect confidentiality
+- Advocate for growth opportunities
 ```
 
-## Building Trust
+---
 
-### Trust Behaviors
+## Common Mistakes
 
-```markdown
-## What Builds Trust
-
-### Consistency
-- Do what you say
-- Follow through on commitments
-- Regular, reliable meetings
-
-### Vulnerability
-- Admit when you're wrong
-- Share your own struggles
-- Ask for their feedback on you
-
-### Confidentiality
-- What's said stays between you
-- Protect their information
-- Create safe space
-
-### Advocacy
-- Speak up for them
-- Support their growth
-- Fight for their interests
-```
-
-### Warning Signs
-
-```markdown
-## Signs of Trust Issues
-
-- Giving short answers
-- Not bringing up problems
-- Surprise issues in other forums
-- Visible disengagement
-- Everything is "fine"
-
-## How to Rebuild
-- Acknowledge the issue
-- Ask what they need
-- Be patient
-- Follow through consistently
-- Create safety for honesty
-```
+1. **Using 1:1s for status** - Status belongs in async updates.
+2. **Skipping tough topics** - Avoidance erodes trust.
+3. **Vague feedback** - Without specifics, behavior does not change.
+4. **Inconsistent cadence** - Missed meetings signal low priority.
 
 ## Practice Exercises
 
 1. Create a 1:1 template for your team
-2. Practice the SBI model on recent feedback situations
-3. Have a career conversation using the framework
+2. Practice the SBI model for recent feedback situations
+3. Draft a quarterly growth plan for an engineer
+
+### Solutions
+
+<details>
+<summary>Exercise 1: 1:1 Template</summary>
+
+```markdown
+Weekly 1:1
+- Their topics
+- Growth check-in
+- Feedback
+- Action items
+```
+
+**Key points:**
+- Keep it short and repeatable.
+- Prioritize their agenda first.
+- Track action items.
+
+</details>
+
+<details>
+<summary>Exercise 2: SBI Feedback</summary>
+
+```markdown
+Situation: During the last release review
+Behavior: You dismissed QA concerns quickly
+Impact: The team felt their input was ignored
+Request: Summarize their concerns before deciding
+```
+
+**Key points:**
+- Focus on behavior, not character.
+- State impact clearly.
+- Make the request actionable.
+
+</details>
+
+<details>
+<summary>Exercise 3: Growth Plan</summary>
+
+```markdown
+Quarterly Growth Plan
+- Goal: Lead a small project end to end
+- Support: Pair with senior engineer
+- Evidence: Own the design doc and delivery plan
+- Checkpoints: Monthly progress review
+```
+
+**Key points:**
+- Tie growth to real work.
+- Define measurable evidence.
+- Review progress regularly.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Purpose**: 1:1s are about trust and growth
+- **Structure**: Consistent agendas create safety
+- **Questions**: Open-ended prompts reveal blockers
+- **Feedback**: SBI keeps feedback specific and fair
+- **Trust**: Reliability builds psychological safety
+
+**Key takeaway**: Great 1:1s turn managers into multipliers.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Redesign your weekly 1:1 agenda
+- Prepare a promotion conversation
+- Deliver feedback using SBI
+- Create a growth plan for a teammate
+- Rebuild trust after a missed commitment
+
+---
 
 ## Further Reading
 
 - [The Manager's Path](https://www.oreilly.com/library/view/the-managers-path/9781491973882/)
 - [Radical Candor](https://www.radicalcandor.com/)
+
+---
+
+**Navigation**: [<- Previous Module](./09-cross-team-collaboration.md) | [Next Module ->](./11-conflict-resolution.md)

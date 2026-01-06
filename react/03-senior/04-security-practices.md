@@ -1,16 +1,57 @@
 # Security Practices
 
-Protect your applications and users from common vulnerabilities.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 24: The Security Audit
+
+Security just flagged a set of vulnerabilities in the frontend. Sarah needs a remediation plan, and Marcus reminds you that frontend security is not just backend responsibility. This week is about protecting users by default: defending against XSS, enforcing CSP, securing authentication flows, and handling sensitive data safely.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **XSS prevention** | A filter - remove dangerous input before it spreads |
+| **CSRF protection** | A wristband - prove who is allowed in |
+| **CSP** | A whitelist - only trusted sources allowed |
+| **Auth security** | A lockbox - protect credentials and tokens |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 23 (Advanced Performance) - Familiarity with runtime environments and deployment.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Prevent XSS, CSRF, and injection attacks
-- Implement secure authentication flows
-- Configure Content Security Policy
-- Handle sensitive data safely
+By the end of this module, you'll be able to:
 
-## XSS Prevention
+- [ ] Prevent XSS and injection vulnerabilities
+- [ ] Implement CSRF protection in client flows
+- [ ] Configure Content Security Policy safely
+- [ ] Secure authentication and token storage
+- [ ] Handle sensitive data without leaks
+- [ ] Maintain a dependency security checklist
+
+---
+
+## Time Estimate
+
+- **Reading**: 70-90 minutes
+- **Exercises**: 3-5 hours
+- **Mastery**: Practice secure patterns over 6-8 weeks
+
+---
+
+## Chapter 1: XSS Prevention
+
+You need to protect every surface that touches user-controlled content.
 
 ### React's Built-in Protection
 
@@ -66,7 +107,9 @@ function isValidUrl(url: string): boolean {
 }
 ```
 
-## CSRF Protection
+## Chapter 2: CSRF Protection
+
+State-changing requests must prove the request came from your app.
 
 ### Token-Based Protection
 
@@ -99,7 +142,9 @@ async function secureRequest(url: string, options: RequestInit = {}) {
 // JWT in HttpOnly cookie > JWT in localStorage
 ```
 
-## Content Security Policy
+## Chapter 3: Content Security Policy
+
+CSP is your front line against injected scripts.
 
 ### Basic CSP
 
@@ -136,7 +181,9 @@ async function secureRequest(url: string, options: RequestInit = {}) {
 Content-Security-Policy-Report-Only: default-src 'self'; report-uri /csp-report
 ```
 
-## Secure Authentication
+## Chapter 4: Secure Authentication
+
+Token handling should reduce damage when mistakes happen.
 
 ### OAuth/OIDC Flow
 
@@ -197,7 +244,9 @@ class TokenStore {
 }
 ```
 
-## Sensitive Data Handling
+## Chapter 5: Sensitive Data Handling
+
+If data should not be exposed, the UI must treat it as radioactive.
 
 ### Input Masking
 
@@ -236,7 +285,9 @@ function handlePayment(cardNumber: string) {
 </form>
 ```
 
-## Security Headers Checklist
+## Chapter 6: Security Headers Checklist
+
+Headers are inexpensive protection that many teams forget.
 
 ```
 Strict-Transport-Security: max-age=31536000; includeSubDomains
@@ -248,7 +299,9 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 > Note: `X-XSS-Protection` is deprecated in modern browsers and should not be used. Modern CSP headers provide better protection.
 
-## Dependency Security
+## Chapter 7: Dependency Security
+
+Your dependency tree is part of your attack surface.
 
 ```bash
 # Audit dependencies
@@ -260,13 +313,120 @@ npm audit fix
 # Use Snyk or Dependabot for continuous monitoring
 ```
 
+---
+
+## Common Mistakes
+
+1. **Trusting user input** - Always sanitize and validate before rendering.
+2. **Storing tokens in localStorage** - It increases XSS blast radius.
+3. **Missing CSP** - Without a policy, injected scripts are harder to stop.
+4. **Ignoring dependency audits** - Vulnerabilities in libraries still affect your app.
+
 ## Practice Exercises
 
 1. Implement CSP for an existing application
 2. Set up OAuth with PKCE flow
 3. Audit and fix XSS vulnerabilities
 
+### Solutions
+
+<details>
+<summary>Exercise 1: CSP Header</summary>
+
+```http
+Content-Security-Policy: default-src 'self'; base-uri 'self'; script-src 'self' https://cdn.example.com; object-src 'none'; frame-ancestors 'none'; report-uri /csp-report
+```
+
+**Key points:**
+- Start with `default-src 'self'`.
+- Add only trusted CDNs.
+- Disable risky sources like `object-src`.
+
+</details>
+
+<details>
+<summary>Exercise 2: OAuth PKCE</summary>
+
+```ts
+// Generate PKCE verifier/challenge (S256)
+function base64UrlEncode(buffer: ArrayBuffer) {
+  return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
+}
+
+const verifier = crypto.randomUUID().replace(/-/g, '');
+const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
+const challenge = base64UrlEncode(digest);
+
+// Store verifier in memory or session storage
+sessionStorage.setItem('pkce_verifier', verifier);
+
+// Redirect to auth server with challenge
+const url = `${AUTH_URL}?response_type=code&code_challenge=${challenge}&code_challenge_method=S256`;
+window.location.assign(url);
+```
+
+**Key points:**
+- PKCE prevents intercepted codes from being reused.
+- Verifier stays on the client.
+- Server validates challenge before issuing tokens.
+
+</details>
+
+<details>
+<summary>Exercise 3: XSS Audit</summary>
+
+```tsx
+import DOMPurify from 'dompurify';
+
+function Comment({ html }: { html: string }) {
+  const sanitized = DOMPurify.sanitize(html);
+  return <div dangerouslySetInnerHTML={{ __html: sanitized }} />;
+}
+```
+
+**Key points:**
+- Sanitize before using `dangerouslySetInnerHTML`.
+- Restrict allowed tags and attributes as needed.
+- Avoid rendering raw HTML when possible.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **XSS defense**: Sanitization and safe rendering
+- **CSRF protection**: Safeguards for state-changing requests
+- **CSP**: Enforcing trusted sources only
+- **Auth security**: Safer token handling
+- **Sensitive data**: Preventing leaks in UI and logs
+
+**Key takeaway**: Secure defaults prevent small mistakes from becoming incidents.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Add CSP headers to production responses
+- Audit all uses of `dangerouslySetInnerHTML`
+- Move tokens out of localStorage
+- Tighten security headers in your CDN
+- Set up automated dependency vulnerability alerts
+
+---
+
 ## Further Reading
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [MDN Web Security](https://developer.mozilla.org/en-US/docs/Web/Security)
+
+---
+
+**Navigation**: [<- Previous Module](./03-advanced-performance.md) | [Next Module ->](./05-accessibility-a11y.md)

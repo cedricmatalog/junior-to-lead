@@ -1,5 +1,8 @@
 # Testing Fundamentals
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Seven: The Bug That Got Away
 
 Six weeks of building. The travel platform looks great. Then Thursday morning, you get the Slack message every developer dreads.
@@ -424,7 +427,7 @@ describe('TransactionList', () => {
 
 ---
 
-## Chapter 9: Testing the Transfer Form
+### Testing the Transfer Form
 
 The transfer form is critical. Money moves. Mistakes cost.
 
@@ -502,7 +505,7 @@ describe('TransferForm', () => {
 
 ---
 
-## Chapter 10: Organizing Tests
+### Organizing Tests
 
 ```jsx
 describe('ComponentName', () => {

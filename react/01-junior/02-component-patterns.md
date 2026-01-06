@@ -1,5 +1,8 @@
 # Component Patterns
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Two: The Dashboard Project
 
 You survived your first week. The product catalog is live, customers are browsing, and Sarah gave you a thumbs up in standup. But now there's a new challenge on the board.

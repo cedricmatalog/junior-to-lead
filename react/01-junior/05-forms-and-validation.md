@@ -1,5 +1,8 @@
 # Forms and Validation
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Five: The Job Application
 
 The food delivery feature is live. Orders are flowing. But there's a new priority from the business team.
@@ -567,7 +570,7 @@ By Friday, the job application portal is live. Sarah walks through what you've b
 
 ---
 
-## Chapter 8: File Uploads
+### File Uploads
 
 Monday morning. HR has a new request.
 
@@ -747,7 +750,7 @@ function DragDropUpload({ onFileSelect, accept, maxSize }) {
 
 ---
 
-## Chapter 9: Saving Progress
+### Saving Progress
 
 "What if someone gets interrupted?" Marcus asks. "They've filled out three steps, then their browser crashes. They have to start over?"
 

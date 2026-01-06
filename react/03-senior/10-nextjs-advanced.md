@@ -1,16 +1,57 @@
 # Next.js Advanced
 
-Master advanced Next.js patterns for production applications.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 30: The Server-Client Split
+
+The team adopted Next.js, but performance and developer experience are still uneven. Sarah asks you to define clear patterns for Server Components, streaming, and caching. Marcus warns that misuse of client components is driving up bundle size. This week is about mastering advanced Next.js features so you can ship fast pages without sacrificing flexibility.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Server components** | Prep kitchen - data work before the table |
+| **Streaming** | A buffet line - serve what is ready first |
+| **Middleware** | A checkpoint - modify requests before they enter |
+| **Edge runtime** | A roadside stand - compute close to users |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 29 (Mentoring Juniors) - Familiarity with structured patterns and team enablement.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Use Server Components effectively
-- Implement streaming and Suspense
-- Configure middleware and edge runtime
-- Design advanced caching strategies
+By the end of this module, you'll be able to:
 
-## Server Components
+- [ ] Use Server Components effectively
+- [ ] Implement streaming with Suspense
+- [ ] Configure middleware and the Edge Runtime
+- [ ] Design advanced caching strategies
+- [ ] Apply Server Actions safely
+- [ ] Reduce client bundle size with server-first patterns
+
+---
+
+## Time Estimate
+
+- **Reading**: 70-90 minutes
+- **Exercises**: 3-5 hours
+- **Mastery**: Practice advanced Next.js patterns over 6-8 weeks
+
+---
+
+## Chapter 1: Server Components
+
+You need a mental model for what runs on the server vs the client.
 
 ### Mental Model
 
@@ -113,7 +154,9 @@ async function OrderDetails({ orderId }) {
 }
 ```
 
-## Streaming and Suspense
+## Chapter 2: Streaming and Suspense
+
+Streaming keeps the UI responsive while data loads.
 
 ### Progressive Loading
 
@@ -158,7 +201,9 @@ export default function Loading() {
 }
 ```
 
-## Middleware
+## Chapter 3: Middleware
+
+Middleware enforces rules before the request reaches your app.
 
 ```tsx
 // middleware.ts
@@ -190,7 +235,9 @@ export const config = {
 };
 ```
 
-## Edge Runtime
+## Chapter 4: Edge Runtime
+
+Move computation closer to the user for lower latency.
 
 ```tsx
 // app/api/location/route.ts
@@ -218,7 +265,9 @@ export async function GET(request: Request) {
 | Heavy computation | Node.js |
 | File system access | Node.js |
 
-## Advanced Caching
+## Chapter 5: Advanced Caching
+
+Caching strategy is the difference between fast and stale.
 
 ### Request Memoization
 
@@ -280,7 +329,9 @@ export const dynamic = 'force-static';
 export const revalidate = 60; // seconds
 ```
 
-## Server Actions
+## Chapter 6: Server Actions
+
+Server Actions simplify mutations without custom endpoints.
 
 ```tsx
 // app/actions.ts
@@ -320,13 +371,138 @@ function SubmitButton() {
 }
 ```
 
+---
+
+## Common Mistakes
+
+1. **Overusing client components** - It bloats bundles and loses server benefits.
+2. **Missing Suspense boundaries** - Streaming has no effect without them.
+3. **Caching without invalidation** - Stale data hurts trust.
+4. **Edge runtime limitations** - Some APIs are not available at the edge.
+
 ## Practice Exercises
 
 1. Build a dashboard with streaming Suspense boundaries
 2. Implement auth middleware with role-based routing
 3. Design a caching strategy for an e-commerce product page
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Streaming Dashboard</summary>
+
+```tsx
+import { Suspense } from 'react';
+
+export default function Dashboard() {
+  return (
+    <>
+      <Summary />
+      <Suspense fallback={<ChartsSkeleton />}>
+        <Charts />
+      </Suspense>
+      <Suspense fallback={<ActivitySkeleton />}>
+        <RecentActivity />
+      </Suspense>
+    </>
+  );
+}
+```
+
+**Key points:**
+- Each section streams independently.
+- Fast content appears first.
+- Slow data does not block the entire page.
+
+</details>
+
+<details>
+<summary>Exercise 2: Auth Middleware</summary>
+
+```ts
+import { NextRequest, NextResponse } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const role = request.cookies.get('role')?.value;
+  const url = new URL(request.url);
+
+  if (url.pathname.startsWith('/admin') && role !== 'admin') {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/admin/:path*']
+};
+```
+
+**Key points:**
+- Middleware runs before routing.
+- Role checks block unauthorized access.
+- Redirect keeps users in a safe path.
+
+</details>
+
+<details>
+<summary>Exercise 3: Product Caching</summary>
+
+```tsx
+export const revalidate = 300;
+
+export async function ProductPage({ params }) {
+  const product = await fetch(`https://api.example.com/products/${params.id}`, {
+    next: { tags: [`product-${params.id}`], revalidate: 300 }
+  }).then((r) => r.json());
+
+  return <ProductDetails product={product} />;
+}
+
+// Later in a server action or webhook:
+// revalidateTag(`product-${id}`);
+```
+
+**Key points:**
+- ISR keeps data fresh on a schedule.
+- Cache tags allow targeted invalidation.
+- Server rendering keeps bundles small.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Server components**: Server-first rendering with smaller bundles
+- **Streaming**: Faster perceived performance with Suspense
+- **Middleware/Edge**: Request-level control close to users
+- **Caching**: Predictable freshness strategies
+- **Server actions**: Mutations without extra endpoints
+
+**Key takeaway**: Advanced Next.js patterns let you ship faster pages with fewer client costs.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Move data fetching into Server Components
+- Add streaming to a slow dashboard
+- Build role-based middleware for admin routes
+- Implement cache tags for product pages
+- Reduce client bundle size by removing unnecessary hooks
+
+---
+
 ## Further Reading
 
 - [Next.js App Router Documentation](https://nextjs.org/docs/app)
 - [Server Components RFC](https://github.com/reactjs/rfcs/pull/188)
+
+---
+
+**Navigation**: [<- Previous Module](./09-mentoring-juniors.md) | [Next Module ->](./11-framework-comparison.md)

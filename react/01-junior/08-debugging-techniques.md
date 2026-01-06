@@ -1,5 +1,8 @@
 # Debugging Techniques
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Eight: The Mystery of the Missing Messages
 
 Week eight starts with chaos.
@@ -424,7 +427,7 @@ Marcus pins a checklist to the wall:
 
 ---
 
-## Chapter 9: The Common Bug Patterns
+### The Common Bug Patterns
 
 Sarah writes the patterns you'll see over and over:
 
@@ -451,7 +454,7 @@ const handleAdd = (item) => {
 
 ---
 
-## Chapter 10: Your Debugging Toolkit
+### Your Debugging Toolkit
 
 ```jsx
 // Add to your debugging toolkit
@@ -486,7 +489,7 @@ By Friday, the chat app is stable. Messages arrive in order. The typing indicato
 
 ---
 
-## Chapter 11: The Error Handling Playbook
+### The Error Handling Playbook
 
 Before you leave, Marcus pulls together everything you've learned about errors into one unified approach.
 

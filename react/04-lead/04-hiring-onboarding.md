@@ -1,16 +1,54 @@
 # Hiring and Onboarding
 
-Build great teams through effective hiring and welcoming new members.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 35: The Team Expansion
+
+Headcount is approved and the team needs to grow fast without lowering the bar. Sarah asks you to design a hiring process that is fair, consistent, and aligned with team needs. Marcus reminds you that onboarding is just as important as hiring -- it determines how quickly new hires become effective. This week focuses on structured interviews, bias reduction, and onboarding plans that work.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Interview process** | A funnel - consistent steps reduce noise |
+| **Rubrics** | A scorecard - compare candidates fairly |
+| **Bias reduction** | Guardrails - protect decisions from shortcuts |
+| **Onboarding** | A runway - accelerate takeoff |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 34 (Team Processes) - Comfort with team rhythms and expectations.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Design fair, effective interviews
-- Evaluate candidates objectively
-- Create onboarding programs that accelerate productivity
-- Build an inclusive hiring process
+By the end of this module, you'll be able to:
 
-## Designing Interviews
+- [ ] Design structured interview loops and rubrics
+- [ ] Reduce bias in evaluation and feedback
+- [ ] Run effective hiring debriefs
+- [ ] Build 30-60-90 day onboarding plans
+- [ ] Create onboarding guides that scale
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice hiring/onboarding leadership over 8-12 weeks
+
+---
+
+## Chapter 1: Designing Interviews
 
 ### Interview Structure
 
@@ -54,7 +92,7 @@ By the end of this module, you will:
 ### Coding Assessment Design
 
 ```markdown
-## Assessment: Build a Task Manager Component
+### Assessment: Build a Task Manager Component
 
 ### Time: 60 minutes
 
@@ -92,7 +130,7 @@ Build a task list component that:
 ### Evaluation Rubric
 
 ```markdown
-## Coding Assessment Rubric
+### Coding Assessment Rubric
 
 ### Problem Solving (1-4)
 4: Identifies edge cases, elegant solutions
@@ -125,12 +163,12 @@ Build a task list component that:
 Below 7: No hire
 ```
 
-## Reducing Bias
+## Chapter 2: Reducing Bias
 
 ### Structured Interviews
 
 ```markdown
-## Behavioral Interview Questions
+### Behavioral Interview Questions
 
 Ask all candidates the same questions:
 
@@ -159,12 +197,12 @@ Ask all candidates the same questions:
 | Anchoring | First impression dominates | Score during interview, not after |
 | Confirmation | Seek evidence for initial impression | Devil's advocate in debrief |
 
-## Making Decisions
+## Chapter 3: Making Decisions
 
 ### Debrief Structure
 
 ```markdown
-## Hiring Debrief Agenda
+### Hiring Debrief Agenda
 
 1. **Individual scores shared** (5 min)
    - No discussion yet
@@ -187,12 +225,12 @@ Ask all candidates the same questions:
    - Document reasoning
 ```
 
-## Onboarding
+## Chapter 4: Onboarding
 
 ### First Day
 
 ```markdown
-## Day 1 Checklist
+### Day 1 Checklist
 
 ### Before They Arrive
 - [ ] Laptop configured
@@ -215,7 +253,7 @@ Ask all candidates the same questions:
 ### First Week
 
 ```markdown
-## Week 1 Goals
+### Week 1 Goals
 
 ### Learn
 - [ ] Understand product and users
@@ -238,7 +276,7 @@ Ask all candidates the same questions:
 ### 30-60-90 Day Plan
 
 ```markdown
-## 30-60-90 Day Onboarding Plan
+### 30-60-90 Day Onboarding Plan
 
 ### First 30 Days: Learn
 - Complete all onboarding tasks
@@ -265,7 +303,7 @@ Ask all candidates the same questions:
 ### Onboarding Documentation
 
 ```markdown
-## New Developer Guide
+## Chapter 5: New Developer Guide
 
 ### Getting Started
 1. [Development Setup](./dev-setup.md)
@@ -288,13 +326,107 @@ Ask all candidates the same questions:
 - Product questions: @product-manager
 ```
 
+---
+
+## Common Mistakes
+
+1. **Unstructured interviews** - Inconsistent feedback creates noise.
+2. **Bias in scoring** - Gut feelings override evidence.
+3. **No onboarding owner** - New hires drift without a guide.
+4. **Overloading week one** - Too much information, too little retention.
+
 ## Practice Exercises
 
 1. Design an interview loop for a senior frontend role
 2. Create an evaluation rubric for a coding challenge
 3. Build a 30-day onboarding checklist
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Interview Loop</summary>
+
+```markdown
+1. Recruiter screen (30 min)
+2. Technical screen (60 min)
+3. System design (60 min)
+4. Pairing session (90 min)
+5. Values and collaboration (45 min)
+```
+
+**Key points:**
+- Balance technical depth and collaboration.
+- Use the same loop for all candidates.
+- Assign clear owners per stage.
+
+</details>
+
+<details>
+<summary>Exercise 2: Rubric</summary>
+
+```markdown
+Criteria (1-5):
+- Problem solving
+- Code quality
+- React fundamentals
+- Communication
+```
+
+**Key points:**
+- Score against defined criteria.
+- Capture evidence with examples.
+- Use rubric in debrief to avoid bias.
+
+</details>
+
+<details>
+<summary>Exercise 3: 30-Day Checklist</summary>
+
+```markdown
+Week 1: Setup, documentation, first small PR
+Week 2: Pairing sessions, first feature
+Week 3: Own a ticket end-to-end
+Week 4: Demo work and review goals
+```
+
+**Key points:**
+- Focus on quick wins early.
+- Provide a clear progression.
+- End with a checkpoint and feedback.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Interview design**: Structured loops and scoring
+- **Bias reduction**: Fair, consistent evaluations
+- **Debriefs**: Clear hiring decisions
+- **Onboarding**: Fast ramp with guidance
+- **Documentation**: Scalable onboarding materials
+
+**Key takeaway**: Hiring and onboarding are systems, not one-off events.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Update your interview loop and rubrics
+- Train interviewers on bias mitigation
+- Create a 30-60-90 onboarding plan
+- Write a new developer guide
+
+---
 ## Further Reading
 
 - [Work Rules!](https://www.workrules.net/) - Google's hiring insights
 - [Who](https://whothebook.com/) - Hiring methodology
+
+---
+
+**Navigation**: [<- Previous Module](./03-team-processes.md) | [Next Module ->](./05-stakeholder-communication.md)

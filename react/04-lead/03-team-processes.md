@@ -1,16 +1,54 @@
 # Team Processes
 
-Build processes that help teams ship quality software efficiently.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 34: The Process Tune-Up
+
+The team is shipping, but the rhythm feels chaotic. Sarah asks you to tune the process so delivery is predictable and sustainable. Marcus reminds you that process is not ceremony for its own sake -- it is a system that protects focus and clarity. This week is about adapting agile practices, running planning and retros, and building team rhythms that work.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Agile practices** | Guardrails - keep the team on track |
+| **Planning** | A calendar - align work to capacity |
+| **Retrospectives** | A mirror - see what to improve |
+| **Team rhythms** | A heartbeat - steady cadence over time |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 33 (Architecture Ownership) - Comfort with cross-team alignment and documentation.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Adapt agile practices to your team
-- Run effective planning and estimation
-- Facilitate productive retrospectives
-- Create sustainable team rhythms
+By the end of this module, you'll be able to:
 
-## Agile in Practice
+- [ ] Adapt agile practices to your team context
+- [ ] Run effective planning and estimation
+- [ ] Facilitate retrospectives that produce action
+- [ ] Define and enforce a clear definition of done
+- [ ] Establish sustainable team rhythms
+
+---
+
+## Time Estimate
+
+- **Reading**: 50-70 minutes
+- **Exercises**: 2-3 hours
+- **Mastery**: Practice process leadership over 6-8 weeks
+
+---
+
+## Chapter 1: Agile in Practice
 
 ### What Actually Matters
 
@@ -26,7 +64,7 @@ By the end of this module, you will:
 ### Adapting to Your Team
 
 ```markdown
-## Our Team's Agile Practices
+### Our Team's Agile Practices
 
 ### What We Keep
 - Daily standups (async option available)
@@ -45,12 +83,12 @@ By the end of this module, you will:
 - Monthly innovation day
 ```
 
-## Sprint Planning
+## Chapter 2: Sprint Planning
 
 ### Pre-Planning
 
 ```markdown
-## Before Sprint Planning
+### Before Sprint Planning
 
 **PM/Design Prep:**
 - [ ] User stories written and prioritized
@@ -66,7 +104,7 @@ By the end of this module, you will:
 ### Planning Session
 
 ```markdown
-## Sprint Planning Agenda (2 hours)
+### Sprint Planning Agenda (2 hours)
 
 ### Part 1: What (45 min)
 1. Sprint goal discussion (10 min)
@@ -89,7 +127,7 @@ By the end of this module, you will:
 ### Estimation
 
 ```markdown
-## T-Shirt Sizing Guide
+### T-Shirt Sizing Guide
 
 **XS**: Few hours, single file, well-understood
   Example: Fix typo, update copy, add logging
@@ -107,12 +145,12 @@ By the end of this module, you will:
   Action: Split into smaller stories
 ```
 
-## Standups
+## Chapter 3: Standups
 
 ### Async Standups
 
 ```markdown
-## Daily Update Template (Slack/written)
+### Daily Update Template (Slack/written)
 
 **Yesterday**: What I completed
 **Today**: What I'm working on
@@ -131,7 +169,7 @@ Example:
 - Park discussions for after
 - Not everyone needs to speak daily
 
-## Retrospectives
+## Chapter 4: Retrospectives
 
 ### Retrospective Formats
 
@@ -168,7 +206,7 @@ Example:
 ### Action Items
 
 ```markdown
-## Retro Action Items
+### Retro Action Items
 
 | Action | Owner | Due | Status |
 |--------|-------|-----|--------|
@@ -179,10 +217,10 @@ Example:
 **Rule**: Max 3 action items, must have owner and deadline
 ```
 
-## Definition of Done
+## Chapter 5: Definition of Done
 
 ```markdown
-## Definition of Done
+### Definition of Done
 
 ### Code
 - [ ] Implements acceptance criteria
@@ -212,7 +250,7 @@ Example:
 - [ ] Smoke tested
 ```
 
-## Team Rhythms
+## Chapter 6: Team Rhythms
 
 ### Weekly Schedule
 
@@ -234,13 +272,106 @@ Friday:    Sprint review, Retro, Learning time
 | End with actions | Clear next steps |
 | Optional attendees | People can skip |
 
+---
+
+## Common Mistakes
+
+1. **Process without purpose** - Rituals that do not change outcomes waste time.
+2. **Over-planning** - Detailed plans collapse when reality shifts.
+3. **No action items** - Retros become venting instead of improvement.
+4. **Undefined done** - Work quality varies without clear criteria.
+
 ## Practice Exercises
 
 1. Design a sprint planning agenda for your team
 2. Create a Definition of Done tailored to your project
 3. Run a retrospective using a new format
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Sprint Planning Agenda</summary>
+
+```markdown
+1. Review sprint goal (10 min)
+2. Capacity check (10 min)
+3. Backlog review and sizing (60 min)
+4. Commit to sprint scope (20 min)
+5. Risks and dependencies (10 min)
+```
+
+**Key points:**
+- Keep focus on goals and capacity.
+- Reserve time for risks.
+- End with an explicit commitment.
+
+</details>
+
+<details>
+<summary>Exercise 2: Definition of Done</summary>
+
+```markdown
+- Code merged with tests passing
+- Lint/type checks green
+- Feature documented
+- UX reviewed
+- Staging smoke test complete
+```
+
+**Key points:**
+- Make quality gates visible.
+- Keep it short and enforceable.
+- Review quarterly.
+
+</details>
+
+<details>
+<summary>Exercise 3: Retro Format</summary>
+
+```markdown
+Start: What should we start?
+Stop: What should we stop?
+Continue: What should we continue?
+```
+
+**Key points:**
+- Use a simple format for clarity.
+- Capture action items with owners.
+- Review follow-ups next retro.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Agile practices**: Adapted to real team needs
+- **Planning**: Capacity-aware commitments
+- **Standups**: Short updates that unblock work
+- **Retros**: Continuous improvement with actions
+- **Rhythms**: Sustainable meeting cadence
+
+**Key takeaway**: Processes exist to protect focus and delivery, not to add ceremony.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Redesign sprint planning for clarity
+- Publish a new Definition of Done
+- Run a retro with action item tracking
+- Adjust meeting cadence to protect focus time
+
+---
 ## Further Reading
 
 - [Shape Up](https://basecamp.com/shapeup) (alternative to Scrum)
 - [Agile Manifesto](https://agilemanifesto.org/)
+
+---
+
+**Navigation**: [<- Previous Module](./02-architecture-ownership.md) | [Next Module ->](./04-hiring-onboarding.md)

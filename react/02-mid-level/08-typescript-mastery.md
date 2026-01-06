@@ -1,16 +1,57 @@
 # TypeScript Mastery
 
-Leverage TypeScript's full power for safer, more maintainable React code.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 18: The Type Safety Push
+
+The codebase is getting bigger, and bugs are harder to spot in review. Sarah wants more confidence before refactors, and Marcus points out that TypeScript can catch most of the mistakes if you model types well. This week is about using TypeScript as a design tool -- not just for annotations -- so your components are safer, easier to reuse, and harder to misuse.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Generics** | A template - one shape, many versions |
+| **Utility types** | Power tools - reshape types quickly |
+| **Discriminated unions** | Labeled boxes - pick the right shape |
+| **Type guards** | Bouncers - check who gets in |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 07 (Testing Strategies) - Familiarity with component composition and reusable patterns.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Use generics for reusable typed components
-- Apply utility types effectively
-- Handle complex type patterns
-- Configure TypeScript for maximum safety
+By the end of this module, you'll be able to:
 
-## Generics in Components
+- [ ] Build generic components and hooks with strong typing
+- [ ] Use utility types to model real data shapes
+- [ ] Apply discriminated unions for complex UI states
+- [ ] Write type guards to narrow unsafe data
+- [ ] Design prop types that prevent misuse
+- [ ] Configure strict TypeScript settings for safety
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-90 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice TypeScript patterns over 4-6 weeks
+
+---
+
+## Chapter 1: Generics in Components
+
+You need reusable components that still keep strict types.
 
 ```tsx
 // Generic list component
@@ -71,7 +112,9 @@ function Select<T>({
 }
 ```
 
-## Utility Types
+## Chapter 2: Utility Types
+
+You can reshape data types without rewriting them from scratch.
 
 ```tsx
 // Partial - make all properties optional
@@ -110,7 +153,9 @@ type FetchUserParams = Parameters<typeof fetchUser>;
 type UserData = Awaited<ReturnType<typeof fetchUserAsync>>;
 ```
 
-## Discriminated Unions
+## Chapter 3: Discriminated Unions
+
+Complex UI states need explicit, typed labels.
 
 ```tsx
 // State machine with discriminated unions
@@ -154,7 +199,9 @@ function reducer(state: number, action: Action): number {
 }
 ```
 
-## Type Guards
+## Chapter 4: Type Guards
+
+External data is messy. Guards help you validate it safely.
 
 ```tsx
 // Type predicate
@@ -198,7 +245,9 @@ function handleUser(user: Admin | Guest) {
 }
 ```
 
-## Component Props Patterns
+## Chapter 5: Component Props Patterns
+
+You need prop types that guide developers toward correct usage.
 
 ```tsx
 // Props with children
@@ -236,7 +285,9 @@ type ExtractedButtonProps = React.ComponentProps<typeof Button>;
 type InputProps = React.ComponentProps<'input'>;
 ```
 
-## Strict Configuration
+## Chapter 6: Strict Configuration
+
+Strict settings catch bugs earlier, even if they feel noisy at first.
 
 ```json
 // tsconfig.json
@@ -257,7 +308,9 @@ type InputProps = React.ComponentProps<'input'>;
 - `noUncheckedIndexedAccess` - Array access returns T | undefined
 - `exactOptionalPropertyTypes` - Distinguish undefined from missing
 
-## Advanced Patterns
+## Chapter 7: Advanced Patterns
+
+These patterns help when your types get truly complex.
 
 ```tsx
 // Template literal types
@@ -284,13 +337,173 @@ type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 type UserWithOptionalEmail = PartialBy<User, 'email'>;
 ```
 
+---
+
+## Common Mistakes
+
+1. **Using `any` as a shortcut** - It breaks the safety net.
+2. **Overly complex types** - Prefer readable types over clever ones.
+3. **Ignoring `strict` errors** - They signal real risks.
+4. **Missing runtime checks** - Types don't validate data at runtime.
+
 ## Practice Exercises
 
 1. Create a generic `useLocalStorage` hook with proper types
 2. Build a type-safe form with discriminated unions for field types
 3. Implement a polymorphic `as` prop component
 
+### Solutions
+
+<details>
+<summary>Exercise 1: useLocalStorage</summary>
+
+```tsx
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [value, setValue] = useState<T>(() => {
+    if (typeof window === 'undefined') return initialValue;
+    try {
+      const stored = window.localStorage.getItem(key);
+      return stored ? (JSON.parse(stored) as T) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
+
+  const setStoredValue = (nextValue: T | ((prev: T) => T)) => {
+    setValue((prev) => {
+      const resolved = typeof nextValue === 'function'
+        ? (nextValue as (prev: T) => T)(prev)
+        : nextValue;
+      window.localStorage.setItem(key, JSON.stringify(resolved));
+      return resolved;
+    });
+  };
+
+  return [value, setStoredValue] as const;
+}
+```
+
+**Key points:**
+- Generic type is inferred from `initialValue`.
+- State and storage stay in sync.
+- Returned tuple is typed with `as const`.
+
+</details>
+
+<details>
+<summary>Exercise 2: Discriminated Form Fields</summary>
+
+```tsx
+type TextField = { type: 'text'; name: string; label: string; placeholder?: string };
+type NumberField = { type: 'number'; name: string; label: string; min?: number; max?: number };
+type SelectField = { type: 'select'; name: string; label: string; options: string[] };
+type Field = TextField | NumberField | SelectField;
+
+function FieldRenderer({ field }: { field: Field }) {
+  if (field.type === 'text') {
+    return (
+      <input
+        name={field.name}
+        placeholder={field.placeholder}
+        aria-label={field.label}
+      />
+    );
+  }
+
+  if (field.type === 'number') {
+    return (
+      <input
+        name={field.name}
+        type="number"
+        min={field.min}
+        max={field.max}
+        aria-label={field.label}
+      />
+    );
+  }
+
+  return (
+    <select name={field.name} aria-label={field.label}>
+      {field.options.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  );
+}
+```
+
+**Key points:**
+- The `type` field narrows the union safely.
+- Each variant enforces required props.
+- Rendering logic stays type-safe.
+
+</details>
+
+<details>
+<summary>Exercise 3: Polymorphic Component</summary>
+
+```tsx
+type AsProp<C extends React.ElementType> = { as?: C };
+type Props<C extends React.ElementType> = AsProp<C> &
+  Omit<React.ComponentPropsWithRef<C>, 'as'> & {
+    variant?: 'primary' | 'secondary';
+  };
+
+const Text = React.forwardRef(function Text<C extends React.ElementType = 'span'>(
+  { as, variant = 'primary', ...props }: Props<C>,
+  ref: React.Ref<Element>
+) {
+  const Component = as ?? 'span';
+  const resolvedProps =
+    Component === 'button' && !('type' in props)
+      ? { type: 'button', ...props }
+      : props;
+  return <Component ref={ref} data-variant={variant} {...resolvedProps} />;
+});
+```
+
+**Key points:**
+- `as` changes the rendered element safely.
+- Props are inferred from the chosen element type.
+- Variants stay consistent across elements.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Generics**: Reusable components with strong typing
+- **Utility types**: Shaping and composing types
+- **Unions**: Explicit, safe UI state modeling
+- **Type guards**: Safe narrowing for runtime data
+- **Prop patterns**: Preventing misuse with types
+
+**Key takeaway**: Types aren't just annotations -- they're design constraints that prevent bugs.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Build a reusable list component with generic typing
+- Model API response states with discriminated unions
+- Add safe polymorphic components to a design system
+- Enforce strict typing for shared utilities
+- Catch invalid props before they reach production
+
+---
+
 ## Further Reading
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/)
 - [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
+
+---
+
+**Navigation**: [← Previous Module](./07-testing-strategies.md) | [Next Module →](./09-code-quality.md)

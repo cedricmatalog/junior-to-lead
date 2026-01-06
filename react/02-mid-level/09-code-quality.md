@@ -1,16 +1,57 @@
 # Code Quality
 
-Maintain high standards through tooling, patterns, and practices.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 19: The Maintainability Check
+
+The team is moving fast, but the codebase is getting harder to review. Sarah wants consistent tooling and fewer style debates. Marcus points out the last refactor took twice as long because the file structure was unclear. This week is about creating guardrails: linting, formatting, project structure, and review habits that keep quality high as the team grows.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Linting** | Spellcheck - catch mistakes before review |
+| **Formatting** | Dress code - consistent appearance |
+| **Refactoring** | Renovation - improve structure without changing purpose |
+| **Code review** | Gate check - quality before shipping |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 08 (TypeScript Mastery) - Familiarity with project tooling and component structure.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Configure ESLint and Prettier for consistency
-- Organize code for maintainability
-- Apply refactoring techniques
-- Establish team conventions
+By the end of this module, you'll be able to:
 
-## ESLint Configuration
+- [ ] Configure ESLint and Prettier for consistent style
+- [ ] Organize project structure for scalability
+- [ ] Apply refactoring techniques safely
+- [ ] Use code review checklists to reduce defects
+- [ ] Add pre-commit hooks for quality enforcement
+- [ ] Define team conventions that stick
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice code-quality habits over 4-6 weeks
+
+---
+
+## Chapter 1: ESLint Configuration
+
+You need the tooling to catch issues before they reach review.
 
 ```js
 // .eslintrc.js
@@ -47,7 +88,9 @@ module.exports = {
 };
 ```
 
-## Prettier Configuration
+## Chapter 2: Prettier Configuration
+
+Formatting debates slow teams down. Prettier eliminates them.
 
 ```json
 // .prettierrc
@@ -73,7 +116,9 @@ module.exports = {
 }
 ```
 
-## Project Structure
+## Chapter 3: Project Structure
+
+A clear layout makes features easy to find and own.
 
 ```
 src/
@@ -105,7 +150,9 @@ src/
 - Shared code in dedicated directories
 - Flat is better than nested (until it isn't)
 
-## Code Organization Patterns
+## Chapter 4: Code Organization Patterns
+
+Structure patterns keep components predictable as the app grows.
 
 ### Component File Structure
 
@@ -164,7 +211,9 @@ export { Modal } from './Modal';
 import { Button, Input, Modal } from '@/components';
 ```
 
-## Refactoring Techniques
+## Chapter 5: Refactoring Techniques
+
+You want improvements without introducing regressions.
 
 ### Extract Component
 
@@ -244,7 +293,9 @@ function ProductPage({ id }) {
 }
 ```
 
-## Code Review Checklist
+## Chapter 6: Code Review Checklist
+
+Reviews need consistency, not personal preferences.
 
 - [ ] No commented-out code
 - [ ] No console.logs in production code
@@ -256,7 +307,9 @@ function ProductPage({ id }) {
 - [ ] Clear naming
 - [ ] Consistent with existing patterns
 
-## Pre-commit Hooks
+## Chapter 7: Pre-commit Hooks
+
+Automation keeps quality consistent even when teams are busy.
 
 ```json
 // package.json
@@ -276,13 +329,167 @@ npx husky-init && npm install
 npm run lint-staged
 ```
 
+---
+
+## Common Mistakes
+
+1. **Linting without fixing** - Warnings ignored become permanent debt.
+2. **Inconsistent structure** - Teams waste time finding the right file.
+3. **Refactoring without tests** - Improvements become regressions.
+4. **Skipping automation** - Manual checks never scale.
+
 ## Practice Exercises
 
 1. Set up ESLint + Prettier for a new project
 2. Refactor a large component into smaller pieces
 3. Create a pre-commit hook that runs tests
 
+### Solutions
+
+<details>
+<summary>Exercise 1: ESLint + Prettier</summary>
+
+```js
+// .eslintrc.js
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jsx-a11y/recommended',
+    'prettier'
+  ],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'jsx-a11y'],
+  rules: {
+    'no-console': ['warn', { allow: ['warn', 'error'] }]
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
+  overrides: [
+    {
+      files: ['**/*.test.*', '**/*.spec.*'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off'
+      }
+    }
+  }
+};
+```
+
+```json
+// .prettierrc
+{
+  "singleQuote": true,
+  "semi": true,
+  "printWidth": 100,
+  "trailingComma": "all"
+}
+```
+
+**Key points:**
+- Prettier should be last in ESLint extends.
+- Keep rules minimal to reduce noise.
+- Enforce consistency across the team.
+
+</details>
+
+<details>
+<summary>Exercise 2: Refactor a Component</summary>
+
+```jsx
+function ProductPage({ product }) {
+  return (
+    <section>
+      <ProductHeader title={product.name} sku={product.sku} />
+      <ProductMeta price={product.price} rating={product.rating} />
+      <ProductActions
+        productId={product.id}
+        inStock={product.inStock}
+        onAddToCart={() => addToCart(product.id)}
+      />
+    </section>
+  );
+}
+```
+
+**Key points:**
+- Split by responsibility (header, meta, actions).
+- Each child component is easier to test.
+- The parent stays readable.
+
+</details>
+
+<details>
+<summary>Exercise 3: Pre-commit Hook</summary>
+
+```bash
+npx husky-init && npm install
+npm install --save-dev lint-staged
+```
+
+```json
+// package.json
+{
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "npm test -- --watch=false"
+    ]
+  }
+}
+```
+
+```bash
+# .husky/pre-commit
+npm run lint-staged
+```
+
+**Key points:**
+- Only staged files are checked.
+- Tests run before code enters the repo.
+- Auto-fixers reduce manual churn.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Linting**: Automated checks for code correctness
+- **Formatting**: Consistent styling with Prettier
+- **Structure**: Organizing code for scalability
+- **Refactoring**: Improving code safely
+- **Review discipline**: Checklists that reduce defects
+
+**Key takeaway**: Quality is a system, not a one-time cleanup.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Add linting and formatting to a greenfield repo
+- Standardize file structure across teams
+- Refactor a long component into clear sections
+- Create a review checklist for PRs
+- Add pre-commit hooks to prevent broken code
+
+---
+
 ## Further Reading
 
 - [ESLint Rules](https://eslint.org/docs/rules/)
 - [Prettier Options](https://prettier.io/docs/en/options.html)
+
+---
+
+**Navigation**: [← Previous Module](./08-typescript-mastery.md) | [Next Module →](./10-nextjs-fundamentals.md)

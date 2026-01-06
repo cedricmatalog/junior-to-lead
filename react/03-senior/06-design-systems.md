@@ -1,16 +1,57 @@
 # Design Systems
 
-Build and maintain component libraries that scale across teams and products.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 26: The Shared Language
+
+Multiple teams are shipping UI, but the product looks inconsistent. Sarah wants a design system that can scale across products without slowing delivery. Marcus points out that a system is only useful if it has clear APIs, reliable tokens, and documentation people actually read. This week is about building a design system that is easy to adopt, hard to misuse, and simple to evolve.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Design system** | A style guide - shared rules and reusable pieces |
+| **Tokens** | A palette - consistent values across the system |
+| **Component API** | A contract - how consumers should use the component |
+| **Versioning** | A release train - predictable updates |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 25 (Accessibility) - Familiarity with inclusive component design.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Structure a component library for reusability
-- Use design tokens for consistency
-- Document components with Storybook
-- Version and distribute packages
+By the end of this module, you'll be able to:
 
-## Design System Structure
+- [ ] Structure a component library for reusability
+- [ ] Define design tokens for consistent styling
+- [ ] Design component APIs that scale across teams
+- [ ] Document components with Storybook
+- [ ] Provide usage guidelines and accessibility notes
+- [ ] Version and distribute design system packages
+
+---
+
+## Time Estimate
+
+- **Reading**: 70-90 minutes
+- **Exercises**: 3-5 hours
+- **Mastery**: Practice design system maintenance over 6-8 weeks
+
+---
+
+## Chapter 1: Design System Structure
+
+You need a repository layout that works for both designers and engineers.
 
 ```
 design-system/
@@ -31,7 +72,9 @@ design-system/
 └── package.json
 ```
 
-## Design Tokens
+## Chapter 2: Design Tokens
+
+Tokens keep styles consistent even when products diverge.
 
 ### Token Definition
 
@@ -134,7 +177,9 @@ const Button = styled.button`
 `;
 ```
 
-## Component API Design
+## Chapter 3: Component API Design
+
+APIs should make the right usage obvious.
 
 ### Consistent Props
 
@@ -227,7 +272,9 @@ Card.Footer = CardFooter;
 </Card>
 ```
 
-## Storybook Documentation
+## Chapter 4: Storybook Documentation
+
+Documentation is how the system actually gets adopted.
 
 ### Story Structure
 
@@ -293,7 +340,9 @@ import * as ButtonStories from './Button.stories';
 
 Buttons trigger actions or navigation.
 
-## Usage
+## Chapter 5: Usage Guidelines
+
+Guidelines keep the system consistent across teams.
 
 ```tsx
 import { Button } from '@myorg/components';
@@ -303,22 +352,24 @@ import { Button } from '@myorg/components';
 </Button>
 ```
 
-## Props
+### Props
 
 <Controls />
 
-## Variants
+### Variants
 
 <Canvas of={ButtonStories.AllVariants} />
 
-## Accessibility
+### Accessibility
 
 - Use clear, descriptive labels
 - Include loading state announcement
 - Ensure sufficient color contrast
 ```
 
-## Versioning and Publishing
+## Chapter 6: Versioning and Publishing
+
+Releases need to be predictable, even with many consumers.
 
 ### Semantic Versioning
 
@@ -371,13 +422,136 @@ npx changeset publish
 }
 ```
 
+---
+
+## Common Mistakes
+
+1. **Shipping components without guidelines** - Adoption stalls without clear usage rules.
+2. **Token drift** - Hardcoded values undermine consistency.
+3. **Overly complex APIs** - If components are hard to use, teams will reimplement.
+4. **Ignoring versioning** - Breaking changes spread silently.
+
 ## Practice Exercises
 
 1. Create a design token system with theme support
 2. Build a component with comprehensive Storybook docs
 3. Set up versioning with changesets
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Token System</summary>
+
+```ts
+// tokens/colors.ts
+export const colors = {
+  brand: {
+    500: '#1e40af',
+    600: '#1e3a8a'
+  },
+  neutral: {
+    100: '#f5f5f5',
+    900: '#111827'
+  }
+};
+
+// Semantic tokens map to primitives
+export const semantic = {
+  light: {
+    surface: colors.neutral[100],
+    text: colors.neutral[900],
+    primary: colors.brand[500]
+  },
+  dark: {
+    surface: colors.neutral[900],
+    text: colors.neutral[100],
+    primary: colors.brand[600]
+  }
+};
+```
+
+**Key points:**
+- Tokens are centralized and reused.
+- Semantic tokens map design intent to primitives.
+- Themes swap token values, not component code.
+- Consumers reference tokens, not raw hex values.
+
+</details>
+
+<details>
+<summary>Exercise 2: Storybook Docs</summary>
+
+```tsx
+// Button.stories.tsx
+export default {
+  title: 'Components/Button',
+  component: Button,
+  args: { variant: 'primary', children: 'Save' },
+  parameters: {
+    a11y: { disable: false }
+  }
+};
+
+export const Primary = {};
+export const Secondary = { args: { variant: 'secondary' } };
+```
+
+**Key points:**
+- Stories show common variants and states.
+- Args allow interactive testing.
+- A11y checks run alongside docs.
+
+</details>
+
+<details>
+<summary>Exercise 3: Changesets</summary>
+
+```bash
+npx changeset
+npx changeset version
+npx changeset publish
+```
+
+**Key points:**
+- Each change creates a version note.
+- Versioning stays consistent across packages.
+- Publishing supports tags (e.g. next) for pre-releases.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Structure**: A scalable repo layout for design systems
+- **Tokens**: Single source of truth for styling
+- **Component APIs**: Consistent, reusable interfaces
+- **Documentation**: Storybook as the adoption engine
+- **Versioning**: Predictable releases for consumers
+
+**Key takeaway**: A design system is a product with users, not just a component folder.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Move shared styles into a token package
+- Document components with Storybook stories
+- Define accessibility guidelines per component
+- Publish a versioned UI package for internal teams
+- Standardize component APIs across products
+
+---
+
 ## Further Reading
 
 - [Storybook Documentation](https://storybook.js.org/docs)
 - [Design Tokens W3C](https://design-tokens.github.io/community-group/)
+
+---
+
+**Navigation**: [<- Previous Module](./05-accessibility-a11y.md) | [Next Module ->](./07-observability-monitoring.md)

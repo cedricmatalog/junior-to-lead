@@ -1,5 +1,8 @@
 # State Management Basics
 
+> **Last reviewed**: 2026-01-06
+
+
 ## Week Four: The Cart Problem
 
 Three weeks in, and you've built some impressive features. But Friday afternoon, Sarah drops a new project on your desk.

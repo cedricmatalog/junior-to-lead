@@ -1,321 +1,305 @@
 # Incident Management
 
-Handle production issues calmly and learn from them.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 38: The Fire Drill
+
+A checkout outage hits during a product launch. Sarah asks you to run the incident response, and Marcus reminds you that calm leadership matters as much as the fix. You need to triage quickly, communicate clearly, and turn chaos into learning. This week focuses on severity levels, incident command, postmortems, and the runbooks that prevent repeat failures.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Severity levels** | Triage tags - decide how fast to move |
+| **Incident command** | Air traffic control - coordinate without flying every plane |
+| **Runbooks** | Checklists - reduce decision load under stress |
+| **Postmortems** | Flight recorders - learn what happened and why |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 37 (Technical Strategy) - Comfort making trade-offs and communicating impact.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Respond to incidents effectively
-- Lead postmortems that drive improvement
-- Build runbooks and reduce MTTR
-- Create a blameless incident culture
+By the end of this module, you'll be able to:
 
-## Incident Response
+- [ ] Classify incidents by severity and response time
+- [ ] Lead incident response as the incident commander
+- [ ] Communicate updates to stakeholders under pressure
+- [ ] Run blameless postmortems that produce action
+- [ ] Create runbooks that reduce time to resolution
+- [ ] Improve alert quality and on-call readiness
 
-### Severity Levels
+---
 
-| Level | Definition | Response Time | Examples |
-|-------|------------|---------------|----------|
-| SEV1 | Service down, major revenue impact | 15 min | Site completely down |
-| SEV2 | Major feature broken, workaround exists | 1 hour | Checkout failing |
-| SEV3 | Minor feature broken, limited impact | 4 hours | Filter not working |
-| SEV4 | Low priority issue | Next sprint | Minor UI bug |
+## Time Estimate
 
-### Incident Response Process
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice incident leadership over 8-12 weeks
 
-```markdown
-## Incident Response Flow
+---
 
-### 1. Detection (0-5 min)
-- Alert fires or user reports
-- Acknowledge in on-call tool
-- Initial assessment
+## Chapter 1: Prepare Before the Incident
 
-### 2. Triage (5-15 min)
-- Determine severity
-- Decide if escalation needed
-- Notify stakeholders
+Sarah wants on-call and alerting in place before the next outage. Marcus reminds you that bad alerts create bad decisions.
 
-### 3. Response (Ongoing)
-- Incident Commander assigned
-- Create incident channel
-- Begin investigation
-
-### 4. Resolution
-- Implement fix
-- Verify fix works
-- Monitor for recurrence
-
-### 5. Post-Incident
-- Incident report
-- Schedule postmortem
-- Track action items
-```
-
-### Incident Commander Role
-
-```markdown
-## Incident Commander Responsibilities
-
-**Do:**
-- Coordinate response efforts
-- Communicate status updates
-- Make decisions on actions
-- Keep track of timeline
-- Delegate tasks clearly
-
-**Don't:**
-- Debug code yourself
-- Get lost in details
-- Forget to update stakeholders
-- Make changes without communication
-
-## Communication Template
-
-"[TIME] [SEV-X] [Status Update]
-
-**Current Status**: Brief description
-**Impact**: Who/what is affected
-**Actions**: What we're doing
-**Next Update**: In X minutes
-
-Example:
-14:32 SEV1 Update #3
-Current Status: Identified database connection issue
-Impact: Checkout flow failing for all users
-Actions: Ops team restarting connection pool
-Next Update: In 15 minutes"
-```
-
-## On-Call Best Practices
-
-### On-Call Setup
+### On-Call Essentials
 
 ```markdown
 ## On-Call Rotation
 
-### Schedule
 - Primary: 1 week rotation
 - Secondary: Shadows primary, takes over if needed
 - Escalation: Team lead, then engineering manager
 
-### Expectations
-- Acknowledge alerts within 15 min (SEV1-2)
-- Available during on-call hours (defined per team)
-- Handoff at rotation end
-
-### Compensation
-- On-call stipend: $X per week
-- Overtime for incident response
-- Comp time for major incidents
-
-### Tools
-- PagerDuty for alerting
-- Slack #incidents channel
-- Runbooks in Notion
+## Expectations
+- Acknowledge alerts within 15 minutes for SEV1-2
+- Keep handoff notes at rotation end
+- Document fixes in runbooks
 ```
 
 ### Alert Quality
 
 ```markdown
-## Good vs Bad Alerts
+## Good Alert
+Title: High error rate on /api/checkout
+Context: Error rate 5% (threshold 1%)
+Runbook: link-to-runbook
+Dashboard: link-to-dashboard
 
-### Good Alert
-**Title**: High error rate on /api/checkout
-**Context**: Error rate 5% (threshold 1%)
-**Runbook**: link-to-runbook
-**Dashboard**: link-to-dashboard
-
-### Bad Alert
-**Title**: Error
-**Context**: Something is wrong
-**Runbook**: None
-**Dashboard**: None
-
-## Alert Hygiene
-- Review alerts monthly
-- Delete or fix noisy alerts
-- Every alert should be actionable
-- If you regularly ignore an alert, fix or remove it
+## Bad Alert
+Title: Error
+Context: Something is wrong
+Runbook: None
+Dashboard: None
 ```
 
-## Postmortems
+## Chapter 2: Declare Severity and Triage
 
-### Postmortem Template
+Your first move is to set severity and assemble the right response. Overreacting wastes time, underreacting amplifies damage.
+
+| Level | Definition | Response Time | Example |
+|-------|------------|---------------|---------|
+| SEV1 | Service down, major revenue impact | 15 minutes | Checkout unavailable |
+| SEV2 | Major feature broken, workaround exists | 1 hour | Payment retries failing |
+| SEV3 | Minor feature broken, limited impact | 4 hours | Filters not working |
+| SEV4 | Low priority issue | Next sprint | Minor UI bug |
+
+## Chapter 3: Run the Incident
+
+Sarah assigns you as incident commander. Your job is coordination and communication, not deep debugging.
 
 ```markdown
-# Incident Postmortem: [Title]
+## Incident Commander Responsibilities
+
+Do:
+- Coordinate response efforts
+- Communicate status updates
+- Make decisions on actions
+- Track the timeline
+- Delegate clearly
+
+Do not:
+- Debug code yourself
+- Get lost in details
+- Make changes without communication
+```
+
+```markdown
+## Status Update Template
+
+[TIME] [SEV-X] Update #N
+
+Current Status: Brief description
+Impact: Who or what is affected
+Actions: What is happening right now
+Next Update: In X minutes
+```
+
+## Chapter 4: Resolve and Verify
+
+Marcus reminds you that the incident is not over when the fix is deployed. You need to confirm recovery and watch for regressions.
+
+```markdown
+## Resolution Checklist
+
+- Fix deployed or rollback complete
+- Key metrics back to normal
+- Logs show error rate stabilized
+- Stakeholders notified of recovery
+```
+
+## Chapter 5: Learn and Improve
+
+Sarah wants a blameless postmortem that drives change. The goal is to prevent the next incident, not assign blame.
+
+```markdown
+# Postmortem Template
 
 ## Summary
-**Date**: 2024-01-15
-**Duration**: 2 hours 15 minutes
-**Severity**: SEV1
-**Author**: @tech-lead
+Date, duration, severity, owner
 
 ## Impact
-- Checkout unavailable for 2 hours
-- ~500 failed transactions
-- Estimated revenue impact: $X
+What broke, who was affected, business impact
 
-## Timeline (All times UTC)
-| Time | Event |
-|------|-------|
-| 14:00 | Deploy of PR #1234 |
-| 14:15 | First error alerts |
-| 14:18 | On-call acknowledges |
-| 14:25 | SEV1 declared, IC assigned |
-| 14:45 | Root cause identified |
-| 15:10 | Fix deployed |
-| 15:30 | Monitoring confirms resolution |
-| 16:15 | Incident closed |
+## Timeline
+What happened, in order
 
 ## Root Cause
-The deployment included a change to the payment API client that
-used a new field not yet available in production. This caused a
-null pointer exception on every checkout attempt.
-
-## Contributing Factors
-1. Change wasn't tested against production API
-2. Staging environment had different data
-3. No canary deployment for this service
+The technical root and the contributing factors
 
 ## What Went Well
-- Fast detection (15 min)
-- Clear incident communication
-- Quick rollback decision
+Fast detection, good communication, etc.
 
-## What Could Be Improved
-- Testing with production-like data
-- Canary deployment would have limited blast radius
-- Better error messages would have sped up debugging
+## What Needs Improvement
+Gaps in testing, monitoring, or process
 
 ## Action Items
 | Action | Owner | Priority | Status |
 |--------|-------|----------|--------|
-| Add integration test with prod API | @alice | P1 | Open |
-| Implement canary deployments | @bob | P1 | Open |
-| Improve error logging in payment client | @carol | P2 | Open |
-| Update runbook with this scenario | @tech-lead | P2 | Complete |
-
-## Lessons Learned
-- Production parity in staging is critical
-- Canary deployments should be standard for payment flows
-- Error messages should include context about what field/value failed
 ```
 
-### Running a Postmortem Meeting
+## Chapter 6: Write Runbooks That Work
 
-```markdown
-## Postmortem Meeting Agenda (60 min)
-
-### Setup (5 min)
-- State purpose: Learning, not blame
-- Review timeline together
-
-### What Happened (15 min)
-- Walk through events
-- Fill in gaps
-- Correct inaccuracies
-
-### Root Cause Analysis (15 min)
-- Use 5 Whys technique
-- Identify contributing factors
-- Look for systemic issues
-
-### What We'll Change (20 min)
-- Brainstorm improvements
-- Prioritize actions
-- Assign owners
-
-### Wrap-up (5 min)
-- Review action items
-- Schedule follow-ups
-- Thank participants
-```
-
-### 5 Whys Example
-
-```markdown
-**Problem**: Checkout was down for 2 hours
-
-**Why?** The payment API returned null for a required field
-**Why?** We deployed code that expected a new field
-**Why?** The field wasn't in production API yet
-**Why?** Staging had mock data with the field
-**Why?** We don't test against production-like data
-
-**Root Cause**: Staging environment doesn't match production
-
-**Action**: Implement production API integration tests
-```
-
-## Runbooks
-
-### Runbook Template
+Marcus suggests short, action-first runbooks that are easy to scan during a crisis.
 
 ```markdown
 # Runbook: High Error Rate on Checkout
 
-## Overview
-This runbook covers how to respond to elevated error rates
-on the checkout endpoint.
-
 ## Detection
-- Alert: "Checkout error rate > 1%"
-- Dashboard: [link]
-
-## Symptoms
-- Users unable to complete purchases
-- Error rate spike in monitoring
-- Customer complaints
+- Alert: Checkout error rate > 1%
+- Dashboard: link-to-dashboard
 
 ## Diagnosis Steps
-
-### 1. Check Recent Deployments
-```bash
-git log --oneline --since="2 hours ago"
-```
-If recent deploy, consider rollback.
-
-### 2. Check External Dependencies
-- Payment provider status: [link]
-- Database status: [link]
-
-### 3. Check Application Logs
-```bash
-kubectl logs -l app=checkout --since=1h | grep ERROR
-```
+1. Check recent deploys
+2. Check external dependencies
+3. Check logs for error patterns
 
 ## Resolution Steps
-
-### If Recent Deploy
-1. Notify team in #incidents
-2. Rollback: `deploy rollback checkout`
-3. Monitor for 15 minutes
-
-### If External Dependency
-1. Check provider status page
-2. Enable fallback if available
-3. Communicate to customers
-
-### If Database Issue
-1. Check connection pool
-2. Restart if needed: `kubectl rollout restart`
-3. Escalate to database team
+- If recent deploy, rollback
+- If dependency issue, enable fallback
+- If database issue, restart connection pool
 
 ## Escalation
 - Primary: On-call frontend
-- Secondary: @tech-lead
-- Database: @dba-team
+- Secondary: Tech lead
+- Database: DBA team
 ```
+
+---
+
+## Common Mistakes
+
+1. **No clear incident commander** - Work happens, but coordination fails.
+2. **Silent incident updates** - Stakeholders lose trust and invent their own narrative.
+3. **Fixing without verification** - Incidents resurface because recovery was not checked.
+4. **Postmortems without follow-through** - Action items never land and the same issues repeat.
 
 ## Practice Exercises
 
 1. Write a runbook for a common incident in your system
-2. Practice incident commander role in a tabletop exercise
-3. Conduct a postmortem for a past incident
+2. Draft a status update for a SEV1 outage
+3. Outline a postmortem for a recent issue
+
+### Solutions
+
+<details>
+<summary>Exercise 1: Runbook</summary>
+
+```markdown
+# Runbook: Login Error Spike
+
+Detection: Alert on 5xx rate > 2%
+Diagnosis: Check recent auth deploys, verify identity provider status
+Resolution: Roll back latest change or enable fallback auth
+Escalation: On-call, then security team
+```
+
+**Key points:**
+- Start with detection and diagnosis.
+- Keep steps short and actionable.
+- Include escalation paths.
+
+</details>
+
+<details>
+<summary>Exercise 2: Status Update</summary>
+
+```markdown
+15:20 SEV1 Update #2
+Current Status: Checkout API returning 500s
+Impact: All purchases failing
+Actions: Rollback in progress, monitoring error rate
+Next Update: In 15 minutes
+```
+
+**Key points:**
+- Use consistent format.
+- Keep impact explicit.
+- Always provide next update time.
+
+</details>
+
+<details>
+<summary>Exercise 3: Postmortem Outline</summary>
+
+```markdown
+Summary: 45-minute checkout outage after deploy
+Impact: 420 failed orders, revenue loss
+Root Cause: Missing null check in payment adapter
+Action Items: Add integration test, add feature flag rollback, update runbook
+```
+
+**Key points:**
+- Focus on learning, not blame.
+- Use clear action items.
+- Assign owners and timelines.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Incident triage**: Classify severity to set response speed
+- **Incident command**: Coordinate actions and communication
+- **Postmortems**: Turn incidents into improvements
+- **Runbooks**: Reduce time to resolution with clear steps
+- **Alert quality**: Make alerts actionable and trustworthy
+
+**Key takeaway**: Calm, structured response shortens outages and builds trust.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Audit noisy alerts and improve signal quality
+- Create a runbook for your top incident type
+- Host a tabletop incident exercise
+- Improve incident updates for stakeholders
+- Track postmortem action items to completion
+
+---
 
 ## Further Reading
 
-- [Google SRE Book - Incident Management](https://sre.google/sre-book/managing-incidents/)
+- [Google SRE Book - Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - [Blameless Postmortems](https://www.etsy.com/codeascraft/blameless-postmortems/)
+
+---
+
+**Navigation**: [<- Previous Module](./06-technical-strategy.md) | [Next Module ->](./08-documentation-culture.md)

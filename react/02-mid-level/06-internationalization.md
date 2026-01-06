@@ -1,16 +1,57 @@
 # Internationalization (i18n)
 
-Build applications that work globally across languages and cultures.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 16: The Global Launch
+
+The product is going international. Sarah lists the new requirements: Spanish and Arabic on day one, currency formatting, and right-to-left layouts that don't break. Marcus warns you that localization is more than translating text -- it affects layout, dates, numbers, and even the order of UI elements. This week is about setting up i18n infrastructure so every new locale feels native, not bolted on.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Translations** | A dictionary - same meaning, different words |
+| **Formatting** | A currency exchanger - same value, different display |
+| **Namespaces** | Folder labels - keep translations organized |
+| **RTL layout** | A mirror - the UI flips direction |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 05 (Error Handling Patterns) - Comfort with component structure and UI feedback patterns.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Set up react-i18next for translations
-- Handle pluralization and formatting
-- Support right-to-left (RTL) languages
-- Manage translation workflows
+By the end of this module, you'll be able to:
 
-## Setting Up react-i18next
+- [ ] Configure react-i18next with namespaces and fallbacks
+- [ ] Manage translation files and keep them organized
+- [ ] Handle date, number, and currency formatting
+- [ ] Implement pluralization rules correctly
+- [ ] Support RTL languages without layout bugs
+- [ ] Build a translation workflow that scales
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice i18n patterns over 4-6 weeks
+
+---
+
+## Chapter 1: Setting Up react-i18next
+
+The first step is wiring up the translation system across the app.
 
 ```jsx
 // i18n.js
@@ -44,7 +85,9 @@ import './i18n';
 // ... rest of app
 ```
 
-## Translation Files
+## Chapter 2: Translation Files
+
+You need a structure that makes it easy to add new locales without chaos.
 
 ```json
 // locales/en.json
@@ -80,7 +123,9 @@ import './i18n';
 }
 ```
 
-## Using Translations
+## Chapter 3: Using Translations
+
+Once keys exist, components should pull translations without manual string juggling.
 
 ```jsx
 import { useTranslation, Trans } from 'react-i18next';
@@ -125,7 +170,9 @@ function RichText() {
 }
 ```
 
-## Formatting
+## Chapter 4: Formatting
+
+Dates, numbers, and currencies have to feel native in every locale.
 
 ```jsx
 // Configure formatters
@@ -169,7 +216,9 @@ function formatNumber(number, locale) {
 // 1234567.89 → "1,234,567.89" (en) or "1.234.567,89" (de)
 ```
 
-## Pluralization
+## Chapter 5: Pluralization
+
+Plural rules differ by language, and hardcoded English logic will break quickly.
 
 ```json
 // en.json - Simple plural
@@ -193,7 +242,9 @@ function formatNumber(number, locale) {
 }
 ```
 
-## RTL Support
+## Chapter 6: RTL Support
+
+The Arabic layout needs to mirror cleanly without breaking your CSS.
 
 ```jsx
 // Detect and apply RTL
@@ -225,7 +276,9 @@ function App() {
 }
 ```
 
-## Lazy Loading Translations
+## Chapter 7: Lazy Loading Translations
+
+You can't ship every language in the initial bundle.
 
 ```jsx
 import i18n from 'i18next';
@@ -250,7 +303,9 @@ function ProfilePage() {
 }
 ```
 
-## Translation Workflow
+## Chapter 8: Translation Workflow
+
+A repeatable process keeps translators, developers, and QA in sync.
 
 ```jsx
 // Extract keys automatically
@@ -277,7 +332,7 @@ function validateTranslations() {
 }
 ```
 
-## Best Practices
+### Best Practices
 
 1. **Never hardcode text** - All user-facing strings in translation files
 2. **Use namespaces** - Organize by feature/page
@@ -293,13 +348,166 @@ function validateTranslations() {
 }
 ```
 
+---
+
+## Common Mistakes
+
+1. **Hardcoding strings** - Every user-facing string should live in translations.
+2. **Ignoring RTL early** - Layout bugs compound if you add RTL late.
+3. **Shipping every locale at once** - Lazy load to avoid large bundles.
+4. **Skipping context** - Translators need notes for ambiguous strings.
+
 ## Practice Exercises
 
 1. Set up i18next with lazy-loaded translations
 2. Add RTL support to an existing app
 3. Implement a language switcher with persistence
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Lazy-Loaded i18n</summary>
+
+```jsx
+import i18n from 'i18next';
+import Backend from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
+
+i18n
+  .use(Backend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: 'en',
+    supportedLngs: ['en', 'es', 'ar'],
+    ns: ['common', 'home'],
+    defaultNS: 'common',
+    backend: {
+      loadPath: '/locales/{{lng}}/{{ns}}.json'
+    },
+    interpolation: {
+      escapeValue: false
+    },
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage']
+    }
+  });
+```
+
+**Key points:**
+- Translations load per namespace and language.
+- Language detection handles user defaults.
+- Bundles stay small on first load.
+
+</details>
+
+<details>
+<summary>Exercise 2: RTL Support</summary>
+
+```jsx
+function AppRoot({ children, locale }) {
+  const direction = locale === 'ar' ? 'rtl' : 'ltr';
+
+  useEffect(() => {
+    document.documentElement.dir = direction;
+    document.documentElement.lang = locale;
+  }, [direction, locale]);
+
+  return (
+    <div dir={direction} className={`app ${direction}`}>
+      {children}
+    </div>
+  );
+}
+```
+
+**Key points:**
+- `dir` controls text direction and layout flow.
+- Use logical CSS properties for margins and padding.
+- Toggle direction based on locale.
+
+</details>
+
+<details>
+<summary>Exercise 3: Language Switcher</summary>
+
+```jsx
+function LanguageSwitcher() {
+  const { i18n } = useTranslation();
+
+  const setLanguage = async (lng) => {
+    await i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng);
+  };
+
+  return (
+    <div className="lang-switcher">
+      <button
+        onClick={() => setLanguage('en')}
+        aria-pressed={i18n.language === 'en'}
+      >
+        English
+      </button>
+      <button
+        onClick={() => setLanguage('es')}
+        aria-pressed={i18n.language === 'es'}
+      >
+        Espanol
+      </button>
+      <button
+        onClick={() => setLanguage('ar')}
+        aria-pressed={i18n.language === 'ar'}
+      >
+        Arabic
+      </button>
+    </div>
+  );
+}
+```
+
+**Key points:**
+- `changeLanguage` updates the app instantly.
+- Persisting in localStorage keeps choices between sessions.
+- Keep labels in their own language for clarity.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **i18n setup**: Wiring react-i18next with namespaces
+- **Translation structure**: Organizing locales and keys
+- **Formatting**: Dates, numbers, and currencies per locale
+- **Pluralization**: Correct language-specific rules
+- **RTL support**: Layout mirroring for right-to-left scripts
+- **Workflow**: Scaling translation updates safely
+
+**Key takeaway**: Internationalization is a product feature, not a last-minute patch.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Ship Spanish translations for a marketing launch
+- Add RTL support to a checkout flow
+- Implement locale-specific currency formatting
+- Build a translation pipeline with CI checks
+- Prevent UI breakage with long or complex strings
+
+---
+
 ## Further Reading
 
 - [react-i18next Documentation](https://react.i18next.com/)
 - [ICU Message Format](https://unicode-org.github.io/icu/userguide/format_parse/messages/)
+
+---
+
+**Navigation**: [← Previous Module](./05-error-handling-patterns.md) | [Next Module →](./07-testing-strategies.md)

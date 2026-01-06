@@ -1,68 +1,105 @@
 # Documentation Culture
 
-Build knowledge systems that scale with your team.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 39: The Knowledge Gap
+
+New hires keep asking the same questions, and key decisions live only in chat. Sarah asks you to build a documentation culture that scales with the team. Marcus reminds you that good docs are not optional; they are how a team keeps moving when people change. This week focuses on doc types, README and ADR standards, ownership, and habits that keep knowledge current.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Documentation** | Shared memory - what the team should not forget |
+| **README** | A front door - orient people fast |
+| **ADRs** | A decision trail - why we chose this path |
+| **Docs-as-code** | A pipeline - docs ship like software |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 38 (Incident Management) - Comfort with postmortems and runbooks.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Create documentation that gets used
-- Establish README and ADR standards
-- Build effective knowledge management
-- Encourage a documentation-first culture
+By the end of this module, you'll be able to:
 
-## Why Documentation Matters
+- [ ] Build a documentation map for your team
+- [ ] Standardize README and ADR formats
+- [ ] Define ownership and update cadence
+- [ ] Create docs that are easy to discover and use
+- [ ] Embed documentation habits into team workflows
+- [ ] Treat docs as part of the delivery pipeline
 
-### The Cost of Missing Documentation
+---
+
+## Time Estimate
+
+- **Reading**: 60-80 minutes
+- **Exercises**: 3-4 hours
+- **Mastery**: Practice documentation habits over 8-12 weeks
+
+---
+
+## Chapter 1: Make the Cost Visible
+
+Sarah wants the team to see documentation as a time saver, not a burden. Marcus suggests quantifying the cost of missing docs.
 
 ```markdown
-## Scenario: Missing Documentation Impact
+## Missing Documentation Impact
 
-**Without documentation:**
-- New engineer asks 5 questions/day
-- Each question takes 15 min from someone
-- 5 engineers × 15 min × 5 questions = 6+ hours/day of interruption
+Without documentation:
+- New engineer asks 5 questions per day
+- Each question takes 15 minutes from someone
+- 5 engineers x 15 minutes x 5 questions = 6+ hours per day
 - Onboarding takes 3 months
 
-**With documentation:**
+With documentation:
 - New engineer finds 4 of 5 answers in docs
-- 1 question/day, still captured in docs
+- 1 question per day, still captured in docs
 - Onboarding takes 1 month
 - Knowledge persists when people leave
 ```
 
-## Types of Documentation
+## Chapter 2: Map the Doc Types
 
-### Documentation Map
+Different questions require different doc types. Keep the map simple and visible.
 
 ```markdown
 ## Documentation Types
 
-### Reference
-**Purpose**: Look up specific information
-**Examples**: API docs, configuration options
-**Updates**: When code changes
-**Location**: Near the code
+Reference
+- Purpose: Look up specific information
+- Examples: API docs, configuration options
+- Update trigger: Code changes
 
-### Tutorial
-**Purpose**: Learn how to do something
-**Examples**: Getting started, how-to guides
-**Updates**: Quarterly review
-**Location**: Team wiki
+Tutorial
+- Purpose: Learn how to do something
+- Examples: Getting started, how-to guides
+- Update trigger: Quarterly review
 
-### Explanation
-**Purpose**: Understand why/how something works
-**Examples**: Architecture docs, ADRs
-**Updates**: When design changes
-**Location**: docs/ folder
+Explanation
+- Purpose: Understand why or how something works
+- Examples: Architecture docs, ADRs
+- Update trigger: Design changes
 
-### Runbook
-**Purpose**: Handle specific situations
-**Examples**: Incident response, deployment
-**Updates**: After incidents
-**Location**: Runbook system
+Runbook
+- Purpose: Handle specific situations
+- Examples: Incident response, deployment
+- Update trigger: After incidents
 ```
 
-## README Standards
+## Chapter 3: Standardize READMEs and ADRs
+
+Sarah wants consistent entry points so the team always knows where to look.
 
 ### Project README Template
 
@@ -73,257 +110,108 @@ Brief description of what this project does.
 
 ## Quick Start
 
-\`\`\`bash
-npm install
-npm run dev
-\`\`\`
+    npm install
+    npm run dev
 
 ## Prerequisites
-
 - Node.js 18+
-- Access to [internal service]
+- Access to internal services
 - Environment variables (see .env.example)
 
-## Development
-
-### Setup
-
-1. Clone the repository
-2. Copy .env.example to .env.local
-3. Run `npm install`
-4. Run `npm run dev`
-
-### Commands
-
+## Commands
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run test` | Run tests |
-| `npm run lint` | Check code style |
+| npm run dev | Start development server |
+| npm run build | Build for production |
+| npm run test | Run tests |
+| npm run lint | Check code style |
 
-### Architecture
-
-Brief overview of how the code is organized.
-
-See [Architecture Documentation](./docs/architecture.md) for details.
-
-## Deployment
-
-How to deploy this project.
-
-## Contributing
-
-Link to contribution guidelines.
+## Architecture
+Brief overview and links to deeper docs.
 
 ## Team
-
-- **Owner**: @team-name
-- **Slack**: #channel-name
-- **On-call**: link-to-rotation
+Owner, Slack channel, on-call rotation
 ```
 
-### Component README Template
+### ADR Template
 
 ```markdown
-# ComponentName
+# ADR: [Decision Title]
 
-Brief description of the component's purpose.
+## Context
+What problem are we solving?
 
-## Usage
+## Decision
+What was chosen and why?
 
-\`\`\`tsx
-import { ComponentName } from './ComponentName';
+## Alternatives
+What else did we consider?
 
-<ComponentName
-  prop1="value"
-  prop2={value}
-  onEvent={handleEvent}
-/>
-\`\`\`
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| prop1 | string | required | Description |
-| prop2 | number | 0 | Description |
-| onEvent | () => void | - | Description |
-
-## Examples
-
-### Basic Usage
-[Example code]
-
-### With Variants
-[Example code]
-
-## Notes
-
-Any important implementation details or gotchas.
+## Consequences
+What changes because of this decision?
 ```
 
-## Architecture Decision Records
+## Chapter 4: Keep Docs Updated
 
-### ADR Directory Structure
-
-```
-docs/
-└── architecture/
-    └── decisions/
-        ├── README.md           # Index and how to write ADRs
-        ├── 0001-use-nextjs.md
-        ├── 0002-state-management.md
-        └── template.md
-```
-
-### ADR Index
-
-```markdown
-# Architecture Decision Records
-
-## What is an ADR?
-An Architecture Decision Record captures an important architectural
-decision made along with its context and consequences.
-
-## When to Write an ADR
-- Choosing between technologies
-- Major architectural changes
-- Decisions with long-term impact
-- Decisions that were debated
-
-## How to Write an ADR
-1. Copy template.md
-2. Number sequentially (0001, 0002, ...)
-3. Fill in all sections
-4. Get review from stakeholders
-5. Merge when accepted
-
-## ADR Index
-
-| # | Title | Status | Date |
-|---|-------|--------|------|
-| 0001 | [Use Next.js](./0001-use-nextjs.md) | Accepted | 2024-01 |
-| 0002 | [State Management](./0002-state-management.md) | Accepted | 2024-01 |
-| 0003 | [Testing Strategy](./0003-testing-strategy.md) | Proposed | 2024-02 |
-```
-
-## Knowledge Management
-
-### Wiki Structure
-
-```markdown
-## Team Wiki Organization
-
-### Getting Started
-- New Engineer Onboarding
-- Development Setup
-- Team Practices
-
-### Technical
-- Architecture Overview
-- System Design Docs
-- API Documentation
-- Runbooks
-
-### Process
-- How We Work
-- Code Review Guidelines
-- Deployment Process
-- Incident Response
-
-### Reference
-- Glossary
-- Useful Links
-- Contact Directory
-```
-
-### Keeping Docs Updated
+Marcus wants ownership and a schedule so docs do not decay.
 
 ```markdown
 ## Documentation Maintenance
 
-### Triggers for Updates
+Triggers for updates:
 - Code changes that affect documented behavior
 - Onboarding questions not answered by docs
 - Post-incident action items
 - Quarterly review cycle
 
-### Ownership
+Ownership:
 - Each doc has an owner
-- Owner reviews quarterly
+- Owners review quarterly
 - Team can propose changes via PR
-
-### Review Cycle
-1. Monthly: Check for outdated content
-2. Quarterly: Comprehensive review
-3. Annually: Reorganize and archive
-
-### Quality Checks
-- Links still work?
-- Screenshots current?
-- Code examples run?
-- Contact info accurate?
 ```
 
-## Building Documentation Culture
+## Chapter 5: Build a Documentation Culture
 
-### Making It Easy
+Sarah asks you to make documentation part of the workflow, not an afterthought.
 
 ```markdown
 ## Documentation Practices
 
-### In Pull Requests
+In pull requests:
 - README updated if behavior changes
 - ADR for architectural decisions
 - Inline comments for complex logic
 
-### In Standups
-- "I updated the wiki with..."
-- "I couldn't find docs for X"
+In onboarding:
+- First task is to fix something in docs
+- Capture questions as doc updates
 
-### In Onboarding
-- First task: Fix something in docs
-- Docs feedback is valuable
-- Questions → Documentation gaps
-
-### Recognition
-- Celebrate good documentation
-- Include in performance reviews
-- "Docs Hero" of the month
+Recognition:
+- Celebrate great docs
+- Highlight doc contributions in reviews
 ```
 
-### Documentation as Code
+## Chapter 6: Docs as Code
+
+Marcus suggests treating docs like software so they stay current and testable.
 
 ```markdown
 ## Docs-as-Code Practices
 
-### Treat docs like code:
 - Version control (git)
 - Review process (PRs)
-- Testing (link checks, spell check)
-- CI/CD (auto-deploy)
-
-### Example: Docusaurus Setup
-
-\`\`\`yaml
-# .github/workflows/docs.yml
-name: Deploy Docs
-on:
-  push:
-    branches: [main]
-    paths: ['docs/**']
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: npm ci
-      - run: npm run docs:build
-      - run: npm run docs:deploy
-\`\`\`
+- Automated checks (links, spelling)
+- CI/CD for docs publishing
 ```
+
+---
+
+## Common Mistakes
+
+1. **Docs with no owner** - Nobody feels responsible for updates.
+2. **One giant wiki page** - Information becomes hard to find and maintain.
+3. **Docs that never ship** - Drafts are not useful if they stay hidden.
+4. **Outdated examples** - Broken code examples erode trust quickly.
 
 ## Practice Exercises
 
@@ -331,7 +219,107 @@ jobs:
 2. Write an ADR for a recent decision
 3. Audit existing documentation for gaps
 
+### Solutions
+
+<details>
+<summary>Exercise 1: README Template</summary>
+
+```markdown
+# Service Name
+
+## Purpose
+One paragraph on what this service does.
+
+## Quick Start
+npm install
+npm run dev
+
+## Commands
+- npm run test
+- npm run lint
+
+## Ownership
+Team: Frontend Platform
+Slack: #frontend-platform
+```
+
+**Key points:**
+- Put the essentials at the top.
+- Keep it short and skimmable.
+- Link to deeper docs.
+
+</details>
+
+<details>
+<summary>Exercise 2: ADR</summary>
+
+```markdown
+# ADR: Adopt TanStack Query
+
+Context: Data fetching is inconsistent across teams.
+Decision: Standardize on TanStack Query.
+Alternatives: Redux Thunks, SWR.
+Consequences: Training and migration work required.
+```
+
+**Key points:**
+- Capture the why, not just the what.
+- List alternatives briefly.
+- Note the trade-offs.
+
+</details>
+
+<details>
+<summary>Exercise 3: Documentation Audit</summary>
+
+```markdown
+Audit Checklist
+- Missing README for key services
+- ADRs not indexed
+- Outdated setup steps
+- Broken links to runbooks
+```
+
+**Key points:**
+- Start with the highest traffic docs.
+- Track fixes as action items.
+- Assign owners.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Doc types**: Match the format to the question
+- **Standards**: Consistent READMEs and ADRs
+- **Ownership**: Clear accountability keeps docs alive
+- **Culture**: Make docs part of the workflow
+- **Docs-as-code**: Treat documentation like product work
+
+**Key takeaway**: Documentation scales the team when people and priorities change.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Add ownership to a key architecture doc
+- Create a README for a critical service
+- Add an ADR for a recent decision
+- Set a quarterly doc review cadence
+- Update runbooks after an incident
+
+---
+
 ## Further Reading
 
 - [Divio Documentation System](https://documentation.divio.com/)
 - [Write the Docs](https://www.writethedocs.org/)
+
+---
+
+**Navigation**: [<- Previous Module](./07-incident-management.md) | [Next Module ->](./09-cross-team-collaboration.md)

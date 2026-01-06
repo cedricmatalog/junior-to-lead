@@ -1,16 +1,57 @@
 # Error Handling Patterns
 
-Build resilient applications that fail gracefully.
+> **Last reviewed**: 2026-01-06
+
+
+## Week 15: The Outage Drill
+
+The API is flaky this week. Users are hitting broken screens, and the support inbox is filling up. Sarah asks for a resilience plan: "If something fails, we need to recover without losing trust." Marcus adds that errors shouldn't blow up the whole app. This week is about designing predictable recovery paths -- from component crashes to failed requests -- so the UI fails gracefully and guides users back on track.
+
+## Mental Models
+
+Before we dive in, here's how to think about the core concepts:
+
+| Concept | Think of it as... |
+|---------|-------------------|
+| **Error boundaries** | Circuit breakers - stop a failure from spreading |
+| **Fallback UI** | A detour sign - keep users moving |
+| **Async errors** | Dropped calls - handle retries and timeouts |
+| **Logging** | Flight recorder - capture what went wrong |
+
+Keep these in mind. They'll click as we build.
+
+---
+
+## Prerequisites
+
+Module 04 (API Design and Integration) - Familiarity with async requests and loading states.
+
+---
 
 ## Learning Objectives
 
-By the end of this module, you will:
-- Implement error boundaries for component crashes
-- Handle async errors effectively
-- Display user-friendly error messages
-- Create fallback UIs and recovery mechanisms
+By the end of this module, you'll be able to:
 
-## Error Boundaries
+- [ ] Implement error boundaries for component crashes
+- [ ] Handle async errors and retries consistently
+- [ ] Build fallback UIs with recovery actions
+- [ ] Classify error types and map them to UX
+- [ ] Display form and validation errors clearly
+- [ ] Instrument logging and monitoring hooks
+
+---
+
+## Time Estimate
+
+- **Reading**: 60-90 minutes
+- **Exercises**: 3-5 hours
+- **Mastery**: Practice error-handling patterns over 4-6 weeks
+
+---
+
+## Chapter 1: Error Boundaries
+
+When a component crashes, the rest of the page shouldn't go down with it.
 
 Catch JavaScript errors in component trees.
 
@@ -62,7 +103,9 @@ function App() {
 }
 ```
 
-## Error Fallback Components
+## Chapter 2: Error Fallback Components
+
+Sarah wants every failure to show a friendly recovery path, not a dead end.
 
 ```jsx
 function ErrorFallback({ error, resetErrorBoundary }) {
@@ -96,7 +139,9 @@ function App() {
 }
 ```
 
-## Async Error Handling
+## Chapter 3: Async Error Handling
+
+Network failures are inevitable. You need consistent retry and timeout strategies.
 
 ```jsx
 // With try-catch
@@ -137,7 +182,9 @@ function DataComponent() {
 }
 ```
 
-## Error Types and Handling
+## Chapter 4: Error Types and Handling
+
+Different errors need different UX. Not every failure is fatal.
 
 ```jsx
 // Define error types
@@ -189,7 +236,9 @@ function handleError(error) {
 }
 ```
 
-## User-Friendly Error Display
+## Chapter 5: User-Friendly Error Display
+
+The message matters. Users need clarity, not stack traces.
 
 ```jsx
 function ErrorDisplay({ error, onRetry }) {
@@ -239,7 +288,9 @@ function ErrorDisplay({ error, onRetry }) {
 }
 ```
 
-## Form Error Handling
+## Chapter 6: Form Error Handling
+
+Validation errors need to be specific and immediate.
 
 ```jsx
 function RegistrationForm() {
@@ -283,7 +334,9 @@ function RegistrationForm() {
 }
 ```
 
-## Logging and Monitoring
+## Chapter 7: Logging and Monitoring
+
+If errors aren't captured, you can't fix what you can't see.
 
 ```jsx
 // Error logging service
@@ -304,13 +357,161 @@ window.addEventListener('unhandledrejection', (event) => {
 });
 ```
 
+---
+
+## Common Mistakes
+
+1. **Catching everything in one place** - Different layers need different recovery strategies.
+2. **Showing raw errors to users** - Translate failures into actionable messages.
+3. **Ignoring retries and timeouts** - Network errors need explicit handling.
+4. **Logging too late** - Capture errors where they happen, not after the fact.
+
 ## Practice Exercises
 
 1. Implement tiered error boundaries for different app sections
 2. Create a toast notification system for errors
 3. Build retry logic with exponential backoff
 
+### Solutions
+
+<details>
+<summary>Exercise 1: Tiered Error Boundaries</summary>
+
+```jsx
+function AppShell() {
+  const [routeKey, setRouteKey] = useState(0);
+
+  return (
+    <ErrorBoundary
+      FallbackComponent={AppFallback}
+      onReset={() => setRouteKey((key) => key + 1)}
+      resetKeys={[routeKey]}
+    >
+      <Header />
+      <main>
+        <ErrorBoundary FallbackComponent={DashboardFallback}>
+          <Dashboard />
+        </ErrorBoundary>
+        <ErrorBoundary FallbackComponent={BillingFallback}>
+          <Billing />
+        </ErrorBoundary>
+      </main>
+    </ErrorBoundary>
+  );
+}
+```
+
+**Key points:**
+- Critical sections get their own boundaries.
+- A dashboard crash doesn't take down billing.
+- App-level fallback covers the full page.
+
+</details>
+
+<details>
+<summary>Exercise 2: Error Toasts</summary>
+
+```jsx
+const ToastContext = createContext(null);
+
+function ToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
+
+  const pushToast = (message) => {
+    const id = Date.now();
+    setToasts((prev) => [...prev, { id, message }]);
+    setTimeout(() => dismissToast(id), 5000);
+  };
+
+  const dismissToast = (id) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
+  return (
+    <ToastContext.Provider value={{ pushToast }}>
+      {children}
+      <div className="toast-stack" role="status" aria-live="polite">
+        {toasts.map((toast) => (
+          <div key={toast.id} className="toast" onClick={() => dismissToast(toast.id)}>
+            {toast.message}
+          </div>
+        ))}
+      </div>
+    </ToastContext.Provider>
+  );
+}
+
+function useToast() {
+  return useContext(ToastContext);
+}
+```
+
+**Key points:**
+- Centralized toast state avoids prop drilling.
+- Click-to-dismiss keeps UX predictable.
+- Any component can report errors via `useToast`.
+
+</details>
+
+<details>
+<summary>Exercise 3: Exponential Backoff</summary>
+
+```jsx
+async function fetchWithBackoff(url, retries = 3, delay = 500, signal) {
+  try {
+    const response = await fetch(url, { signal });
+    if (!response.ok) throw new Error('Request failed');
+    return response.json();
+  } catch (error) {
+    if (retries <= 0) throw error;
+    const jitter = Math.random() * 200;
+    await new Promise((resolve) => setTimeout(resolve, delay + jitter));
+    return fetchWithBackoff(url, retries - 1, delay * 2, signal);
+  }
+}
+```
+
+**Key points:**
+- Delay doubles each retry to reduce server load.
+- Jitter avoids retry spikes.
+- Errors bubble after the final attempt.
+- Works with existing query or fetch utilities.
+
+</details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **Error boundaries**: Isolating crashes to a subtree
+- **Fallback UI**: Keeping users moving during failures
+- **Async errors**: Retries, timeouts, and network recovery
+- **Error taxonomy**: Matching error types to UX
+- **Logging**: Capturing actionable context
+
+**Key takeaway**: Resilience comes from predictable recovery, not perfect code.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Add fallback UIs to critical pages
+- Improve error messaging on failed API calls
+- Add retry logic to flaky endpoints
+- Surface field-level form errors clearly
+- Instrument error reporting with context
+
+---
+
 ## Further Reading
 
 - [React Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
 - [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
+
+---
+
+**Navigation**: [← Previous Module](./04-api-design-integration.md) | [Next Module →](./06-internationalization.md)
