@@ -7,7 +7,7 @@
 
 It's Monday morning. You've just joined a startup as a frontend developer, and your tech lead Sarah drops by your desk.
 
-"Welcome aboard! We're building a product catalog for our e-commerce platform. I need you to create a page that displays products, handles out-of-stock items, and shows sale badges. Sound good?"
+"Welcome aboard! You're building a product catalog for your e-commerce platform. You need to create a page that displays products, handles out-of-stock items, and shows sale badges. Sound good?"
 
 You nod, open your editor, and stare at the blank file.
 
@@ -15,7 +15,7 @@ Where do you even start?
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -23,7 +23,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Components** | LEGO bricks - self-contained pieces you snap together and reuse |
 | **Props** | An ingredient list - tells the component what values to use |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -70,7 +70,7 @@ But your editor screams red. Sarah walks by and glances at your screen.
 
 She pulls up a chair.
 
-"See that `class`? In JavaScript, `class` is a reserved keyword. So in JSX, we use `className` instead."
+"See that `class`? In JavaScript, `class` is a reserved keyword. So in JSX, you use `className` instead."
 
 ```jsx
 // This is JSX - looks like HTML, thinks like JavaScript
@@ -188,7 +188,7 @@ You start copy-pasting your code and changing the product name each time.
 
 Your colleague Marcus notices your pain.
 
-"You're thinking like it's 2010. In React, we build *components* - reusable templates that accept different data."
+"You're thinking like it's 2010. In React, you build *components* - reusable templates that accept different data."
 
 He shows you:
 
@@ -900,7 +900,7 @@ function ProductCard({ product }) {
 
 **Key points:**
 - Use `onMouseEnter` and `onMouseLeave` to track hover state
-- Store hover state with `useState` (we'll learn this in Module 3)
+- Store hover state with `useState` (you'll learn this in Module 3)
 - Use conditional rendering (`&&`) to show/hide the button
 - Consider accessibility: keyboard users won't see the button. Better approach: always show it and style differently on hover
 

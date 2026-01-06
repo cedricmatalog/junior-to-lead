@@ -9,7 +9,7 @@ A cross-team decision is stuck, and you do not have formal authority to resolve 
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Persuasion** | A story arc - connect problem, journey, and outcome |
 | **Consensus** | A coalition - align enough people to move forward |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

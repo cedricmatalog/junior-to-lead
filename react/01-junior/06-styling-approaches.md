@@ -11,11 +11,11 @@ The job application portal is complete. But when you open it in the browser, som
 
 He's not wrong. The buttons don't match. The spacing is inconsistent. Every component has its own shade of blue.
 
-"We need a design system," Sarah says. "And that means choosing a styling approach. Today, you pick your weapon."
+"You need a design system," Sarah says. "And that means choosing a styling approach. Today, you pick your weapon."
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -23,7 +23,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Tailwind CSS** | Pre-made building blocks - combine existing pieces quickly |
 | **CSS-in-JS** | Custom furniture - styles designed specifically for each component |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -65,7 +65,7 @@ Sarah pulls up a comparison chart:
 | styled-components | Automatic | Good | Good | Medium |
 | Plain CSS | Manual (BEM) | Basic | Excellent | Low |
 
-"Each has trade-offs," she explains. "Let me show you what they look like in practice."
+"Each has trade-offs," she explains. "Here's what they look like in practice."
 
 ---
 
@@ -549,6 +549,16 @@ Sarah nods. "The consistency comes from the tokens, not from the technology."
 3. **Styles scattered everywhere** - Keep them organized
 4. **Overusing !important** - Fix specificity issues properly
 
+
+Example:
+```jsx
+// ❌ Magic numbers and inline styles everywhere
+<button style={{ padding: 13, background: '#1E90FF' }}>Save</button>
+
+// ✅ Reuse tokens or classes
+<button className="btn btn-primary">Save</button>
+```
+
 ---
 
 ## Debug This Code
@@ -605,7 +615,7 @@ Look at how className is constructed. Is the syntax correct? Does `variant` actu
 
 **Bug 1**: Missing template literal or string concatenation - `className={styles.button styles.variant}` is invalid syntax.
 
-**Bug 2**: `styles.variant` tries to access a CSS class named `.variant`, but we need to dynamically access `.primary` or `.secondary` based on the prop value.
+**Bug 2**: `styles.variant` tries to access a CSS class named `.variant`, but you need to dynamically access `.primary` or `.secondary` based on the prop value.
 
 **Fixed code:**
 

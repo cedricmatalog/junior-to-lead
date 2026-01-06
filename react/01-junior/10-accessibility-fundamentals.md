@@ -7,21 +7,21 @@
 
 Everything is going well. The features are polished, the tests are passing, the team is hitting deadlines. Then Monday morning, Sarah calls an emergency meeting.
 
-"We have a problem," she says, pulling up an email. "GovServe wants to adopt our platform for their citizen services portal. But their procurement requires WCAG 2.1 AA compliance."
+"You have a problem," she says, pulling up an email. "GovServe wants to adopt your platform for their citizen services portal. But their procurement requires WCAG 2.1 AA compliance."
 
 "What's WCAG?" you ask.
 
-"Web Content Accessibility Guidelines. It's how we ensure people with disabilities can use our app." She pulls up an attached PDF. "They hired an accessibility consultant to audit us. Here are the results."
+"Web Content Accessibility Guidelines. It's how you ensure people with disabilities can use your app." She pulls up an attached PDF. "They hired an accessibility consultant to audit you. Here are the results."
 
 The report is sobering. 47 failures. Screen readers can't navigate the dashboard. Forms have no labels. The modal traps keyboard users with no escape. Color contrast fails on half the buttons.
 
-Marcus looks uncomfortable. "I've never tested with a screen reader."
+Marcus looks uncomfortable. "Screen-reader testing is new here."
 
-"Neither have I," Sarah admits. "But we have two weeks to fix this. Let's learn."
+Sarah nods. "It's new here too, but you have two weeks to fix this. You can learn."
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -30,7 +30,7 @@ Before we dive in, here's how to think about the core concepts:
 | **ARIA** | Translator notes - extra context when HTML alone isn't enough |
 | **Focus management** | Spotlight control - guides keyboard users through the interface |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -65,7 +65,7 @@ By the end of this module, you'll be able to:
 
 The consultant, Maya, joins a video call to walk through the failures.
 
-"Let's start with severity levels," she says.
+"You can start with severity levels," she says.
 
 **WCAG Levels:**
 - **Level A** - Minimum accessibility (must fix)
@@ -132,7 +132,7 @@ She shares her screen, showing the audit categories:
 
 ## Chapter 2: Semantic HTML First
 
-"Before we touch ARIA," Maya says, "let's fix the HTML. Most accessibility issues come from using the wrong elements."
+"Before you touch ARIA," Maya says, "you can fix the HTML. Most accessibility issues come from using the wrong elements."
 
 ```jsx
 // BAD: Div soup - screen readers see nothing meaningful
@@ -769,9 +769,9 @@ Maya runs the audit again. Zero failures.
 
 "Congratulations," she says. "You've built an accessible application. But remember—accessibility isn't a checkbox. It's an ongoing practice."
 
-Sarah adds: "From now on, we test with keyboard and screen reader before every release."
+Sarah adds: "From now on, you test with keyboard and screen reader before every release."
 
-Marcus nods. "I'm adding jest-axe to our CI pipeline today."
+Marcus nods. "Jest-axe goes into your CI pipeline today."
 
 The GovServe deal closes the following week.
 
@@ -795,10 +795,18 @@ The GovServe deal closes the following week.
 
 1. **Using divs for everything** - Use semantic HTML first
 2. **Hiding focus outlines** - Users need to see where focus is
-3. **Placeholder as label** - Placeholders disappear when typing
-4. **Color as only indicator** - Use icons and text too
-5. **Skipping heading levels** - Breaks screen reader navigation
-6. **Positive tabIndex** - Breaks natural tab order
+3. **Visual-only cues** - Placeholder-only labels or color-only indicators fail non-visual users
+4. **Breaking structure** - Skipping heading levels or using positive tabIndex breaks navigation
+
+
+Example:
+```jsx
+// ❌ Non-semantic clickable div
+<div onClick={save}>Save</div>
+
+// ✅ Semantic button with default keyboard support
+<button onClick={save}>Save</button>
+```
 
 ## Practice Exercises
 
@@ -816,7 +824,7 @@ The GovServe deal closes the following week.
 2. Open your app in the browser
 3. Open DevTools (F12)
 4. Click on the "axe DevTools" tab
-5. Click "Scan ALL of my page"
+5. Click "Scan ALL of your page"
 
 **Common failures and fixes:**
 
@@ -1211,7 +1219,7 @@ function ProductCard({ product }) {
 
 3. **Rotor navigation:**
    - VO + U: Open rotor
-   - Left/Right arrows: Switch categories (headings, links, form controls)
+   - Left/Right arrows: Cycle categories (headings, links, form controls)
    - Up/Down arrows: Navigate within category
 
 4. **Test checklist:**

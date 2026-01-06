@@ -7,7 +7,7 @@
 
 Three weeks in, and you've built some impressive features. But Friday afternoon, Sarah drops a new project on your desk.
 
-"We're pivoting," she says. "The streaming service is adding food delivery. Users can order snacks while watching."
+"You're pivoting," she says. "The streaming service is adding food delivery. Users can order snacks while watching."
 
 Marcus looks up. "Uber Eats meets Netflix?"
 
@@ -21,7 +21,7 @@ Sarah smiles. "That's the right question."
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -29,7 +29,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Global state** | An office whiteboard - everyone can see and reference it |
 | **Lifting state** | Moving a note to the bulletin board - shared info goes to a common location |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -557,7 +557,7 @@ This component doesn't care where it's rendered—header, sidebar, checkout page
 
 ## Chapter 8: When to Reach for Libraries
 
-"When do we need Redux?" you ask.
+"When do you need Redux?" you ask.
 
 "Rarely," Sarah admits. "But there are signs."
 
@@ -587,7 +587,7 @@ function Counter() {
 }
 ```
 
-"For this food delivery app? Context + useReducer is perfect. We'll know when we outgrow it."
+"For this food delivery app? Context + useReducer is perfect. You'll know when you outgrow it."
 
 ---
 
@@ -606,6 +606,17 @@ function Counter() {
 1. **Using state for derived values** - If you can calculate it, don't store it
 2. **Too much global state** - Keep state as local as possible
 3. **Premature Context** - A few levels of props is fine
+
+
+Example:
+```jsx
+// ❌ Mutating state in place
+state.items.push(newItem);
+setState(state);
+
+// ✅ Create a new array
+setState({ ...state, items: [...state.items, newItem] });
+```
 
 ---
 
@@ -868,7 +879,7 @@ function CartProvider({ children }) {
 <details>
 <summary>Hint</summary>
 
-Reducers must be pure functions. Are we modifying the existing state object?
+Reducers must be pure functions. Are you modifying the existing state object?
 
 </details>
 

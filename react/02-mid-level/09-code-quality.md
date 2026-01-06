@@ -9,7 +9,7 @@ The team is moving fast, but the codebase is getting harder to review. Sarah wan
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Refactoring** | Renovation - improve structure without changing purpose |
 | **Code review** | Gate check - quality before shipping |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -337,6 +337,18 @@ npm run lint-staged
 2. **Inconsistent structure** - Teams waste time finding the right file.
 3. **Refactoring without tests** - Improvements become regressions.
 4. **Skipping automation** - Manual checks never scale.
+
+
+Example:
+```jsx
+// ❌ Disable the rule instead of fixing the issue
+/* eslint-disable-next-line react-hooks/exhaustive-deps */
+
+// ✅ Fix dependencies explicitly
+useEffect(() => {
+  doWork(userId);
+}, [userId]);
+```
 
 ## Practice Exercises
 

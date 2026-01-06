@@ -9,7 +9,7 @@ Two new juniors joined the team, and Sarah asks you to mentor one of them. Marcu
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Feedback** | A mirror - show gaps without judgment |
 | **Pairing** | A tandem bike - move together at the right pace |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -170,7 +170,7 @@ Pairing can teach quickly when you use it intentionally.
 **Driver-Navigator**
 - Junior drives: Types code, thinks out loud
 - You navigate: Guide direction, catch errors
-- Switch periodically
+- Rotate periodically
 
 **Watch and Learn**
 - You drive: Explain your thought process

@@ -15,7 +15,7 @@ You check the code. The API returns the right data. The component receives it. B
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -23,7 +23,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Error Boundaries** | Safety nets - catch crashes so the whole app doesn't collapse |
 | **Breakpoints** | A pause button - freeze execution and examine everything |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -363,7 +363,7 @@ class ErrorBoundary extends React.Component {
 
 ## Chapter 7: The Double Fetch Mystery
 
-"Why are we loading messages twice?" QA asks. The Network tab shows duplicate requests.
+"Why are you loading messages twice?" QA asks. The Network tab shows duplicate requests.
 
 ```jsx
 // BUG: Effect runs twice due to object dependency
@@ -493,7 +493,7 @@ By Friday, the chat app is stable. Messages arrive in order. The typing indicato
 
 Before you leave, Marcus pulls together everything you've learned about errors into one unified approach.
 
-"You've seen errors everywhere this week—in effects, in handlers, in renders. Let me show you the complete picture."
+"You've seen errors everywhere this week—in effects, in handlers, in renders. Here's the complete picture."
 
 ### The Error Landscape
 
@@ -581,7 +581,7 @@ async function apiCall(endpoint, options = {}) {
       error.status = response.status;
 
       if (response.status === 401) {
-        // Redirect to login
+        // Navigate to login
         window.location.href = '/login';
       }
 
@@ -669,6 +669,16 @@ function UserAvatar({ userId }) {
 2. **Changing multiple things at once** - One change per test
 3. **Ignoring ESLint warnings** - They catch real bugs
 4. **Not using DevTools** - Stop guessing, start inspecting
+
+
+Example:
+```jsx
+// ❌ Scatter logs across components
+console.log('state', state);
+
+// ✅ Pause execution where it breaks
+debugger;
+```
 
 ---
 

@@ -17,7 +17,7 @@ He's not wrong.
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -25,7 +25,7 @@ Before we dive in, here's how to think about the core concepts:
 | **useEffect** | A morning routine - runs after render, handles side tasks, has cleanup steps |
 | **Custom hooks** | Your recipe collection - reusable logic you write once and use anywhere |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -60,7 +60,7 @@ By the end of this module, you'll be able to:
 
 You start with a simple notification counter. Every time a notification arrives, the badge should update.
 
-"Let me show you the basics first," Sarah says.
+"Here are the basics first," Sarah says.
 
 ```jsx
 function Counter() {
@@ -232,7 +232,7 @@ Here's the useEffect lifecycle visualized:
 
 ## Chapter 3: The Ref Escape Hatch
 
-"We need a reference to the WebSocket," Marcus says. "But we don't want it to trigger re-renders every time it changes."
+"You need a reference to the WebSocket," Marcus says. "But you don't want it to trigger re-renders every time it changes."
 
 "That's what `useRef` is for."
 
@@ -274,7 +274,7 @@ console.log(`Rendered ${renderCount.current} times`);
 
 The notification bell needs to know who's logged in. That information lives at the top of the app.
 
-"I could pass it down through every component..." you start.
+"You could pass it down through every component..." you start.
 
 "Please don't," Sarah laughs. "That's prop drilling. Use Context."
 
@@ -392,7 +392,7 @@ Here's a decision tree for dependency arrays:
 
 Time to build the notification system for real.
 
-"Watch how I package this up," Marcus says.
+"Watch how this gets packaged," Marcus says.
 
 ```jsx
 function useNotifications(userId) {
@@ -546,7 +546,7 @@ Here's what happens with race conditions:
 
 Before you leave for the weekend, Marcus shares a war story.
 
-"I once crashed production with an infinite loop. Took me hours to figure out."
+"An infinite loop once crashed production. It took hours to figure out."
 
 ```jsx
 // INFINITE LOOP - options is new object each render
@@ -581,7 +581,7 @@ function GoodComponent({ url }) {
 
 ### The Performance Toolkit
 
-"Now that you understand hooks," Sarah says, "let's talk about when *not* to recompute things."
+"Now that you understand hooks," Sarah says, "you can talk about when *not* to recompute things."
 
 ### React.memo — Memoize Components
 
@@ -698,6 +698,20 @@ const greeting = `Hello, ${name}!`;
 2. **Stale closures** - Use functional updates or refs
 3. **Infinite loops** - Object/array dependencies recreated each render
 4. **Forgetting cleanup** - WebSockets, timers, and event listeners need cleanup
+
+
+Example:
+```jsx
+// ❌ Missing dependencies create stale values
+useEffect(() => {
+  fetchUser(userId);
+}, []);
+
+// ✅ Include external values
+useEffect(() => {
+  fetchUser(userId);
+}, [userId]);
+```
 
 ---
 
@@ -1144,35 +1158,6 @@ function UserProfile({ userId }) {
 
 </details>
 
----
-
-## What You Learned
-
-This module covered:
-
-- **useState**: Manages component state with functional updates to avoid stale closures
-- **useEffect**: Handles side effects (data fetching, subscriptions, DOM manipulation) with cleanup functions and dependencies
-- **useRef**: Stores mutable values and DOM references without triggering re-renders
-- **useContext**: Accesses shared state from Context providers without prop drilling
-- **Custom Hooks**: Extracts reusable stateful logic following the "use" naming convention
-- **Performance Hooks**: useMemo and useCallback prevent unnecessary recalculations and re-renders
-
-**Key takeaway**: Hooks let you add state and side effects to function components while keeping logic reusable and testable through custom hooks.
-
----
-
-## Real-World Application
-
-This week at work, you might use these concepts to:
-
-- Build a notification system with WebSocket connections managed via useEffect cleanup
-- Create a useFetch custom hook to handle loading, error, and data states across multiple components
-- Implement a theme switcher using useContext to avoid passing theme props through every component
-- Optimize expensive filtering or sorting operations with useMemo
-- Build a useLocalStorage hook that syncs state with browser storage
-
----
-
 <details>
 <summary>Exercise 3: usePrevious Hook</summary>
 
@@ -1218,6 +1203,35 @@ function Counter() {
 - First render returns undefined since there's no previous value yet
 
 </details>
+
+---
+
+## What You Learned
+
+This module covered:
+
+- **useState**: Manages component state with functional updates to avoid stale closures
+- **useEffect**: Handles side effects (data fetching, subscriptions, DOM manipulation) with cleanup functions and dependencies
+- **useRef**: Stores mutable values and DOM references without triggering re-renders
+- **useContext**: Accesses shared state from Context providers without prop drilling
+- **Custom Hooks**: Extracts reusable stateful logic following the "use" naming convention
+- **Performance Hooks**: useMemo and useCallback prevent unnecessary recalculations and re-renders
+
+**Key takeaway**: Hooks let you add state and side effects to function components while keeping logic reusable and testable through custom hooks.
+
+---
+
+## Real-World Application
+
+This week at work, you might use these concepts to:
+
+- Build a notification system with WebSocket connections managed via useEffect cleanup
+- Create a useFetch custom hook to handle loading, error, and data states across multiple components
+- Implement a theme switcher using useContext to avoid passing theme props through every component
+- Optimize expensive filtering or sorting operations with useMemo
+- Build a useLocalStorage hook that syncs state with browser storage
+
+---
 
 ## Further Reading
 

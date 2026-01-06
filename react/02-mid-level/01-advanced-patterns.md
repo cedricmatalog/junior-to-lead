@@ -5,11 +5,11 @@
 
 ## Week 11: The Dashboard Refactor
 
-The streaming dashboard finally has traction, but the codebase is showing its age. Sarah asks you to add authentication gates, shared behaviors, and layout variants without copying logic into every component. Marcus points at the newest pull request and sighs: "We're building the same wrapper three times." You need patterns that let components stay flexible while the logic stays centralized. This week is about learning those reusable patterns so new features don't feel like rewrites.
+The streaming dashboard finally has traction, but the codebase is showing its age. Sarah asks you to add authentication gates, shared behaviors, and layout variants without copying logic into every component. Marcus points at the newest pull request and sighs: "You're building the same wrapper three times." You need patterns that let components stay flexible while the logic stays centralized. This week is about learning those reusable patterns so new features don't feel like rewrites.
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Headless UI** | A skeleton - structure without a skin |
 | **Polymorphic components** | A Swiss Army knife - one tool, many forms |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -281,6 +281,16 @@ Select.Option = SelectOption;
 2. **Render-prop nesting** - Deeply nested render props make code hard to read and test.
 3. **Leaking presentation into headless logic** - Keep styles out of headless components so they stay reusable.
 4. **Skipping prop forwarding** - Polymorphic components must forward props and refs to avoid broken accessibility.
+
+
+Example:
+```jsx
+// ❌ Copy-paste auth checks in every screen
+if (!user) return <Login />;
+
+// ✅ Share behavior with a HOC
+const ProtectedDashboard = withAuth(Dashboard);
+```
 
 ## Practice Exercises
 

@@ -9,7 +9,7 @@ Two senior engineers are locked in a technical disagreement, and the tension is 
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Interests vs positions** | An iceberg - real needs sit below the surface |
 | **Decision frameworks** | A referee - enforce fair rules |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

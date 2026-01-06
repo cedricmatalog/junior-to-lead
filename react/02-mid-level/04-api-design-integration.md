@@ -9,7 +9,7 @@ Marketing wants a new personalization API, design wants instant updates, and cus
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Optimistic updates** | A promise - show the result before the confirmation |
 | **Loading states** | A queue sign - set expectations while waiting |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -344,6 +344,19 @@ function ProfileSkeleton() {
 2. **Ignoring non-200 errors** - Always handle error shapes and status codes.
 3. **Skipping retries and caching** - Users feel slowness if you refetch too often.
 4. **Hiding loading states** - Make waiting explicit to prevent confusion.
+
+
+Example:
+```jsx
+// ❌ Ignore error states
+const res = await fetch('/api/orders');
+const data = await res.json();
+
+// ✅ Handle errors explicitly
+const res = await fetch('/api/orders');
+if (!res.ok) throw new Error('Request failed');
+const data = await res.json();
+```
 
 ## Practice Exercises
 

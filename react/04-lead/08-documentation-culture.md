@@ -9,16 +9,16 @@ New hires keep asking the same questions, and key decisions live only in chat. S
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
 | **Documentation** | Shared memory - what the team should not forget |
 | **README** | A front door - orient people fast |
-| **ADRs** | A decision trail - why we chose this path |
+| **ADRs** | A decision trail - why you chose this path |
 | **Docs-as-code** | A pipeline - docs ship like software |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

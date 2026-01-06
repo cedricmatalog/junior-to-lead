@@ -15,7 +15,7 @@ Until now, you've been pushing to a branch someone else set up. Now you need to 
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -23,7 +23,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Commits** | Save checkpoints - go back if things go wrong |
 | **Pull Requests** | Asking for feedback - review before publishing |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -95,7 +95,7 @@ git commit -m "more changes"
 git commit -m "fixed thing"
 ```
 
-"These tell me nothing," he says. "In six months, you won't remember what 'thing' was."
+"These tell you nothing," he says. "In six months, you won't remember what 'thing' was."
 
 He introduces Conventional Commits:
 
@@ -126,13 +126,13 @@ git commit -m "feat(checkout): add Stripe integration hook"
 git commit -m "fix(checkout): handle Amex 15-digit card numbers"
 ```
 
-"Now I can read the history and understand exactly what changed."
+"Now you can read the history and understand exactly what changed."
 
 ---
 
 ## Chapter 3: The Conflict
 
-Day three. You're about to push, but Marcus messages: "I just merged some checkout changes. You might want to rebase."
+Day three. You're about to push, but Marcus messages: "Checkout changes just landed. You might want to rebase."
 
 You pull main and... conflicts.
 
@@ -331,7 +331,7 @@ git push origin v1.2.1
 
 ## Chapter 8: Staying in Sync
 
-"How do I avoid conflicts in the first place?" you ask.
+"How can you avoid conflicts in the first place?" you ask.
 
 Marcus shares the secrets:
 
@@ -428,7 +428,7 @@ Before you push, Marcus catches something in your code.
 
 You look. It is. The Stripe test key, right in the component.
 
-"That can never go to GitHub," he says. "Let me show you environment variables."
+"That can never go to GitHub," he says. "Here's how environment variables work."
 
 ### The .env File
 
@@ -579,6 +579,16 @@ By Friday, your payment feature is live. The commit history is clean. No conflic
 2. **Vague commit messages** - Your future self will hate you
 3. **Giant PRs** - Small PRs get reviewed faster
 4. **Ignoring conflicts** - They don't go away on their own
+
+
+Example:
+```jsx
+// ❌ Hardcoded secrets in code
+const apiKey = 'sk_test_123';
+
+// ✅ Read secrets from env vars
+const apiKey = import.meta.env.VITE_API_KEY;
+```
 
 ---
 
@@ -1151,7 +1161,7 @@ git rebase --abort
 - Resolve by editing the file to the desired final state
 - Remove conflict markers before committing
 - Test the code after resolving to ensure it works
-- Use --ours or --theirs to accept one side entirely
+- Use --yours or --theirs to accept one side entirely
 - git mergetool provides visual diff tools
 - Communicate with teammates when resolving conflicts in shared code
 

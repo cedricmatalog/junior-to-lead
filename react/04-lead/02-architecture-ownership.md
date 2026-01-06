@@ -9,7 +9,7 @@ You are now accountable for the long-term health of the frontend platform. Sarah
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Migrations** | A bridge - move safely without collapse |
 | **Platform thinking** | Utilities - shared infrastructure for everyone |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -372,7 +372,7 @@ Adopt TanStack Query for all new server-state features.
 Phase 1: Build parallel route in new stack
 Phase 2: Mirror traffic (read-only)
 Phase 3: Gradual rollout (10% -> 100%)
-Rollback: Switch traffic back, keep data compatible
+Rollback: Shift traffic back, keep data compatible
 ```
 
 **Key points:**

@@ -9,7 +9,7 @@ The team adopted Next.js, but performance and developer experience are still une
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Middleware** | A checkpoint - modify requests before they enter |
 | **Edge runtime** | A roadside stand - compute close to users |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -380,6 +380,21 @@ function SubmitButton() {
 3. **Caching without invalidation** - Stale data hurts trust.
 4. **Edge runtime limitations** - Some APIs are not available at the edge.
 
+
+Example:
+```tsx
+// ❌ Fetch in a client effect
+useEffect(() => {
+  fetch('/api/account');
+}, []);
+
+// ✅ Fetch in a Server Component
+export default async function Page() {
+  const data = await fetch('/api/account');
+  return <Account data={data} />;
+}
+```
+
 ## Practice Exercises
 
 1. Build a dashboard with streaming Suspense boundaries
@@ -441,7 +456,7 @@ export const config = {
 **Key points:**
 - Middleware runs before routing.
 - Role checks block unauthorized access.
-- Redirect keeps users in a safe path.
+- Navigation keeps users on a safe path.
 
 </details>
 

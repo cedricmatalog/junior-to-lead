@@ -9,7 +9,7 @@ The codebase is getting bigger, and bugs are harder to spot in review. Sarah wan
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Discriminated unions** | Labeled boxes - pick the right shape |
 | **Type guards** | Bouncers - check who gets in |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -345,6 +345,20 @@ type UserWithOptionalEmail = PartialBy<User, 'email'>;
 2. **Overly complex types** - Prefer readable types over clever ones.
 3. **Ignoring `strict` errors** - They signal real risks.
 4. **Missing runtime checks** - Types don't validate data at runtime.
+
+
+Example:
+```ts
+// ❌ any hides real types
+function identity(value: any) {
+  return value;
+}
+
+// ✅ Generic preserves types
+function identity<T>(value: T): T {
+  return value;
+}
+```
 
 ## Practice Exercises
 

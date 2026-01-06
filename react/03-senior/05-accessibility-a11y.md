@@ -9,7 +9,7 @@ An audit flagged multiple accessibility issues, and a key client requires WCAG c
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **ARIA** | Labels - fill the gaps when semantics fall short |
 | **Keyboard support** | The remote control - full access without a mouse |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -347,6 +347,16 @@ it('has no accessibility violations', async () => {
 2. **Relying on color alone** - Provide text or icon cues too.
 3. **Missing focus styles** - Keyboard users lose track without visible focus.
 4. **Adding ARIA everywhere** - Use native semantics first.
+
+
+Example:
+```jsx
+// ❌ Non-semantic click target
+<div onClick={openMenu}>Menu</div>
+
+// ✅ Semantic control
+<button onClick={openMenu}>Menu</button>
+```
 
 ## Practice Exercises
 

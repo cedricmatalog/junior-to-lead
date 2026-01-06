@@ -9,7 +9,7 @@ A major launch is coming, and leadership wants performance guarantees. Sarah sho
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Caching** | A pantry - reuse what is already prepared |
 | **Profiling** | A heat map - find where the time goes |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -369,6 +369,16 @@ Performance wins fade unless you lock them in. Set budgets, automate checks, and
 2. **Ignoring cache invalidation** - Stale data can be worse than slow data.
 3. **Overusing memoization** - It can add overhead without real gains.
 4. **Skipping budgets** - Regressions go unnoticed until users complain.
+
+
+Example:
+```tsx
+// ❌ Load heavy components up front
+import Chart from './Chart';
+
+// ✅ Split with dynamic import
+const Chart = dynamic(() => import('./Chart'));
+```
 
 ## Practice Exercises
 

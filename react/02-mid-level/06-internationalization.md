@@ -9,7 +9,7 @@ The product is going international. Sarah lists the new requirements: Spanish an
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Namespaces** | Folder labels - keep translations organized |
 | **RTL layout** | A mirror - the UI flips direction |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -356,6 +356,16 @@ function validateTranslations() {
 2. **Ignoring RTL early** - Layout bugs compound if you add RTL late.
 3. **Shipping every locale at once** - Lazy load to avoid large bundles.
 4. **Skipping context** - Translators need notes for ambiguous strings.
+
+
+Example:
+```jsx
+// ❌ Hardcoded strings
+<button>Checkout</button>
+
+// ✅ Localized strings
+<button>{t('checkout')}</button>
+```
 
 ## Practice Exercises
 

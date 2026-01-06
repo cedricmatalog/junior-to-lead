@@ -5,11 +5,11 @@
 
 ## Week 12: The Laggy Release
 
-The dashboard launched with a splash, but now users are complaining about lag. Sarah pulls up a video: scrolling stutters, filters hang, and mobile devices choke. "We need this to feel instant," she says. Marcus reminds you that optimization isn't about magic tricks -- it's about understanding what React renders, why it renders, and which work can be skipped. Your job this week is to identify waste and make performance predictable.
+The dashboard launched with a splash, but now users are complaining about lag. Sarah pulls up a video: scrolling stutters, filters hang, and mobile devices choke. "You need this to feel instant," she says. Marcus reminds you that optimization isn't about magic tricks -- it's about understanding what React renders, why it renders, and which work can be skipped. Your job this week is to identify waste and make performance predictable.
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Virtualization** | A window shade - only show what's visible |
 | **Code splitting** | Packing cubes - load only what you need right now |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -306,6 +306,19 @@ Look for:
 2. **Ignoring dependency arrays** - Stale values lead to bugs and misleading performance gains.
 3. **Optimizing before measuring** - Always profile first to confirm the bottleneck.
 4. **Rendering huge lists** - Without virtualization, large lists will always feel slow.
+
+
+Example:
+```jsx
+// ❌ Expensive calc runs every render
+const total = items.reduce((sum, item) => sum + item.price, 0);
+
+// ✅ Memoize expensive work
+const total = useMemo(
+  () => items.reduce((sum, item) => sum + item.price, 0),
+  [items]
+);
+```
 
 ## Practice Exercises
 

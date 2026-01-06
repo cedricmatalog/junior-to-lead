@@ -9,7 +9,7 @@ The team is shipping, but the rhythm feels chaotic. Sarah asks you to tune the p
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Retrospectives** | A mirror - see what to improve |
 | **Team rhythms** | A heartbeat - steady cadence over time |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

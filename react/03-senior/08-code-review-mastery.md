@@ -9,7 +9,7 @@ Pull requests are piling up and quality is slipping. Sarah wants faster review c
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Architecture review** | A blueprint check - ensure structure holds |
 | **Review culture** | A team sport - everyone improves together |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

@@ -9,7 +9,7 @@ Multiple teams are shipping UI, but the product looks inconsistent. Sarah wants 
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Component API** | A contract - how consumers should use the component |
 | **Versioning** | A release train - predictable updates |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -348,7 +348,7 @@ Guidelines keep the system consistent across teams.
 import { Button } from '@myorg/components';
 
 <Button variant="primary" onClick={handleClick}>
-  Click me
+  Click this
 </Button>
 ```
 
@@ -430,6 +430,16 @@ npx changeset publish
 2. **Token drift** - Hardcoded values undermine consistency.
 3. **Overly complex APIs** - If components are hard to use, teams will reimplement.
 4. **Ignoring versioning** - Breaking changes spread silently.
+
+
+Example:
+```tsx
+// ❌ Ad-hoc colors per component
+const Button = () => <button style={{ color: '#4F46E5' }}>Save</button>;
+
+// ✅ Use design tokens
+const Button = () => <button className="text-primary">Save</button>;
+```
 
 ## Practice Exercises
 

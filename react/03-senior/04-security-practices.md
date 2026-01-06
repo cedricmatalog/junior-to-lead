@@ -9,7 +9,7 @@ Security just flagged a set of vulnerabilities in the frontend. Sarah needs a re
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **CSP** | A whitelist - only trusted sources allowed |
 | **Auth security** | A lockbox - protect credentials and tokens |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -322,6 +322,16 @@ npm audit fix
 3. **Missing CSP** - Without a policy, injected scripts are harder to stop.
 4. **Ignoring dependency audits** - Vulnerabilities in libraries still affect your app.
 
+
+Example:
+```jsx
+// ❌ Render unsanitized HTML
+<div dangerouslySetInnerHTML={{ __html: userInput }} />
+
+// ✅ Sanitize before rendering
+<div dangerouslySetInnerHTML={{ __html: sanitize(userInput) }} />
+```
+
 ## Practice Exercises
 
 1. Implement CSP for an existing application
@@ -363,7 +373,7 @@ const challenge = base64UrlEncode(digest);
 // Store verifier in memory or session storage
 sessionStorage.setItem('pkce_verifier', verifier);
 
-// Redirect to auth server with challenge
+// Send to auth server with challenge
 const url = `${AUTH_URL}?response_type=code&code_challenge=${challenge}&code_challenge_method=S256`;
 window.location.assign(url);
 ```

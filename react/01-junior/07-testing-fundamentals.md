@@ -13,13 +13,13 @@ Sarah and Marcus gather around your desk. The bug? A typo in a conditional rende
 
 "How did this ship?" you ask.
 
-"Because we didn't test it," Marcus says. "No test caught this before production."
+"Because you didn't test it," Marcus says. "No test caught this before production."
 
 Sarah pulls up a chair. "Today, you learn testing. Not because it's fun—because bugs like this are preventable."
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -27,7 +27,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Integration tests** | Taste-testing the whole dish - verify pieces work together |
 | **Mocking** | Fake ingredients for practice - isolates what you're testing |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -278,7 +278,7 @@ it('submits form with entered values', async () => {
 });
 ```
 
-"Notice we use `userEvent` instead of `fireEvent`. It simulates real user behavior—focus, typing character by character, blur."
+"Notice you use `userEvent` instead of `fireEvent`. It simulates real user behavior—focus, typing character by character, blur."
 
 ---
 
@@ -542,6 +542,16 @@ describe('ComponentName', () => {
 2. **Too many mocks** - If you mock everything, you're testing nothing
 3. **Not testing error cases** - Happy path isn't enough
 4. **Brittle selectors** - Use roles and labels, not class names
+
+
+Example:
+```jsx
+// ❌ Testing implementation details
+expect(component.state.open).toBe(true);
+
+// ✅ Testing user-visible behavior
+expect(screen.getByRole('dialog')).toBeVisible();
+```
 
 ## Practice Exercises
 

@@ -9,7 +9,7 @@ The team is shipping, but direction is fuzzy. Sarah asks you to define a technic
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Roadmaps** | A route plan - sequence steps toward a destination |
 | **Tech radar** | A weather report - know what is safe to adopt |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

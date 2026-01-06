@@ -9,7 +9,7 @@ The product team wants personalized feeds, cross-device carts, and real-time upd
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **State machines** | Traffic lights - strict, predictable transitions |
 | **Atom stores** | Sticky notes - small, independent pieces |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -331,6 +331,16 @@ Sarah expects you to justify why each slice of state lives where it does.
 2. **Mixing server and client state** - Cache server data separately from UI state to avoid bugs.
 3. **Overusing Context** - Context is not a replacement for state management tools.
 4. **Skipping state modeling** - Complex flows benefit from explicit machines or reducers.
+
+
+Example:
+```jsx
+// ❌ Treat server data as local UI state
+const [projects, setProjects] = useState([]);
+
+// ✅ Use a server-state cache
+const { data: projects } = useQuery(['projects'], fetchProjects);
+```
 
 ## Practice Exercises
 

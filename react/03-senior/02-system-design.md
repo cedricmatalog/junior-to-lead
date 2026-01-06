@@ -9,7 +9,7 @@ Traffic is growing and the product roadmap is expanding. Sarah asks you to propo
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Build systems** | Assembly lines - predictable outputs at scale |
 | **CDN strategy** | Highway ramps - deliver fast and local |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -200,7 +200,7 @@ Production Traffic
 
 1. Deploy new version to Green
 2. Test Green environment
-3. Switch traffic to Green
+3. Shift traffic to Green
 4. Blue becomes standby
 ```
 
@@ -327,6 +327,16 @@ You need visibility across the entire frontend system.
 2. **Ignoring deployment constraints** - Architecture must match release processes.
 3. **Skipping budgets** - Without limits, performance regresses over time.
 4. **Unowned observability** - Alerts without owners become noise.
+
+
+Example:
+```ts
+// ❌ UI reaches into the data layer directly
+import { db } from '../db';
+
+// ✅ UI depends on an interface boundary
+import { ordersRepository } from '../repositories/orders';
+```
 
 ## Practice Exercises
 

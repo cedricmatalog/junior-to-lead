@@ -9,7 +9,7 @@ Two teams block each other on a shared API, and the launch date is slipping. Sar
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Guilds** | A town hall - align across teams |
 | **Dependencies** | A supply chain - manage risk and delays |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

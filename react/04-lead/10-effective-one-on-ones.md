@@ -9,7 +9,7 @@ Two engineers feel stuck, and morale is dipping. Sarah asks you to use 1:1s to u
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Trust** | A bank account - consistency builds balance |
 | **Growth plans** | A map - show the next steps and milestones |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

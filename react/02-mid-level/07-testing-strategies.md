@@ -9,7 +9,7 @@ The team is shipping faster, but bugs are slipping through. Sarah wants more con
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Mocking** | Stunt doubles - stand in for external systems |
 | **CI pipelines** | Airport security - checks before boarding |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -143,9 +143,7 @@ describe('UserManagement', () => {
 
   it('shows error when API fails', async () => {
     server.use(
-      rest.get('/api/users', (req, res, ctx) => {
-        return res(ctx.status(500));
-      })
+      http.get('/api/users', () => HttpResponse.json([], { status: 500 }))
     );
 
     renderWithProviders(<UserManagement />);
@@ -165,15 +163,15 @@ External systems can't be part of every test. You need safe stand-ins.
 
 ```jsx
 // mocks/handlers.js
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  rest.get('/api/user', (req, res, ctx) => {
-    const isAuthenticated = req.headers.get('Authorization');
+  http.get('/api/user', ({ request }) => {
+    const isAuthenticated = request.headers.get('Authorization');
     if (!isAuthenticated) {
-      return res(ctx.status(401));
+      return new HttpResponse(null, { status: 401 });
     }
-    return res(ctx.json({ id: 1, name: 'Test User' }));
+    return HttpResponse.json({ id: 1, name: 'Test User' });
   }),
 ];
 
@@ -363,6 +361,16 @@ describe('useFetch', () => {
 2. **Over-mocking** - Excessive mocks can hide integration bugs.
 3. **Ignoring flaky tests** - Flakiness erodes trust in the suite.
 4. **Chasing 100% coverage** - Focus on risk and critical paths.
+
+
+Example:
+```ts
+// ❌ Stub fetch in every test
+global.fetch = jest.fn();
+
+// ✅ Use MSW handlers for integration tests
+import { http, HttpResponse } from 'msw';
+```
 
 ## Practice Exercises
 

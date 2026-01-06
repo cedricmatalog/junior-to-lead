@@ -9,7 +9,7 @@ The team wants server-rendered pages, faster initial loads, and a path to produc
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Server components** | A prep kitchen - work happens before the table |
 | **Deployment** | A launch checklist - steps before takeoff |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -335,6 +335,20 @@ npx vercel
 2. **Over-fetching on the client** - Prefer server data fetching when possible.
 3. **Missing loading states** - App Router routes need explicit `loading.tsx`.
 4. **Leaking secrets** - Only expose variables prefixed with `NEXT_PUBLIC_`.
+
+
+Example:
+```tsx
+// ❌ Fetch on the client for first paint data
+useEffect(() => {
+  fetch('/api/products');
+}, []);
+
+// ✅ Fetch on the server with getServerSideProps
+export async function getServerSideProps() {
+  return { props: { /* data */ } };
+}
+```
 
 ## Practice Exercises
 

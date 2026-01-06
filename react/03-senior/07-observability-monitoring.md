@@ -9,7 +9,7 @@ Errors are slipping into production and nobody notices until support tickets arr
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Logging** | A black box - context when things go wrong |
 | **Alerting** | A pager - only wake someone when it matters |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -354,7 +354,7 @@ const rules = {
   },
   webVitals: {
     LCP: { threshold: 2500, severity: 'warning' },
-    FID: { threshold: 100, severity: 'warning' },
+    INP: { threshold: 200, severity: 'warning' },
     CLS: { threshold: 0.1, severity: 'info' },
   },
 };
@@ -406,6 +406,16 @@ Key metrics to track:
 2. **Alert fatigue** - Too many alerts get ignored.
 3. **Sampling too low** - You miss rare but critical issues.
 4. **No ownership** - Metrics without owners do not improve.
+
+
+Example:
+```ts
+// ❌ Log and lose the context
+console.error('Checkout failed');
+
+// ✅ Capture with context
+captureException(err, { tags: { area: 'checkout' } });
+```
 
 ## Practice Exercises
 

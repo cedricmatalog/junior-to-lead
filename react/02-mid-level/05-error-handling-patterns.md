@@ -5,11 +5,11 @@
 
 ## Week 15: The Outage Drill
 
-The API is flaky this week. Users are hitting broken screens, and the support inbox is filling up. Sarah asks for a resilience plan: "If something fails, we need to recover without losing trust." Marcus adds that errors shouldn't blow up the whole app. This week is about designing predictable recovery paths -- from component crashes to failed requests -- so the UI fails gracefully and guides users back on track.
+The API is flaky this week. Users are hitting broken screens, and the support inbox is filling up. Sarah asks for a resilience plan: "If something fails, you need to recover without losing trust." Marcus adds that errors shouldn't blow up the whole app. This week is about designing predictable recovery paths -- from component crashes to failed requests -- so the UI fails gracefully and guides users back on track.
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Async errors** | Dropped calls - handle retries and timeouts |
 | **Logging** | Flight recorder - capture what went wrong |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -365,6 +365,16 @@ window.addEventListener('unhandledrejection', (event) => {
 2. **Showing raw errors to users** - Translate failures into actionable messages.
 3. **Ignoring retries and timeouts** - Network errors need explicit handling.
 4. **Logging too late** - Capture errors where they happen, not after the fact.
+
+
+Example:
+```jsx
+// ❌ Swallow errors silently
+try { await saveProfile(); } catch {}
+
+// ✅ Capture and surface errors
+try { await saveProfile(); } catch (err) { setError(err.message); }
+```
 
 ## Practice Exercises
 

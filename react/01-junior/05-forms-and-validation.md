@@ -7,7 +7,7 @@
 
 The food delivery feature is live. Orders are flowing. But there's a new priority from the business team.
 
-"We're hiring," Sarah says. "A lot. And HR wants an application portal built into the platform."
+"You're hiring," Sarah says. "A lot. And HR wants an application portal built into the platform."
 
 You've built forms before—simple inputs, maybe a contact form. But this is different. Multi-step wizard. File uploads. Conditional fields. Real-time validation.
 
@@ -17,7 +17,7 @@ He's about to show you why.
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -25,7 +25,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Validation** | A bouncer checking IDs - verify data meets requirements before letting it through |
 | **Schema validation** | A DMV form template - defines all rules in one place |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -170,7 +170,7 @@ The boilerplate disappears. The intent becomes clear.
 
 ## Chapter 3: Schema Validation with Zod
 
-"For the job application, we need serious validation," Sarah says. "That's where Zod comes in."
+"For the job application, you need serious validation," Sarah says. "That's where Zod comes in."
 
 Zod lets you define your validation rules as a schema—a single source of truth.
 
@@ -897,6 +897,18 @@ const userSchema = z.object({
 2. **Not handling async validation** - Check uniqueness, loading states
 3. **Clearing form on error** - Preserve user input
 4. **Generic error messages** - Be specific about what's wrong
+
+
+Example:
+```jsx
+// ❌ Ad-hoc validation scattered in handlers
+if (!email.includes('@')) {
+  setEmailError('Invalid email');
+}
+
+// ✅ Centralized schema validation
+const schema = z.object({ email: z.string().email() });
+```
 
 ---
 

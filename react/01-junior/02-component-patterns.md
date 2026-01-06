@@ -7,17 +7,17 @@
 
 You survived your first week. The product catalog is live, customers are browsing, and Sarah gave you a thumbs up in standup. But now there's a new challenge on the board.
 
-"We're building a streaming dashboard," Sarah announces, pulling up mockups. "Think Netflix meets Spotify. Content rows, tabbed sections, video players. The design team went all out."
+"You're building a streaming dashboard," Sarah announces, pulling up mockups. "Think Netflix meets Spotify. Content rows, tabbed sections, video players. The design team went all out."
 
-Marcus leans over. "The trick is making components that don't fight each other. You'll see what I mean."
+Marcus leans over. "The trick is making components that don't fight each other. You'll see why."
 
 You look at the mockups. Dozens of cards, multiple layouts, tabs everywhere. If you hardcode each one, you'll be writing components forever.
 
-"There's a better way," Sarah says, noticing your expression. "Let me show you some patterns."
+"There's a better way," Sarah says, noticing your expression. "Here are some patterns."
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -25,7 +25,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Children prop** | Gift wrapping - the wrapper doesn't care what's inside, just provides the presentation |
 | **Controlled components** | A puppet on strings - parent controls every movement, full control but more work |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -60,7 +60,7 @@ By the end of this module, you'll be able to:
 
 You start with the media cards. Movies need one layout, TV series need another, podcasts need a third. Your first instinct: create a base card and extend it.
 
-"I see that look," Marcus says. "You're thinking inheritance. BaseCard, MovieCard extends BaseCard..."
+"That look says it all," Marcus says. "You're thinking inheritance. BaseCard, MovieCard extends BaseCard..."
 
 You nod.
 
@@ -507,6 +507,23 @@ She nods. "Now you're thinking in patterns."
 1. **Over-abstracting too early** - Start simple, extract patterns when you see repetition
 2. **Prop drilling through many layers** - Use Context for deep trees
 3. **Mixing controlled and uncontrolled** - Pick one approach and stick with it
+
+
+Example:
+```jsx
+// ❌ Inheritance couples components tightly
+class MovieCard extends Card {}
+
+// ✅ Composition keeps components flexible
+function MovieCard({ movie }) {
+  return (
+    <Card>
+      <CardHeader>{movie.title}</CardHeader>
+      <CardBody>{movie.summary}</CardBody>
+    </Card>
+  );
+}
+```
 
 ---
 

@@ -9,7 +9,7 @@ Leadership wants to launch a new product and asks for a framework recommendation
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Migration** | A move - plan steps and packing |
 | **Ecosystem health** | A forecast - watch for long-term risk |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

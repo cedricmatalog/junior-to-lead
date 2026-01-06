@@ -9,7 +9,7 @@ A checkout outage hits during a product launch. Sarah asks you to run the incide
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Runbooks** | Checklists - reduce decision load under stress |
 | **Postmortems** | Flight recorders - learn what happened and why |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

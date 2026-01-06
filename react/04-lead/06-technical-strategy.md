@@ -9,7 +9,7 @@ Two teams pitch new tools in the same week, and leadership wants a 12-month plan
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Tech radar** | A weather map - know what is safe and what is risky |
 | **Roadmap** | A flight plan - sequence steps toward a destination |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

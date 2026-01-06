@@ -9,7 +9,7 @@ Headcount is approved and the team needs to grow fast without lowering the bar. 
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Bias reduction** | Guardrails - protect decisions from shortcuts |
 | **Onboarding** | A runway - accelerate takeoff |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
@@ -192,7 +192,7 @@ Ask all candidates the same questions:
 
 | Bias | Description | Mitigation |
 |------|-------------|------------|
-| Similarity | Prefer people like us | Diverse panel, structured scoring |
+| Similarity | Prefer people like you | Diverse panel, structured scoring |
 | Halo effect | One trait influences all | Separate criteria, multiple interviewers |
 | Anchoring | First impression dominates | Score during interview, not after |
 | Confirmation | Seek evidence for initial impression | Devil's advocate in debrief |

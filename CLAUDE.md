@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This is a **React Developer Curriculum** - a comprehensive learning resource that guides developers from junior to lead-level positions. It contains **42 educational modules** organized into 4 progressive levels (Junior → Mid-Level → Senior → Lead), covering both technical React skills and leadership competencies.
+This is a **React Developer Curriculum** - a comprehensive learning resource that guides developers from junior to lead-level positions. It contains **43 educational modules** organized into 4 progressive levels (Junior → Mid-Level → Senior → Lead), covering both technical React skills and leadership competencies.
 
 **This is a documentation/curriculum repository, not a code project.** There is no build system, test suite, or application code. All content is markdown-based learning materials.
 

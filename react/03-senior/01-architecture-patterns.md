@@ -5,11 +5,11 @@
 
 ## Week 21: The Architecture Review
 
-The product is growing fast and the codebase is starting to drift. Sarah asks you to lead an architecture review before the next feature push. Marcus pulls up a diagram with three competing structures and says, "We need a map that scales with the team." This week is about organizing code so features are easy to find, dependencies stay predictable, and decisions are documented instead of tribal knowledge.
+The product is growing fast and the codebase is starting to drift. Sarah asks you to lead an architecture review before the next feature push. Marcus pulls up a diagram with three competing structures and says, "You need a map that scales with the team." This week is about organizing code so features are easy to find, dependencies stay predictable, and decisions are documented instead of tribal knowledge.
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Monorepos** | A campus - shared infrastructure, separate buildings |
 | **Dependency injection** | Power outlets - swap implementations safely |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 

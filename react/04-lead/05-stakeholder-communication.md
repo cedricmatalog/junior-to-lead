@@ -9,7 +9,7 @@ The roadmap is moving fast, but the room is not aligned. Sarah asks you to brief
 
 ## Mental Models
 
-Before we dive in, here's how to think about the core concepts:
+Before you dive in, here's how to think about the core concepts:
 
 | Concept | Think of it as... |
 |---------|-------------------|
@@ -18,7 +18,7 @@ Before we dive in, here's how to think about the core concepts:
 | **Status updates** | A dashboard - highlight green, yellow, red |
 | **Expectations** | A contract - align before delivery |
 
-Keep these in mind. They'll click as we build.
+Keep these in mind. They'll click as you build.
 
 ---
 
