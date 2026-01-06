@@ -31,6 +31,8 @@ You've completed this level when you can:
 | 13 | [E2E Testing with Playwright](13-e2e-testing-with-playwright.md) | Playwright setup, locators, fixtures, CI |
 | 14 | [Animations and Motion](14-animations-and-motion.md) | CSS transitions, keyframes, Framer Motion, reduced motion |
 | 15 | [Deployment and CI](15-deployment-and-ci.md) | CI pipelines, artifacts, env vars, release strategies |
+| 16 | [React Router Data APIs](16-react-router-data-apis.md) | Loaders, actions, defer, route errors, fetchers |
+| 17 | [PWA and Offline-First](17-pwa-and-offline-first.md) | Service workers, cache strategies, offline UX, update flows |
 
 ## Recommended Path
 
@@ -45,6 +47,8 @@ You've completed this level when you can:
 9. **E2E Testing** protects critical user journeys
 10. **Animations** add clarity and polish to UI changes
 11. **Deployment** makes releases reliable
+12. **React Router Data APIs** improve data loading discipline
+13. **PWA and Offline-First** add resilience for real-world conditions
 
 ## Key Transitions at This Level
 

@@ -4,25 +4,19 @@ Date: 2026-01-06
 Scope: /home/cedric/junior-to-lead/react
 
 ## Audit Summary
-- Scanned 62 Markdown files in `react/` (57 modules + 5 READMEs).
-- All 57 modules include Mental Models, Prerequisites, Learning Objectives, Time Estimate, Common Mistakes, Practice Exercises + Solutions, What You Learned, Real-World Application, Further Reading, and Navigation.
+- Scanned 68 Markdown files in `react/` (63 modules + 5 READMEs).
+- All 63 modules include Mental Models, Prerequisites, Learning Objectives, Time Estimate, Common Mistakes, Practice Exercises + Solutions, What You Learned, Real-World Application, Further Reading, and Navigation.
 - Navigation links are valid for all modules (no missing targets).
 - Debug This Code coverage matches the guideline (8 of 10 junior modules).
 - Voice and example markers were normalized (second-person voice; ❌/✅ examples in modules with JS/TS snippets).
 
 ## Inventory
-- Module counts (actual): Junior 13, Mid 15, Senior 17, Lead 12 (total 57).
+- Module counts (actual): Junior 13, Mid 17, Senior 21, Lead 12 (total 63).
 - `react/README.md` reflects updated counts and includes the new module navigation.
-- `CLAUDE.md` reflects 57 modules in both purpose and structure sections.
+- `CLAUDE.md` reflects 63 modules in both purpose and structure sections.
 
 ## Format Drift
-The CLAUDE format expects 5-8 chapters per module. These junior modules exceed that range:
-- `react/01-junior/06-forms-and-validation.md` (9 chapters)
-- `react/01-junior/07-styling-approaches.md` (9 chapters)
-- `react/01-junior/10-testing-fundamentals.md` (10 chapters)
-- `react/01-junior/11-debugging-techniques.md` (11 chapters)
-- `react/01-junior/13-git-workflows.md` (11 chapters)
-- `react/01-junior/12-accessibility-fundamentals.md` (9 chapters)
+All modules now follow the 5-8 chapter guideline.
 
 ## Content Balance
 - Module length is inverted: Junior modules are the longest (avg ~4.2k words) while Lead modules are the shortest (avg ~1.3k words). Consider rebalancing so complexity and depth increase by level.
@@ -31,9 +25,9 @@ The CLAUDE format expects 5-8 chapters per module. These junior modules exceed t
 - `react/01-junior/13-git-workflows.md` uses `git checkout --theirs/--ours`; consider `git restore --theirs/--ours` or clarify that checkout is legacy-but-supported.
 
 ## Coverage Gaps / Opportunities
-- Add capstone projects per level plus a lightweight assessment checklist.
-- Add a “last reviewed” or “version target” marker per module to reduce ecosystem drift.
+- Standalone gap modules were added for router data APIs, PWA/offline, modern React APIs, web workers, privacy logging, and subresource integrity.
+- Capstone modules are intentionally excluded per current direction.
 
 ## Recommended Next Steps
-1) Reduce chapter counts for the remaining junior modules to align with the 5-8 chapter guideline.
-2) Decide whether to add capstones + version tags as part of a 2026 refresh.
+1) Rebalance module length so depth increases by level.
+2) Decide whether to add explicit version-target markers beyond the existing last-reviewed dates.

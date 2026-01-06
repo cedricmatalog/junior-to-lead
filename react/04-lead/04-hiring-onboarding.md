@@ -301,30 +301,58 @@ Ask all candidates the same questions:
 ```
 
 ### Onboarding Documentation
-
-```markdown
-## Chapter 5: New Developer Guide
+## Chapter 5: New Developer Guide (Inline)
 
 ### Getting Started
-1. [Development Setup](./dev-setup.md)
-2. [Architecture Overview](./architecture.md)
-3. [Team Practices](./practices.md)
+- Install Node LTS and the team package manager (npm/yarn/pnpm).
+- Clone the repo, run `npm install`, and start the dev server.
+- Load required env vars from the approved secrets store.
+- Verify access to analytics, error reporting, and staging.
+
+### Architecture Overview
+- Review the high-level system diagram: UI layers, data flow, and boundaries.
+- Note the core domains (auth, billing, catalog, search) and owners.
+- Read key ADRs and recent architectural decisions.
+
+### Team Practices
+- Branching model and PR expectations (size, tests, checklist).
+- Definition of done and release cadence.
+- Communication norms: standups, async updates, and escalation.
 
 ### Key Concepts
-- [Our Design System](./design-system.md)
-- [State Management](./state.md)
-- [Testing Strategy](./testing.md)
+**Design System**
+- Use tokens and base components before building new UI.
+- Document new components with usage examples and variants.
+
+**State Management**
+- Client state: local component state or lightweight store.
+- Server state: caching and revalidation via a query layer.
+- Decision rule: pick the smallest tool that fits the scope.
+
+**Testing Strategy**
+- Follow the test pyramid: unit → integration → E2E.
+- Test the behavior that matters to users, not implementation details.
+- Run critical suites before every release.
 
 ### Processes
-- [How to Deploy](./deployment.md)
-- [Code Review Guidelines](./code-review.md)
-- [On-Call Guide](./on-call.md)
+**Deployment**
+- Environments: dev → staging → production.
+- Use feature flags for risky changes and plan rollbacks.
+
+**Code Review Guidelines**
+- Review for correctness, clarity, and maintainability.
+- Ask for context when needed; avoid guessing intent.
+- Keep reviews small and fast to reduce bottlenecks.
+
+**On-Call Guide**
+- Know escalation paths and incident severity levels.
+- Use runbooks for standard incidents.
+- Document every incident with a short postmortem.
 
 ### Who to Ask
 - Technical questions: @tech-lead
 - Process questions: @engineering-manager
 - Product questions: @product-manager
-```
 
 ---
 

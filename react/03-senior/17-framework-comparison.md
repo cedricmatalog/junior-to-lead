@@ -408,4 +408,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./16-nextjs-app-router-deep-dive.md)
+**Navigation**: [← Previous Module](./16-nextjs-app-router-deep-dive.md) | [Next Module →](./18-modern-react-apis.md)

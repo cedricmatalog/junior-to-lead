@@ -11,11 +11,11 @@ This curriculum covers both **technical React skills** and **leadership competen
 | Level | Focus | Modules | Target |
 |-------|-------|---------|--------|
 | [01 - Junior](01-junior/) | Foundation | 13 | Solid fundamentals, ship features independently |
-| [02 - Mid-Level](02-mid-level/) | Proficiency | 15 | Own complex features, production-grade code |
-| [03 - Senior](03-senior/) | Expertise | 17 | Architectural decisions, mentor others |
+| [02 - Mid-Level](02-mid-level/) | Proficiency | 17 | Own complex features, production-grade code |
+| [03 - Senior](03-senior/) | Expertise | 21 | Architectural decisions, mentor others |
 | [04 - Lead](04-lead/) | Leadership | 12 | Technical direction, grow teams |
 
-**Total: 57 modules across 4 levels**
+**Total: 63 modules across 4 levels**
 
 ## How to Use This Curriculum
 
@@ -60,6 +60,8 @@ This curriculum covers both **technical React skills** and **leadership competen
 - [E2E Testing with Playwright](02-mid-level/13-e2e-testing-with-playwright.md)
 - [Animations and Motion](02-mid-level/14-animations-and-motion.md)
 - [Deployment and CI](02-mid-level/15-deployment-and-ci.md)
+- [React Router Data APIs](02-mid-level/16-react-router-data-apis.md)
+- [PWA and Offline-First](02-mid-level/17-pwa-and-offline-first.md)
 
 ### Senior Developer
 
@@ -80,6 +82,10 @@ This curriculum covers both **technical React skills** and **leadership competen
 - [Next.js Advanced](03-senior/15-nextjs-advanced.md)
 - [Next.js App Router Deep Dive](03-senior/16-nextjs-app-router-deep-dive.md)
 - [Framework Comparison](03-senior/17-framework-comparison.md)
+- [Modern React APIs](03-senior/18-modern-react-apis.md)
+- [Web Workers and Off-Main-Thread Work](03-senior/19-web-workers-off-main-thread.md)
+- [Privacy and PII Logging](03-senior/20-privacy-and-pii-logging.md)
+- [Subresource Integrity and Third-Party Scripts](03-senior/21-subresource-integrity-third-party-scripts.md)
 
 ### Lead Developer
 - [Technical Leadership](04-lead/01-technical-leadership.md)

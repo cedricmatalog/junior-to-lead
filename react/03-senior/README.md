@@ -33,6 +33,10 @@ You've completed this level when you can:
 | 15 | [Next.js Advanced](15-nextjs-advanced.md) | Server Components, streaming, middleware, edge runtime, caching layers |
 | 16 | [Next.js App Router Deep Dive](16-nextjs-app-router-deep-dive.md) | Server/client boundaries, caching, route handlers |
 | 17 | [Framework Comparison](17-framework-comparison.md) | Next.js vs Remix vs Astro, when to use what, migration strategies |
+| 18 | [Modern React APIs](18-modern-react-apis.md) | useSyncExternalStore, useInsertionEffect, action hooks, useOptimistic |
+| 19 | [Web Workers and Off-Main-Thread Work](19-web-workers-off-main-thread.md) | Workers, message passing, transferables, React integration |
+| 20 | [Privacy and PII Logging](20-privacy-and-pii-logging.md) | Data classification, redaction, consent, retention |
+| 21 | [Subresource Integrity and Third-Party Scripts](21-subresource-integrity-third-party-scripts.md) | SRI, CSP, vendor risk, script isolation |
 
 ## Recommended Path
 
@@ -46,6 +50,8 @@ You've completed this level when you can:
 8. **Code Review** and **Mentoring** multiply your effectiveness
 9. **Next.js Advanced** and **App Router Deep Dive** strengthen framework mastery
 10. **Framework Comparison** broadens your architectural choices
+11. **Modern React APIs** and **Web Workers** protect performance and concurrency
+12. **Privacy** and **Subresource Integrity** harden user trust and vendor safety
 
 ## Key Transitions at This Level
 
