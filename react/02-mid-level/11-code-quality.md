@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 10 (TypeScript Mastery) - Familiarity with project tooling and component structure.
+Mid-Level Module 10 (TypeScript Mastery) - Familiarity with project tooling and component structure.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: ESLint Configuration
 
 You need the tooling to catch issues before they reach review.
+
+"Linting is your first line of defense," Sarah says.
 
 ```js
 // .eslintrc.js
@@ -92,6 +94,8 @@ module.exports = {
 
 Formatting debates slow teams down. Prettier eliminates them.
 
+"Formatting is a solved problem," Marcus says.
+
 ```json
 // .prettierrc
 {
@@ -119,6 +123,8 @@ Formatting debates slow teams down. Prettier eliminates them.
 ## Chapter 3: Project Structure
 
 A clear layout makes features easy to find and own.
+
+"Structure is a communication tool," Sarah says.
 
 ```
 src/
@@ -153,6 +159,8 @@ src/
 ## Chapter 4: Code Organization Patterns
 
 Structure patterns keep components predictable as the app grows.
+
+"Predictability reduces cognitive load," Marcus says.
 
 ### Component File Structure
 
@@ -214,6 +222,8 @@ import { Button, Input, Modal } from '@/components';
 ## Chapter 5: Refactoring Techniques
 
 You want improvements without introducing regressions.
+
+"Refactor with a safety net," Sarah says.
 
 ### Extract Component
 
@@ -297,6 +307,8 @@ function ProductPage({ id }) {
 
 Reviews need consistency, not personal preferences.
 
+"Consistency beats opinion wars," Marcus says.
+
 - [ ] No commented-out code
 - [ ] No console.logs in production code
 - [ ] Proper error handling
@@ -310,6 +322,8 @@ Reviews need consistency, not personal preferences.
 ## Chapter 7: Pre-commit Hooks
 
 Automation keeps quality consistent even when teams are busy.
+
+"Automate the boring guardrails," Sarah says.
 
 ```json
 // package.json

@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 01 (Advanced Patterns) - Comfort with components, hooks, and composition patterns.
+Mid-Level Module 01 (Advanced Patterns) - Comfort with components, hooks, and composition patterns.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 The first step is understanding why that filter dropdown re-renders half the page.
 
+Sarah taps the flame chart. "Find the triggers before you reach for fixes."
+
 React re-renders a component when:
 1. Its state changes
 2. Its props change
@@ -75,7 +77,9 @@ function Parent() {
 
 Marcus points out a component that renders on every keystroke even though its props never change.
 
-Prevents re-renders when props haven't changed.
+"If props don't change, don't pay the cost," he says.
+
+React.memo prevents re-renders when props haven't changed.
 
 ```jsx
 const ExpensiveList = memo(function ExpensiveList({ items }) {
@@ -109,7 +113,9 @@ const UserCard = memo(
 
 Your filtering logic is expensive. You need to cache the result until inputs actually change.
 
-Memoize expensive calculations.
+"Cache the expensive stuff, not the cheap stuff," Sarah says.
+
+useMemo memoizes expensive calculations.
 
 ```jsx
 function ProductList({ products, filter }) {
@@ -139,7 +145,9 @@ const fullName = `${first} ${last}`; // Just do this
 
 Passing new functions on every render keeps re-triggering child renders.
 
-Memoize functions to prevent unnecessary re-renders.
+Marcus points at the prop list. "Stable functions keep memoized children calm."
+
+useCallback memoizes functions to prevent unnecessary re-renders.
 
 ```jsx
 function SearchPage() {
@@ -167,6 +175,8 @@ const SearchResults = memo(function SearchResults({ onSearch }) {
 ## Chapter 5: Virtualization
 
 The activity feed has thousands of rows. Rendering all of them is killing scroll performance.
+
+"Only render what the user can see," Sarah says.
 
 Only render visible items in large lists.
 
@@ -215,6 +225,8 @@ function VirtualList({ items }) {
 
 The app loads a huge bundle on first paint. You need to load screens only when users navigate.
 
+"Ship the screen when the user asks for it," Marcus says.
+
 Load code only when needed.
 
 ```jsx
@@ -258,6 +270,8 @@ function Analytics() {
 
 Sarah wants to know which dependencies are inflating the bundle. Time to measure, not guess.
 
+"Measure first, trim second," she says.
+
 ```bash
 # Using webpack-bundle-analyzer
 npm install --save-dev webpack-bundle-analyzer
@@ -285,6 +299,8 @@ debounce(fn, 300);
 ## Chapter 8: Profiling
 
 You need hard evidence before you optimize. The profiler will show where the time goes.
+
+"Let the profiler settle the argument," Sarah says.
 
 Use React DevTools Profiler:
 

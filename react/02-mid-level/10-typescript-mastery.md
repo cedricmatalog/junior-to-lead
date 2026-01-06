@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 08 (Testing Strategies) - Familiarity with component composition and reusable patterns.
+Mid-Level Module 01 (Advanced Patterns) - Familiarity with component composition and reusable patterns.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Generics in Components
 
 You need reusable components that still keep strict types.
+
+"Reuse without losing safety," Sarah says.
 
 ```tsx
 // Generic list component
@@ -116,6 +118,8 @@ function Select<T>({
 
 You can reshape data types without rewriting them from scratch.
 
+"Utility types keep you honest and fast," Marcus says.
+
 ```tsx
 // Partial - make all properties optional
 interface User {
@@ -156,6 +160,8 @@ type UserData = Awaited<ReturnType<typeof fetchUserAsync>>;
 ## Chapter 3: Discriminated Unions
 
 Complex UI states need explicit, typed labels.
+
+"Make the states explicit so bugs have nowhere to hide," Sarah says.
 
 ```tsx
 // State machine with discriminated unions
@@ -203,6 +209,8 @@ function reducer(state: number, action: Action): number {
 
 External data is messy. Guards help you validate it safely.
 
+"Narrow before you use," Marcus says.
+
 ```tsx
 // Type predicate
 function isUser(value: unknown): value is User {
@@ -249,6 +257,8 @@ function handleUser(user: Admin | Guest) {
 
 You need prop types that guide developers toward correct usage.
 
+"Patterns keep teams aligned," Sarah says.
+
 ```tsx
 // Props with children
 interface CardProps {
@@ -289,6 +299,8 @@ type InputProps = React.ComponentProps<'input'>;
 
 Strict settings catch bugs earlier, even if they feel noisy at first.
 
+"Strict is faster than loose," Marcus says.
+
 ```json
 // tsconfig.json
 {
@@ -311,6 +323,8 @@ Strict settings catch bugs earlier, even if they feel noisy at first.
 ## Chapter 7: Advanced Patterns
 
 These patterns help when your types get truly complex.
+
+"Use advanced types as tools, not trophies," Sarah says.
 
 ```tsx
 // Template literal types

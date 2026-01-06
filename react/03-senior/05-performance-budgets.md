@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 04 (Advanced Performance) - Familiarity with Web Vitals and profiling.
+Senior Module 04 (Advanced Performance) - Familiarity with Web Vitals and profiling.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 Sarah lists the core metrics:
 
+"Pick the ones users actually feel," she says.
+
 - LCP
 - INP
 - CLS
@@ -69,6 +71,8 @@ Sarah lists the core metrics:
 ## Chapter 2: Set Realistic Targets
 
 Start with baselines, then improve.
+
+"Baseline before you police," Marcus says.
 
 ```text
 LCP: <= 2.5s
@@ -85,6 +89,8 @@ JS bundle: <= 200KB
 
 You add Lighthouse CI and bundlesize checks.
 
+"Automate the guardrails," Sarah says.
+
 ```yaml
 - name: Lighthouse CI
   run: npx lhci autorun
@@ -100,6 +106,8 @@ You add Lighthouse CI and bundlesize checks.
 
 Not every release can pass budgets perfectly.
 
+"Exceptions need a clock," Marcus says.
+
 "Use exception paths with time limits," Marcus says.
 
 ```text
@@ -114,6 +122,8 @@ Owner: Frontend Team
 
 You create a weekly performance report.
 
+"Ownership makes progress real," Sarah says.
+
 "If nobody owns it, nobody fixes it," Sarah says.
 
 ---
@@ -121,6 +131,8 @@ You create a weekly performance report.
 ## Chapter 6: Keeping It Sustainable
 
 Budgets become part of the release checklist.
+
+"Make it routine so it sticks," Marcus says.
 
 "Make it routine. Then it stays healthy."
 

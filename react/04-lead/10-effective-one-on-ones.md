@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 41: The Growth Engine
+## Week Ten: The Growth Engine
 
 Two engineers feel stuck, and morale is dipping. Sarah asks you to use 1:1s to unblock growth and build trust. Marcus reminds you that the best 1:1s are not status meetings; they are coaching conversations. This week focuses on structure, questions, feedback, and the habits that make 1:1s a reliable growth tool.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 09 (Cross-Team Collaboration) - Comfort with stakeholder alignment and communication.
+Lead Module 09 (Cross-Team Collaboration) - Comfort with stakeholder alignment and communication.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Define the Purpose
 
+You set the intention before you open the calendar.
+
 Sarah wants you to prioritize the human side of the work. Marcus reminds you that a good 1:1 solves for trust first, then growth.
+
+Sarah says, "One-on-ones are for the person, not the status."
 
 ```markdown
 ## 1:1 Priorities
@@ -65,7 +69,11 @@ Sarah wants you to prioritize the human side of the work. Marcus reminds you tha
 
 ## Chapter 2: Structure the Meeting
 
+You pick a simple structure so the other person can prepare.
+
 A consistent structure helps people feel safe and prepared.
+
+Marcus says, "Structure creates safety."
 
 ```markdown
 ## Weekly 1:1 Template
@@ -98,7 +106,11 @@ Career:
 
 ## Chapter 3: Ask Better Questions
 
+You choose questions that surface blockers early.
+
 Marcus suggests open-ended questions that invite reflection instead of yes or no.
+
+Sarah says, "Questions unlock what people won't volunteer."
 
 ```markdown
 ## Questions That Work
@@ -119,7 +131,11 @@ Marcus suggests open-ended questions that invite reflection instead of yes or no
 
 ## Chapter 4: Career and Promotion Conversations
 
+You make expectations explicit before the review cycle arrives.
+
 Sarah asks you to be direct about expectations and evidence.
+
+Marcus says, "Make growth concrete, not vague."
 
 ```markdown
 ## Career Conversation Guide
@@ -147,7 +163,11 @@ Let's build a plan together and check progress monthly."
 
 ## Chapter 5: Deliver Feedback That Lands
 
+You give feedback while it still matters.
+
 Marcus recommends the SBI model for clarity.
+
+Sarah says, "Feedback lands when it's specific and timely."
 
 ```markdown
 ## SBI Example
@@ -160,7 +180,11 @@ Request: "In future reviews, hold questions to the end."
 
 ## Chapter 6: Build and Repair Trust
 
+You show up consistently, even when nothing is urgent.
+
 Consistency beats intensity. Show up, follow through, and be clear about commitments.
+
+Marcus says, "Trust is built in small moments."
 
 ```markdown
 ## Trust Builders
@@ -276,4 +300,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./09-cross-team-collaboration.md) | [Next Module ->](./11-conflict-resolution.md)
+**Navigation**: [← Previous Module](./09-cross-team-collaboration.md) | [Next Module →](./11-conflict-resolution.md)

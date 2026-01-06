@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Supply-Chain Security) - Familiarity with dependency and vendor risk.
+Senior Module 07 (Supply-Chain Security) - Familiarity with dependency and vendor risk.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 You cannot protect what you do not track.
 
+Sarah says, "If a script has no owner, remove it."
+
 Create a simple table:
 
 - **Owner** (team or vendor)
@@ -71,6 +73,8 @@ Create a simple table:
 ## Chapter 2: Add SRI Hashes
 
 SRI lets the browser verify the exact content of a script.
+
+Marcus says, "If the file changes, the browser should refuse to run it."
 
 ```html
 <script
@@ -88,6 +92,8 @@ SRI lets the browser verify the exact content of a script.
 
 Use Content Security Policy to limit where scripts can load from.
 
+Sarah says, "CSP is the seatbelt. SRI is the airbag."
+
 ```http
 Content-Security-Policy: script-src 'self' https://cdn.example.com; object-src 'none'
 ```
@@ -99,6 +105,8 @@ Content-Security-Policy: script-src 'self' https://cdn.example.com; object-src '
 ## Chapter 4: Load Only What You Need
 
 Load third-party scripts intentionally.
+
+Marcus says, "Tag managers are powerful, but they bypass review."
 
 - Prefer `defer` or `async`
 - Gate marketing scripts behind consent
@@ -112,6 +120,8 @@ Load third-party scripts intentionally.
 
 SRI hashes must change when the script changes.
 
+Sarah says, "Make hash updates part of release hygiene."
+
 - Track script versions in code review
 - Update hash when vendor releases a new build
 - Use a staging check to verify hashes
@@ -123,6 +133,8 @@ SRI hashes must change when the script changes.
 ## Chapter 6: Isolate Untrusted Scripts
 
 If a script needs access but you do not trust it, sandbox it.
+
+Marcus says, "Isolation turns breaches into contained incidents."
 
 - Use sandboxed iframes for ads or widgets
 - Communicate via `postMessage`

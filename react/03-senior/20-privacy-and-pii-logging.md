@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Security Practices) - Familiarity with secure data handling.
+Senior Module 06 (Security Practices) - Familiarity with secure data handling.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 Before you log anything, decide what it is.
 
+Sarah says, "If it's personal, treat it as high risk."
+
 Create a simple data map:
 
 - **PII**: names, email, phone, address
@@ -70,6 +72,8 @@ Create a simple data map:
 ## Chapter 2: Log by Allowlist
 
 Avoid logging entire objects. Log only what you approve.
+
+Marcus says, "Allowlist beats blacklist every time."
 
 ```ts
 const allowedKeys = new Set(['event', 'route', 'status', 'requestId']);
@@ -91,6 +95,8 @@ function safeLog(payload: Record<string, unknown>) {
 
 Analytics should respect consent and collect only what you need.
 
+Sarah says, "No consent means no events."
+
 - Gate analytics behind a consent flag
 - Avoid user-entered text and form fields
 - Use anonymized identifiers when possible
@@ -102,6 +108,8 @@ Analytics should respect consent and collect only what you need.
 ## Chapter 4: Scrub Error Reports
 
 Error reporting is valuable, but stack traces can leak data. Scrub before sending.
+
+Marcus says, "Privacy doesn't mean blind. It means intentional."
 
 ```ts
 const errorClient = createErrorClient({
@@ -122,6 +130,8 @@ const errorClient = createErrorClient({
 
 Keep logs only as long as needed.
 
+Sarah says, "If no one needs it, delete it."
+
 - Define retention windows by data class
 - Restrict access to logs by role
 - Encrypt at rest and in transit
@@ -134,6 +144,8 @@ Keep logs only as long as needed.
 ## Chapter 6: Privacy Incident Playbook
 
 You will eventually discover a leak. Plan for it now.
+
+Marcus says, "Fast response turns leaks into lessons."
 
 - Rotate secrets and revoke tokens
 - Remove leaked data from storage

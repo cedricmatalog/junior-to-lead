@@ -29,7 +29,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 11 (Debugging Techniques) - Understanding how to investigate and fix issues before committing code.
+Junior Module 11 (Debugging Techniques) - Understanding how to investigate and fix issues before committing code.
 
 ---
 
@@ -182,6 +182,8 @@ git push --force-with-lease origin feature/checkout-payment-integration
 
 Time to request review. You open GitHub and start typing the PR description.
 
+Sarah says, "A good PR description saves review time."
+
 ```markdown
 ## Description
 Brief explanation of what this PR does.
@@ -263,6 +265,8 @@ git push origin feature/checkout-payment-integration
 ## Chapter 6: The Merge
 
 Approved! But before merging, one last sync:
+
+Marcus says, "Sync before you merge so nothing surprises you."
 
 ```bash
 git checkout main

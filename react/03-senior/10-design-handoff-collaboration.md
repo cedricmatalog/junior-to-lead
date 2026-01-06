@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 09 (Design Systems) - Familiarity with component libraries and tokens.
+Senior Module 09 (Design Systems) - Familiarity with component libraries and tokens.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 "If you name it once, you stop arguing about it," Sarah says.
 
+You write the shared token names so everyone points to the same thing.
+
 ```text
 color.primary.600
 spacing.4
@@ -70,6 +72,8 @@ radius.md
 ## Chapter 2: Component Contracts
 
 Define the API clearly.
+
+"A clear contract keeps both sides honest," Sarah says.
 
 ```text
 Button variants: primary | secondary | ghost
@@ -85,6 +89,8 @@ States: default | loading | disabled
 
 Marcus hands you a checklist:
 
+"Checklists make reviews fair," Sarah says.
+
 - Spacing matches spec
 - Typography uses tokens
 - States are covered (hover, focus, disabled)
@@ -98,6 +104,8 @@ Marcus hands you a checklist:
 
 Design changes happen. You need a process.
 
+"Changes are fine. Chaos isn't," Marcus says.
+
 "Track changes in a single thread and update tokens first," Sarah says.
 
 ---
@@ -106,6 +114,8 @@ Design changes happen. You need a process.
 
 You add a weekly design-engineering review.
 
+"Rituals keep alignment cheap," Sarah says.
+
 "Regular alignment prevents last-minute surprises."
 
 ---
@@ -113,6 +123,8 @@ You add a weekly design-engineering review.
 ## Chapter 6: QA and Sign-Off
 
 Ship only after a joint review.
+
+"QA is where details get real," Marcus says.
 
 "A 15-minute QA session saves days of rework."
 

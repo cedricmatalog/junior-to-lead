@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 42: The Heated Debate
+## Week Eleven: The Heated Debate
 
 Two senior engineers are locked in a technical disagreement, and the tension is spreading. Sarah asks you to mediate before the conflict hardens into factions. Marcus reminds you that conflict is normal, but unmanaged conflict drains trust and velocity. This week focuses on early signals, mediation steps, de-escalation, and decision frameworks that move teams forward.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 10 (Effective 1:1s) - Comfort giving feedback and holding tough conversations.
+Lead Module 10 (Effective 1:1s) - Comfort giving feedback and holding tough conversations.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Recognize Early Signals
 
+You watch for tension before it becomes a conflict.
+
 Sarah asks you to watch for early warning signs before a conflict becomes personal.
+
+Sarah says, "Small tensions become big incidents if you ignore them."
 
 ```markdown
 ## Early Warning Signs
@@ -74,7 +78,11 @@ Chat:
 
 ## Chapter 2: Separate and Listen
 
+You hear each side without judgment first.
+
 Marcus suggests separate conversations first to understand perspectives without escalation.
+
+Marcus says, "Listen first. Solve second."
 
 ```markdown
 ## 1:1 Mediation Prompts
@@ -86,7 +94,11 @@ Marcus suggests separate conversations first to understand perspectives without 
 
 ## Chapter 3: Facilitate the Joint Conversation
 
+You bring the two perspectives into the same room.
+
 Once you have context, bring both sides together and focus on interests, not positions.
+
+Sarah says, "Bring people together once you've heard both sides."
 
 ```markdown
 ## Interests vs Positions
@@ -100,7 +112,11 @@ Interest: "I want simple code"
 
 ## Chapter 4: Use a Decision Framework
 
+You shift the conversation to trade-offs instead of opinions.
+
 Sarah wants objective criteria to break ties. Marcus recommends a clear scoring method.
+
+Marcus says, "A framework keeps conflict from turning personal."
 
 ```markdown
 ## Technical Decision Framework
@@ -114,7 +130,11 @@ Sarah wants objective criteria to break ties. Marcus recommends a clear scoring 
 
 ## Chapter 5: De-escalate in the Moment
 
+You slow the room down before you solve the issue.
+
 When things heat up, slow the conversation down and reframe the problem.
+
+Sarah says, "Lower the temperature before you solve the problem."
 
 ```markdown
 ## De-escalation Tactics
@@ -127,7 +147,11 @@ When things heat up, slow the conversation down and reframe the problem.
 
 ## Chapter 6: Disagree and Commit
 
+You lock in alignment after the decision.
+
 Sometimes full agreement is impossible. You still need unity after the decision.
+
+Marcus says, "Commitment keeps the team moving even when you disagree."
 
 ```markdown
 ## Disagree and Commit
@@ -236,4 +260,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./10-effective-one-on-ones.md) | [Next Module ->](./12-influence-without-authority.md)
+**Navigation**: [← Previous Module](./10-effective-one-on-ones.md) | [Next Module →](./12-influence-without-authority.md)

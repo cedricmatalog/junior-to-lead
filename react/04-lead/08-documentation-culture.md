@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 39: The Knowledge Gap
+## Week Eight: The Knowledge Gap
 
 New hires keep asking the same questions, and key decisions live only in chat. Sarah asks you to build a documentation culture that scales with the team. Marcus reminds you that good docs are not optional; they are how a team keeps moving when people change. This week focuses on doc types, README and ADR standards, ownership, and habits that keep knowledge current.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Incident Management) - Comfort with postmortems and runbooks.
+Lead Module 05 (Stakeholder Communication) - Comfort documenting decisions and sharing updates.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Make the Cost Visible
 
+You quantify the time cost so the team feels it.
+
 Sarah wants the team to see documentation as a time saver, not a burden. Marcus suggests quantifying the cost of missing docs.
+
+Sarah says, "Every missing doc shows up as a meeting."
 
 ```markdown
 ## Missing Documentation Impact
@@ -71,7 +75,11 @@ With documentation:
 
 ## Chapter 2: Map the Doc Types
 
+You map questions to the right doc type so people can self-serve.
+
 Different questions require different doc types. Keep the map simple and visible.
+
+Marcus says, "Know which docs matter most."
 
 ```markdown
 ## Documentation Types
@@ -99,7 +107,11 @@ Runbook
 
 ## Chapter 3: Standardize READMEs and ADRs
 
+You make entry points predictable so people stop guessing.
+
 Sarah wants consistent entry points so the team always knows where to look.
+
+Sarah says, "Standards reduce guesswork."
 
 ### Project README Template
 
@@ -153,7 +165,11 @@ What changes because of this decision?
 
 ## Chapter 4: Keep Docs Updated
 
+You assign ownership so docs do not decay.
+
 Marcus wants ownership and a schedule so docs do not decay.
+
+Marcus says, "A stale doc is a broken promise."
 
 ```markdown
 ## Documentation Maintenance
@@ -172,7 +188,11 @@ Ownership:
 
 ## Chapter 5: Build a Documentation Culture
 
+You make documentation part of the workflow, not an extra task.
+
 Sarah asks you to make documentation part of the workflow, not an afterthought.
+
+Sarah says, "Docs are a team habit, not an afterthought."
 
 ```markdown
 ## Documentation Practices
@@ -193,7 +213,11 @@ Recognition:
 
 ## Chapter 6: Docs as Code
 
+You treat docs like code so they stay healthy.
+
 Marcus suggests treating docs like software so they stay current and testable.
+
+Marcus says, "Docs deserve the same rigor as code."
 
 ```markdown
 ## Docs-as-Code Practices
@@ -322,4 +346,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./07-incident-management.md) | [Next Module ->](./09-cross-team-collaboration.md)
+**Navigation**: [← Previous Module](./07-incident-management.md) | [Next Module →](./09-cross-team-collaboration.md)

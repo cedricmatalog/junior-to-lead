@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 03 (Hooks Deep Dive) - Comfort with components, props, and basic hooks.
+Junior Module 03 (Hooks Deep Dive) - Comfort with components, props, and basic hooks.
 
 ---
 

@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 13 (Code Review Mastery) - Familiarity with feedback and team collaboration.
+Senior Module 13 (Code Review Mastery) - Familiarity with feedback and team collaboration.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 Mentoring works best when you focus on growth, not gatekeeping.
 
+Sarah says, "Your job is to help them grow, not to prove you're right."
+
 ### Your Role
 
 - **Guide**, not gatekeeper
@@ -71,6 +73,8 @@ Training them to train:     nx (exponential growth)
 ## Chapter 2: Structuring Mentorship
 
 A structured plan prevents mentorship from becoming ad-hoc support.
+
+Marcus says, "A plan turns help into progress."
 
 ### Initial Assessment
 
@@ -124,6 +128,8 @@ A structured plan prevents mentorship from becoming ad-hoc support.
 
 Different juniors need different teaching modes.
 
+Sarah says, "Teach the way they learn, not the way you learned."
+
 ### The "Why" Before "How"
 
 ```tsx
@@ -160,12 +166,11 @@ Try it yourself first, then we'll review.
 Add keyboard navigation for results.
 ```
 
-### Pair Programming
-
-```markdown
 ## Chapter 4: Pairing Modes
 
 Pairing can teach quickly when you use it intentionally.
+
+Marcus says, "Pairing is a tool, not a default."
 
 **Driver-Navigator**
 - Junior drives: Types code, thinks out loud
@@ -180,11 +185,12 @@ Pairing can teach quickly when you use it intentionally.
 **Ping-Pong**
 - Alternate: You write test, they write code
 - Good for: TDD, keeping both engaged
-```
 
 ## Chapter 5: Giving Feedback
 
 Good feedback is specific and tied to impact.
+
+Sarah says, "Feedback is a gift when it's specific."
 
 ### The SBI Model
 
@@ -231,6 +237,8 @@ implementation details before we understood the requirements
 
 Solve the problem of learning, not the problem itself.
 
+Marcus says, "Give them the next step, not the whole path."
+
 ### Ask Before Telling
 
 ```markdown
@@ -258,6 +266,8 @@ Solve the problem of learning, not the problem itself.
 ## Chapter 7: Balancing Mentoring with Work
 
 Mentoring is part of the job, but delivery still matters.
+
+Sarah says, "Mentoring is work. Make time for it."
 
 ### Time Boxing
 

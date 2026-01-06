@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 32: The Technical Vision Reset
+## Week One: The Technical Vision Reset
 
 The team is shipping, but direction is fuzzy. Sarah asks you to define a technical vision that aligns with product goals and reduces risk. Marcus reminds you that leadership is not about writing every line -- it is about setting direction, making trade-offs, and creating clarity. This week focuses on the systems and decisions that guide a team at scale.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 17 (Framework Comparison) - Comfort evaluating trade-offs and documenting decisions.
+Senior Module 17 (Framework Comparison) - Comfort evaluating trade-offs and documenting decisions.
 
 ---
 
@@ -51,7 +51,13 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: The Lead Developer Role
 
+You split the role into what it is and what it is not.
+
 ### What It Is
+
+Sarah says, "Lead is about direction, not control."
+
+You sketch the role on a whiteboard so everyone sees the same shape.
 
 - Setting technical direction for your team/area
 - Making architectural decisions
@@ -60,6 +66,10 @@ By the end of this module, you'll be able to:
 
 ### What It Isn't
 
+Marcus adds, "If you try to do it all, you block the team."
+
+You list the traps that slow teams down.
+
 - Writing all the code
 - Making all the decisions
 - Managing people (that's EM)
@@ -67,7 +77,13 @@ By the end of this module, you'll be able to:
 
 ## Chapter 2: Setting Technical Vision
 
+You gather input from product and engineering before you write the vision.
+
 ### Vision Document Structure
+
+Sarah says, "Write the vision down so the team can point to it."
+
+You open a blank doc and start with the current state.
 
 ```markdown
 # Frontend Technical Vision 2024-2025
@@ -100,6 +116,8 @@ By the end of this module, you'll be able to:
 
 ### Communicating Vision
 
+You tailor the message to the audience so it lands.
+
 - **Executives**: Business impact, ROI, risk
 - **Engineers**: Technical benefits, learning opportunities
 - **Product**: Feature velocity, reliability improvements
@@ -107,7 +125,13 @@ By the end of this module, you'll be able to:
 
 ## Chapter 3: Technical Roadmaps
 
+You line up the next quarter on a single page.
+
 ### Roadmap Structure
+
+Marcus says, "Roadmaps are promises. Keep them honest."
+
+You map the quarter into milestones and dependencies.
 
 ```markdown
 ### Q1 2024 Roadmap
@@ -137,6 +161,8 @@ By the end of this module, you'll be able to:
 
 ### Balancing the Roadmap
 
+You balance delivery and long-term investment.
+
 ```
 ┌──────────────────────────────────────────────┐
 │                 Roadmap Mix                   │
@@ -150,7 +176,13 @@ By the end of this module, you'll be able to:
 
 ## Chapter 4: Buy vs Build Decisions
 
+You compare options before you commit the team to years of maintenance.
+
 ### Decision Framework
+
+Sarah says, "Every build choice is a maintenance choice."
+
+You compare options with a simple scorecard.
 
 ```markdown
 ### Evaluation: Auth Solution
@@ -185,7 +217,13 @@ Auth0 for now:
 
 ## Chapter 5: Risk Assessment
 
+You pause and list the risks out loud.
+
 ### Risk Categories
+
+Marcus says, "Name the risks before they surprise you."
+
+You name them early so you can plan around them.
 
 | Category | Examples | Mitigation |
 |----------|----------|------------|
@@ -206,7 +244,13 @@ Auth0 for now:
 
 ## Chapter 6: Making Decisions
 
+You decide which door you are walking through.
+
 ### Decision Types
+
+Sarah says, "Decide fast on reversible choices, slow on irreversible ones."
+
+You label the decision type before you debate it.
 
 - **One-way door**: Hard to reverse, need careful analysis
 - **Two-way door**: Easy to reverse, decide quickly
@@ -244,13 +288,21 @@ Zustand
 
 ## Chapter 7: Balancing Innovation and Delivery
 
+You look at the team's time budget before adding experiments.
+
 ### The 70-20-10 Rule
+
+Marcus says, "Innovation only matters if you can still ship."
+
+You rebalance time so exploration does not steal delivery.
 
 - **70%**: Core product work
 - **20%**: Improvements and tech debt
 - **10%**: Innovation and experiments
 
 ### Managing Tech Exploration
+
+You keep a radar so experiments stay intentional.
 
 ```markdown
 ## Tech Radar
@@ -396,4 +448,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [Next Module ->](./02-architecture-ownership.md)
+**Navigation**: [Next Module →](./02-architecture-ownership.md)

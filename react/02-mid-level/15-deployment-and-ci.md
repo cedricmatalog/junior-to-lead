@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 11 (Code Quality) - Familiarity with linting and testing tools.
+Mid-Level Module 11 (Code Quality) - Familiarity with linting and testing tools.
 
 ---
 
@@ -69,6 +69,8 @@ Prod: real users, real stakes
 
 ## Chapter 2: Build Artifacts
 
+You need a build you can trust everywhere.
+
 "Build once, deploy many," Marcus says.
 
 ```bash
@@ -83,6 +85,8 @@ npm run build
 ## Chapter 3: A Simple CI Pipeline
 
 You wire lint, tests, and build together.
+
+"If it doesn't pass CI, it doesn't ship," Sarah says.
 
 ```yaml
 name: CI
@@ -110,6 +114,8 @@ jobs:
 
 Local `.env.local` doesn't exist in production.
 
+"Treat environment config as deployment input," Marcus says.
+
 "Use platform env settings," Sarah says.
 
 ```text
@@ -125,6 +131,8 @@ VITE_FEATURE_FLAG_NEW_CHECKOUT=true
 
 You can reduce risk with gradual rollouts.
 
+"Safer releases beat heroic rollbacks," Sarah says.
+
 - **Canary**: Release to a small percentage of users
 - **Feature flags**: Hide new features behind toggles
 - **Dark launch**: Ship code without exposing UI
@@ -136,6 +144,8 @@ You can reduce risk with gradual rollouts.
 ## Chapter 6: Rollbacks and Health Checks
 
 When things go wrong, revert fast.
+
+"Plan the escape hatch before you need it," Marcus says.
 
 ```text
 Rollback steps:

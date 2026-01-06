@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 09 (Design Systems) - Familiarity with shared tooling and component conventions.
+Senior Module 03 (System Design) - Familiarity with system boundaries and production trade-offs.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Error Tracking with Sentry
 
 You need error visibility with enough context to fix issues quickly.
+
+"Logs without context are noise," Sarah says.
 
 ### Setup
 
@@ -119,6 +121,8 @@ function handlePaymentError(error: Error, context: PaymentContext) {
 
 Track runtime performance before it shows up in user complaints.
 
+"Measure what users feel, not just server time," Marcus says.
+
 ### Web Vitals
 
 ```tsx
@@ -183,6 +187,8 @@ function Dashboard() {
 ## Chapter 3: Logging Strategy
 
 Logs should answer "what happened" without drowning you in noise.
+
+"Logs should answer questions, not create them," Sarah says.
 
 ### Structured Logging
 
@@ -265,6 +271,8 @@ logger.error('Payment failed', { error: err.message, orderId });
 
 Product analytics should be precise and respectful of user privacy.
 
+"Analytics should serve decisions, not vanity," Marcus says.
+
 ### Event Tracking
 
 ```tsx
@@ -335,6 +343,8 @@ function AnalyticsProvider({ children }: { children: React.ReactNode }) {
 
 Alerts should be actionable, not constant.
 
+"Alerts should wake you for real problems only," Sarah says.
+
 ### Alert Configuration
 
 ```typescript
@@ -387,6 +397,8 @@ export async function GET() {
 ## Chapter 6: Dashboard Metrics
 
 Dashboards tell you if the system is healthy at a glance.
+
+"Dashboards tell the story at a glance," Marcus says.
 
 Key metrics to track:
 

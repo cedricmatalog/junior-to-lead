@@ -35,7 +35,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 03 (Hooks Deep Dive) - Understanding useState, useEffect, useContext, and custom hooks.
+Junior Module 03 (Hooks Deep Dive) - Understanding useState, useEffect, useContext, and custom hooks.
 
 ---
 
@@ -114,6 +114,8 @@ function App() {
 ## Chapter 2: Lifting State Up
 
 You start building the menu page. Temperature-controlled drinks need Celsius and Fahrenheit displays. Your first attempt:
+
+Sarah says, "If two components need the same state, lift it once."
 
 ```jsx
 function TemperatureInputs() {
@@ -285,6 +287,8 @@ Here's how Context works as a provider tree:
 
 Time to build the real thing. The cart state is complex—items, quantities, customizations, restaurant info—so you use `useReducer` with Context.
 
+Marcus says, "Complex state needs a reducer to stay readable."
+
 ```jsx
 const OrderContext = createContext(null);
 
@@ -441,6 +445,8 @@ function useOrder() {
 ## Chapter 6: Mixing Local and Global
 
 The menu item component shows the pattern in action:
+
+Sarah says, "Keep local state local, and lift only what's shared."
 
 ```jsx
 function MenuItem({ item, restaurantId }) {

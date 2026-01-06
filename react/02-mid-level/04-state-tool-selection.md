@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 03 (State at Scale) - Familiarity with Redux Toolkit, Zustand, and server state concepts.
+Mid-Level Module 03 (State at Scale) - Familiarity with Redux Toolkit, Zustand, and server state concepts.
 
 ---
 
@@ -74,6 +74,8 @@ URL: filters, pagination, search
 
 Local state should be fast and private.
 
+"If more than one screen needs it, it stops being local," Sarah says.
+
 ```jsx
 function QuantityPicker() {
   const [count, setCount] = useState(1);
@@ -98,6 +100,8 @@ const useCartStore = create(set => ({
 
 Fetching data is different from UI state.
 
+"Treat the server like a separate system, not a local store," Marcus says.
+
 ```jsx
 const { data: products } = useQuery({
   queryKey: ['products'],
@@ -112,6 +116,8 @@ const { data: products } = useQuery({
 ## Chapter 4: Avoid Derived State Traps
 
 Duplicating derived state creates bugs.
+
+"Compute it when you need it," Sarah says. "Store the source, not the math."
 
 ```jsx
 const total = items.reduce((sum, item) => sum + item.price, 0);

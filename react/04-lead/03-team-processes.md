@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 34: The Process Tune-Up
+## Week Three: The Process Tune-Up
 
 The team is shipping, but the rhythm feels chaotic. Sarah asks you to tune the process so delivery is predictable and sustainable. Marcus reminds you that process is not ceremony for its own sake -- it is a system that protects focus and clarity. This week is about adapting agile practices, running planning and retros, and building team rhythms that work.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 02 (Architecture Ownership) - Comfort with cross-team alignment and documentation.
+Lead Module 02 (Architecture Ownership) - Comfort with cross-team alignment and documentation.
 
 ---
 
@@ -49,6 +49,10 @@ By the end of this module, you'll be able to:
 ---
 
 ## Chapter 1: Agile in Practice
+
+You want process to feel like momentum, not meetings.
+
+Sarah says, "Process should serve delivery, not the other way around."
 
 ### What Actually Matters
 
@@ -84,6 +88,10 @@ By the end of this module, you'll be able to:
 ```
 
 ## Chapter 2: Sprint Planning
+
+You pull the next sprint into focus and cut the noise.
+
+Marcus says, "Plan for reality, not perfection."
 
 ### Pre-Planning
 
@@ -147,6 +155,10 @@ By the end of this module, you'll be able to:
 
 ## Chapter 3: Standups
 
+You set the standup tone for the week.
+
+Sarah says, "Standups are for blockers, not status theater."
+
 ### Async Standups
 
 ```markdown
@@ -170,6 +182,10 @@ Example:
 - Not everyone needs to speak daily
 
 ## Chapter 4: Retrospectives
+
+You pick a retro format that matches the team's energy.
+
+Marcus says, "Retros are how you buy your time back."
 
 ### Retrospective Formats
 
@@ -219,6 +235,10 @@ Example:
 
 ## Chapter 5: Definition of Done
 
+You define what "done" means before the sprint starts.
+
+Sarah says, "Done means shippable, not just merged."
+
 ```markdown
 ### Definition of Done
 
@@ -251,6 +271,10 @@ Example:
 ```
 
 ## Chapter 6: Team Rhythms
+
+You set a rhythm the team can sustain.
+
+Marcus says, "Rhythm makes teams sustainable."
 
 ### Weekly Schedule
 
@@ -374,4 +398,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./02-architecture-ownership.md) | [Next Module ->](./04-hiring-onboarding.md)
+**Navigation**: [← Previous Module](./02-architecture-ownership.md) | [Next Module →](./04-hiring-onboarding.md)

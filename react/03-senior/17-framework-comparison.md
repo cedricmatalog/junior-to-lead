@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 15 (Next.js Advanced) - Familiarity with modern React frameworks.
+Senior Module 15 (Next.js Advanced) - Familiarity with modern React frameworks.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Framework Overview
 
 You need a baseline comparison before ranking options.
+
+Sarah says, "Start with facts, not preferences."
 
 ### Next.js
 
@@ -171,6 +173,8 @@ createRoot(document.getElementById('root')).render(<App />);
 
 A matrix keeps decisions grounded in evidence, not preference.
 
+Marcus says, "Write the trade-offs down so the decision is defensible."
+
 | Requirement | Next.js | Remix | Astro | Vite+React |
 |------------|---------|-------|-------|------------|
 | SEO critical | ✅ | ✅ | ✅ | ⚠️ |
@@ -185,6 +189,8 @@ A matrix keeps decisions grounded in evidence, not preference.
 ## Chapter 3: When to Choose What
 
 Different products require different trade-offs.
+
+Sarah says, "Pick the framework that fits the constraints, not the hype."
 
 ### Choose Next.js When
 
@@ -221,6 +227,8 @@ Different products require different trade-offs.
 ## Chapter 4: Migration Strategies
 
 Migrations succeed when they are staged and measurable.
+
+Marcus says, "Migrate in slices, not in a single leap."
 
 ### Incremental Migration
 
@@ -272,6 +280,8 @@ then migrate apps independently.
 ## Chapter 5: Staying Current
 
 Staying current is about patterns, not chasing every release.
+
+Sarah says, "Stay current without chasing every headline."
 
 ### Following Development
 

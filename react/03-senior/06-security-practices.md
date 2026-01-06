@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 04 (Advanced Performance) - Familiarity with runtime environments and deployment.
+Senior Module 04 (Advanced Performance) - Familiarity with runtime environments and deployment.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: XSS Prevention
 
 You need to protect every surface that touches user-controlled content.
+
+"Assume input is hostile until proven safe," Sarah says.
 
 ### React's Built-in Protection
 
@@ -111,6 +113,8 @@ function isValidUrl(url: string): boolean {
 
 State-changing requests must prove the request came from your app.
 
+"If a cookie is sent, it can be abused," Marcus says.
+
 ### Token-Based Protection
 
 ```tsx
@@ -145,6 +149,8 @@ async function secureRequest(url: string, options: RequestInit = {}) {
 ## Chapter 3: Content Security Policy
 
 CSP is your front line against injected scripts.
+
+"CSP is your seatbelt," Sarah says. "Use it."
 
 ### Basic CSP
 
@@ -184,6 +190,8 @@ Content-Security-Policy-Report-Only: default-src 'self'; report-uri /csp-report
 ## Chapter 4: Secure Authentication
 
 Token handling should reduce damage when mistakes happen.
+
+"Treat auth as a flow, not a checkbox," Marcus says.
 
 ### OAuth/OIDC Flow
 
@@ -248,6 +256,8 @@ class TokenStore {
 
 If data should not be exposed, the UI must treat it as radioactive.
 
+"If it can hurt the user, treat it as toxic," Sarah says.
+
 ### Input Masking
 
 ```tsx
@@ -289,6 +299,8 @@ function handlePayment(cardNumber: string) {
 
 Headers are inexpensive protection that many teams forget.
 
+"Headers are cheap insurance," Marcus says.
+
 ```
 Strict-Transport-Security: max-age=31536000; includeSubDomains
 X-Content-Type-Options: nosniff
@@ -302,6 +314,8 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 ## Chapter 7: Dependency Security
 
 Your dependency tree is part of your attack surface.
+
+"Every dependency is a trust decision," Sarah says.
 
 ```bash
 # Audit dependencies

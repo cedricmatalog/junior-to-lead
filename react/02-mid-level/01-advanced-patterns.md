@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 12 (Accessibility Fundamentals) - Comfort with component composition, props, and reusable UI patterns.
+Junior Module 02 (Component Patterns) - Comfort with component composition, props, and reusable UI patterns.
 
 ---
 
@@ -53,9 +53,9 @@ By the end of this module, you'll be able to:
 
 Sarah needs an authentication gate for multiple routes, and duplicating the same logic across screens is already getting messy.
 
-## Higher-Order Components (HOCs)
+"Wrap it once, then reuse it," Sarah says. "Stop copying the same guard."
 
-Functions that take a component and return an enhanced component.
+A higher-order component takes a component and returns an enhanced component.
 
 ```jsx
 function withAuth(WrappedComponent) {
@@ -99,9 +99,11 @@ function withLogger(WrappedComponent) {
 
 ## Chapter 2: Render Props
 
-Marcus wants a reusable mouse-tracking behavior, but each screen needs a different UI. Render props make the logic portable.
+Marcus wants a reusable mouse-tracking behavior, but each screen needs a different UI.
 
-Pass a function as children or props to share logic.
+"Keep the behavior, swap the view," he says. "That's a render prop."
+
+You pass a function as children or props to share logic.
 
 ```jsx
 function MouseTracker({ children }) {
@@ -143,7 +145,9 @@ function MyComponent() {
 
 Design hands you a new visual system. You need to keep behavior consistent while swapping the presentation entirely.
 
-Components that handle logic without rendering UI.
+"Separate the brain from the skin," Sarah says.
+
+Headless components handle logic without rendering UI.
 
 ```jsx
 function useToggle(initialValue = false) {
@@ -194,7 +198,9 @@ function Accordion({ title, children }) {
 
 Your design system needs a `Button` that can be a link, a button, or a router component without losing type safety.
 
-Components that render as different elements.
+"One component, many faces," Marcus says.
+
+Polymorphic components render as different elements.
 
 ```tsx
 type PolymorphicProps<E extends React.ElementType> = {
@@ -222,7 +228,9 @@ function Text<E extends React.ElementType = 'span'>({
 
 The select menu is getting complex. You need sub-components that share state without threading props through every layer.
 
-Components that work together with shared state.
+"Stop threading props and let the parts collaborate," Sarah says.
+
+Compound components work together with shared state.
 
 ```jsx
 const SelectContext = createContext(null);

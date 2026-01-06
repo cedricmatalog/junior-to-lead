@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Error Handling Patterns) - Comfort with component structure and UI feedback patterns.
+Mid-Level Module 06 (Error Handling Patterns) - Comfort with component structure and UI feedback patterns.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Setting Up react-i18next
 
 The first step is wiring up the translation system across the app.
+
+"Localization isn't a feature; it's a foundation," Sarah says.
 
 ```jsx
 // i18n.js
@@ -88,6 +90,8 @@ import './i18n';
 ## Chapter 2: Translation Files
 
 You need a structure that makes it easy to add new locales without chaos.
+
+"Treat translation files like code: consistent and organized," Marcus says.
 
 ```json
 // locales/en.json
@@ -126,6 +130,8 @@ You need a structure that makes it easy to add new locales without chaos.
 ## Chapter 3: Using Translations
 
 Once keys exist, components should pull translations without manual string juggling.
+
+"Keep strings out of JSX so the UI can adapt," Sarah says.
 
 ```jsx
 import { useTranslation, Trans } from 'react-i18next';
@@ -174,6 +180,8 @@ function RichText() {
 
 Dates, numbers, and currencies have to feel native in every locale.
 
+"Dates and money are part of language," Marcus says.
+
 ```jsx
 // Configure formatters
 i18n.init({
@@ -220,6 +228,8 @@ function formatNumber(number, locale) {
 
 Plural rules differ by language, and hardcoded English logic will break quickly.
 
+"Plural rules are language-specific," Sarah says. "Let the library handle it."
+
 ```json
 // en.json - Simple plural
 {
@@ -245,6 +255,8 @@ Plural rules differ by language, and hardcoded English logic will break quickly.
 ## Chapter 6: RTL Support
 
 The Arabic layout needs to mirror cleanly without breaking your CSS.
+
+"RTL is a layout shift, not a quick flip," Marcus says.
 
 ```jsx
 // Detect and apply RTL
@@ -280,6 +292,8 @@ function App() {
 
 You can't ship every language in the initial bundle.
 
+"Load the language you need, when you need it," Sarah says.
+
 ```jsx
 import i18n from 'i18next';
 import Backend from 'i18next-http-backend';
@@ -306,6 +320,8 @@ function ProfilePage() {
 ## Chapter 8: Translation Workflow
 
 A repeatable process keeps translators, developers, and QA in sync.
+
+"Workflow beats chaos," Marcus says. "Make it repeatable."
 
 ```jsx
 // Extract keys automatically

@@ -31,7 +31,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 01 (React Fundamentals) - Understanding JSX, props, and basic components.
+Junior Module 01 (React Fundamentals) - Understanding JSX, props, and basic components.
 
 ---
 

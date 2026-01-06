@@ -20,7 +20,7 @@ You've completed this level when you can:
 | 1 | [Technical Leadership](01-technical-leadership.md) | Setting vision, technical roadmaps, buy vs build decisions, risk assessment |
 | 2 | [Architecture Ownership](02-architecture-ownership.md) | ADRs, tech debt management, migration strategies, platform thinking |
 | 3 | [Team Processes](03-team-processes.md) | Agile practices, sprint planning, estimation, retrospectives |
-| 4 | [Hiring & Onboarding](04-hiring-onboarding.md) | Interview design, technical assessments, onboarding programs, culture |
+| 4 | [Hiring and Onboarding](04-hiring-onboarding.md) | Interview design, technical assessments, onboarding programs, culture |
 | 5 | [Stakeholder Communication](05-stakeholder-communication.md) | Technical writing, presenting to non-technical audiences, managing expectations |
 | 6 | [Technical Strategy](06-technical-strategy.md) | Technology evaluation, long-term planning, innovation time, POCs |
 | 7 | [Incident Management](07-incident-management.md) | On-call rotations, postmortems, runbooks, blameless culture, severity levels |

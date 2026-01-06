@@ -17,7 +17,7 @@ You've completed this level when you can:
 | # | Module | Key Topics |
 |---|--------|------------|
 | 1 | [Architecture Patterns](01-architecture-patterns.md) | Feature-sliced design, module boundaries, dependency injection, monorepos |
-| 2 | [Architecture Decision Records](02-architecture-decision-records.md) | ADR templates, status, linking decisions |
+| 2 | [Architecture Decision Records (ADRs)](02-architecture-decision-records.md) | ADR templates, status, linking decisions |
 | 3 | [System Design](03-system-design.md) | Frontend architecture, micro-frontends, build systems, deployment strategies |
 | 4 | [Advanced Performance](04-advanced-performance.md) | Core Web Vitals, SSR/SSG/ISR, edge rendering, caching strategies |
 | 5 | [Performance Budgets and Governance](05-performance-budgets.md) | Budgets, CI gates, ownership |
@@ -26,7 +26,7 @@ You've completed this level when you can:
 | 8 | [Accessibility (a11y)](08-accessibility-a11y.md) | WCAG guidelines, ARIA, keyboard navigation, screen reader testing |
 | 9 | [Design Systems](09-design-systems.md) | Component libraries, Storybook, tokens, theming, versioning, documentation |
 | 10 | [Design Handoff and Collaboration](10-design-handoff-collaboration.md) | Tokens, contracts, QA |
-| 11 | [Observability & Monitoring](11-observability-monitoring.md) | Error tracking (Sentry), logging, analytics, performance monitoring, alerting |
+| 11 | [Observability and Monitoring](11-observability-monitoring.md) | Error tracking (Sentry), logging, analytics, performance monitoring, alerting |
 | 12 | [Production Debugging and Triage](12-production-debugging-triage.md) | Triage, mitigation, communication |
 | 13 | [Code Review Mastery](13-code-review-mastery.md) | Constructive feedback, architectural reviews, knowledge sharing, standards |
 | 14 | [Mentoring Juniors](14-mentoring-juniors.md) | Pair programming, growth plans, feedback delivery, unblocking others |

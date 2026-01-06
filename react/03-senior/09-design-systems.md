@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 08 (Accessibility (a11y)) - Familiarity with inclusive component design.
+Senior Module 08 (Accessibility (a11y)) - Familiarity with inclusive component design.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 You need a repository layout that works for both designers and engineers.
 
+"Make structure predictable for every contributor," Sarah says.
+
 ```
 design-system/
 ├── packages/
@@ -75,6 +77,8 @@ design-system/
 ## Chapter 2: Design Tokens
 
 Tokens keep styles consistent even when products diverge.
+
+"Tokens keep decisions centralized," Marcus says.
 
 ### Token Definition
 
@@ -181,6 +185,8 @@ const Button = styled.button`
 
 APIs should make the right usage obvious.
 
+"APIs should be boring and consistent," Sarah says.
+
 ### Consistent Props
 
 ```tsx
@@ -276,6 +282,8 @@ Card.Footer = CardFooter;
 
 Documentation is how the system actually gets adopted.
 
+"Docs are part of the product," Marcus says.
+
 ### Story Structure
 
 ```tsx
@@ -344,6 +352,8 @@ Buttons trigger actions or navigation.
 
 Guidelines keep the system consistent across teams.
 
+"Guidelines prevent one-off hacks," Sarah says.
+
 ```tsx
 import { Button } from '@myorg/components';
 
@@ -370,6 +380,8 @@ import { Button } from '@myorg/components';
 ## Chapter 6: Versioning and Publishing
 
 Releases need to be predictable, even with many consumers.
+
+"Versioning is how you earn trust," Marcus says.
 
 ### Semantic Versioning
 

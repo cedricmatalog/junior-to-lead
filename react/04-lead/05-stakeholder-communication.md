@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 36: The Alignment Gap
+## Week Five: The Alignment Gap
 
 The roadmap is moving fast, but the room is not aligned. Sarah asks you to brief leadership on a risky migration, and Marcus warns that great work fails when it is misunderstood. You need to translate technical decisions into business outcomes, keep partners informed, and surface trade-offs early. This week focuses on audience-aware messaging, crisp docs, and the habit of delivering news with options instead of surprises.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 04 (Hiring & Onboarding) - Comfort with structured communication.
+Lead Module 03 (Team Processes) - Comfort with team rhythms and decision points.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Map the Audience
 
+You list who needs what before you write a single update.
+
 Sarah asks for a quick update for the executive team and a deeper walkthrough for product. Marcus reminds you that the same message lands differently depending on who is listening. Start by mapping what each group cares about and the level of detail they need.
+
+Sarah says, "Know who you're talking to before you start."
 
 ### Communication Matrix
 
@@ -64,7 +68,11 @@ Sarah asks for a quick update for the executive team and a deeper walkthrough fo
 
 ## Chapter 2: Translate Tech Into Impact
 
+You translate decisions into outcomes people can feel.
+
 Marcus shows you how to turn a technical decision into a business outcome. Start with the problem, then explain the impact, then propose the change.
+
+Marcus says, "Lead with impact, then explain the tech."
 
 ```markdown
 ## Same Update, Different Audiences
@@ -87,7 +95,11 @@ and positions us for the mobile initiative next quarter."
 
 ## Chapter 3: Write Docs That Drive Decisions
 
+You write to a decision, not just to inform.
+
 Sarah wants decisions captured in a format that is easy to scan and hard to misinterpret. Keep docs short, lead with the recommendation, and make the ask explicit.
+
+Sarah says, "Docs should move decisions, not just share info."
 
 ### RFC Template
 
@@ -142,7 +154,11 @@ On track for Q1 delivery. One risk item to discuss.
 
 ## Chapter 4: Present to Leadership
 
+You lead with the answer, then the trade-offs.
+
 Marcus suggests you lead with the answer and offer details only if asked. Keep the ask crisp and repeat it at the end.
+
+Marcus says, "Executives want clarity and trade-offs."
 
 ### The Pyramid Principle
 
@@ -190,7 +206,11 @@ Simple Gantt chart with major milestones
 
 ## Chapter 5: Set Expectations and Deliver Bad News
 
+You surface risks early so there are no surprises later.
+
 Sarah wants expectations set early, before trade-offs become surprises. When bad news hits, share it quickly with options.
+
+Sarah says, "Bad news early is better than bad news late."
 
 ### Setting Expectations Early
 
@@ -378,4 +398,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./04-hiring-onboarding.md) | [Next Module ->](./06-technical-strategy.md)
+**Navigation**: [← Previous Module](./04-hiring-onboarding.md) | [Next Module →](./06-technical-strategy.md)

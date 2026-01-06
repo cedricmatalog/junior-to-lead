@@ -7,7 +7,7 @@
 
 The checkout flow passed unit tests and integration tests, yet a production hotfix went out at midnight. The payment modal never opened on Safari.
 
-"This is why we need E2E," Sarah says. "Unit tests protect logic. Integration tests protect components. E2E protects the real user journey."
+"This is why you need E2E," Sarah says. "Unit tests protect logic. Integration tests protect components. E2E protects the real user journey."
 
 Marcus adds, "Think of E2E as a smoke alarm. You don't want it to go off every day, but you want it there when it counts."
 
@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 08 (Testing Strategies) - Comfort with integration testing and test structure.
+Mid-Level Module 08 (Testing Strategies) - Comfort with integration testing and test structure.
 
 ---
 
@@ -74,6 +74,8 @@ test('loads the dashboard', async ({ page }) => {
 
 Fragile selectors make tests brittle.
 
+"Pick selectors that match the user view," Marcus says.
+
 "Prefer role and accessible names," Sarah says.
 
 ```ts
@@ -88,6 +90,8 @@ await expect(page.getByRole('status')).toHaveText('Added');
 ## Chapter 3: Data Setup and Reset
 
 The checkout test needs a known cart state.
+
+"Reset data every run or chase ghosts," Sarah says.
 
 ```ts
 test.beforeEach(async ({ request }) => {
@@ -117,6 +121,8 @@ export default defineConfig({
 
 Login flows slow tests. You can reuse state.
 
+"Reuse auth state so tests stay fast," Marcus says.
+
 ```ts
 test.use({ storageState: 'storage/auth.json' });
 
@@ -134,6 +140,8 @@ test('opens account page', async ({ page }) => {
 
 Flaky tests destroy trust.
 
+"If it flakes, it fails," Sarah says.
+
 ```ts
 await page.getByRole('button', { name: 'Pay' }).click();
 await expect(page.getByRole('status')).toHaveText('Payment complete');
@@ -146,6 +154,8 @@ await expect(page.getByRole('status')).toHaveText('Payment complete');
 ## Chapter 6: CI Runs and Artifacts
 
 You wire tests into CI with screenshots and traces. Let Playwright start the dev server so your pipeline doesn't hang.
+
+"Artifacts tell the story," Marcus says.
 
 ```ts
 // playwright.config.ts

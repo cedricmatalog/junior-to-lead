@@ -29,7 +29,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 10 (Testing Fundamentals) - Understanding component behavior and state to debug effectively.
+Junior Module 10 (Testing Fundamentals) - Understanding component behavior and state to debug effectively.
 
 ---
 
@@ -138,6 +138,8 @@ Here's what the React DevTools component tree looks like:
 
 "Everyone starts with `console.log`," Marcus says. "But there's so much more."
 
+You switch from prints to tools that show state in motion.
+
 ```jsx
 // Group related logs
 console.group('User Data');
@@ -171,6 +173,8 @@ You add `console.time` around the message fetch. The timing looks normal. The bu
 
 "Stop guessing," Sarah says. "Freeze time and look."
 
+You pause the exact moment the bug appears.
+
 ```jsx
 function handleSubmit(data) {
   debugger; // Execution pauses here when DevTools is open
@@ -195,6 +199,8 @@ You set a conditional breakpoint: pause only when `conversationId === 'abc123'`.
 ## Chapter 4: Finding the Race Condition
 
 The bug is clear now. When users switch conversations fast, responses arrive out of order.
+
+Marcus says, "Race conditions hide in timing, not logic."
 
 ```jsx
 // BUG: Race condition in message loading
@@ -364,6 +370,8 @@ class ErrorBoundary extends React.Component {
 ## Chapter 7: The Double Fetch Mystery
 
 "Why are you loading messages twice?" QA asks. The Network tab shows duplicate requests.
+
+You trace the duplicate calls before changing any code.
 
 ```jsx
 // BUG: Effect runs twice due to object dependency

@@ -31,7 +31,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 02 (Component Patterns) - Familiarity with props, component composition, and how data flows in React.
+Junior Module 02 (Component Patterns) - Familiarity with props, component composition, and how data flows in React.
 
 ---
 
@@ -439,6 +439,8 @@ function useNotifications(userId) {
 ## Chapter 7: Putting It All Together and Pitfalls
 
 By Friday, the notification bell is live:
+
+Sarah says, "This is where the hooks finally click together."
 
 ```jsx
 function NotificationBell() {

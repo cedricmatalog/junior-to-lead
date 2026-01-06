@@ -29,7 +29,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Forms and Validation) - Understanding component structure and state management for styling dynamic components.
+Junior Module 06 (Forms and Validation) - Understanding component structure and state management for styling dynamic components.
 
 ---
 
@@ -117,6 +117,8 @@ function Button({ variant = 'primary', children }) {
 
 "Tailwind is different," Sarah says. "Instead of writing CSS, you compose utility classes."
 
+You build the UI by stacking small, readable classes.
+
 ```jsx
 function Card({ title, children }) {
   return (
@@ -186,6 +188,8 @@ module.exports = {
 
 "Sometimes you need styles that respond to props at runtime," Marcus says. "That's where CSS-in-JS shines."
 
+You co-locate styles with the component so they move together.
+
 ```jsx
 import styled from 'styled-components';
 
@@ -253,6 +257,8 @@ const Card = styled.div`
 ## Chapter 5: Design Tokens — The Shared Language
 
 "Whichever approach you choose," Sarah says, "you need design tokens. They're the shared vocabulary between designers and developers."
+
+You define tokens once so styles stay consistent everywhere.
 
 ```js
 // tokens.js

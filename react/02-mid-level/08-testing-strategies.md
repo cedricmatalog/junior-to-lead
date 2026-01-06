@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Internationalization) - Comfort with component composition and async data.
+Mid-Level Module 05 (API Design and Integration) - Comfort with component composition and async data.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 You need a shared testing strategy before you write another test file.
 
+"Strategy first, tools second," Marcus says.
+
 ```
          /\
         /  \
@@ -74,6 +76,8 @@ You need a shared testing strategy before you write another test file.
 ## Chapter 2: Integration Testing
 
 Sarah wants tests that match how users actually interact with the UI.
+
+"Test the behavior users feel, not the code you wish they used," she says.
 
 Test components as users interact with them.
 
@@ -158,6 +162,8 @@ describe('UserManagement', () => {
 ## Chapter 3: Mocking Strategies
 
 External systems can't be part of every test. You need safe stand-ins.
+
+"Mocks should be realistic, not magical," Marcus says.
 
 ### MSW for API Mocking
 
@@ -251,6 +257,8 @@ it('auto-saves after delay', async () => {
 
 Coverage should highlight risk, not just inflate metrics.
 
+"Coverage is a risk lens, not a score," Sarah says.
+
 ```js
 // jest.config.js
 module.exports = {
@@ -283,6 +291,8 @@ module.exports = {
 ## Chapter 5: CI/CD Testing
 
 Marcus wants tests to run on every pull request, not just locally.
+
+"If it doesn't run in CI, it doesn't count," he says.
 
 ```yaml
 # .github/workflows/test.yml
@@ -322,6 +332,8 @@ jobs:
 ## Chapter 6: Testing Hooks
 
 Custom hooks handle tricky logic and deserve direct tests too.
+
+"Hooks hide logic. Tests make it visible," Sarah says.
 
 ```jsx
 import { renderHook, act, waitFor } from '@testing-library/react';

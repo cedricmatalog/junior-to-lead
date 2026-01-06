@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 08 (Testing Strategies) - Familiarity with test setup and CI workflows.
+Mid-Level Module 08 (Testing Strategies) - Familiarity with test setup and CI workflows.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 Start with fast feedback.
 
+Sarah wants a quick pass before every PR.
+
 ```text
 1) Open DevTools
 2) Run axe DevTools scan
@@ -70,6 +72,8 @@ Start with fast feedback.
 ## Chapter 2: jest-axe for Components
 
 Automate a11y checks in component tests.
+
+Marcus wants it running with the unit suite.
 
 ```ts
 import { render } from '@testing-library/react';
@@ -88,6 +92,8 @@ it('has no a11y violations', async () => {
 ## Chapter 3: Playwright + axe for E2E
 
 Run audits on real flows.
+
+Sarah wants proof on the user journeys that matter.
 
 ```ts
 import { test, expect } from '@playwright/test';
@@ -108,6 +114,8 @@ test('checkout is accessible', async ({ page }) => {
 
 Fail the build on critical violations.
 
+Marcus insists the gate is real, not a warning.
+
 ```yaml
 - name: A11y tests
   run: npm test -- --runInBand a11y
@@ -121,6 +129,8 @@ Fail the build on critical violations.
 
 Automated tools miss real usability problems.
 
+Sarah still does a keyboard walk-through before launch.
+
 "Keyboard flows, focus order, and screen-reader UX still need humans."
 
 ---
@@ -128,6 +138,8 @@ Automated tools miss real usability problems.
 ## Chapter 6: Reporting and Tracking
 
 Add a ticket template for regressions.
+
+Marcus wants regressions tracked like any other bug.
 
 ```text
 A11y Regression:

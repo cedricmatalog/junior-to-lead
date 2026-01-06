@@ -20,15 +20,15 @@ You've completed this level when you can:
 | 2 | [Performance Optimization](02-performance-optimization.md) | React.memo, useMemo, useCallback, virtualization, bundle analysis, lazy loading |
 | 3 | [State at Scale](03-state-at-scale.md) | Redux Toolkit, Zustand, Jotai, server state (TanStack Query), state machines |
 | 4 | [State Tool Selection](04-state-tool-selection.md) | Boundaries, tradeoffs, migration paths |
-| 5 | [API Design & Integration](05-api-design-integration.md) | REST patterns, GraphQL basics, error handling, optimistic updates, caching |
+| 5 | [API Design and Integration](05-api-design-integration.md) | REST patterns, GraphQL basics, error handling, optimistic updates, caching |
 | 6 | [Error Handling Patterns](06-error-handling-patterns.md) | Error boundaries, try/catch strategies, user-friendly errors, fallback UI |
-| 7 | [Internationalization](07-internationalization.md) | react-i18next, locale detection, RTL support, pluralization, date/number formats |
+| 7 | [Internationalization (i18n)](07-internationalization.md) | react-i18next, locale detection, RTL support, pluralization, date/number formats |
 | 8 | [Testing Strategies](08-testing-strategies.md) | Integration tests, mocking strategies, test coverage, CI/CD testing |
 | 9 | [Accessibility Testing Tooling](09-accessibility-testing-tooling.md) | Axe, jest-axe, Playwright + a11y, CI gates |
 | 10 | [TypeScript Mastery](10-typescript-mastery.md) | Generics, utility types, discriminated unions, strict mode, type guards |
 | 11 | [Code Quality](11-code-quality.md) | ESLint rules, Prettier, code organization, documentation, refactoring |
 | 12 | [Next.js Fundamentals](12-nextjs-fundamentals.md) | Pages vs App Router, SSR/SSG basics, API routes, file-based routing |
-| 13 | [E2E Testing with Playwright](13-e2e-testing-with-playwright.md) | Playwright setup, locators, fixtures, CI |
+| 13 | [End-to-End Testing with Playwright](13-e2e-testing-with-playwright.md) | Playwright setup, locators, fixtures, CI |
 | 14 | [Animations and Motion](14-animations-and-motion.md) | CSS transitions, keyframes, Framer Motion, reduced motion |
 | 15 | [Deployment and CI](15-deployment-and-ci.md) | CI pipelines, artifacts, env vars, release strategies |
 | 16 | [React Router Data APIs](16-react-router-data-apis.md) | Loaders, actions, defer, route errors, fetchers |

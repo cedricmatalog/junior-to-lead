@@ -31,7 +31,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 04 (State Management Basics) - Understanding state management, useReducer, and Context patterns.
+Junior Module 04 (State Management Basics) - Understanding state management, useReducer, and Context patterns.
 
 ---
 
@@ -114,6 +114,8 @@ It works, but already you can see the problem. Two fields, and there's a lot of 
 ## Chapter 2: React Hook Form to the Rescue
 
 "Nobody writes forms by hand anymore," Marcus says. "Meet React Hook Form."
+
+You wire up the form once so you stop fighting state.
 
 ```jsx
 import { useForm } from 'react-hook-form';
@@ -310,6 +312,8 @@ function FormField({ label, error, children }) {
 
 Time to build the real thing. The job application is complex:
 
+Sarah says, "Schemas keep complex forms from becoming chaos."
+
 ```jsx
 const applicationSchema = z.object({
   // Personal Info
@@ -352,6 +356,8 @@ const applicationSchema = z.object({
 ## Chapter 6: Multi-Step Wizard
 
 A 20-field form is overwhelming. You break it into steps:
+
+Marcus says, "Steps reduce cognitive load."
 
 ```
 ┌──────────────────────────────────────────────────────────┐

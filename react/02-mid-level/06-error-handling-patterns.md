@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 04 (API Design and Integration) - Familiarity with async requests and loading states.
+Mid-Level Module 05 (API Design and Integration) - Familiarity with async requests and loading states.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Error Boundaries
 
 When a component crashes, the rest of the page shouldn't go down with it.
+
+"Contain the blast radius," Marcus says.
 
 Catch JavaScript errors in component trees.
 
@@ -107,6 +109,8 @@ function App() {
 
 Sarah wants every failure to show a friendly recovery path, not a dead end.
 
+"Give them a way back," she says.
+
 ```jsx
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -142,6 +146,8 @@ function App() {
 ## Chapter 3: Async Error Handling
 
 Network failures are inevitable. You need consistent retry and timeout strategies.
+
+"Retries need rules, not guesses," Marcus says.
 
 ```jsx
 // With try-catch
@@ -185,6 +191,8 @@ function DataComponent() {
 ## Chapter 4: Error Types and Handling
 
 Different errors need different UX. Not every failure is fatal.
+
+"Classify the failure before you choose the response," Sarah says.
 
 ```jsx
 // Define error types
@@ -240,6 +248,8 @@ function handleError(error) {
 
 The message matters. Users need clarity, not stack traces.
 
+"Clarity beats raw errors," Marcus says.
+
 ```jsx
 function ErrorDisplay({ error, onRetry }) {
   const errorInfo = useMemo(() => {
@@ -292,6 +302,8 @@ function ErrorDisplay({ error, onRetry }) {
 
 Validation errors need to be specific and immediate.
 
+"Tell the user exactly what to fix," Sarah says.
+
 ```jsx
 function RegistrationForm() {
   const [errors, setErrors] = useState({});
@@ -337,6 +349,8 @@ function RegistrationForm() {
 ## Chapter 7: Logging and Monitoring
 
 If errors aren't captured, you can't fix what you can't see.
+
+"Logs are your breadcrumbs," Marcus says.
 
 ```jsx
 // Error logging service

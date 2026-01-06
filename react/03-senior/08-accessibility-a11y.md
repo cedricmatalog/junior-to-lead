@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Security Practices) - Familiarity with safe UI defaults.
+Mid-Level Module 09 (Accessibility Testing Tooling) - Familiarity with accessibility testing and tooling.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 You need a shared standard before you fix anything.
 
+"Use WCAG as the baseline, not the ceiling," Sarah says.
+
 **POUR**: Perceivable, Operable, Understandable, Robust
 
 ### Level A (Minimum)
@@ -74,6 +76,8 @@ You need a shared standard before you fix anything.
 ## Chapter 2: Semantic HTML
 
 Start with correct elements before adding any ARIA.
+
+"Semantics first, ARIA second," Marcus says.
 
 ```tsx
 // Bad: div soup
@@ -104,6 +108,8 @@ Start with correct elements before adding any ARIA.
 ## Chapter 3: ARIA Attributes
 
 ARIA should enhance, not replace, semantics.
+
+"ARIA fills gaps. It doesn't replace HTML," Sarah says.
 
 ### When to Use ARIA
 
@@ -165,6 +171,8 @@ ARIA should enhance, not replace, semantics.
 ## Chapter 4: Keyboard Navigation
 
 Every action should be reachable without a mouse.
+
+"If you can't reach it by keyboard, it's not done," Marcus says.
 
 ### Focus Management
 
@@ -238,6 +246,8 @@ function SkipLink() {
 
 Forms are where accessibility failures hurt the most.
 
+"Forms are where users feel friction first," Sarah says.
+
 ```tsx
 function AccessibleForm() {
   return (
@@ -276,6 +286,8 @@ function AccessibleForm() {
 
 Contrast and focus are essential for readability and navigation.
 
+"Contrast is usability, not decoration," Marcus says.
+
 ```tsx
 // Don't rely on color alone
 // Bad
@@ -294,6 +306,8 @@ Contrast and focus are essential for readability and navigation.
 ## Chapter 7: Images
 
 Alt text is the difference between silence and meaning.
+
+"Alt text is the product for screen readers," Sarah says.
 
 ```tsx
 // Informative image
@@ -314,6 +328,8 @@ Alt text is the difference between silence and meaning.
 ## Chapter 8: Testing
 
 Automated tools are a start, but real checks require real tools.
+
+"Automation catches issues; humans catch reality," Marcus says.
 
 ### Automated Testing
 

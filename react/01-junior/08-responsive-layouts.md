@@ -30,7 +30,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Styling Approaches) - Comfort with CSS modules or utility classes.
+Junior Module 07 (Styling Approaches) - Comfort with CSS modules or utility classes.
 
 ---
 
@@ -59,6 +59,8 @@ By the end of this module, you'll be able to:
 
 "Start small, then expand," Sarah says. "If it works on a phone, it scales up."
 
+You set the base styles for the smallest screen first.
+
 ```css
 .card {
   padding: 16px;
@@ -80,6 +82,8 @@ By the end of this module, you'll be able to:
 ## Chapter 2: Flexbox for Components
 
 You need a header that stacks on mobile and aligns on desktop.
+
+Sarah says, "Stack first, align later."
 
 ```css
 .header {
@@ -105,6 +109,8 @@ You need a header that stacks on mobile and aligns on desktop.
 
 A dashboard needs a grid.
 
+Marcus says, "Grid sets the structure before you style the details."
+
 ```css
 .dashboard {
   display: grid;
@@ -127,6 +133,8 @@ A dashboard needs a grid.
 
 Hardcoded pixels break on unusual screens.
 
+Sarah says, "Let sizes breathe instead of locking them in."
+
 ```css
 h1 {
   font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
@@ -145,6 +153,8 @@ h1 {
 ## Chapter 5: Responsive Media
 
 Images should fit without stretching or overflowing.
+
+Marcus says, "Media should scale without losing the story."
 
 ```css
 .product-image {

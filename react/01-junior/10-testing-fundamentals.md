@@ -33,7 +33,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Styling Approaches) - Understanding components, state, and user interactions to test effectively.
+Junior Module 07 (Styling Approaches) - Understanding components, state, and user interactions to test effectively.
 
 ---
 
@@ -164,6 +164,8 @@ describe('Button', () => {
 
 "Users don't inspect the DOM," Sarah says. "They look for buttons, labels, text. Your tests should too."
 
+You start by querying the UI the way a real person would.
+
 ```jsx
 // Priority (best to worst)
 screen.getByRole('button', { name: 'Submit' }); // Accessible name
@@ -249,6 +251,8 @@ Here's the query priority flowchart - which query method to use:
 
 "Clicking is the easy part," Marcus says. "Typing, selecting, form submission—that's where it gets interesting."
 
+You simulate real user actions, not just events.
+
 ```jsx
 import userEvent from '@testing-library/user-event';
 
@@ -285,6 +289,8 @@ it('submits form with entered values', async () => {
 ## Chapter 5: The Async Dance
 
 "Remember that checkout bug?" Sarah asks. "Loading states are where async testing saves you."
+
+You wait for the UI to settle before you assert.
 
 ```jsx
 it('shows loading state then data', async () => {
@@ -361,6 +367,8 @@ Sarah draws a line in the sand.
 ## Chapter 8: The Banking Dashboard Tests
 
 Time for a real challenge. The company is adding a banking dashboard—transactions, transfers, balances. Security and correctness are non-negotiable.
+
+Sarah says, "Treat finance flows like production-critical code."
 
 Because color conveys meaning in finance UIs, it's reasonable to assert the positive/negative styling here.
 

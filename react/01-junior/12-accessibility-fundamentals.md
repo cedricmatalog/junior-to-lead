@@ -36,7 +36,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 10 (Testing Fundamentals) - Comfort validating UI behavior and quality before release.
+Junior Module 10 (Testing Fundamentals) - Comfort validating UI behavior and quality before release.
 
 ---
 
@@ -133,6 +133,8 @@ She shares her screen, showing the audit categories:
 ## Chapter 2: Semantic HTML First
 
 "Before you touch ARIA," Maya says, "you can fix the HTML. Most accessibility issues come from using the wrong elements."
+
+You start by choosing the right element for the job.
 
 ```jsx
 // BAD: Div soup - screen readers see nothing meaningful
@@ -254,6 +256,8 @@ She shares her screen, showing the audit categories:
 ## Chapter 4: Keyboard Navigation
 
 "12 keyboard failures," Maya says. "This is critical. Many users can't use a mouse—motor disabilities, visual impairments, power users who prefer keyboard."
+
+You trace the tab order like a user would.
 
 ### Everything Must Be Reachable
 
@@ -569,6 +573,8 @@ function FormField({ label, error, children }) {
 
 "You can't fix what you can't find," Maya says. "Here's how to test."
 
+You combine manual checks with tooling so nothing slips through.
+
 ### Manual Testing Checklist
 
 ```markdown
@@ -664,6 +670,8 @@ describe('LoginForm', () => {
 ## Chapter 8: Color and Contrast
 
 "7 contrast failures," Maya says. "These are easy to fix but easy to miss."
+
+You measure contrast instead of guessing.
 
 ### WCAG Contrast Requirements
 

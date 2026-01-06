@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 01 (Architecture Patterns) - Comfort with architecture decisions and tradeoffs.
+Senior Module 01 (Architecture Patterns) - Comfort with architecture decisions and tradeoffs.
 
 ---
 
@@ -65,6 +65,8 @@ A new hire asks why the project uses module federation. Nobody knows.
 
 Marcus shares a short template:
 
+He wants a format everyone recognizes.
+
 ```text
 # ADR-012: Use React Query for server state
 
@@ -89,6 +91,8 @@ Tradeoffs and follow-up work.
 
 "Write ADRs for high-impact, hard-to-reverse choices," Sarah says.
 
+Not every decision needs a document.
+
 Examples:
 - New framework
 - API design shifts
@@ -100,6 +104,8 @@ Examples:
 ## Chapter 4: Status and Lifecycle
 
 Decisions evolve.
+
+"No decision is forever," Marcus says.
 
 ```text
 Status: Proposed → Accepted → Deprecated → Superseded
@@ -113,6 +119,8 @@ Status: Proposed → Accepted → Deprecated → Superseded
 
 Tie decisions to pull requests and migration plans.
 
+"Make decisions traceable," Sarah says.
+
 "If a decision changes code, the code should link back," Marcus says.
 
 ---
@@ -120,6 +128,8 @@ Tie decisions to pull requests and migration plans.
 ## Chapter 6: Keeping ADRs Alive
 
 You add a lightweight review step.
+
+"ADRs are living artifacts," Sarah says.
 
 "Review ADRs quarterly, update status, and archive what no longer applies."
 

@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 02 (Performance Optimization) - Comfort with hooks, effects, and performance tradeoffs.
+Mid-Level Module 02 (Performance Optimization) - Comfort with hooks, effects, and performance tradeoffs.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 You need a shared language for state before you pick any tooling.
 
+"Name the buckets before you pick the tool," Sarah says.
+
 | Type | Examples | Solution |
 |------|----------|----------|
 | Local UI | Form inputs, toggles, modals | useState |
@@ -63,6 +65,8 @@ You need a shared language for state before you pick any tooling.
 ## Chapter 2: Redux Toolkit
 
 The cart needs global visibility, DevTools, and predictable updates. Redux Toolkit handles the heavy lifting.
+
+"If the whole app depends on it, give it rails," Marcus says.
 
 Modern Redux with less boilerplate.
 
@@ -129,6 +133,8 @@ function ProductCard({ product }) {
 
 Some UI state is too small for Redux. You need a lighter store for quick wins.
 
+"Use the lightest tool that fits," Sarah says.
+
 Minimal state management with hooks.
 
 ```jsx
@@ -183,6 +189,8 @@ function AddToCartButton({ product }) {
 
 For modular features, atom-based state keeps dependencies clean.
 
+"Atoms keep features independent," Marcus says.
+
 Atomic state management - bottom-up approach.
 
 ```jsx
@@ -224,6 +232,8 @@ function Counter() {
 ## Chapter 5: Server State with TanStack Query
 
 Product data is slow and stale. You need caching, retries, and background updates.
+
+"Server state has its own rules," Sarah says.
 
 Separate concerns: let a library handle caching, refetching, and synchronization.
 
@@ -272,6 +282,8 @@ function UpdateUserButton({ userId }) {
 
 The checkout flow keeps breaking because transitions are implicit. A state machine makes them explicit.
 
+"When the steps matter, make them explicit," Marcus says.
+
 For complex state logic with defined transitions.
 
 ```jsx
@@ -313,6 +325,8 @@ function DataFetcher() {
 ## Chapter 7: Choosing the Right Tool
 
 Sarah expects you to justify why each slice of state lives where it does.
+
+"Smallest tool that solves the problem wins," she says.
 
 | Scenario | Recommendation |
 |----------|----------------|

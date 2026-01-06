@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 03 (State at Scale) - Familiarity with client vs server state and caching tools.
+Mid-Level Module 03 (State at Scale) - Familiarity with client vs server state and caching tools.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: API Layer Architecture
 
 You need a single place to handle auth, errors, and request defaults.
+
+"Centralize the contract," Sarah says. "Don't spread it across screens."
 
 Separate API logic from components.
 
@@ -121,6 +123,8 @@ export const usersApi = {
 
 With a clean API layer, you can now cache data and avoid refetching on every render.
 
+"Cache it once, reuse it everywhere," Marcus says.
+
 ```jsx
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApi } from './api/users';
@@ -175,6 +179,8 @@ function UserList() {
 
 Sarah wants instant feedback when users favorite a show, even if the server is slow.
 
+"Show the result fast, but plan the rollback," she says.
+
 Update UI immediately, rollback on error.
 
 ```jsx
@@ -219,6 +225,8 @@ function useUpdateTodo() {
 
 Real users hit real failures. You need consistent, reusable error paths.
 
+"Errors are part of the contract," Marcus says. "Handle them deliberately."
+
 ```jsx
 function ErrorMessage({ error }) {
   if (error.status === 401) {
@@ -257,6 +265,8 @@ const { data } = useQuery({
 ## Chapter 5: GraphQL with Apollo
 
 The analytics team ships a GraphQL endpoint. Your UI still needs the same discipline.
+
+"Different query shape, same responsibility," Sarah says.
 
 ```jsx
 import { gql, useQuery, useMutation } from '@apollo/client';
@@ -301,6 +311,8 @@ function UserList() {
 ## Chapter 6: Loading States
 
 Loading spinners and skeletons are UX decisions, not afterthoughts.
+
+"Loading is part of the experience," Marcus says.
 
 ```jsx
 function UserProfile({ userId }) {

@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 16 (Next.js App Router Deep Dive) - Familiarity with server/client boundaries and streaming.
+Senior Module 16 (Next.js App Router Deep Dive) - Familiarity with server/client boundaries and streaming.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 Subscriptions need to be concurrent-safe.
 
+"If you're listening to something outside React, use the right hook," Sarah says.
+
 ```tsx
 import { useSyncExternalStore } from 'react';
 
@@ -76,6 +78,8 @@ function useAuthStore() {
 
 Some styling libraries need to inject CSS before layout.
 
+"Only use it for styles," Marcus says. "Nothing else."
+
 ```tsx
 import { useInsertionEffect } from 'react';
 
@@ -92,15 +96,27 @@ useInsertionEffect(() => {
 
 Server actions need UI feedback.
 
+"Keep server work close to the UI," Sarah says.
+
 ```tsx
 'use client';
 import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
+
+function SaveButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? 'Saving...' : 'Save'}
+    </button>
+  );
+}
 
 function SaveProfile() {
   const [state, formAction] = useActionState(saveProfile, { error: null });
   return (
     <form action={formAction}>
-      <button>Save</button>
+      <SaveButton />
       {state.error && <p>{state.error}</p>}
     </form>
   );
@@ -115,11 +131,16 @@ function SaveProfile() {
 
 Show updates before confirmation.
 
+"Optimism needs a rollback plan," Marcus says.
+
 ```tsx
 'use client';
 import { useOptimistic } from 'react';
 
-const [optimisticItems, addOptimistic] = useOptimistic(items);
+const [optimisticItems, addOptimistic] = useOptimistic(
+  items,
+  (state, newItem) => [...state, newItem]
+);
 ```
 
 "Optimistic UI should still handle rollback when the server rejects."
@@ -130,6 +151,8 @@ const [optimisticItems, addOptimistic] = useOptimistic(items);
 
 Don't reach for advanced hooks unless you need them.
 
+"If useState works, keep it," Sarah says.
+
 "If `useState` works, keep it. Use modern APIs when concurrency or server actions require it."
 
 ---
@@ -137,6 +160,8 @@ Don't reach for advanced hooks unless you need them.
 ## Chapter 6: Migration Notes
 
 Upgrade in small steps:
+
+"Small migrations beat big rewrites," Marcus says.
 
 - Replace custom subscriptions with `useSyncExternalStore`
 - Keep `useInsertionEffect` limited to CSS-in-JS
@@ -203,7 +228,10 @@ const [state, action] = useActionState(updateSettings, { error: null });
 <summary>Exercise 3: Optimistic Like</summary>
 
 ```tsx
-const [optimistic, addOptimistic] = useOptimistic(likes);
+const [optimisticLikes, addOptimisticLike] = useOptimistic(
+  likes,
+  (state, delta) => state + delta
+);
 ```
 
 **Key points:**
@@ -221,7 +249,7 @@ This module covered:
 
 - **useSyncExternalStore**: Safe external subscriptions
 - **useInsertionEffect**: Style injection before paint
-- **Action hooks**: Server actions with UI state
+- **Action hooks**: Server actions with `useActionState` and `useFormStatus`
 - **useOptimistic**: Fast UI with rollback
 
 **Key takeaway**: Modern React APIs exist to keep concurrency safe and user feedback crisp.

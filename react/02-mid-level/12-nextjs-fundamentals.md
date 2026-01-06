@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 11 (Code Quality) - Comfort with project structure and production readiness.
+Mid-Level Module 11 (Code Quality) - Comfort with project structure and production readiness.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 You need to choose the right routing model before you start migrating features.
 
+"Pick the model that fits your team's reality," Sarah says.
+
 | Feature | Pages Router | App Router |
 |---------|-------------|------------|
 | Directory | `pages/` | `app/` |
@@ -65,6 +67,8 @@ You need to choose the right routing model before you start migrating features.
 ## Chapter 2: App Router Basics
 
 Marcus wants a clean routing structure that the whole team can follow.
+
+"Consistency keeps migrations calm," he says.
 
 ```
 app/
@@ -122,6 +126,8 @@ export default function HomePage() {
 ## Chapter 3: Data Fetching
 
 You need to decide where data lives and when it loads.
+
+"Understand where the code runs before you fetch," Sarah says.
 
 ### Server Components (Default)
 
@@ -182,6 +188,8 @@ export function Counter() {
 
 Marketing needs blog posts and product pages that scale with content.
 
+"Let the route describe the data," Marcus says.
+
 ```tsx
 // app/blog/[slug]/page.tsx
 interface Props {
@@ -209,6 +217,8 @@ export async function generateStaticParams() {
 ## Chapter 5: API Routes
 
 Some backend functionality can live alongside the UI for speed and simplicity.
+
+"Keep contracts close when speed matters," Sarah says.
 
 ```tsx
 // app/api/users/route.ts
@@ -249,6 +259,8 @@ export async function GET(
 
 Fast navigation still needs clear feedback when data is loading or broken.
 
+"Make loading and errors explicit, not implied," Marcus says.
+
 ```tsx
 // app/users/loading.tsx
 export default function Loading() {
@@ -277,6 +289,8 @@ export default function Error({
 ## Chapter 7: Shipping and Configuration
 
 Before launch, you need consistent metadata, environment configuration, and deployment steps.
+
+"Ship with guardrails, not guesses," Sarah says.
 
 ### Metadata
 

@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 11 (Observability & Monitoring) - Familiarity with logs, errors, and metrics.
+Senior Module 11 (Observability and Monitoring) - Familiarity with logs, errors, and metrics.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 "Start with impact," Sarah says.
 
+You write the impact questions before you chase the root cause.
+
 - Who is affected?
 - What is broken?
 - Is there a workaround?
@@ -77,6 +79,8 @@ Pull error logs, traces, and recent deploys.
 
 If users are blocked, reduce impact first.
 
+"Mitigate first, analyze second," Sarah says.
+
 - Disable a feature flag
 - Roll back a release
 - Hide a broken component
@@ -95,6 +99,8 @@ Replay the request with production-like payloads. Compare against working cases.
 
 Check the release diff.
 
+"Changes are clues," Marcus says.
+
 "If it broke yesterday, look at what changed yesterday."
 
 ---
@@ -102,6 +108,8 @@ Check the release diff.
 ## Chapter 6: Communicate and Document
 
 Provide updates and track follow-ups.
+
+"Communication is part of the fix," Sarah says.
 
 "People forgive incidents. They don't forgive silence."
 

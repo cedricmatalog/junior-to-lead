@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 14 (Mentoring Juniors) - Familiarity with structured patterns and team enablement.
+Mid-Level Module 12 (Next.js Fundamentals) - Familiarity with Next.js routing, data fetching, and deployment basics.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Server Components
 
 You need a mental model for what runs on the server vs the client.
+
+Sarah says, "Know where the code runs before you ship it."
 
 ### Mental Model
 
@@ -158,6 +160,8 @@ async function OrderDetails({ orderId }) {
 
 Streaming keeps the UI responsive while data loads.
 
+Marcus says, "Perceived speed is real speed."
+
 ### Progressive Loading
 
 ```tsx
@@ -205,6 +209,8 @@ export default function Loading() {
 
 Middleware enforces rules before the request reaches your app.
 
+Sarah says, "Put guardrails at the edge, not deep in the tree."
+
 ```tsx
 // middleware.ts
 import { NextResponse } from 'next/server';
@@ -239,6 +245,8 @@ export const config = {
 
 Move computation closer to the user for lower latency.
 
+Marcus says, "Distance shows up as latency."
+
 ```tsx
 // app/api/location/route.ts
 export const runtime = 'edge';
@@ -268,6 +276,8 @@ export async function GET(request: Request) {
 ## Chapter 5: Advanced Caching
 
 Caching strategy is the difference between fast and stale.
+
+Sarah says, "Caching is part of the product contract."
 
 ### Request Memoization
 
@@ -332,6 +342,8 @@ export const revalidate = 60; // seconds
 ## Chapter 6: Server Actions
 
 Server Actions simplify mutations without custom endpoints.
+
+Marcus says, "Actions simplify flows, but they still need guardrails."
 
 ```tsx
 // app/actions.ts

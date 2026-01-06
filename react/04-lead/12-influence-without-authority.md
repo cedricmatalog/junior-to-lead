@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 43: The Soft Power Test
+## Week Twelve: The Soft Power Test
 
 A cross-team decision is stuck, and you do not have formal authority to resolve it. Sarah asks you to move it forward through influence, not escalation. Marcus reminds you that credibility and relationships are your strongest tools. This week focuses on building trust, persuading with data and stories, building consensus, and leading by example.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 11 (Conflict Resolution) - Comfort navigating disagreements and decision frameworks.
+Lead Module 11 (Conflict Resolution) - Comfort navigating disagreements and decision frameworks.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Understand Sources of Influence
 
+You map where your influence really comes from.
+
 Sarah points out that you do not need a title to lead. Influence comes from how people experience working with you.
+
+Sarah says, "Influence starts with trust."
 
 ```markdown
 ## Sources of Influence
@@ -64,7 +68,11 @@ Sarah points out that you do not need a title to lead. Influence comes from how 
 
 ## Chapter 2: Build Credibility
 
+You pick small actions that build trust over time.
+
 Marcus uses the credibility equation to show what you can control.
+
+Marcus says, "Credibility is earned in small moments."
 
 ```
 Credibility = (Competence + Reliability + Intimacy) / Self-Interest
@@ -89,7 +97,11 @@ Intimacy:
 
 ## Chapter 3: Persuade with Data and Story
 
+You connect evidence to impact so people remember the point.
+
 Sarah wants every argument to connect evidence to impact, then land with a story that people remember.
+
+Sarah says, "Data convinces. Story aligns."
 
 ```markdown
 ## Persuasion Framework
@@ -115,7 +127,11 @@ conversion. Cutting it in half could recover $X per month."
 
 ## Chapter 4: Build Consensus
 
+You pre-wire decisions so the meeting is a formality, not a fight.
+
 Marcus recommends pre-wiring: talk to stakeholders before the big meeting.
+
+Marcus says, "Consensus is built, not demanded."
 
 ```markdown
 ## Consensus Process
@@ -138,7 +154,11 @@ After:
 
 ## Chapter 5: Navigate Resistance
 
+You treat resistance as signal, not sabotage.
+
 Sarah suggests naming the resistance type so you can respond without defensiveness.
+
+Sarah says, "Resistance is usually about risk, not ego."
 
 ```markdown
 ## Types of Resistance
@@ -155,7 +175,11 @@ Blocker: "I do not have bandwidth"
 
 ## Chapter 6: Lead by Example
 
+You model the behavior you want repeated.
+
 Marcus reminds you that culture changes when people see the behavior, not when they hear a speech.
+
+Marcus says, "People follow what you do, not what you say."
 
 ```markdown
 ## Lead by Example
@@ -270,4 +294,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./11-conflict-resolution.md)
+**Navigation**: [← Previous Module](./11-conflict-resolution.md)

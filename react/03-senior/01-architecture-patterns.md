@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 12 (Next.js Fundamentals) - Comfort with project structure and production concerns.
+Mid-Level Module 12 (Next.js Fundamentals) - Comfort with project structure and production concerns.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Feature-Sliced Design
 
 You need a structure that scales without burying features across folders.
+
+"Features are the unit of change," Sarah says.
 
 Organize code by features, not technical layers.
 
@@ -117,6 +119,8 @@ entities/
 
 Clear boundaries prevent accidental coupling between features.
 
+"Boundaries keep teams from stepping on each other," Marcus says.
+
 ### Public API Pattern
 
 ```tsx
@@ -158,6 +162,8 @@ interface ProductCardProps {
 ## Chapter 3: Monorepo Structure
 
 Some teams need shared packages without losing ownership.
+
+"Shared tooling is good; shared chaos is not," Sarah says.
 
 ```
 packages/
@@ -219,6 +225,8 @@ packages/
 
 When dependencies change, you should not need to rewrite every consumer.
 
+"Make dependencies explicit so you can swap them," Marcus says.
+
 Decouple components from implementations.
 
 ```tsx
@@ -272,6 +280,8 @@ function CheckoutButton() {
 ## Chapter 5: Trade-off Analysis
 
 Architecture choices need a paper trail so the team can revisit them later.
+
+"Architecture is choices, not trophies," Sarah says.
 
 When making architectural decisions, document trade-offs:
 

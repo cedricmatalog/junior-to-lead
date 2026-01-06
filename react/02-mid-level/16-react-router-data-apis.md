@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 05 (API Design & Integration) - Comfort with async requests and error handling.
+Mid-Level Module 05 (API Design and Integration) - Comfort with async requests and error handling.
 
 ---
 
@@ -79,6 +79,8 @@ const router = createBrowserRouter([
 
 The component becomes simpler.
 
+"Let the loader carry the data," Sarah says.
+
 ```jsx
 import { useLoaderData } from 'react-router-dom';
 
@@ -95,6 +97,8 @@ function Settings() {
 ## Chapter 3: Actions for Mutations
 
 Forms can submit directly to routes.
+
+"Mutations belong next to the route," Marcus says.
 
 ```jsx
 import { Form } from 'react-router-dom';
@@ -124,6 +128,8 @@ import { Form } from 'react-router-dom';
 
 Some data is slow. Serve what you can now.
 
+"Split slow data so the page can breathe," Sarah says.
+
 ```jsx
 import { defer, Await } from 'react-router-dom';
 
@@ -145,6 +151,8 @@ loader: () => defer({
 
 Handle failures where they happen.
 
+"Contain errors at the route boundary," Marcus says.
+
 ```jsx
 {
   path: '/settings',
@@ -161,6 +169,8 @@ Handle failures where they happen.
 ## Chapter 6: Fetchers and Revalidation
 
 Update in the background without navigation.
+
+"Background updates should not hijack the URL," Sarah says.
 
 ```jsx
 import { useFetcher } from 'react-router-dom';

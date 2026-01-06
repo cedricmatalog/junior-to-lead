@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 37: The Long Horizon
+## Week Six: The Long Horizon
 
 Two teams pitch new tools in the same week, and leadership wants a 12-month plan. Sarah asks you to shape a technical strategy that supports business goals without chasing every new idea. Marcus reminds you that strategy is a set of choices, not a list of technologies. This week focuses on evaluation frameworks, tech radars, roadmaps, and experiments that turn curiosity into accountable decisions.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 05 (Stakeholder Communication) - Comfort presenting trade-offs to different audiences.
+Lead Module 05 (Stakeholder Communication) - Comfort presenting trade-offs to different audiences.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Start With the Problem
 
+You write a short problem statement before you pick any tools.
+
 Sarah asks you to write the strategy in terms of business goals, not tooling preferences. Marcus suggests a short problem statement before any solution talk.
+
+Sarah says, "Strategy starts with the pain, not the tool."
 
 ```markdown
 ## Problem Statement Template
@@ -64,7 +68,11 @@ Sarah asks you to write the strategy in terms of business goals, not tooling pre
 
 ## Chapter 2: Evaluate Options with a Scorecard
 
+You turn opinions into measurable trade-offs.
+
 Use a weighted scorecard to make the trade-offs explicit. This helps avoid debates that turn into opinions.
+
+Marcus says, "Scorecards turn opinions into trade-offs."
 
 ```markdown
 ## Technology Evaluation: [Technology Name]
@@ -101,7 +109,11 @@ Adopt / Trial / Assess / Hold
 
 ## Chapter 3: Maintain a Tech Radar
 
+You keep a living view of what to adopt, trial, or avoid.
+
 Sarah wants a single place that signals what the team should adopt, trial, or avoid. Review it quarterly.
+
+Sarah says, "Track trends so they don't blindside you."
 
 ```markdown
 ## Team Technology Radar
@@ -130,7 +142,11 @@ Sarah wants a single place that signals what the team should adopt, trial, or av
 
 ## Chapter 4: Build Roadmaps Tied to Goals
 
+You connect every initiative to a business outcome.
+
 Marcus suggests you connect each initiative to a business outcome. The roadmap should show sequence and dependencies, not just a wish list.
+
+Marcus says, "Roadmaps should map to outcomes, not tasks."
 
 ```markdown
 ## Frontend Technical Roadmap 2024-2025
@@ -167,7 +183,11 @@ Marcus suggests you connect each initiative to a business outcome. The roadmap s
 
 ## Chapter 5: Run Experiments and POCs
 
+You test assumptions before committing the roadmap.
+
 Sarah expects every experiment to have a hypothesis and exit criteria. POCs are tools for learning, not pre-approved decisions.
+
+Sarah says, "Test assumptions before you commit."
 
 ```markdown
 ## Experiment Template
@@ -218,7 +238,11 @@ Validate real-time collaboration for the editor.
 
 ## Chapter 6: Decide and Communicate
 
+You write a short decision memo so the team does not re-litigate the choice.
+
 Marcus recommends a short decision memo that records the why, not just the what. This prevents reruns of the same debates.
+
+Marcus says, "Decisions only matter if everyone hears them."
 
 ```markdown
 ## Decision Memo
@@ -350,4 +374,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./05-stakeholder-communication.md) | [Next Module ->](./07-incident-management.md)
+**Navigation**: [← Previous Module](./05-stakeholder-communication.md) | [Next Module →](./07-incident-management.md)

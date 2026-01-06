@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 38: The Fire Drill
+## Week Seven: The Fire Drill
 
 A checkout outage hits during a product launch. Sarah asks you to run the incident response, and Marcus reminds you that calm leadership matters as much as the fix. You need to triage quickly, communicate clearly, and turn chaos into learning. This week focuses on severity levels, incident command, postmortems, and the runbooks that prevent repeat failures.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Technical Strategy) - Comfort making trade-offs and communicating impact.
+Lead Module 06 (Technical Strategy) - Comfort making trade-offs and communicating impact.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Prepare Before the Incident
 
+You get the basics in place before the pager goes off.
+
 Sarah wants on-call and alerting in place before the next outage. Marcus reminds you that bad alerts create bad decisions.
+
+Sarah says, "Preparation turns chaos into procedure."
 
 ### On-Call Essentials
 
@@ -86,7 +90,11 @@ Dashboard: None
 
 ## Chapter 2: Declare Severity and Triage
 
+You name the severity so the response matches the impact.
+
 Your first move is to set severity and assemble the right response. Overreacting wastes time, underreacting amplifies damage.
+
+Marcus says, "Name the severity early so everyone aligns."
 
 | Level | Definition | Response Time | Example |
 |-------|------------|---------------|---------|
@@ -97,7 +105,11 @@ Your first move is to set severity and assemble the right response. Overreacting
 
 ## Chapter 3: Run the Incident
 
+You keep the timeline and the team aligned.
+
 Sarah assigns you as incident commander. Your job is coordination and communication, not deep debugging.
+
+Sarah says, "Someone must own the timeline."
 
 ```markdown
 ## Incident Commander Responsibilities
@@ -128,7 +140,11 @@ Next Update: In X minutes
 
 ## Chapter 4: Resolve and Verify
 
+You confirm recovery before declaring it over.
+
 Marcus reminds you that the incident is not over when the fix is deployed. You need to confirm recovery and watch for regressions.
+
+Marcus says, "Verify fixes, don't assume them."
 
 ```markdown
 ## Resolution Checklist
@@ -141,7 +157,11 @@ Marcus reminds you that the incident is not over when the fix is deployed. You n
 
 ## Chapter 5: Learn and Improve
 
+You capture lessons while the details are still fresh.
+
 Sarah wants a blameless postmortem that drives change. The goal is to prevent the next incident, not assign blame.
+
+Sarah says, "Postmortems are how you buy back trust."
 
 ```markdown
 # Postmortem Template
@@ -171,7 +191,11 @@ Gaps in testing, monitoring, or process
 
 ## Chapter 6: Write Runbooks That Work
 
+You write runbooks for real humans under stress.
+
 Marcus suggests short, action-first runbooks that are easy to scan during a crisis.
+
+Marcus says, "Runbooks should guide a tired human at 3 a.m."
 
 ```markdown
 # Runbook: High Error Rate on Checkout
@@ -302,4 +326,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./06-technical-strategy.md) | [Next Module ->](./08-documentation-culture.md)
+**Navigation**: [← Previous Module](./06-technical-strategy.md) | [Next Module →](./08-documentation-culture.md)

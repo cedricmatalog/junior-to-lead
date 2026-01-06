@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 15 (Next.js Advanced) - Familiarity with App Router concepts and streaming.
+Senior Module 15 (Next.js Advanced) - Familiarity with App Router concepts and streaming.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 By default, components are server components.
 
+Sarah says, "Start server-first; add client only when you need it."
+
 ```tsx
 // app/products/page.tsx (server component)
 export default async function Page() {
@@ -73,6 +75,8 @@ export default async function Page() {
 
 Caching is now built into `fetch`.
 
+Marcus says, "Make caching choices explicit, not accidental."
+
 ```tsx
 await fetch('https://api.example.com/products', {
   next: { revalidate: 60 }
@@ -86,6 +90,8 @@ await fetch('https://api.example.com/products', {
 ## Chapter 3: Route Handlers
 
 Use `route.ts` for small APIs.
+
+Sarah says, "Keep handlers close to the UI they serve."
 
 ```ts
 // app/api/health/route.ts
@@ -102,6 +108,8 @@ export async function GET() {
 
 App Router gives per-route `loading.tsx` and `error.tsx`.
 
+Marcus says, "Granular boundaries keep the UI calm."
+
 ```tsx
 // app/products/loading.tsx
 export default function Loading() {
@@ -117,6 +125,8 @@ export default function Loading() {
 
 Edge is fast but limited. Node is flexible but slower.
 
+Sarah says, "Pick the runtime that fits the dependency."
+
 "Choose edge for latency-sensitive reads. Choose node for complex dependencies."
 
 ---
@@ -124,6 +134,8 @@ Edge is fast but limited. Node is flexible but slower.
 ## Chapter 6: Migration Pitfalls
 
 Common mistakes:
+
+Marcus says, "Migrate in slices, not in a single leap."
 
 - Using client-only libraries in server components
 - Fetching in both server and client

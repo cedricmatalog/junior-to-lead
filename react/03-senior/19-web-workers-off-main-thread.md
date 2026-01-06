@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 04 (Advanced Performance) - Comfort with profiling and main-thread bottlenecks.
+Senior Module 04 (Advanced Performance) - Comfort with profiling and main-thread bottlenecks.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 Start with evidence, not guesses.
 
+"If you can't measure it, you can't move it," Sarah says.
+
 ```tsx
 performance.mark('start-parse');
 const result = parseHugePayload(payload);
@@ -71,6 +73,8 @@ performance.measure('parse', 'start-parse', 'end-parse');
 ## Chapter 2: Create a Worker
 
 Use a dedicated worker for a single job stream.
+
+"Give heavy work its own lane," Marcus says.
 
 ```ts
 const worker = new Worker(new URL('./stats.worker.ts', import.meta.url), {
@@ -91,6 +95,8 @@ worker.onmessage = event => {
 ## Chapter 3: Message Shape and Safety
 
 Keep messages explicit and serializable.
+
+"If you can't serialize it, don't send it," Sarah says.
 
 ```ts
 // main thread
@@ -113,6 +119,8 @@ self.onmessage = event => {
 
 Copying large buffers is slow. Transfer instead.
 
+"Transfer ownership, don't copy the truck," Marcus says.
+
 ```ts
 const buffer = new ArrayBuffer(1024 * 1024);
 worker.postMessage({ buffer }, [buffer]);
@@ -125,6 +133,8 @@ worker.postMessage({ buffer }, [buffer]);
 ## Chapter 5: Integrate with React
 
 Wrap the worker in a hook so components stay clean.
+
+"Hide the worker behind a clean hook," Sarah says.
 
 ```tsx
 function useWorkerTask<TInput, TOutput>(workerUrl: URL) {
@@ -156,6 +166,8 @@ function useWorkerTask<TInput, TOutput>(workerUrl: URL) {
 ## Chapter 6: Manage Lifecycle and Pools
 
 Workers are not free. Start them when needed and shut them down.
+
+"Workers are tools, not defaults," Marcus says.
 
 - Use a single worker for a stream of tasks
 - Terminate workers on unmount or after idle

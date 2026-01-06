@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 35: The Team Expansion
+## Week Four: The Team Expansion
 
 Headcount is approved and the team needs to grow fast without lowering the bar. Sarah asks you to design a hiring process that is fair, consistent, and aligned with team needs. Marcus reminds you that onboarding is just as important as hiring -- it determines how quickly new hires become effective. This week focuses on structured interviews, bias reduction, and onboarding plans that work.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 03 (Team Processes) - Comfort with team rhythms and expectations.
+Lead Module 03 (Team Processes) - Comfort with team rhythms and expectations.
 
 ---
 
@@ -50,7 +50,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Designing Interviews
 
+You sketch the interview loop before you schedule anyone.
+
 ### Interview Structure
+
+Sarah says, "Consistency is fairness."
 
 ```markdown
 ## Frontend Developer Interview Process
@@ -165,7 +169,11 @@ Below 7: No hire
 
 ## Chapter 2: Reducing Bias
 
+You build guardrails before you start evaluating people.
+
 ### Structured Interviews
+
+Marcus says, "Structure reduces bias more than good intentions."
 
 ```markdown
 ### Behavioral Interview Questions
@@ -199,6 +207,10 @@ Ask all candidates the same questions:
 
 ## Chapter 3: Making Decisions
 
+You set a debrief format so decisions stay fair.
+
+Sarah says, "Decisions need evidence, not vibes."
+
 ### Debrief Structure
 
 ```markdown
@@ -226,6 +238,10 @@ Ask all candidates the same questions:
 ```
 
 ## Chapter 4: Onboarding
+
+You map the first day and week so nothing is left to chance.
+
+Marcus says, "Onboarding decides how fast people become effective."
 
 ### First Day
 
@@ -302,6 +318,10 @@ Ask all candidates the same questions:
 
 ### Onboarding Documentation
 ## Chapter 5: New Developer Guide (Inline)
+
+You outline the guide so new hires know exactly where to start.
+
+Sarah says, "Make the first week feel safe and obvious."
 
 ### Getting Started
 - Install Node LTS and the team package manager (npm/yarn/pnpm).
@@ -457,4 +477,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./03-team-processes.md) | [Next Module ->](./05-stakeholder-communication.md)
+**Navigation**: [← Previous Module](./03-team-processes.md) | [Next Module →](./05-stakeholder-communication.md)

@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 11 (Observability & Monitoring) - Familiarity with production risks and trade-offs.
+Senior Module 11 (Observability and Monitoring) - Familiarity with production risks and trade-offs.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 Before reviewing code, align on why the review exists.
 
+Sarah leans in. "Reviews aren't a gate; they're a safety net."
+
 1. **Catch bugs** before they reach production
 2. **Share knowledge** across the team
 3. **Maintain standards** for code quality
@@ -62,6 +64,8 @@ Before reviewing code, align on why the review exists.
 ## Chapter 2: What to Review
 
 A good review checks correctness, design, and risk.
+
+Marcus says, "Correctness first, then design, then risk."
 
 ### Correctness
 - Does it solve the problem?
@@ -91,6 +95,8 @@ A good review checks correctness, design, and risk.
 ## Chapter 3: Providing Feedback
 
 Feedback should be clear, actionable, and respectful.
+
+Sarah says, "Be specific. Be kind. Leave a path forward."
 
 ### Be Specific and Actionable
 
@@ -141,6 +147,8 @@ Feedback should be clear, actionable, and respectful.
 
 The process matters just as much as the comments.
 
+Marcus says, "Workflow keeps reviews fast and fair."
+
 ### Before Reviewing
 
 1. Understand the context (read ticket/description)
@@ -182,6 +190,8 @@ The process matters just as much as the comments.
 
 Architecture reviews prevent long-term pain.
 
+Sarah says, "Review the plan before the code."
+
 For large changes, review the approach before implementation.
 
 ```markdown
@@ -208,6 +218,8 @@ Approved with conditions:
 
 How you receive feedback shapes the team culture.
 
+Marcus says, "How you take feedback shapes trust."
+
 ### As the Author
 
 1. **Don't take it personally** - Review is about code, not you
@@ -233,6 +245,8 @@ sufficient. What do you think?
 ## Chapter 7: Building Review Culture
 
 Culture determines whether reviews help or hurt.
+
+Sarah says, "Culture is how reviews scale."
 
 ### As a Team
 

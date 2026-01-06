@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 33: Owning the Long View
+## Week Two: Owning the Long View
 
 You are now accountable for the long-term health of the frontend platform. Sarah asks you to make architecture decisions visible, keep debt from accumulating, and plan migrations without disrupting delivery. Marcus reminds you that ownership means creating systems that survive team changes. This week focuses on ADRs, tech debt management, and platform thinking.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 01 (Technical Leadership) - Comfort setting vision and documenting decisions.
+Lead Module 01 (Technical Leadership) - Comfort setting vision and documenting decisions.
 
 ---
 
@@ -49,6 +49,10 @@ By the end of this module, you'll be able to:
 ---
 
 ## Chapter 1: Architecture Decision Records (ADRs)
+
+Sarah says, "If it's not written down, it's not a decision."
+
+You open a fresh ADR template so the decision is explicit.
 
 ### ADR Template
 
@@ -120,6 +124,10 @@ docs/
 
 ## Chapter 2: Technical Debt Management
 
+Marcus says, "Debt is fine when it's intentional and tracked."
+
+You categorize debt before deciding what to pay down.
+
 ### Categorizing Debt
 
 | Type | Description | Example |
@@ -130,6 +138,8 @@ docs/
 | Cruft | Accumulation | Dead code, unused features |
 
 ### Tech Debt Register
+
+You keep a living register so trade-offs stay visible.
 
 ```markdown
 ### Tech Debt Inventory
@@ -154,6 +164,8 @@ docs/
 
 ### Debt Payment Strategy
 
+You set a budget so debt work does not get crowded out.
+
 ```
 ┌─────────────────────────────────────────────┐
 │            Sprint Allocation                 │
@@ -169,6 +181,10 @@ Adjust based on situation:
 ```
 
 ## Chapter 3: Migration Strategies
+
+Sarah says, "Migrate in slices, not in a single leap."
+
+You map the slices so the team can move safely.
 
 ### The Strangler Fig Pattern
 
@@ -199,6 +215,8 @@ Phase 4: Decommission old
 ```
 
 ### Migration Plan Template
+
+You write a phased plan before touching code.
 
 ```markdown
 # Migration Plan: Redux to Zustand
@@ -247,6 +265,10 @@ Feature flag allows instant rollback to Redux.
 
 ## Chapter 4: Platform Thinking
 
+Marcus says, "Platforms reduce repeat work across teams."
+
+You frame platform work as leverage, not overhead.
+
 ### Platform vs Product
 
 ```
@@ -260,8 +282,13 @@ Single team uses         Multiple teams use
 
 ### Internal Platforms
 
-```markdown
+You list the shared services teams will use every week.
+
 ## Chapter 5: Frontend Platform Services
+
+Sarah says, "Services should remove friction, not add gates."
+
+You break the platform into services the team can own.
 
 ### Design System
 - Component library
@@ -286,7 +313,6 @@ Single team uses         Multiple teams use
 - Code generators
 - Documentation
 - Self-service: Teams contribute
-```
 
 ### Platform Team Model
 
@@ -414,4 +440,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./01-technical-leadership.md) | [Next Module ->](./03-team-processes.md)
+**Navigation**: [← Previous Module](./01-technical-leadership.md) | [Next Module →](./03-team-processes.md)

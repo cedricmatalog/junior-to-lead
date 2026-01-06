@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 03 (System Design) - Familiarity with delivery, caching, and system-level trade-offs.
+Senior Module 03 (System Design) - Familiarity with delivery, caching, and system-level trade-offs.
 
 ---
 
@@ -52,6 +52,8 @@ By the end of this module, you'll be able to:
 ## Chapter 1: Core Web Vitals
 
 You need concrete targets that the whole team can measure.
+
+"Targets keep debates out of performance reviews," Sarah says.
 
 ### LCP (Largest Contentful Paint)
 
@@ -155,6 +157,8 @@ function CardSkeleton() {
 
 Different pages need different trade-offs between speed and freshness.
 
+"Pick the model that matches the user journey," Marcus says.
+
 ### SSR (Server-Side Rendering)
 
 ```tsx
@@ -227,6 +231,8 @@ function ProductPage() {
 
 Caching is the fastest performance win when applied thoughtfully.
 
+"Caching is a product decision," Sarah says.
+
 ### Client-Side Caching
 
 ```tsx
@@ -285,6 +291,8 @@ export async function GET(request: Request) {
 
 Profiling tells you where time is actually spent.
 
+"Profile before you optimize," Marcus says.
+
 ### React DevTools Profiler
 
 1. Open DevTools Profiler tab
@@ -338,6 +346,8 @@ onLCP(console.log);
 ## Chapter 5: Guardrails and Regression Prevention
 
 Performance wins fade unless you lock them in. Set budgets, automate checks, and make regressions visible.
+
+"Guardrails turn good into consistent," Sarah says.
 
 ```json
 // lighthouse-budget.json

@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 01 (Architecture Patterns) - Familiarity with structure, boundaries, and trade-offs.
+Senior Module 01 (Architecture Patterns) - Familiarity with structure, boundaries, and trade-offs.
 
 ---
 
@@ -53,6 +53,8 @@ By the end of this module, you'll be able to:
 
 You need a shared model of the system before teams can move independently.
 
+"Layers create shared language," Sarah says.
+
 ```
 ┌─────────────────────────────────────────────┐
 │              Presentation Layer              │
@@ -72,6 +74,8 @@ You need a shared model of the system before teams can move independently.
 ## Chapter 2: Micro-Frontends
 
 Multiple teams want ownership without stepping on each other.
+
+"Use micro-frontends only when org scale demands it," Marcus says.
 
 ### When to Consider
 
@@ -129,6 +133,8 @@ https://example.com/admin     → Admin micro-frontend
 
 Builds are getting slow and fragile. You need a scalable pipeline.
 
+"Build speed is product speed," Sarah says.
+
 ### Modern Build Pipeline
 
 ```
@@ -183,6 +189,8 @@ export default defineConfig({
 ## Chapter 4: Deployment Strategies
 
 Releases need to be safer and more frequent.
+
+"Safe releases are a design choice," Marcus says.
 
 ### Blue-Green Deployment
 
@@ -246,6 +254,8 @@ const flags = {
 
 Speed depends on where content lives and how it is cached.
 
+"Caching is a design decision, not just a header," Sarah says.
+
 ```
 ┌─────────────┐     ┌─────────┐     ┌────────┐
 │   Browser   │ ──▶ │   CDN   │ ──▶ │ Origin │
@@ -274,6 +284,8 @@ location /index.html {
 
 Budgets keep performance from drifting over time.
 
+"Budgets stop drift before it starts," Marcus says.
+
 ```json
 // performance-budget.json
 {
@@ -293,6 +305,8 @@ Budgets keep performance from drifting over time.
 ## Chapter 7: Error Tracking Architecture
 
 You need visibility across the entire frontend system.
+
+"If you can't see it, you can't fix it," Sarah says.
 
 ```
 ┌─────────────────────────────────────────────┐

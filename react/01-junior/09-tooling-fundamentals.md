@@ -5,7 +5,7 @@
 
 ## Week Nine: The Setup That Never Ends
 
-The routing work is done, but the onboarding doc is thin. A new teammate asks, "How do I run this locally?"
+The routing work is done, but the onboarding doc is thin. A new teammate asks how to run it locally.
 
 You realize the project has grown, but the tooling story hasn't.
 
@@ -30,7 +30,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Styling Approaches) - Comfort building and running React components locally.
+Junior Module 07 (Styling Approaches) - Comfort building and running React components locally.
 
 ---
 

@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 15 (Deployment and CI) - Familiarity with production builds and releases.
+Mid-Level Module 15 (Deployment and CI) - Familiarity with production builds and releases.
 
 ---
 
@@ -75,6 +75,8 @@ if ('serviceWorker' in navigator) {
 
 Choose one per route:
 
+Sarah asks which screens need freshness and which can be cached.
+
 - Cache-first for static assets
 - Network-first for dynamic pages
 - Stale-while-revalidate for dashboards
@@ -86,6 +88,8 @@ Choose one per route:
 ## Chapter 3: Offline Fallbacks
 
 Create a simple offline page.
+
+"Make failure graceful," Marcus says.
 
 ```html
 <!-- public/offline.html -->
@@ -101,6 +105,8 @@ Create a simple offline page.
 
 Service workers update in the background.
 
+Marcus warns about surprise reloads that drop user progress.
+
 "Notify users when a new version is ready," Sarah says.
 
 ---
@@ -108,6 +114,8 @@ Service workers update in the background.
 ## Chapter 5: Testing Offline
 
 Use DevTools:
+
+Sarah says, "Test the tunnel before you ship the train."
 
 1) Application > Service Workers
 2) Network > Offline

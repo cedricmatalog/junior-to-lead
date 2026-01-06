@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Styling Approaches) - Comfort with component styling and UI structure.
+Junior Module 07 (Styling Approaches) - Comfort with component styling and UI structure.
 
 ---
 
@@ -57,6 +57,8 @@ By the end of this module, you'll be able to:
 
 You start with hover and focus states.
 
+Sarah leans over. "Motion should explain, not distract."
+
 ```css
 .button {
   transition: transform 120ms ease, box-shadow 120ms ease;
@@ -75,6 +77,8 @@ You start with hover and focus states.
 ## Chapter 2: Keyframes for Attention
 
 Loading states need gentle motion.
+
+"Use motion to point, not to perform," Marcus says.
 
 ```css
 @keyframes pulse {
@@ -96,6 +100,8 @@ Loading states need gentle motion.
 
 A linear animation feels robotic.
 
+"Easing is the difference between stiff and natural," Sarah says.
+
 ```css
 .card {
   transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -109,6 +115,8 @@ A linear animation feels robotic.
 ## Chapter 4: Framer Motion for Complex UI
 
 A sidebar should slide in and out smoothly.
+
+"Use a library when CSS gets tangled," Marcus says.
 
 ```jsx
 import { motion, AnimatePresence } from 'framer-motion';
@@ -139,6 +147,8 @@ function Sidebar({ open }) {
 
 Some users prefer less motion. Respect that.
 
+"Respect the user's settings every time," Sarah says.
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -153,6 +163,8 @@ Some users prefer less motion. Respect that.
 ---
 
 ## Chapter 6: Performance Pitfalls
+
+Your UI should stay smooth even under load.
 
 "Animate transforms and opacity. Avoid layout thrash," Marcus says.
 

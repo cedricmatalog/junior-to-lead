@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 40: The Dependency Web
+## Week Nine: The Dependency Web
 
 Two teams block each other on a shared API, and the launch date is slipping. Sarah asks you to create clearer contracts and coordination, while Marcus points out that cross-team work succeeds only when expectations are explicit. This week focuses on API contracts, shared libraries, RFCs, and dependency management that reduce friction and surprises.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 08 (Documentation Culture) - Comfort documenting decisions and standards.
+Lead Module 08 (Documentation Culture) - Comfort documenting decisions and standards.
 
 ---
 
@@ -51,7 +51,11 @@ By the end of this module, you'll be able to:
 
 ## Chapter 1: Define Clear API Contracts
 
+You write the contract before you promise anything to another team.
+
 Sarah wants contracts that specify behavior, not just endpoints. Marcus suggests you write the guarantees down so there is no debate later.
+
+Sarah says, "Contracts prevent guesswork."
 
 ```markdown
 ## API Contract Template
@@ -91,7 +95,11 @@ Breaking Changes:
 
 ## Chapter 2: Test the Contract
 
+You turn promises into tests so they cannot drift.
+
 Marcus recommends consumer-driven tests so producers and consumers stay aligned.
+
+Marcus says, "If the contract isn't tested, it's not real."
 
 ```typescript
 // Consumer-driven contract test
@@ -111,7 +119,11 @@ describe('User API Contract', () => {
 
 ## Chapter 3: Govern Shared Libraries
 
+You define ownership so shared code does not become abandoned code.
+
 Sarah wants shared libraries only when they reduce overall complexity. Marcus warns that shared code without ownership becomes a liability.
+
+Sarah says, "Shared libraries need shared ownership."
 
 ```markdown
 ## Shared Library Decision Guide
@@ -148,7 +160,11 @@ Breaking changes:
 
 ## Chapter 4: Create Cross-Team Forums
 
+You create a lightweight forum so decisions do not stall in DMs.
+
 Sarah asks you to create lightweight ways for teams to coordinate. Marcus suggests a guild and a simple RFC process.
+
+Marcus says, "Forums keep teams aligned without endless meetings."
 
 ```markdown
 ## Frontend Guild Charter
@@ -172,7 +188,11 @@ Action items: Tracked in shared doc.
 
 ## Chapter 5: Manage Dependencies
 
+You map dependencies early so launches do not get blocked.
+
 Marcus encourages you to treat dependencies like risks and plan around them.
+
+Sarah says, "Dependencies are risks unless you plan them."
 
 ```markdown
 ## Dependency Request Template
@@ -306,4 +326,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./08-documentation-culture.md) | [Next Module ->](./10-effective-one-on-ones.md)
+**Navigation**: [← Previous Module](./08-documentation-culture.md) | [Next Module →](./10-effective-one-on-ones.md)

@@ -28,7 +28,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Security Practices) - Familiarity with common web security risks.
+Senior Module 06 (Security Practices) - Familiarity with common web security risks.
 
 ---
 
@@ -71,6 +71,8 @@ npm ls
 
 Lockfiles freeze versions.
 
+"Lock the graph or you ship surprises," Sarah says.
+
 ```text
 package-lock.json / pnpm-lock.yaml / yarn.lock
 ```
@@ -96,6 +98,8 @@ npm audit --omit=dev
 
 Check package integrity and provenance signals.
 
+"Trust, then verify," Marcus says.
+
 "Integrity hashes and signed packages reduce tampering risk."
 
 ---
@@ -103,6 +107,8 @@ Check package integrity and provenance signals.
 ## Chapter 5: Dependency Review in PRs
 
 Add a policy:
+
+"Reviews are your checkpoint," Sarah says.
 
 - Review dependency diffs
 - Require approval for new packages
@@ -113,6 +119,8 @@ Add a policy:
 ## Chapter 6: Incident Response
 
 When a vuln hits:
+
+"Move fast, but leave a trail," Marcus says.
 
 1) Identify exposure
 2) Patch or pin

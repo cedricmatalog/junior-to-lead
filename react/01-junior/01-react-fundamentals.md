@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Your First Day on the Job
+## Week One: Your First Day on the Job
 
 It's Monday morning. You've just joined a startup as a frontend developer, and your tech lead Sarah drops by your desk.
 
