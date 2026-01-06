@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 14: The Data Contract
+## Week Five: The Data Contract
 
 Marketing wants a new personalization API, design wants instant updates, and customer support wants reliable error messages. Sarah tells you the UI can't be stable unless the data layer is. Marcus adds that "fetch in components" is why errors are leaking into the UI. This week you'll design a reusable API layer, integrate caching, and handle real-world failures without spreading messy logic across every screen.
 
@@ -550,4 +550,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./03-state-at-scale.md) | [Next Module →](./05-error-handling-patterns.md)
+**Navigation**: [← Previous Module](./04-state-tool-selection.md) | [Next Module →](./06-error-handling-patterns.md)

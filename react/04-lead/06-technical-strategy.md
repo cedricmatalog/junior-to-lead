@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 36 (Stakeholder Communication) - Comfort presenting trade-offs to different audiences.
+Module 05 (Stakeholder Communication) - Comfort presenting trade-offs to different audiences.
 
 ---
 

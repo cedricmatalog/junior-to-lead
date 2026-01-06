@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 29: The Growth Plan
+## Week Fourteen: The Growth Plan
 
 Two new juniors joined the team, and Sarah asks you to mentor one of them. Marcus reminds you that mentoring is not just answering questions -- it is about building confidence and habits. This week focuses on how to mentor effectively: set goals, teach with intention, give feedback, and balance mentoring with your own delivery.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 28 (Code Review Mastery) - Familiarity with feedback and team collaboration.
+Module 13 (Code Review Mastery) - Familiarity with feedback and team collaboration.
 
 ---
 
@@ -398,4 +398,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./08-code-review-mastery.md) | [Next Module ->](./10-nextjs-advanced.md)
+**Navigation**: [← Previous Module](./13-code-review-mastery.md) | [Next Module →](./15-nextjs-advanced.md)

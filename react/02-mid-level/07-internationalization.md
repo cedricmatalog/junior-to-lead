@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 16: The Global Launch
+## Week Seven: The Global Launch
 
 The product is going international. Sarah lists the new requirements: Spanish and Arabic on day one, currency formatting, and right-to-left layouts that don't break. Marcus warns you that localization is more than translating text -- it affects layout, dates, numbers, and even the order of UI elements. This week is about setting up i18n infrastructure so every new locale feels native, not bolted on.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 05 (Error Handling Patterns) - Comfort with component structure and UI feedback patterns.
+Module 06 (Error Handling Patterns) - Comfort with component structure and UI feedback patterns.
 
 ---
 
@@ -520,4 +520,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./05-error-handling-patterns.md) | [Next Module →](./07-testing-strategies.md)
+**Navigation**: [← Previous Module](./06-error-handling-patterns.md) | [Next Module →](./08-testing-strategies.md)

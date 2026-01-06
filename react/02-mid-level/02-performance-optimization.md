@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 12: The Laggy Release
+## Week Two: The Laggy Release
 
 The dashboard launched with a splash, but now users are complaining about lag. Sarah pulls up a video: scrolling stutters, filters hang, and mobile devices choke. "You need this to feel instant," she says. Marcus reminds you that optimization isn't about magic tricks -- it's about understanding what React renders, why it renders, and which work can be skipped. Your job this week is to identify waste and make performance predictable.
 

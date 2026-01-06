@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 23: The Performance Deadline
+## Week Four: The Performance Deadline
 
 A major launch is coming, and leadership wants performance guarantees. Sarah shows you the Core Web Vitals report and points to a regression on mobile. Marcus adds that optimization cannot be guesswork -- it needs measurable targets and repeatable strategies. This week is about advanced performance work: rendering strategies, caching layers, profiling, and the guardrails that keep speed from degrading after release.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 22 (System Design) - Familiarity with delivery, caching, and system-level trade-offs.
+Module 03 (System Design) - Familiarity with delivery, caching, and system-level trade-offs.
 
 ---
 
@@ -511,4 +511,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./02-system-design.md) | [Next Module ->](./04-security-practices.md)
+**Navigation**: [← Previous Module](./03-system-design.md) | [Next Module →](./05-performance-budgets.md)

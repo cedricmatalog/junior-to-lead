@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 25: The Accessibility Review
+## Week Eight: The Accessibility Review
 
 An audit flagged multiple accessibility issues, and a key client requires WCAG compliance. Sarah asks you to lead the remediation plan. Marcus reminds you that accessibility is not a checklist -- it is a set of habits that shape every component. This week is about building inclusive UI: semantic HTML, ARIA usage, keyboard support, and realistic testing strategies.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 24 (Security Practices) - Familiarity with safe UI defaults.
+Module 06 (Security Practices) - Familiarity with safe UI defaults.
 
 ---
 
@@ -539,4 +539,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./04-security-practices.md) | [Next Module ->](./06-design-systems.md)
+**Navigation**: [← Previous Module](./07-supply-chain-security.md) | [Next Module →](./09-design-systems.md)

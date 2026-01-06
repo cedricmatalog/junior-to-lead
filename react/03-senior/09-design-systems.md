@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 26: The Shared Language
+## Week Nine: The Shared Language
 
 Multiple teams are shipping UI, but the product looks inconsistent. Sarah wants a design system that can scale across products without slowing delivery. Marcus points out that a system is only useful if it has clear APIs, reliable tokens, and documentation people actually read. This week is about building a design system that is easy to adopt, hard to misuse, and simple to evolve.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 25 (Accessibility) - Familiarity with inclusive component design.
+Module 08 (Accessibility (a11y)) - Familiarity with inclusive component design.
 
 ---
 
@@ -564,4 +564,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./05-accessibility-a11y.md) | [Next Module ->](./07-observability-monitoring.md)
+**Navigation**: [← Previous Module](./08-accessibility-a11y.md) | [Next Module →](./10-design-handoff-collaboration.md)

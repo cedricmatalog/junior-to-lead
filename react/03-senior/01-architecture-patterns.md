@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 21: The Architecture Review
+## Week One: The Architecture Review
 
 The product is growing fast and the codebase is starting to drift. Sarah asks you to lead an architecture review before the next feature push. Marcus pulls up a diagram with three competing structures and says, "You need a map that scales with the team." This week is about organizing code so features are easy to find, dependencies stay predictable, and decisions are documented instead of tribal knowledge.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 20 (Next.js Fundamentals) - Comfort with project structure and production concerns.
+Module 12 (Next.js Fundamentals) - Comfort with project structure and production concerns.
 
 ---
 
@@ -456,4 +456,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [Next Module ->](./02-system-design.md)
+**Navigation**: [Next Module →](./02-architecture-decision-records.md)

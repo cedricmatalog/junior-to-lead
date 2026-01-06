@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 31 (Framework Comparison) - Comfort evaluating trade-offs and documenting decisions.
+Module 17 (Framework Comparison) - Comfort evaluating trade-offs and documenting decisions.
 
 ---
 

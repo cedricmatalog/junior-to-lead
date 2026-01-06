@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week Six: The Design System
+## Week Seven: The Design System
 
 The job application portal is complete. But when you open it in the browser, something feels off.
 
@@ -29,7 +29,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 05 (Forms and Validation) - Understanding component structure and state management for styling dynamic components.
+Module 06 (Forms and Validation) - Understanding component structure and state management for styling dynamic components.
 
 ---
 
@@ -1357,4 +1357,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./05-forms-and-validation.md) | [Next Module →](./07-testing-fundamentals.md)
+**Navigation**: [← Previous Module](./06-forms-and-validation.md) | [Next Module →](./08-responsive-layouts.md)

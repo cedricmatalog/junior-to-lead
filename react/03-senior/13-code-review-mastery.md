@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 28: The Review Bottleneck
+## Week Thirteen: The Review Bottleneck
 
 Pull requests are piling up and quality is slipping. Sarah wants faster review cycles without sacrificing rigor. Marcus says the best reviewers do more than find bugs -- they teach, align, and protect the architecture. This week is about mastering code reviews: how to evaluate quality, communicate clearly, and build a culture where feedback improves the whole team.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 27 (Observability and Monitoring) - Familiarity with production risks and trade-offs.
+Module 11 (Observability & Monitoring) - Familiarity with production risks and trade-offs.
 
 ---
 
@@ -382,4 +382,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./07-observability-monitoring.md) | [Next Module ->](./09-mentoring-juniors.md)
+**Navigation**: [← Previous Module](./12-production-debugging-triage.md) | [Next Module →](./14-mentoring-juniors.md)

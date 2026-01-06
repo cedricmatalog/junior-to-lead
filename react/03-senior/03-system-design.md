@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 22: The Scale Blueprint
+## Week Three: The Scale Blueprint
 
 Traffic is growing and the product roadmap is expanding. Sarah asks you to propose a system design that supports multiple teams, faster deployments, and better reliability. Marcus warns that the current build pipeline will not survive another year of growth. This week is about thinking beyond components and designing the full frontend system: layers, deployments, caching, and observability.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 21 (Architecture Patterns) - Familiarity with structure, boundaries, and trade-offs.
+Module 01 (Architecture Patterns) - Familiarity with structure, boundaries, and trade-offs.
 
 ---
 
@@ -468,4 +468,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./01-architecture-patterns.md) | [Next Module ->](./03-advanced-performance.md)
+**Navigation**: [← Previous Module](./02-architecture-decision-records.md) | [Next Module →](./04-advanced-performance.md)

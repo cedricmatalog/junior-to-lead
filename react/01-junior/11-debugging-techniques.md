@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week Eight: The Mystery of the Missing Messages
+## Week Eleven: The Mystery of the Missing Messages
 
 Week eight starts with chaos.
 
@@ -29,7 +29,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Testing Fundamentals) - Understanding component behavior and state to debug effectively.
+Module 10 (Testing Fundamentals) - Understanding component behavior and state to debug effectively.
 
 ---
 
@@ -1499,4 +1499,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./07-testing-fundamentals.md) | [Next Module →](./09-git-workflows.md)
+**Navigation**: [← Previous Module](./10-testing-fundamentals.md) | [Next Module →](./12-accessibility-fundamentals.md)

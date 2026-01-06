@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 24: The Security Audit
+## Week Six: The Security Audit
 
 Security just flagged a set of vulnerabilities in the frontend. Sarah needs a remediation plan, and Marcus reminds you that frontend security is not just backend responsibility. This week is about protecting users by default: defending against XSS, enforcing CSP, securing authentication flows, and handling sensitive data safely.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 23 (Advanced Performance) - Familiarity with runtime environments and deployment.
+Module 04 (Advanced Performance) - Familiarity with runtime environments and deployment.
 
 ---
 
@@ -439,4 +439,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./03-advanced-performance.md) | [Next Module ->](./05-accessibility-a11y.md)
+**Navigation**: [← Previous Module](./05-performance-budgets.md) | [Next Module →](./07-supply-chain-security.md)

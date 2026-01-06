@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 35 (Hiring and Onboarding) - Comfort with structured communication.
+Module 04 (Hiring & Onboarding) - Comfort with structured communication.
 
 ---
 

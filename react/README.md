@@ -10,12 +10,12 @@ This curriculum covers both **technical React skills** and **leadership competen
 
 | Level | Focus | Modules | Target |
 |-------|-------|---------|--------|
-| [01 - Junior](01-junior/) | Foundation | 10 | Solid fundamentals, ship features independently |
-| [02 - Mid-Level](02-mid-level/) | Proficiency | 10 | Own complex features, production-grade code |
-| [03 - Senior](03-senior/) | Expertise | 11 | Architectural decisions, mentor others |
+| [01 - Junior](01-junior/) | Foundation | 13 | Solid fundamentals, ship features independently |
+| [02 - Mid-Level](02-mid-level/) | Proficiency | 15 | Own complex features, production-grade code |
+| [03 - Senior](03-senior/) | Expertise | 17 | Architectural decisions, mentor others |
 | [04 - Lead](04-lead/) | Leadership | 12 | Technical direction, grow teams |
 
-**Total: 43 modules across 4 levels**
+**Total: 57 modules across 4 levels**
 
 ## How to Use This Curriculum
 
@@ -28,40 +28,58 @@ This curriculum covers both **technical React skills** and **leadership competen
 ## Quick Navigation
 
 ### Junior Developer
+
 - [React Fundamentals](01-junior/01-react-fundamentals.md)
 - [Component Patterns](01-junior/02-component-patterns.md)
 - [Hooks Deep Dive](01-junior/03-hooks-deep-dive.md)
 - [State Management Basics](01-junior/04-state-management-basics.md)
-- [Forms & Validation](01-junior/05-forms-and-validation.md)
-- [Styling Approaches](01-junior/06-styling-approaches.md)
-- [Testing Fundamentals](01-junior/07-testing-fundamentals.md)
-- [Debugging Techniques](01-junior/08-debugging-techniques.md)
-- [Git Workflows](01-junior/09-git-workflows.md)
+- [Routing and Navigation](01-junior/05-routing-and-navigation.md)
+- [Forms and Validation](01-junior/06-forms-and-validation.md)
+- [Styling Approaches](01-junior/07-styling-approaches.md)
+- [Responsive Layouts](01-junior/08-responsive-layouts.md)
+- [Tooling Fundamentals](01-junior/09-tooling-fundamentals.md)
+- [Testing Fundamentals](01-junior/10-testing-fundamentals.md)
+- [Debugging Techniques](01-junior/11-debugging-techniques.md)
+- [Accessibility Fundamentals](01-junior/12-accessibility-fundamentals.md)
+- [Git Workflows](01-junior/13-git-workflows.md)
 
 ### Mid-Level Developer
+
 - [Advanced Patterns](02-mid-level/01-advanced-patterns.md)
 - [Performance Optimization](02-mid-level/02-performance-optimization.md)
 - [State at Scale](02-mid-level/03-state-at-scale.md)
-- [API Design & Integration](02-mid-level/04-api-design-integration.md)
-- [Error Handling Patterns](02-mid-level/05-error-handling-patterns.md)
-- [Internationalization](02-mid-level/06-internationalization.md)
-- [Testing Strategies](02-mid-level/07-testing-strategies.md)
-- [TypeScript Mastery](02-mid-level/08-typescript-mastery.md)
-- [Code Quality](02-mid-level/09-code-quality.md)
-- [Next.js Fundamentals](02-mid-level/10-nextjs-fundamentals.md)
+- [State Tool Selection](02-mid-level/04-state-tool-selection.md)
+- [API Design & Integration](02-mid-level/05-api-design-integration.md)
+- [Error Handling Patterns](02-mid-level/06-error-handling-patterns.md)
+- [Internationalization](02-mid-level/07-internationalization.md)
+- [Testing Strategies](02-mid-level/08-testing-strategies.md)
+- [Accessibility Testing Tooling](02-mid-level/09-accessibility-testing-tooling.md)
+- [TypeScript Mastery](02-mid-level/10-typescript-mastery.md)
+- [Code Quality](02-mid-level/11-code-quality.md)
+- [Next.js Fundamentals](02-mid-level/12-nextjs-fundamentals.md)
+- [E2E Testing with Playwright](02-mid-level/13-e2e-testing-with-playwright.md)
+- [Animations and Motion](02-mid-level/14-animations-and-motion.md)
+- [Deployment and CI](02-mid-level/15-deployment-and-ci.md)
 
 ### Senior Developer
+
 - [Architecture Patterns](03-senior/01-architecture-patterns.md)
-- [System Design](03-senior/02-system-design.md)
-- [Advanced Performance](03-senior/03-advanced-performance.md)
-- [Security Practices](03-senior/04-security-practices.md)
-- [Accessibility (a11y)](03-senior/05-accessibility-a11y.md)
-- [Design Systems](03-senior/06-design-systems.md)
-- [Observability & Monitoring](03-senior/07-observability-monitoring.md)
-- [Code Review Mastery](03-senior/08-code-review-mastery.md)
-- [Mentoring Juniors](03-senior/09-mentoring-juniors.md)
-- [Next.js Advanced](03-senior/10-nextjs-advanced.md)
-- [Framework Comparison](03-senior/11-framework-comparison.md)
+- [Architecture Decision Records](03-senior/02-architecture-decision-records.md)
+- [System Design](03-senior/03-system-design.md)
+- [Advanced Performance](03-senior/04-advanced-performance.md)
+- [Performance Budgets and Governance](03-senior/05-performance-budgets.md)
+- [Security Practices](03-senior/06-security-practices.md)
+- [Supply-Chain Security](03-senior/07-supply-chain-security.md)
+- [Accessibility (a11y)](03-senior/08-accessibility-a11y.md)
+- [Design Systems](03-senior/09-design-systems.md)
+- [Design Handoff and Collaboration](03-senior/10-design-handoff-collaboration.md)
+- [Observability & Monitoring](03-senior/11-observability-monitoring.md)
+- [Production Debugging and Triage](03-senior/12-production-debugging-triage.md)
+- [Code Review Mastery](03-senior/13-code-review-mastery.md)
+- [Mentoring Juniors](03-senior/14-mentoring-juniors.md)
+- [Next.js Advanced](03-senior/15-nextjs-advanced.md)
+- [Next.js App Router Deep Dive](03-senior/16-nextjs-app-router-deep-dive.md)
+- [Framework Comparison](03-senior/17-framework-comparison.md)
 
 ### Lead Developer
 - [Technical Leadership](04-lead/01-technical-leadership.md)

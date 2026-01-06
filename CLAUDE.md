@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This is a **React Developer Curriculum** - a comprehensive learning resource that guides developers from junior to lead-level positions. It contains **43 educational modules** organized into 4 progressive levels (Junior → Mid-Level → Senior → Lead), covering both technical React skills and leadership competencies.
+This is a **React Developer Curriculum** - a comprehensive learning resource that guides developers from junior to lead-level positions. It contains **57 educational modules** organized into 4 progressive levels (Junior → Mid-Level → Senior → Lead), covering both technical React skills and leadership competencies.
 
 **This is a documentation/curriculum repository, not a code project.** There is no build system, test suite, or application code. All content is markdown-based learning materials.
 
@@ -13,9 +13,9 @@ This is a **React Developer Curriculum** - a comprehensive learning resource tha
 ```
 junior-to-lead/
 ├── react/
-│   ├── 01-junior/        # 10 modules: React fundamentals through accessibility
-│   ├── 02-mid-level/     # 10 modules: Advanced patterns, performance, TypeScript
-│   ├── 03-senior/        # 11 modules: Architecture, system design, mentoring
+│   ├── 01-junior/        # 13 modules: React fundamentals through responsive layouts
+│   ├── 02-mid-level/     # 15 modules: Advanced patterns, performance, a11y tooling
+│   ├── 03-senior/        # 17 modules: Architecture, system design, governance
 │   ├── 04-lead/          # 12 modules: Technical leadership, team management
 │   └── README.md         # Main curriculum overview with navigation
 ├── docs/
@@ -287,9 +287,9 @@ Most junior-level modules (01-junior/) include a "Debug This Code" section with 
 - **Purpose**: Reinforce learning through active debugging, build pattern recognition, simulate code review scenarios
 
 ### Levels Overview
-- **Junior (10 modules)**: Foundation - JSX, hooks, state, forms, testing, debugging, git, accessibility
-- **Mid-Level (10 modules)**: Proficiency - Advanced patterns, performance, state at scale, TypeScript, Next.js
-- **Senior (11 modules)**: Expertise - Architecture, system design, security, design systems, mentoring
+- **Junior (13 modules)**: Foundation - JSX, hooks, state, forms, testing, debugging, git, accessibility, routing, tooling, responsive layouts
+- **Mid-Level (15 modules)**: Proficiency - Advanced patterns, performance, state at scale, TypeScript, Next.js, E2E, motion, deployment, state tool selection, a11y tooling
+- **Senior (17 modules)**: Expertise - Architecture, system design, security, design systems, mentoring, ADRs, budgets, production triage
 - **Lead (12 modules)**: Leadership - Technical direction, team processes, stakeholder management, conflict resolution
 
 ### Cross-Cutting Themes

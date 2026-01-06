@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week Five: The Job Application
+## Week Six: The Job Application
 
 The food delivery feature is live. Orders are flowing. But there's a new priority from the business team.
 
@@ -1700,4 +1700,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./04-state-management-basics.md) | [Next Module →](./06-styling-approaches.md)
+**Navigation**: [← Previous Module](./05-routing-and-navigation.md) | [Next Module →](./07-styling-approaches.md)

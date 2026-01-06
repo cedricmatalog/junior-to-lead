@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 37 (Technical Strategy) - Comfort making trade-offs and communicating impact.
+Module 06 (Technical Strategy) - Comfort making trade-offs and communicating impact.
 
 ---
 

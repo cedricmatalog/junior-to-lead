@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 33 (Architecture Ownership) - Comfort with cross-team alignment and documentation.
+Module 02 (Architecture Ownership) - Comfort with cross-team alignment and documentation.
 
 ---
 

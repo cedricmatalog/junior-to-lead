@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 31: The Platform Decision
+## Week Seventeen: The Platform Decision
 
 Leadership wants to launch a new product and asks for a framework recommendation. Sarah expects a clear comparison, not opinions. Marcus reminds you that the best choice depends on constraints: team skill, hosting, data needs, and long-term maintenance. This week is about evaluating frameworks systematically, planning migrations, and staying current without chasing every trend.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 30 (Next.js Advanced) - Familiarity with modern React frameworks.
+Module 15 (Next.js Advanced) - Familiarity with modern React frameworks.
 
 ---
 
@@ -408,4 +408,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./10-nextjs-advanced.md)
+**Navigation**: [← Previous Module](./16-nextjs-app-router-deep-dive.md)

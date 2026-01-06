@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 18: The Type Safety Push
+## Week Ten: The Type Safety Push
 
 The codebase is getting bigger, and bugs are harder to spot in review. Sarah wants more confidence before refactors, and Marcus points out that TypeScript can catch most of the mistakes if you model types well. This week is about using TypeScript as a design tool -- not just for annotations -- so your components are safer, easier to reuse, and harder to misuse.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 07 (Testing Strategies) - Familiarity with component composition and reusable patterns.
+Module 08 (Testing Strategies) - Familiarity with component composition and reusable patterns.
 
 ---
 
@@ -520,4 +520,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./07-testing-strategies.md) | [Next Module →](./09-code-quality.md)
+**Navigation**: [← Previous Module](./09-accessibility-testing-tooling.md) | [Next Module →](./11-code-quality.md)

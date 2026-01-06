@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 30: The Server-Client Split
+## Week Fifteen: The Server-Client Split
 
 The team adopted Next.js, but performance and developer experience are still uneven. Sarah asks you to define clear patterns for Server Components, streaming, and caching. Marcus warns that misuse of client components is driving up bundle size. This week is about mastering advanced Next.js features so you can ship fast pages without sacrificing flexibility.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 29 (Mentoring Juniors) - Familiarity with structured patterns and team enablement.
+Module 14 (Mentoring Juniors) - Familiarity with structured patterns and team enablement.
 
 ---
 
@@ -520,4 +520,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./09-mentoring-juniors.md) | [Next Module ->](./11-framework-comparison.md)
+**Navigation**: [← Previous Module](./14-mentoring-juniors.md) | [Next Module →](./16-nextjs-app-router-deep-dive.md)

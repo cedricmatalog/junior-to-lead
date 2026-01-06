@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 13: The Data Explosion
+## Week Three: The Data Explosion
 
 The product team wants personalized feeds, cross-device carts, and real-time updates. Sarah warns you that "state sprawl" is creeping in: some data lives in local components, some in global stores, and some on the server. Marcus adds that bugs are showing up because nobody knows where the source of truth lives. This week is about choosing the right state tool for each problem and keeping the data model sane as the app grows.
 
@@ -558,4 +558,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./02-performance-optimization.md) | [Next Module →](./04-api-design-integration.md)
+**Navigation**: [← Previous Module](./02-performance-optimization.md) | [Next Module →](./04-state-tool-selection.md)

@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 42 (Conflict Resolution) - Comfort navigating disagreements and decision frameworks.
+Module 11 (Conflict Resolution) - Comfort navigating disagreements and decision frameworks.
 
 ---
 

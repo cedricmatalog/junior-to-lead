@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 27: The Visibility Gap
+## Week Eleven: The Visibility Gap
 
 Errors are slipping into production and nobody notices until support tickets arrive. Sarah wants visibility before users complain. Marcus points out that without clear telemetry, performance and reliability regress silently. This week is about building observability for the frontend: errors, performance, logs, analytics, and alerts that surface the right signals at the right time.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 26 (Design Systems) - Familiarity with shared tooling and component conventions.
+Module 09 (Design Systems) - Familiarity with shared tooling and component conventions.
 
 ---
 
@@ -531,4 +531,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [<- Previous Module](./06-design-systems.md) | [Next Module ->](./08-code-review-mastery.md)
+**Navigation**: [← Previous Module](./10-design-handoff-collaboration.md) | [Next Module →](./12-production-debugging-triage.md)

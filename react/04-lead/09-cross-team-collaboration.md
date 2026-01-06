@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 39 (Documentation Culture) - Comfort documenting decisions and standards.
+Module 08 (Documentation Culture) - Comfort documenting decisions and standards.
 
 ---
 

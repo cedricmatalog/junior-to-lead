@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 15: The Outage Drill
+## Week Six: The Outage Drill
 
 The API is flaky this week. Users are hitting broken screens, and the support inbox is filling up. Sarah asks for a resilience plan: "If something fails, you need to recover without losing trust." Marcus adds that errors shouldn't blow up the whole app. This week is about designing predictable recovery paths -- from component crashes to failed requests -- so the UI fails gracefully and guides users back on track.
 
@@ -524,4 +524,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./04-api-design-integration.md) | [Next Module →](./06-internationalization.md)
+**Navigation**: [← Previous Module](./05-api-design-integration.md) | [Next Module →](./07-internationalization.md)

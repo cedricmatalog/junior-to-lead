@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week Nine: Your First Real Feature
+## Week Thirteen: Your First Real Feature
 
 Nine weeks in. You've built components, fixed bugs, shipped features. But there's something you've been dreading.
 
@@ -29,7 +29,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 08 (Debugging Techniques) - Understanding how to investigate and fix issues before committing code.
+Module 11 (Debugging Techniques) - Understanding how to investigate and fix issues before committing code.
 
 ---
 
@@ -1203,4 +1203,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./08-debugging-techniques.md) | [Next Module →](./10-accessibility-fundamentals.md)
+**Navigation**: [← Previous Module](./12-accessibility-fundamentals.md)

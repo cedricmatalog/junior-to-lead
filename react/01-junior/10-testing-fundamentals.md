@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week Seven: The Bug That Got Away
+## Week Ten: The Bug That Got Away
 
 Six weeks of building. The travel platform looks great. Then Thursday morning, you get the Slack message every developer dreads.
 
@@ -33,7 +33,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Styling Approaches) - Understanding components, state, and user interactions to test effectively.
+Module 07 (Styling Approaches) - Understanding components, state, and user interactions to test effectively.
 
 ---
 
@@ -1175,4 +1175,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./06-styling-approaches.md) | [Next Module →](./08-debugging-techniques.md)
+**Navigation**: [← Previous Module](./09-tooling-fundamentals.md) | [Next Module →](./11-debugging-techniques.md)

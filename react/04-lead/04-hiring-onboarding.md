@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 34 (Team Processes) - Comfort with team rhythms and expectations.
+Module 03 (Team Processes) - Comfort with team rhythms and expectations.
 
 ---
 

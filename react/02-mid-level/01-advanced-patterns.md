@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 11: The Dashboard Refactor
+## Week One: The Dashboard Refactor
 
 The streaming dashboard finally has traction, but the codebase is showing its age. Sarah asks you to add authentication gates, shared behaviors, and layout variants without copying logic into every component. Marcus points at the newest pull request and sighs: "You're building the same wrapper three times." You need patterns that let components stay flexible while the logic stays centralized. This week is about learning those reusable patterns so new features don't feel like rewrites.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 10 (Accessibility Fundamentals) - Comfort with component composition, props, and reusable UI patterns.
+Module 12 (Accessibility Fundamentals) - Comfort with component composition, props, and reusable UI patterns.
 
 ---
 

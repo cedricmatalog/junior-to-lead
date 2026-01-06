@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 19: The Maintainability Check
+## Week Eleven: The Maintainability Check
 
 The team is moving fast, but the codebase is getting harder to review. Sarah wants consistent tooling and fewer style debates. Marcus points out the last refactor took twice as long because the file structure was unclear. This week is about creating guardrails: linting, formatting, project structure, and review habits that keep quality high as the team grows.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 08 (TypeScript Mastery) - Familiarity with project tooling and component structure.
+Module 10 (TypeScript Mastery) - Familiarity with project tooling and component structure.
 
 ---
 
@@ -504,4 +504,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./08-typescript-mastery.md) | [Next Module →](./10-nextjs-fundamentals.md)
+**Navigation**: [← Previous Module](./10-typescript-mastery.md) | [Next Module →](./12-nextjs-fundamentals.md)

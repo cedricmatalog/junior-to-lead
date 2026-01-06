@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 17: The Quality Push
+## Week Eight: The Quality Push
 
 The team is shipping faster, but bugs are slipping through. Sarah wants more confidence before releases, and Marcus points out that unit tests alone aren't catching integration issues. You need a strategy that balances speed, coverage, and reliability. This week is about choosing the right mix of tests, writing meaningful integration tests, and wiring them into CI so quality keeps up with delivery.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 06 (Internationalization) - Comfort with component composition and async data.
+Module 07 (Internationalization) - Comfort with component composition and async data.
 
 ---
 
@@ -500,4 +500,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./06-internationalization.md) | [Next Module →](./08-typescript-mastery.md)
+**Navigation**: [← Previous Module](./07-internationalization.md) | [Next Module →](./09-accessibility-testing-tooling.md)

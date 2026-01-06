@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 41 (Effective 1:1s) - Comfort giving feedback and holding tough conversations.
+Module 10 (Effective 1:1s) - Comfort giving feedback and holding tough conversations.
 
 ---
 

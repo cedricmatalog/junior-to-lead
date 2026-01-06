@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 32 (Technical Leadership) - Comfort setting vision and documenting decisions.
+Module 01 (Technical Leadership) - Comfort setting vision and documenting decisions.
 
 ---
 

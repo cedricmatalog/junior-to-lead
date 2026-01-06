@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week 20: The Framework Shift
+## Week Twelve: The Framework Shift
 
 The team wants server-rendered pages, faster initial loads, and a path to production deployments. Sarah suggests moving the newest features to Next.js, while Marcus wants to avoid surprises with the new App Router. This week is about understanding the framework's mental model, how data flows on the server and the client, and how to ship a production-ready app without getting lost in the routing and deployment details.
 
@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 09 (Code Quality) - Comfort with project structure and production readiness.
+Module 11 (Code Quality) - Comfort with project structure and production readiness.
 
 ---
 
@@ -491,4 +491,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./09-code-quality.md)
+**Navigation**: [← Previous Module](./11-code-quality.md) | [Next Module →](./13-e2e-testing-with-playwright.md)

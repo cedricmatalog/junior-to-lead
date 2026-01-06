@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 38 (Incident Management) - Comfort with postmortems and runbooks.
+Module 07 (Incident Management) - Comfort with postmortems and runbooks.
 
 ---
 

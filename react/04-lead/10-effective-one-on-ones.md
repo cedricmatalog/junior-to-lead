@@ -24,7 +24,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 40 (Cross-Team Collaboration) - Comfort with stakeholder alignment and communication.
+Module 09 (Cross-Team Collaboration) - Comfort with stakeholder alignment and communication.
 
 ---
 

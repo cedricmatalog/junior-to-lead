@@ -3,7 +3,7 @@
 > **Last reviewed**: 2026-01-06
 
 
-## Week Ten: The Audit
+## Week Twelve: The Audit
 
 Everything is going well. The features are polished, the tests are passing, the team is hitting deadlines. Then Monday morning, Sarah calls an emergency meeting.
 
@@ -36,7 +36,7 @@ Keep these in mind. They'll click as you build.
 
 ## Prerequisites
 
-Module 09 (Git Workflows) - Understanding collaboration practices and code review to ship accessible features.
+Module 10 (Testing Fundamentals) - Comfort validating UI behavior and quality before release.
 
 ---
 
@@ -1416,4 +1416,4 @@ This week at work, you might use these concepts to:
 
 ---
 
-**Navigation**: [← Previous Module](./09-git-workflows.md)
+**Navigation**: [← Previous Module](./11-debugging-techniques.md) | [Next Module →](./13-git-workflows.md)
